@@ -1,14 +1,14 @@
 export {}
-const fetch = require("node-fetch")
+import fetch from "node-fetch"
 
-export const getVersion = async () => {
-  const n = await fetch("https://ddragon.leagueoflegends.com/api/versions.json")
+export async function getVersion(): Promise<string> {
+  const n: any = await fetch("https://ddragon.leagueoflegends.com/api/versions.json")
   return (await n.json())[0]
 }
 
 export async function runes() {
-  const version = await getVersion()
-  const data = await (await fetch(`http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/runesReforged.json`)).json()
+  const version: string = await getVersion()
+  const data: any = await (await fetch(`http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/runesReforged.json`)).json()
 
   let final: any = {
     runes: {},
@@ -43,9 +43,9 @@ export async function runes() {
   return final
 }
 
-export const championTable = async () => {
-  const v = await getVersion()
-  const n = await (await fetch(`http://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion.json`)).json()
+export async function championTable() {
+  const v: string = await getVersion()
+  const n: any = await (await fetch(`http://ddragon.leagueoflegends.com/cdn/${v}/data/en_US/champion.json`)).json()
 
   let d: any = {}
   for (const a in n.data)
