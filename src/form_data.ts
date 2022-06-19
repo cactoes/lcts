@@ -1,4 +1,3 @@
-export {}
 import fetch from "node-fetch"
 
 export async function getVersion(): Promise<string> {
