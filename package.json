@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "run": "node .",
+    "clean": "del /S dst\\*",
     "run:dev": "tsc && node ."
   },
   "keywords": [],
