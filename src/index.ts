@@ -1,10 +1,6 @@
-//const { client, C_Game, C_User, C_Runes, C_Lobby } = require("lcinterface")
-//const { runes, championTable, getVersion } = require("./form_data")
-//const fs = require("fs")
-
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
 import { runes, championTable, getVersion } from "./form_data"
-import * as fs from "fs"
+const fs = require("fs")
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 const SECOND: number = 1000
@@ -21,13 +17,13 @@ const interfaces = {
 
 const user: CUser = {
   setStatus: async function(status: string) {
-    let user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, undefined, "get")
+    let user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
     user_data.statusMessage = status
     return await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, user_data, "put")
   },
 
   setRank: async function(tier: string, rank: string) {
-    let user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, undefined, "get")
+    let user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
     user_data.lol.rankedLeagueTier = tier
     user_data.lol.rankedLeagueDivision = rank
     return await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, user_data, "put")
@@ -45,7 +41,7 @@ const game: CGame = {
   championBanIndex: 0,
   updateGameflow: async function() {
     // update the gameflow phase
-    try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, undefined, "get") } catch {  }
+    try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
     
     // call methods that depend on the gameflow check || depend on checking every second
     if (this.APCEnabled)
@@ -79,20 +75,20 @@ const game: CGame = {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.READYCHECK) {
       if (!this.acceptedMatch) {
         this.acceptedMatch = true
-        interfaces.game.virtualCall<void>(interfaces.lobby.dest.matchaccept, undefined, "post", false)
+        interfaces.game.virtualCall<void>(interfaces.lobby.dest.matchaccept, {}, "post", false)
       }
     }
   },
   autoPickChampion: async function() {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
       // get our local players data (for summoner id)
-      const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, undefined, "get")
+      const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
 
       // get data of the lobby we are in
-      const lobby_data = await interfaces.lobby.virtualCall<ILobby>(interfaces.lobby.dest.lobby, undefined, "get")
+      const lobby_data = await interfaces.lobby.virtualCall<ILobby>(interfaces.lobby.dest.lobby, {}, "get")
 
       // get the data of the champion select data
-      const champSelectData = await interfaces.game.virtualCall<IChampSelect>(interfaces.game.dest.champselect, undefined, "get")
+      const champSelectData = await interfaces.game.virtualCall<IChampSelect>(interfaces.game.dest.champselect, {}, "get")
 
       // find ourself in the champion select data
       const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
@@ -272,7 +268,7 @@ const await_login = async () => {
   let logged_in = !1
   for (; !logged_in; ) {
       try {
-          await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, undefined, "get") && (logged_in = !0)
+          await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get") && (logged_in = !0)
       } catch {
           console.log("not logged in")
       }

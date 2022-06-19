@@ -7,13 +7,16 @@
     "build": "tsc",
     "run": "node .",
     "clean": "del /S dst\\*",
-    "run:dev": "tsc && node ."
+    "test": "tsc && node ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lcinterface": "^3.2.1",
+    "lcinterface": "^3.2.3",
     "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0"
   }
 }
