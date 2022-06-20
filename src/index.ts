@@ -185,6 +185,8 @@ const game: CGame = {
 
       // do we want to set our runes automatically (rune name has to start with "_change" || "[u.gg]")
       const autoSetRunes: boolean = true
+
+      // do we want to set our summner spell auitomatically
       const autoSetSummoners: boolean = true
 
       // do we want to check if we have our chosen (primary) lane
