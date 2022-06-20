@@ -213,6 +213,7 @@ interface CGame {
   GAMEFLOW_PHASE_LAST: string
   championPickIndex: number
   championBanIndex: number
+  hasSetRunes: boolean
 
   async updateGameflow(): void
   async autoAcceptMatch(): void
@@ -370,4 +371,79 @@ interface CLobby {
   async setPartyType(type: string): void
   async startSearch(): void
   async stopSearch(): void
+}
+
+declare interface String {
+  remove_left_side(): string
+}
+
+interface IRune {
+  current: boolean
+  name: string
+  primaryStyleId: number,
+  selectedPerkIds: number[],
+  subStyleId: number,
+}
+
+interface ISavedRune {
+  autoModifiedSelections: any[],
+  current: boolean,
+  id: number,
+  isActive: boolean,
+  isDeletable: boolean,
+  isEditable: boolean,
+  isValid: boolean,
+  lastModified: number,
+  name: string,
+  order: number,
+  primaryStyleId: number,
+  selectedPerkIds: number[],
+  subStyleId: number
+}
+
+interface ISpellTable {
+  Barrier: {
+    id: number,
+    key: string
+  },
+  Cleanse: {
+    id: number,
+    key: string
+  },
+  Exhaust: {
+    id: number,
+    key: string
+  },
+  Flash: {
+    id: number,
+    key: string
+  },
+  Ghost: {
+    id: number,
+    key: string
+  },
+  Heal: {
+    id: number,
+    key: string
+  },
+  Smite: {
+    id: number,
+    key: string
+  },
+  Teleport: {
+    id: number,
+    key: string
+  },
+  Clarity: {
+    id: number,
+    key: string
+  },
+  Ignite: {
+    id: number,
+    key: string
+  },
+  Mark: {
+    id: number,
+    key: string
+  }
 }

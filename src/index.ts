@@ -1,12 +1,69 @@
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
 import { runes, championTable, getVersion } from "./form_data"
+import { get_rune_from_web } from "./web_rune"
+
 const fs = require("fs")
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 const SECOND: number = 1000
 
+const getKeyByValue = (object: any, value: number): string => {
+  let final: string | undefined = Object.keys(object).find(key => object[key] === value)
+  
+  if (!final)
+    final = ""
+  
+  return final
+}
+
 const champion: IChampionTable = JSON.parse(fs.readFileSync("data/championTable.json").toString())
 const rune: IRuneTable = JSON.parse(fs.readFileSync("data/runeTable.json").toString())
+const spellTable: ISpellTable = {
+  Barrier: {
+    id: 0,
+    key: "SummonerBarrier"
+  },
+  Cleanse: {
+    id: 1,
+    key: "SummonerBoost"
+  },
+  Exhaust: {
+    id: 3,
+    key: "SummonerExhaust"
+  },
+  Flash: {
+    id: 4,
+    key: "SummonerFlash"
+  },
+  Ghost: {
+    id: 6,
+    key: "SummonerHaste"
+  },
+  Heal: {
+    id: 7,
+    key: "SummonerHeal"
+  },
+  Smite: {
+    id: 11,
+    key: "SummonerSmite"
+  },
+  Teleport: {
+    id: 12,
+    key: "SummonerTeleport"
+  },
+  Clarity: {
+    id: 13,
+    key: "SummonerMana"
+  },
+  Ignite: {
+    id: 14,
+    key: "SummonerDot"
+  },
+  Mark: {
+    id: 32,
+    key: "SummonerSnowball"
+  }
+}
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -39,6 +96,7 @@ const game: CGame = {
   GAMEFLOW_PHASE_LAST: '',
   championPickIndex: 0,
   championBanIndex: 0,
+  hasSetRunes: false,
   updateGameflow: async function() {
     // update the gameflow phase
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
@@ -60,6 +118,7 @@ const game: CGame = {
       if (this.GAMEFLOW_PHASE !== interfaces.game.gameflow.CHAMPSELECT) {
         this.championPickIndex = 0
         this.championBanIndex = 0
+        this.hasSetRunes = false
       }
 
       // update the gameflow last phase
@@ -111,9 +170,22 @@ const game: CGame = {
         support: [ champion.data["Nautilus"] ]
       }
 
+      // define all our summoner spells
+      const summonerSpells: ILane = {
+        top: [ spellTable.Teleport.id, spellTable.Flash.id ],
+        jungle: [ spellTable.Smite.id, spellTable.Flash.id ],
+        middle: [ spellTable.Ignite.id, spellTable.Flash.id ],
+        bottom: [ spellTable.Heal.id, spellTable.Flash.id ],
+        support: [ spellTable.Ignite.id, spellTable.Flash.id ]
+      }
+
       // do we want to lock in or only pick
       const lockChampion: boolean = true
       const lockBanChampion: boolean = true
+
+      // do we want to set our runes automatically (rune name has to start with "_change" || "[u.gg]")
+      const autoSetRunes: boolean = true
+      const autoSetSummoners: boolean = true
 
       // do we want to check if we have our chosen (primary) lane
       const checkLane: boolean = false
@@ -133,6 +205,24 @@ const game: CGame = {
         for (const action in champSelectData.actions[pair]) {
           // get the current action data
           const currentAction: IAction = champSelectData.actions[pair][action] // championId, completed, id, isAllyAction, isInProgress, pickTurn, type, actorCellId
+
+          // set runes if we are locked in
+          if (autoSetRunes && !game.hasSetRunes && currentAction.completed && currentAction.championId == championPicks[lane][game.championPickIndex]) {
+            game.hasSetRunes = true
+            
+            const rune_data = await get_rune_from_web(getKeyByValue(champion.data, championPicks[lane][game.championPickIndex]).toLowerCase())
+
+            const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
+            const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith("_change") || r.name.startsWith("[u.gg]"))
+
+            // summoner spells
+            if (autoSetSummoners)
+              await interfaces.lobby.virtualCall<void>("/lol-champ-select/v1/session/my-selection", { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
+
+            // runes
+            if (target_rune)
+              await interfaces.runes.virtualCall<void>(interfaces.runes.dest.runes + `/${target_rune?.id}`, rune_data, "put", false)
+          }
 
           // is it our trun
           if (currentAction.actorCellId !== localUserChampSelect?.cellId)
@@ -244,19 +334,22 @@ client.on("connect", async (credentials: ICredentials) => {
   //console.log(await interfaces.lobby.virtualCall(interfaces.lobby.dest.lobby, {}, "get"))
 
   if (interfaces.lobby.isCorrectState("hooked", true)) {
-    await lobby.createLobby(interfaces.lobby.queueId.normal.draft)
-    await lobby.setLanes(interfaces.game.lane.BOTTOM, interfaces.game.lane.MIDDLE)
-    await lobby.setPartyType(interfaces.lobby.type.open)
+    //await lobby.createLobby(interfaces.lobby.queueId.normal.draft)
+    //await lobby.setLanes(interfaces.game.lane.BOTTOM, interfaces.game.lane.MIDDLE)
+    //await lobby.setPartyType(interfaces.lobby.type.open)
 
-    await lobby.startSearch()
+    //await lobby.startSearch()
   }
 })
 
 client.on("disconnect", () => {
+  // unhook all the interfaces
   interfaces.user.unhook()
   interfaces.game.unhook()
   interfaces.runes.unhook()
+  interfaces.lobby.unhook()
 
+  // make sure gameloop doesnt continue
   game.available = false
 
   console.log("disconnected")
