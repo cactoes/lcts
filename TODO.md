@@ -9,5 +9,5 @@ idk man
 
 ### Completed tasks ✓
 - [x] Completed task title
-- [x] clean-up "form_data.ts" @cactoes
-- [x] clean-up "web_rune.ts" @cactoes & @MeloenCoding
+- [x] clean-up "form_data.ts" [@cactoes](https://github.com/cactoes)
+- [x] clean-up "web_rune.ts" [@cactoes](https://github.com/cactoes) & [@MeloenCoding](https://github.com/MeloenCoding)
