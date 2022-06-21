@@ -158,7 +158,7 @@ const game: CGame = {
         jungle: [ champion.data["Lilia"], champion.data["Gwen"] ],
         middle: [ champion.data["Irelia"], champion.data["Oriana"] ],
         bottom: [ champion.data["Caitlyn"], champion.data["Kaisa"] ],
-        support: [ champion.data["Pyke"], champion.data["Lux"] ]
+        utility: [ champion.data["Renata"] ]
       }
 
       // define all the champions we want to try and ban
@@ -167,7 +167,7 @@ const game: CGame = {
         jungle: [ champion.data["Belveth"] ],
         middle: [ champion.data["Akali"] ],
         bottom: [ champion.data["Ezreal"] ],
-        support: [ champion.data["Nautilus"] ]
+        utility: [ champion.data["Nautilus"] ]
       }
 
       // define all our summoner spells
@@ -176,7 +176,7 @@ const game: CGame = {
         jungle: [ spellTable.Smite.id, spellTable.Flash.id ],
         middle: [ spellTable.Ignite.id, spellTable.Flash.id ],
         bottom: [ spellTable.Heal.id, spellTable.Flash.id ],
-        support: [ spellTable.Ignite.id, spellTable.Flash.id ]
+        utility: [ spellTable.Ignite.id, spellTable.Flash.id ]
       }
 
       // do we want to lock in or only pick
@@ -190,7 +190,7 @@ const game: CGame = {
       const autoSetSummoners: boolean = true
 
       // do we want to check if we have our chosen (primary) lane
-      const checkLane: boolean = false
+      const checkLane: boolean = true
 
       // set our default lane incase we dont have one
       const defaultLane: string = "bottom"
@@ -202,7 +202,7 @@ const game: CGame = {
       if (checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
         return
 
-      // loop trough all the actions
+        // loop trough all the actions
       for (const pair in champSelectData.actions) {
         for (const action in champSelectData.actions[pair]) {
           // get the current action data
