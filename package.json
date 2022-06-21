@@ -14,7 +14,7 @@
   "license": "GNU GPLv3",
   "dependencies": {
     "jsdom": "^20.0.0",
-    "lcinterface": "^3.3.0",
+    "lcinterface": "^3.3.1",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
