@@ -127,7 +127,7 @@ const game: CGame = {
         jungle: [ champion.data["Belveth"] ],
         middle: [ champion.data["Akali"] ],
         bottom: [ champion.data["Ezreal"] ],
-        utility: [ champion.data["Nautilus"] ]
+        utility: [ champion.data["Morgana"] ]
       }
 
       // do we want to lock in or only pick
@@ -264,7 +264,7 @@ const game: CGame = {
 
           // set spells if we are locked in
           if (!game.hasSetSummonerSpells && currentAction.completed && currentAction.type == "pick")
-            await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.spells, { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
+            await interfaces.runes.virtualCall<void>(interfaces.runes.dest.spells, { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
         }
       }
     }
