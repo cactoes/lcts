@@ -1,11 +1,17 @@
 # league client ts
+A feature rich league client written is TypeScript
 
-## install project
+## prerequisites
+- `TypeScript` For compiling
 
-1. cd league_client_ts
-2. npm install
-3. npm test
+## installing the client
+1. git clone https://github.com/cactoes/league_client_ts.git
+2. cd league_client_ts
+3. npm install
 
-# build project
+## buildig the client
+- `npm build`
 
-1. npm build
+## test
+Compiles and runes the client
+- `npm test`
