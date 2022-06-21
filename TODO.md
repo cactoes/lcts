@@ -6,6 +6,7 @@ idk man
 - [ ] choose a license (GNU GPLv3 / MIT) [https://choosealicense.com/](https://choosealicense.com/)
 
 ### Other
+- [ ] make public
 
 ### Completed tasks ✓
 - [x] Completed task title
