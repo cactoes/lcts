@@ -17,6 +17,7 @@ interface IRuneTable {
   version: string
   data: {
     runes: {
+      [key:string]: number
       Domination: number
       Inspiration: number
       Precision: number
@@ -24,6 +25,7 @@ interface IRuneTable {
       Sorcery: number
     }
     styles: {
+      [key:string]: number
       AdaptiveForce: number
       CDRScaling: number
       AttackSpeed: number
@@ -32,6 +34,7 @@ interface IRuneTable {
       HealthScaling: number
     }
     keyStones: {
+      [key: string]: { [key:string]: number }
       Domination: {
         Electrocute: number
         Predator: number
@@ -61,6 +64,7 @@ interface IRuneTable {
       }
     }
     perks: {
+      [key:string]: { [key: string]: number }[]
       Domination: [
         {
           CheapShot: number
@@ -542,4 +546,16 @@ interface IChampion_base {
       attackspeed: number
     }
   }
+}
+
+interface IRuneWebBase {
+  name: string
+  runes: {
+    primary: string
+    secondary: string
+  }
+  keystone: string[]
+  primary_perks: string[][]
+  secondary_perks: string[][]
+  styles: string[][]
 }
