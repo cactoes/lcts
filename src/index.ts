@@ -1,5 +1,5 @@
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
-import { runes, championTable, getVersion } from "./form_data"
+import { rune_table, champion_table, get_version } from "./form_data"
 import { get_rune_from_web } from "./web_rune"
 
 const fs = require("fs")
@@ -291,18 +291,18 @@ const lobby: CLobby = {
 
 client.on("connect", async (credentials: ICredentials) => {
   // get game version
-  const game_version = await getVersion()
+  const game_version = await get_version()
   
   // check game version
   if (champion.version !== game_version || rune.version !== game_version) {
     fs.writeFileSync("data/championTable.json", JSON.stringify({
       version: game_version,
-      data: await championTable()
+      data: await champion_table()
     }, null, 2))
 
     fs.writeFileSync("data/runeTable.json", JSON.stringify({
       version: game_version,
-      data: await runes()
+      data: await rune_table()
     }, null, 2))
   }
 

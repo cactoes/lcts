@@ -9,6 +9,10 @@ interface IChampionTable {
   }
 }
 
+interface IChampionTable_base {
+  [key: string]: number
+}
+
 interface IRuneTable {
   version: string
   data: {
@@ -448,5 +452,94 @@ interface ISpellTable {
   Mark: {
     id: number,
     key: string
+  }
+}
+
+interface IRuneReforged {
+  id: number
+  key: string
+  icon: string
+  name: string
+  slots: { runes: IRuneBase[] }[]
+}
+
+interface IRuneTable_base {
+  runes: {
+    [key: string]: number
+  }
+  styles: {
+    [key: string]: number
+  }
+  keyStones: {
+    [key: string]: {
+      [key: string]: number
+    }
+  }
+  perks: {
+    [key: string]: {[key: string]: number}[]
+  }
+}
+
+interface IRuneBase {
+  id: number
+  key: string
+  icon: string
+  name: string
+  shortDesc: string
+  longDesc: string
+}
+
+interface IChampionRefoged {
+  type: string
+  format: string
+  version: string
+  data: IChampion_base[]
+}
+
+interface IChampion_base {
+  version: string
+  id: string
+  key: string
+  name: string
+  title: string
+  blurb: string
+  info: {
+    attack: number
+    defense: number
+    magic: number
+    difficulty: number
+  }
+  image: {
+    full: string
+    sprite: string
+    group: string
+    x: number
+    y: number
+    w: number
+    h: number
+    tags: [index: string]
+    partype: string
+    stats: {
+      hp: number
+      hpperlevel: number
+      mp: number
+      mpperlevel: number
+      movespeed: number
+      armor: number
+      armorperlevel: number
+      spellblock: number
+      spellblockperlevel: number
+      attackrange: number
+      hpregen: number
+      hpregenperlevel: number
+      mpregen: number
+      mpregenperlevel: number
+      crit: number
+      critperlevel: number
+      attackdamage: number
+      attackdamageperlevel: number
+      attackspeedperlevel: number
+      attackspeed: number
+    }
   }
 }
