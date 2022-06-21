@@ -18,3 +18,6 @@ $ npm install
 ```
 $ npm start
 ```
+
+## License
+[GNU GPLv3](LICENSE)

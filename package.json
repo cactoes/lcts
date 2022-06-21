@@ -11,7 +11,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "GNU GPLv3",
   "dependencies": {
     "jsdom": "^20.0.0",
     "lcinterface": "^3.3.0",
