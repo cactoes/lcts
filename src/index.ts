@@ -23,14 +23,15 @@ const interfaces = {
   lobby: new C_Lobby({canCallUnhooked: false})
 }
 
+
+
 const user: CUser = {
   setStatus: async function(status: string) {
     let user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
     user_data.statusMessage = status
     return await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, user_data, "put")
   },
-
-  setRank: async function(tier: string, rank: string) {
+  setRank: async function (tier: string, rank: string): Promise<IUser> {
     let user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
     user_data.lol.rankedLeagueTier = tier
     user_data.lol.rankedLeagueDivision = rank
@@ -281,11 +282,13 @@ client.on("connect", async (credentials: ICredentials) => {
   
   // check game version
   if (champion.version !== game_version || rune.version !== game_version) {
+    // update out championTable
     fs.writeFileSync("data/championTable.json", JSON.stringify({
       version: game_version,
       data: await champion_table()
     }, null, 2))
 
+    // update out runeTable
     fs.writeFileSync("data/runeTable.json", JSON.stringify({
       version: game_version,
       data: await rune_table()
@@ -301,8 +304,6 @@ client.on("connect", async (credentials: ICredentials) => {
   // setup some destinations
   interfaces.game.addDest("login", "/lol-login/v1/session")
 
-  // https://lcu.vivide.re/
-
   // wait for client to be logged in
   await await_login()
   game.available = true
@@ -311,9 +312,12 @@ client.on("connect", async (credentials: ICredentials) => {
   // gameflow checker (loop)
   game.updateGameflow()
   
+  // if we are hooked
   if (interfaces.user.isCorrectState("hooked", true)) {
-    await user.setStatus("ぺこら")
-    await user.setRank("diamond", "III")
+    // set our status
+    await user.setStatus(config.misc.status)
+    // set our display rank
+    await user.setRank(config.misc.rank.tier, config.misc.rank.rank)
   }
 
   if (interfaces.lobby.isCorrectState("hooked", true)) {
