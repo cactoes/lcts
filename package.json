@@ -5,7 +5,7 @@
   "main": "dst/index.js",
   "scripts": {
     "build": "tsc",
-    "run": "node .",
+    "start": "node .",
     "clean": "del /S dst\\*",
     "test": "tsc && node ."
   },
