@@ -1,8 +1,9 @@
 # League client ts
 idk man
 
-### template
-- [ ] Task title ~3d #type @name yyyy-mm-dd  
+### Important
+- [ ] clean-up "web_rune.ts"
+- [ ] clean-up "form_data.ts"
 
 ### Completed template ✓
 - [x] Completed task title  
