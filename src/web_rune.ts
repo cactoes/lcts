@@ -3,7 +3,6 @@ const DOMParser = require("jsdom")
 
 const fs = require("fs")
 
-
 const runeTable: any = JSON.parse(fs.readFileSync("data/runeTable.json").toString())
 
 String.prototype.remove_left_side = function () {
