@@ -6,6 +6,8 @@
 2. npm install
 3. npm test
 
+=======
+
 # build project
 
 1. npm build
