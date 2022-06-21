@@ -23,10 +23,8 @@ const interfaces = {
   lobby: new C_Lobby({canCallUnhooked: false})
 }
 
-
-
 const user: CUser = {
-  setStatus: async function(status: string) {
+  setStatus: async function(status: string): Promise<IUser> {
     let user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
     user_data.statusMessage = status
     return await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, user_data, "put")

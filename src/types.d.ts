@@ -208,7 +208,7 @@ interface IUser {
 }
 
 interface CUser {
-  async setStatus(status: string): void
+  async setStatus(status: string): Promise<IUser>
   async setRank(tier: string, rank: string): Promise<IUser>
 }
 
