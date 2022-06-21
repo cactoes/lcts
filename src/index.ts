@@ -308,11 +308,10 @@ const game: CGame = {
           if (currentAction.actorCellId !== localUserChampSelect?.cellId)
             continue
 
-          // set runes if we are locked in
-          if (!game.hasSetSummonerSpells && currentAction.completed && currentAction.type == "pick") {
-
+          // set spells if we are locked in
+          if (!game.hasSetSummonerSpells && currentAction.completed && currentAction.type == "pick")
             await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.spells, { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
-          }
+          
         }
       }
     }
