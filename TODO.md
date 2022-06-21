@@ -3,7 +3,7 @@ idk man
 
 ### Important
 - [ ] clean-up "web_rune.ts"
-- [ ] choose a license (GNU GPLv3 / MIT)
+- [ ] choose a license (GNU GPLv3 / MIT) [https://choosealicense.com/](https://choosealicense.com/)
 
 ### Other
 
