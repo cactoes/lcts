@@ -18,52 +18,6 @@ const getKeyByValue = (object: any, value: number): string => {
 
 const champion: IChampionTable = JSON.parse(fs.readFileSync("data/championTable.json").toString())
 const rune: IRuneTable = JSON.parse(fs.readFileSync("data/runeTable.json").toString())
-const spellTable: ISpellTable = {
-  Barrier: {
-    id: 0,
-    key: "SummonerBarrier"
-  },
-  Cleanse: {
-    id: 1,
-    key: "SummonerBoost"
-  },
-  Exhaust: {
-    id: 3,
-    key: "SummonerExhaust"
-  },
-  Flash: {
-    id: 4,
-    key: "SummonerFlash"
-  },
-  Ghost: {
-    id: 6,
-    key: "SummonerHaste"
-  },
-  Heal: {
-    id: 7,
-    key: "SummonerHeal"
-  },
-  Smite: {
-    id: 11,
-    key: "SummonerSmite"
-  },
-  Teleport: {
-    id: 12,
-    key: "SummonerTeleport"
-  },
-  Clarity: {
-    id: 13,
-    key: "SummonerMana"
-  },
-  Ignite: {
-    id: 14,
-    key: "SummonerDot"
-  },
-  Mark: {
-    id: 32,
-    key: "SummonerSnowball"
-  }
-}
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -232,11 +186,11 @@ const game: CGame = {
           if (currentAction.type == "pick") {
             // check if we have a champion selected
             if (currentAction.championId == 0 || currentAction.championId !== championPicks[lane][game.championPickIndex])
-              interfaces.game.virtualCall<void>(`/lol-champ-select/v1/session/actions/${currentAction.id}`, { championId: championPicks[lane][game.championPickIndex] }, "patch", false)
+              interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championPicks[lane][game.championPickIndex] }, "patch", false)
             
             // check if we want to lock in our selected champion
             else if (lockChampion && currentAction.championId == championPicks[lane][game.championPickIndex])
-              interfaces.game.virtualCall<void>(`/lol-champ-select/v1/session/actions/${currentAction.id}/complete`, { championId: championPicks[lane][game.championPickIndex] }, "post", false)
+              interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][game.championPickIndex] }, "post", false)
   
             // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
             else
@@ -246,11 +200,11 @@ const game: CGame = {
           } else if (currentAction.type == "ban") {
             // check if we have a champion selected
             if (currentAction.championId == 0 || currentAction.championId !== championBans[lane][game.championBanIndex])
-              interfaces.game.virtualCall<void>(`/lol-champ-select/v1/session/actions/${currentAction.id}`, { championId: championBans[lane][game.championBanIndex] }, "patch", false)
+              interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][game.championBanIndex] }, "patch", false)
             
             // check if we want to ban our champion
             else if (lockBanChampion && currentAction.championId == championBans[lane][game.championBanIndex])
-              interfaces.game.virtualCall<void>(`/lol-champ-select/v1/session/actions/${currentAction.id}/complete`, { championId: championPicks[lane][game.championBanIndex] }, "post", false)
+              interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][game.championBanIndex] }, "post", false)
 
             // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
             else
@@ -291,11 +245,11 @@ const game: CGame = {
       
       // define all our summoner spells
       const summonerSpells: ILane = {
-        top: [ spellTable.Teleport.id, spellTable.Flash.id ],
-        jungle: [ spellTable.Smite.id, spellTable.Flash.id ],
-        middle: [ spellTable.Ignite.id, spellTable.Flash.id ],
-        bottom: [ spellTable.Heal.id, spellTable.Flash.id ],
-        utility: [ spellTable.Ignite.id, spellTable.Flash.id ]
+        top: [ interfaces.runes.spell.Teleport.id, interfaces.runes.spell.Flash.id ],
+        jungle: [ interfaces.runes.spell.Smite.id, interfaces.runes.spell.Flash.id ],
+        middle: [ interfaces.runes.spell.Ignite.id, interfaces.runes.spell.Flash.id ],
+        bottom: [ interfaces.runes.spell.Heal.id, interfaces.runes.spell.Flash.id ],
+        utility: [ interfaces.runes.spell.Ignite.id, interfaces.runes.spell.Flash.id ]
       }
 
        // loop trough all the actions
@@ -311,7 +265,6 @@ const game: CGame = {
           // set spells if we are locked in
           if (!game.hasSetSummonerSpells && currentAction.completed && currentAction.type == "pick")
             await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.spells, { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
-          
         }
       }
     }
@@ -361,8 +314,6 @@ client.on("connect", async (credentials: ICredentials) => {
   
   // setup some destinations
   interfaces.game.addDest("login", "/lol-login/v1/session")
-  interfaces.game.addDest("champselect", "/lol-champ-select/v1/session")
-  interfaces.runes.addDest("spells", "/lol-champ-select/v1/session/my-selection")
 
   // https://lcu.vivide.re/
 
@@ -378,8 +329,6 @@ client.on("connect", async (credentials: ICredentials) => {
     await user.setStatus("ぺこら")
     await user.setRank("diamond", "III")
   }
-
-  //console.log(await interfaces.lobby.virtualCall(interfaces.lobby.dest.lobby, {}, "get"))
 
   if (interfaces.lobby.isCorrectState("hooked", true)) {
     //await lobby.createLobby(interfaces.lobby.queueId.normal.draft)
