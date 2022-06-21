@@ -215,9 +215,6 @@ interface CUser {
 interface CGame {
   available: boolean
   acceptedMatch: boolean
-  AAMEnabled: boolean
-  APCEnabled: boolean
-  APSSEnabled: boolean
   GAMEFLOW_PHASE: string
   GAMEFLOW_PHASE_LAST: string
   championPickIndex: number
@@ -558,4 +555,56 @@ interface IRuneWebBase {
   primary_perks: string[][]
   secondary_perks: string[][]
   styles: string[][]
+}
+
+interface IConfig {
+  auto: {
+    acceptMatch: boolean
+    champion: {
+      set: boolean
+      lock: boolean
+      ban: boolean
+      checkLane: boolean
+      defaultLane: string
+      lanePick: {
+        [key: string]: string[]
+        top: string[]
+        jungle: string[]
+        middle: string[]
+        bottom: string[]
+        utility: string[]
+      }
+      laneBan: {
+        [key: string]: string[]
+        top: string[]
+        jungle: string[]
+        middle: string[]
+        bottom: string[]
+        utility: string[]
+      }
+    }
+    runes: {
+      set: true
+    }
+    spells: {
+      set: boolean
+      checkLane: boolean
+      defaultLane: string
+      lane: {
+        [key: string]: Array<string, 2>
+        top: Array<string, 2>
+        jungle: Array<string, 2>
+        middle: Array<string, 2>
+        bottom: Array<string, 2>
+        utility: Array<string, 2>
+      }
+    }
+  }
+  misc: {
+    status: string,
+    rank: {
+      tier: string,
+      rank: string
+    }
+  }
 }

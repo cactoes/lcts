@@ -9,15 +9,12 @@ const SECOND: number = 1000
 
 const getKeyByValue = (object: any, value: number): string => {
   let final: string | undefined = Object.keys(object).find(key => object[key] === value)
-  
-  if (!final)
-    final = ""
-  
-  return final
+  return !final? "":final
 }
 
 const champion: IChampionTable = JSON.parse(fs.readFileSync("data/championTable.json").toString())
 const rune: IRuneTable = JSON.parse(fs.readFileSync("data/runeTable.json").toString())
+const config: IConfig = JSON.parse(fs.readFileSync("data/config.json").toString())
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -44,9 +41,6 @@ const user: CUser = {
 const game: CGame = {
   available: false,
   acceptedMatch: false,
-  AAMEnabled: true,
-  APCEnabled: true,
-  APSSEnabled: true,
   GAMEFLOW_PHASE: '',
   GAMEFLOW_PHASE_LAST: '',
   championPickIndex: 0,
@@ -58,16 +52,16 @@ const game: CGame = {
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
     
     // call methods that depend on the gameflow check || depend on checking every second
-    if (this.APCEnabled)
+    if (config.auto.champion.set)
       this.autoPickChampion()
 
-    if (this.APSSEnabled)
+    if (config.auto.spells.set)
       this.autoPickSummonerSpells()
 
     if (this.GAMEFLOW_PHASE !== this.GAMEFLOW_PHASE_LAST) {
       console.log(this.GAMEFLOW_PHASE)
       // call methods that depend on the gameflow update
-      if (this.AAMEnabled)
+      if (config.auto.acceptMatch)
         this.autoAcceptMatch()
   
       // reset any state changes
@@ -112,42 +106,39 @@ const game: CGame = {
       // find ourself in the champion select data
       const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
       
-      // define all the champions we want to try and pick
+      // define all the champions we want to try and pick (from config)
       const championPicks: ILane = {
-        top: [ champion.data["Irelia"], champion.data["Gwen"] ],
-        jungle: [ champion.data["Lilia"], champion.data["Gwen"] ],
-        middle: [ champion.data["Irelia"], champion.data["Oriana"] ],
-        bottom: [ champion.data["Caitlyn"], champion.data["Kaisa"] ],
-        utility: [ champion.data["Renata"] ]
+        top: [], jungle: [], middle: [], bottom: [], utility: []
       }
 
-      // define all the champions we want to try and ban
+      // fill out championPicks from config
+      for (const lane in config.auto.champion.lanePick) {
+        // get all champions in current lane
+        config.auto.champion.lanePick[lane].forEach((c_champion: string) => {
+          // save their id
+          championPicks[lane].push( champion.data[c_champion] )
+        })
+      }
+
+      // define all the champions we want to try and ban (from config)
       const championBans: ILane = {
-        top: [ champion.data["Garen"] ],
-        jungle: [ champion.data["Belveth"] ],
-        middle: [ champion.data["Akali"] ],
-        bottom: [ champion.data["Ezreal"] ],
-        utility: [ champion.data["Morgana"] ]
+        top: [], jungle: [], middle: [], bottom: [], utility: []
       }
 
-      // do we want to lock in or only pick
-      const lockChampion: boolean = true
-      const lockBanChampion: boolean = true
-
-      // do we want to set our runes automatically (rune name has to start with "_change" || "[u.gg]")
-      const autoSetRunes: boolean = true
-
-      // do we want to check if we have our chosen (primary) lane
-      const checkLane: boolean = true
-
-      // set our default lane incase we dont have one
-      const defaultLane: string = "bottom"
+      // fill out championBans from config
+      for (const lane in config.auto.champion.laneBan) {
+        // get all champions in current lane
+        config.auto.champion.laneBan[lane].forEach((c_champion: string) => {
+          // save their id
+          championBans[lane].push( champion.data[c_champion] )
+        })
+      }
 
       // get our (primary) lane
-      const lane: string = lobby_data.localMember.firstPositionPreference == ""? defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
+      const lane: string = lobby_data.localMember.firstPositionPreference == ""? config.auto.champion.defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
       
       // lane checks
-      if (checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
+      if (config.auto.champion.checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
         return
 
       // loop trough all the actions
@@ -156,10 +147,10 @@ const game: CGame = {
           // get the current action data
           const currentAction: IAction = champSelectData.actions[pair][action] // championId, completed, id, isAllyAction, isInProgress, pickTurn, type, actorCellId
 
-          // set runes if we are locked in
-          if (autoSetRunes && !game.hasSetRunes && currentAction.completed && currentAction.championId == championPicks[lane][game.championPickIndex]) {
+          // set runes if we are locked in (rune name has to start with "_change" || "[u.gg]")
+          if (config.auto.runes.set && !game.hasSetRunes && currentAction.completed && currentAction.championId == championPicks[lane][game.championPickIndex]) {
             game.hasSetRunes = true
-            
+
             const rune_data = await get_rune_from_web(getKeyByValue(champion.data, championPicks[lane][game.championPickIndex]).toLowerCase())
 
             const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
@@ -189,7 +180,7 @@ const game: CGame = {
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championPicks[lane][game.championPickIndex] }, "patch", false)
             
             // check if we want to lock in our selected champion
-            else if (lockChampion && currentAction.championId == championPicks[lane][game.championPickIndex])
+            else if (config.auto.champion.lock && currentAction.championId == championPicks[lane][game.championPickIndex])
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][game.championPickIndex] }, "post", false)
   
             // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
@@ -203,7 +194,7 @@ const game: CGame = {
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][game.championBanIndex] }, "patch", false)
             
             // check if we want to ban our champion
-            else if (lockBanChampion && currentAction.championId == championBans[lane][game.championBanIndex])
+            else if (config.auto.champion.ban && currentAction.championId == championBans[lane][game.championBanIndex])
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][game.championBanIndex] }, "post", false)
 
             // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
@@ -216,8 +207,6 @@ const game: CGame = {
   },
   autoPickSummonerSpells: async function() {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
-      // do we want to set our summner spell auitomatically
-
       // get our local players data (for summoner id)
       const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
 
@@ -230,29 +219,26 @@ const game: CGame = {
       // find ourself in the champion select data
       const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
 
-      // do we want to check if we have our chosen (primary) lane
-      const checkLane: boolean = true
-
-      // set our default lane incase we dont have one
-      const defaultLane: string = "bottom"
-
       // get our (primary) lane
-      const lane: string = lobby_data.localMember.firstPositionPreference == ""? defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
+      const lane: string = lobby_data.localMember.firstPositionPreference == ""? config.auto.spells.defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
       
       // lane checks
-      if (checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
+      if (config.auto.spells.checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
         return
       
       // define all our summoner spells
       const summonerSpells: ILane = {
-        top: [ interfaces.runes.spell.Teleport.id, interfaces.runes.spell.Flash.id ],
-        jungle: [ interfaces.runes.spell.Smite.id, interfaces.runes.spell.Flash.id ],
-        middle: [ interfaces.runes.spell.Ignite.id, interfaces.runes.spell.Flash.id ],
-        bottom: [ interfaces.runes.spell.Heal.id, interfaces.runes.spell.Flash.id ],
-        utility: [ interfaces.runes.spell.Ignite.id, interfaces.runes.spell.Flash.id ]
+        top: [], jungle: [], middle: [], bottom: [], utility: []
       }
 
-       // loop trough all the actions
+      // fill out summonerSpells from config
+      for (const lane in config.auto.spells.lane) {
+        // save their id
+        summonerSpells[lane][0] = interfaces.runes.spell[ config.auto.spells.lane[lane][0] ].id
+        summonerSpells[lane][1] = interfaces.runes.spell[ config.auto.spells.lane[lane][1] ].id
+      }
+
+      // loop trough all the actions
       for (const pair in champSelectData.actions) {
         for (const action in champSelectData.actions[pair]) {
           // get the current action data
