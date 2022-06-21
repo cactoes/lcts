@@ -209,15 +209,18 @@ interface CGame {
   acceptedMatch: boolean
   AAMEnabled: boolean
   APCEnabled: boolean
+  APSSEnabled: boolean
   GAMEFLOW_PHASE: string
   GAMEFLOW_PHASE_LAST: string
   championPickIndex: number
   championBanIndex: number
   hasSetRunes: boolean
+  hasSetSummonerSpells: boolean
 
   async updateGameflow(): void
   async autoAcceptMatch(): void
   async autoPickChampion(): void
+  async autoPickSummonerSpells(): void
 }
 
 interface IActor {

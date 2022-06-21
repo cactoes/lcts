@@ -92,11 +92,13 @@ const game: CGame = {
   acceptedMatch: false,
   AAMEnabled: true,
   APCEnabled: true,
+  APSSEnabled: true,
   GAMEFLOW_PHASE: '',
   GAMEFLOW_PHASE_LAST: '',
   championPickIndex: 0,
   championBanIndex: 0,
   hasSetRunes: false,
+  hasSetSummonerSpells: false,
   updateGameflow: async function() {
     // update the gameflow phase
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
@@ -104,6 +106,9 @@ const game: CGame = {
     // call methods that depend on the gameflow check || depend on checking every second
     if (this.APCEnabled)
       this.autoPickChampion()
+
+    if (this.APSSEnabled)
+      this.autoPickSummonerSpells()
 
     if (this.GAMEFLOW_PHASE !== this.GAMEFLOW_PHASE_LAST) {
       console.log(this.GAMEFLOW_PHASE)
@@ -119,6 +124,7 @@ const game: CGame = {
         this.championPickIndex = 0
         this.championBanIndex = 0
         this.hasSetRunes = false
+        this.hasSetSummonerSpells = false
       }
 
       // update the gameflow last phase
@@ -170,24 +176,12 @@ const game: CGame = {
         utility: [ champion.data["Nautilus"] ]
       }
 
-      // define all our summoner spells
-      const summonerSpells: ILane = {
-        top: [ spellTable.Teleport.id, spellTable.Flash.id ],
-        jungle: [ spellTable.Smite.id, spellTable.Flash.id ],
-        middle: [ spellTable.Ignite.id, spellTable.Flash.id ],
-        bottom: [ spellTable.Heal.id, spellTable.Flash.id ],
-        utility: [ spellTable.Ignite.id, spellTable.Flash.id ]
-      }
-
       // do we want to lock in or only pick
       const lockChampion: boolean = true
       const lockBanChampion: boolean = true
 
       // do we want to set our runes automatically (rune name has to start with "_change" || "[u.gg]")
       const autoSetRunes: boolean = true
-
-      // do we want to set our summner spell auitomatically
-      const autoSetSummoners: boolean = true
 
       // do we want to check if we have our chosen (primary) lane
       const checkLane: boolean = true
@@ -202,7 +196,7 @@ const game: CGame = {
       if (checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
         return
 
-        // loop trough all the actions
+      // loop trough all the actions
       for (const pair in champSelectData.actions) {
         for (const action in champSelectData.actions[pair]) {
           // get the current action data
@@ -217,16 +211,12 @@ const game: CGame = {
             const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
             const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith("_change") || r.name.startsWith("[u.gg]"))
 
-            // summoner spells
-            if (autoSetSummoners)
-              await interfaces.lobby.virtualCall<void>("/lol-champ-select/v1/session/my-selection", { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
-
             // runes
             if (target_rune)
               await interfaces.runes.virtualCall<void>(interfaces.runes.dest.runes + `/${target_rune?.id}`, rune_data, "put", false)
           }
 
-          // is it our trun
+          // is it our turn
           if (currentAction.actorCellId !== localUserChampSelect?.cellId)
             continue
           
@@ -268,7 +258,63 @@ const game: CGame = {
           }
         }
       }
+    }
+  },
+  autoPickSummonerSpells: async function() {
+    if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
+      // do we want to set our summner spell auitomatically
 
+      // get our local players data (for summoner id)
+      const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
+
+      // get data of the lobby we are in
+      const lobby_data = await interfaces.lobby.virtualCall<ILobby>(interfaces.lobby.dest.lobby, {}, "get")
+
+      // get the data of the champion select data
+      const champSelectData = await interfaces.game.virtualCall<IChampSelect>(interfaces.game.dest.champselect, {}, "get")
+
+      // find ourself in the champion select data
+      const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
+
+      // do we want to check if we have our chosen (primary) lane
+      const checkLane: boolean = true
+
+      // set our default lane incase we dont have one
+      const defaultLane: string = "bottom"
+
+      // get our (primary) lane
+      const lane: string = lobby_data.localMember.firstPositionPreference == ""? defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
+      
+      // lane checks
+      if (checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
+        return
+      
+      // define all our summoner spells
+      const summonerSpells: ILane = {
+        top: [ spellTable.Teleport.id, spellTable.Flash.id ],
+        jungle: [ spellTable.Smite.id, spellTable.Flash.id ],
+        middle: [ spellTable.Ignite.id, spellTable.Flash.id ],
+        bottom: [ spellTable.Heal.id, spellTable.Flash.id ],
+        utility: [ spellTable.Ignite.id, spellTable.Flash.id ]
+      }
+
+       // loop trough all the actions
+      for (const pair in champSelectData.actions) {
+        for (const action in champSelectData.actions[pair]) {
+          // get the current action data
+          const currentAction: IAction = champSelectData.actions[pair][action] // championId, completed, id, isAllyAction, isInProgress, pickTurn, type, actorCellId
+
+          // is it us
+          if (currentAction.actorCellId !== localUserChampSelect?.cellId)
+            continue
+
+          // set runes if we are locked in
+          if (!game.hasSetSummonerSpells && currentAction.completed && currentAction.type == "pick") {
+
+            await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.spells, { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
+          }
+        }
+      }
     }
   }
 }
@@ -317,6 +363,7 @@ client.on("connect", async (credentials: ICredentials) => {
   // setup some destinations
   interfaces.game.addDest("login", "/lol-login/v1/session")
   interfaces.game.addDest("champselect", "/lol-champ-select/v1/session")
+  interfaces.runes.addDest("spells", "/lol-champ-select/v1/session/my-selection")
 
   // https://lcu.vivide.re/
 
