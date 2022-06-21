@@ -2,12 +2,19 @@
 A feature rich league client written is TypeScript
 
 ## prerequisites
-- `TypeScript` For compiling
+- TypeScript - [For Compilig](https://www.typescriptlang.org/download)
+```
+$ npm install -g typescript
+```
 
 ## installing the client
-1. git clone https://github.com/cactoes/league_client_ts.git
-2. cd league_client_ts
-3. npm install
+```
+$ git clone https://github.com/cactoes/league_client_ts.git
+$ cd league_client_ts
+$ npm install
+```
 
 ## running the client
-- `npm start`
+```
+$ npm start
+```
