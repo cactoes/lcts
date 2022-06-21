@@ -9,9 +9,5 @@ A feature rich league client written is TypeScript
 2. cd league_client_ts
 3. npm install
 
-## buildig the client
-- `npm build`
-
-## test
-Compiles and runes the client
-- `npm test`
+## running the client
+- `npm start`
