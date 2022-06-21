@@ -1,4 +1,4 @@
 node_modules/
 dst/
-
+data/config.json
 *.temp.js
