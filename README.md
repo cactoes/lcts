@@ -42,14 +42,16 @@ Methods are called like this
 await user.setStatus("example")
 ```
 #### Methods in **user**
+[IUser](src/types.d.ts#158) class
 ```TypeScript
 async function setStatus(status: string): Promise<IUser>
 async function setRank(tier: string, rank: string): Promise<IUser>
 ```
 #### Methods in **lobby**
+[ILobby](src/types.d.ts#283) class
 ```TypeScript
 async function setLanes(first: string, second: string): void
-async function create(queueId: number): Promise<[ILobby](src/types.d.ts#283)>
+async function create(queueId: number): Promise<ILobby>
 async function setPartyType(type: string): void
 async function startSearch(): void
 async function stopSearch(): void
