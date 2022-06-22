@@ -8,18 +8,38 @@
       "checkLane": true,
       "defaultLane": "bottom",
       "lanePick": {
-        "top": [ "Gwen" ],
-        "jungle": [ "Lilia" ],
-        "middle": [ "Irelia" ],
-        "bottom": [ "Caitlyn" ],
-        "utility": [ "Renata" ]
+        "top": [
+          "Gwen"
+        ],
+        "jungle": [
+          "Lilia"
+        ],
+        "middle": [
+          "Irelia"
+        ],
+        "bottom": [
+          "Caitlyn"
+        ],
+        "utility": [
+          "Renata"
+        ]
       },
       "laneBan": {
-        "top": [ "Garen" ],
-        "jungle": [ "Belveth" ],
-        "middle": [ "Akali" ],
-        "bottom": [ "Ezreal" ],
-        "utility": [ "Morgana" ]
+        "top": [
+          "Garen"
+        ],
+        "jungle": [
+          "Belveth"
+        ],
+        "middle": [
+          "Akali"
+        ],
+        "bottom": [
+          "Ezreal"
+        ],
+        "utility": [
+          "Morgana"
+        ]
       }
     },
     "runes": {
@@ -30,11 +50,26 @@
       "checkLane": true,
       "defaultLane": "bottom",
       "lane": {
-        "top": [ "Teleport", "Flash" ],
-        "jungle": [ "Smite", "Flash" ],
-        "middle": [ "Ignite", "Flash" ],
-        "bottom": [ "Heal", "Flash" ],
-        "utility": [ "Ignite", "Flash" ]
+        "top": [
+          "Teleport",
+          "Flash"
+        ],
+        "jungle": [
+          "Smite",
+          "Flash"
+        ],
+        "middle": [
+          "Ignite",
+          "Flash"
+        ],
+        "bottom": [
+          "Heal",
+          "Flash"
+        ],
+        "utility": [
+          "Ignite",
+          "Flash"
+        ]
       }
     }
   },

@@ -80,10 +80,10 @@ export async function champion_table(): Promise<IChampionTable_base> {
   let final: IChampionTable_base = {}
 
   // loop through all the champions 
-  all_champion_data.data.forEach((champion: IChampion_base) => {
+  for (const champion in all_champion_data.data) {
     // and store their key under their id
-    final[champion.id] = parseInt(champion.key)
-  })
+    final[all_champion_data.data[champion].id] = parseInt(all_champion_data.data[champion].key)
+  }
 
   // return the final array
   return final

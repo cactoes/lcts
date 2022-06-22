@@ -21,8 +21,8 @@ export const create_window = (): void => {
   overlayWindow.attachTo(overlay_window, 'League of Legends (TM) Client')
 
   main_window = new BrowserWindow({
-    width: 1000,
-    height: 800,
+    width: 650,
+    height: 550,
     autoHideMenuBar: true,
     transparent: true,
     frame: false,
