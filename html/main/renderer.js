@@ -8,7 +8,9 @@ VanillaTilt.init(document.querySelectorAll(".card"), {
   glare: true,
   "max-glare": 0.3
 })
+
 let setup = false
+
 async function update_config() {
   ipcRenderer.send("getConfig")
 }
@@ -30,6 +32,13 @@ ipcRenderer.on("config", (e, data) => {
         AllLanesTwoImg[i].className = "active_img"
       }
     }
+
+    document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled"}`
+    document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled"}`
+
+    document.getElementById("autoPick").querySelectorAll("p")[1].className = config.auto.champion.set? "":"disabled"
+    document.getElementById("autoLock").querySelectorAll("p")[1].className = config.auto.champion.lock? "":"disabled"
+    document.getElementById("autoBan").querySelectorAll("p")[1].className =  config.auto.champion.ban? "":"disabled"
   }
 })
 
@@ -115,9 +124,64 @@ document.getElementById("saveDefaultLanes").addEventListener("click", () => {
     }
   }
 
+  ipcRenderer.send("checkLaneChampion", document.getElementById("checkLaneChampion").parentElement.className == "lanes__one noselect"? true:false)
+  ipcRenderer.send("checkLaneSpells", document.getElementById("checkLaneSpells").parentElement.className == "lanes__two noselect"? true:false)
+
   ipcRenderer.send("saveLanes", {
     championId: activeChampion,
     spellsId: activeSpell,
+  })
+
+  update_config()
+})
+
+document.getElementById("checkLaneChampion").addEventListener("click", (e) => {
+  if (e.target.parentElement.className == "lanes__one noselect disabled") {
+    e.target.parentElement.className = "lanes__one noselect"
+  } else {
+    e.target.parentElement.className = "lanes__one noselect disabled"
+  }
+})
+
+document.getElementById("checkLaneSpells").addEventListener("click", (e) => {
+  if (e.target.parentElement.className == "lanes__two noselect disabled") {
+    e.target.parentElement.className = "lanes__two noselect"
+  } else {
+    e.target.parentElement.className = "lanes__two noselect disabled"
+  }
+})
+
+document.getElementById("autoPick").addEventListener("click", (e) => {
+  e.target.parentElement.querySelectorAll("p")[1].className =  e.target.parentElement.querySelectorAll("p")[1].className == "disabled"? "":"disabled"
+})
+document.getElementById("autoLock").addEventListener("click", (e) => {
+  e.target.parentElement.querySelectorAll("p")[1].className =  e.target.parentElement.querySelectorAll("p")[1].className == "disabled"? "":"disabled"
+})
+document.getElementById("autoBan").addEventListener("click", (e) => {
+  e.target.parentElement.querySelectorAll("p")[1].className = e.target.parentElement.querySelectorAll("p")[1].className == "disabled"? "":"disabled"
+})
+
+document.getElementById("autoRunes").addEventListener("click", (e) => {
+  e.target.className = e.target.className == "disabled2"? "":"disabled2"
+})
+
+document.getElementById("saveRunes").addEventListener("click", () => {
+  const autoRunes = !(document.getElementById("autoRunes").className == "disabled2")
+  const runesPrefix = document.getElementById("runesPrefix").innerHTML
+  ipcRenderer.send("saveRunes", {
+    autoRunes, runesPrefix
+  })
+
+  update_config()
+})
+
+document.getElementById("savePicks").addEventListener("click", () => {
+  const autoPick = !(document.getElementById("autoPick").querySelectorAll("p")[1].className == "disabled")
+  const autoLock = !(document.getElementById("autoLock").querySelectorAll("p")[1].className == "disabled")
+  const autoBan = !(document.getElementById("autoBan").querySelectorAll("p")[1].className == "disabled")
+
+  ipcRenderer.send("savePicks", {
+    autoPick, autoLock, autoBan
   })
 
   update_config()

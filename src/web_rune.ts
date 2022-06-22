@@ -104,7 +104,7 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
 }
 
 // form a rune template for handler
-function form_rune(rune_obj: IRuneWebBase): IRune { 
+function form_rune(rune_obj: IRuneWebBase, runePrefix: string): IRune { 
 
   // get active ("perk-active") keystone id based on rune tree. (Ex. domination -> hail of blades) see '../data/runeTable.json'
   const keystone = runeTable.data.keyStones[ rune_obj.runes.primary ][ Object.keys( runeTable.data.keyStones[ rune_obj.runes.primary ] )[ rune_obj.keystone.indexOf("perk-active") ] ]
@@ -156,7 +156,7 @@ function form_rune(rune_obj: IRuneWebBase): IRune {
   // setting perks to a format leagueApi can handle
   let final_rune: IRune = {
     current: true,
-    name: "[u.gg] " + rune_obj.name,
+    name: `${runePrefix} ` + rune_obj.name,
     primaryStyleId: runeTable.data.runes[rune_obj.runes.primary],
     selectedPerkIds: [
       keystone,
@@ -178,10 +178,10 @@ function form_rune(rune_obj: IRuneWebBase): IRune {
 
 
 // combine into one function for easy use & export
-export async function get_rune_from_web(champion_name: string): Promise<IRune> {
+export async function get_rune_from_web(champion_name: string, runePrefix: string): Promise<IRune> {
   // get base rune data
   return get_base_build(champion_name).then<IRune>((base: IRuneWebBase) => {
     // format the runes so league client can use it
-    return form_rune(base)
+    return form_rune(base, runePrefix)
   })
 }

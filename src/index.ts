@@ -158,14 +158,14 @@ const game: CGame = {
           // get the current action data
           const currentAction: IAction = champSelectData.actions[pair][action] // championId, completed, id, isAllyAction, isInProgress, pickTurn, type, actorCellId
 
-          // set runes if we are locked in (rune name has to start with "_change" || "[u.gg]")
+          // set runes if we are locked in (rune name has to start with rune.prefix)
           if (config().auto.runes.set && !game.hasSetRunes && currentAction.completed && currentAction.championId == championPicks[lane][game.championPickIndex]) {
             game.hasSetRunes = true
 
-            const rune_data = await get_rune_from_web(getKeyByValue(champion().data, championPicks[lane][game.championPickIndex]).toLowerCase())
+            const rune_data = await get_rune_from_web(getKeyByValue(champion().data, championPicks[lane][game.championPickIndex]).toLowerCase(), config().auto.runes.prefix)
 
             const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
-            const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith("_change") || r.name.startsWith("[u.gg]"))
+            const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith(config().auto.runes.prefix))
 
             // runes
             if (target_rune)
@@ -365,6 +365,33 @@ ipcMain.on("create_lobby", async () => {
 
 ipcMain.on("getConfig", () => {
   main_window.webContents.send('config', config()) // send to overlay_page
+})
+
+ipcMain.on("checkLaneChampion", (e, state) => {
+  let cfg: IConfig = config()
+  cfg.auto.champion.checkLane = state
+  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
+})
+
+ipcMain.on("checkLaneSpells", (e, state) => {
+  let cfg: IConfig = config()
+  cfg.auto.spells.checkLane = state
+  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
+})
+
+ipcMain.on("savePicks", (e, data) => {
+  let cfg: IConfig = config()
+  cfg.auto.champion.set = data.autoPick
+  cfg.auto.champion.lock = data.autoLock
+  cfg.auto.champion.ban = data.autoBan
+  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
+})
+
+ipcMain.on("saveRunes", (e, data) => {
+  let cfg: IConfig = config()
+  cfg.auto.runes.set = data.autoRunes
+  cfg.auto.runes.prefix = data.runesPrefix
+  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
 })
 
 ipcMain.on("saveLanes", (e, data) => {

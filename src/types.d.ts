@@ -584,7 +584,8 @@ interface IConfig {
       }
     }
     runes: {
-      set: true
+      set: boolean,
+      prefix: string
     }
     spells: {
       set: boolean

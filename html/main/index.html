@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>League Client TS</title>
     <link rel="stylesheet" href="index.css" />
-    <script src="./tilt.js" defer></script>
+    <script type="text/javascript" src="./tilt.js" defer></script>
     <script src="./renderer.js" defer></script>
   </head>
   <body>
@@ -15,10 +15,11 @@
         <div class="client_status"></div>
         <div class="content">
           <h2 class="noselect">CONFIG</h2>
-          <h3>DEFAULT LANES</h3>
+          <h3>DEFAULT / CHECK LANE</h3>
+
           <div class="lanes__container">
             <div class="lanes__one noselect">
-              <p>champion</p>
+              <p id="checkLaneChampion">champion</p>
               <img src="../img/Position_Challenger-top.png" class="">
               <img src="../img/Position_Challenger-jungle.png" class="">
               <img src="../img/Position_Challenger-middle.png" class="">
@@ -26,7 +27,7 @@
               <img src="../img/Position_Challenger-support.png" class="">
             </div>
             <div class="lanes__two noselect">
-              <p>spells</p>
+              <p id="checkLaneSpells">spells</p>
               <img src="../img/Position_Challenger-top.png" class="">
               <img src="../img/Position_Challenger-jungle.png" class="">
               <img src="../img/Position_Challenger-middle.png" class="">
@@ -34,8 +35,9 @@
               <img src="../img/Position_Challenger-support.png" class="">
             </div>
           </div>
+
           <a href="#" id="saveDefaultLanes" class=".noselect">save</a>
-          <div class="arrow left noselect"><</div>
+          <div class="arrow left noselect">&lt;</div>
           <div class="arrow right noselect">></div>
         </div>
       </div>
@@ -44,15 +46,42 @@
         <div class="drag"></div>
         <div class="client_status"></div>
         <div class="content">
-          <h2 class="noselect">LOBBY</h2>
-          <h3>CONFIG</h3>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat qui, temporibus incidunt laudantium repudiandae officiis doloremque impedit quisquam obcaecati voluptatum reprehenderit, cupiditate corporis.</p>
-          <a href="#" class=".noselect">Start</a>
-          <div class="arrow left noselect"><</div>
+          <h2 class="noselect">CONFIG</h2>
+          <h3>CHAMPION SELECT</h3>
+          
+          <div class="champion_container">
+            <div id="autoPick">
+              <p>auto</p><p class="disabled">PICK</p><p>champion</p>
+            </div>
+            <div id="autoLock">
+              <p>auto</p><p>LOCK</p><p>champion</p>
+            </div>
+            <div id="autoBan">
+              <p>auto</p><p>BAN</p><p>champion</p>
+            </div>
+          </div>
+
+          <a href="#" id="savePicks" class=".noselect">save</a>
+          <div class="arrow left noselect">&lt;</div>
           <div class="arrow right noselect">></div>
         </div>
       </div>
 
+      <div class="card" style="display: none;">
+        <div class="drag"></div>
+        <div class="client_status"></div>
+        <div class="content">
+          <h2 class="noselect">CONFIG</h2>
+          <h3>RUNES</h3>
+          <p id="autoRunes">automatically import runes from u.gg</p>
+          <br>
+          <p style="cursor: default;">automatically change the rune that starts with <b contentEditable="true" id="runesPrefix">[u.gg]</b></p>
+          <a href="#" id="saveRunes" class=".noselect">save</a>
+          <div class="arrow left noselect">&lt;</div>
+          <div class="arrow right noselect">></div>
+        </div>
+      </div>
+      
     </div>
   </body>
 </html>

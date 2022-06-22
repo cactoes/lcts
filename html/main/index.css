@@ -60,12 +60,8 @@ body {
   right: 15px;
   font-size: 4em;
   color: rgba(255, 255, 255, .1);
-  cursor: pointer;
+  pointer-events: none;
   transition: .3s;
-}
-
-.container .card .content h2:hover {
-  color: rgba(255, 255, 255, .4);
 }
 
 .container .card .content h3 {
@@ -83,6 +79,8 @@ body {
 
 .container .card .content .lanes__container p {
   margin-bottom: 10px;
+  transition: all .2s;
+  cursor: pointer;
 }
 
 .container .card .content .lanes__container img {
@@ -175,6 +173,62 @@ body {
 }
 .right {
   right: 10px;
+}
+
+.disabled {
+  -webkit-filter: grayscale(1);
+  filter: grayscale(1);
+}
+
+.disabled p {
+  color: #adadad !important;
+}
+
+.champion_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: .4s;
+}
+
+.champion_container div {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#autoRunes {
+  cursor: pointer;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
+}
+
+#runesPrefix {
+  cursor: pointer;
+  outline: none;
+}
+
+.disabled2 {
+  color: #adadad !important;
+  text-decoration: line-through;
+}
+
+.champion_container div .disabled {
+  color: #adadad !important;
+  text-decoration: line-through;
+}
+
+.champion_container div p {
+  padding: 5px 5px;
+  cursor: pointer;
 }
 
 .noselect {
