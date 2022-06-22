@@ -1,16 +1,14 @@
+import { create_window, main_window, overlay_window } from "./electron"
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
 import { rune_table, champion_table, get_version } from "./form_data"
 import { get_rune_from_web } from "./web_rune"
-
-const fs = require("fs")
+import { app, ipcMain } from "electron"
+import * as fs from "fs"
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
 const SECOND: number = 1000
 
-const getKeyByValue = (object: any, value: number): string => {
-  let final: string | undefined = Object.keys(object).find(key => object[key] === value)
-  return !final? "":final
-}
+const getKeyByValue = (object: any, value: number): string => Object.keys(object).find(key => object[key] === value) || ""
 
 const champion: IChampionTable = JSON.parse(fs.readFileSync("data/championTable.json").toString())
 const rune: IRuneTable = JSON.parse(fs.readFileSync("data/runeTable.json").toString())
@@ -21,6 +19,19 @@ const interfaces = {
   game: new C_Game({canCallUnhooked: false}),
   runes: new C_Runes({canCallUnhooked: false}),
   lobby: new C_Lobby({canCallUnhooked: false})
+}
+
+const await_login = async (): Promise<boolean> => {
+  let logged_in = false
+  while(!logged_in) {
+    try {
+      await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get") && (logged_in = true)
+  } catch {
+      console.log("not logged in")
+  }
+  await sleep(1 * SECOND)
+  }
+  return false
 }
 
 const user: CUser = {
@@ -58,7 +69,8 @@ const game: CGame = {
       this.autoPickSummonerSpells()
 
     if (this.GAMEFLOW_PHASE !== this.GAMEFLOW_PHASE_LAST) {
-      console.log(this.GAMEFLOW_PHASE)
+      overlay_window.webContents.send('game_state', this.GAMEFLOW_PHASE) // send to overlay_page
+      
       // call methods that depend on the gameflow update
       if (config.auto.acceptMatch)
         this.autoAcceptMatch()
@@ -277,7 +289,7 @@ const lobby: CLobby = {
 client.on("connect", async (credentials: ICredentials) => {
   // get game version
   const game_version = await get_version()
-  
+
   // check game version
   if (champion.version !== game_version || rune.version !== game_version) {
     // update out championTable
@@ -342,18 +354,17 @@ client.on("disconnect", () => {
 
 client.connect()
 
-const await_login = async () => {
-  let logged_in = !1
-  for (; !logged_in; ) {
-      try {
-          await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get") && (logged_in = !0)
-      } catch {
-          console.log("not logged in")
-      }
-      await sleep(1 * SECOND)
+ipcMain.on("create_lobby", async () => {
+  if (interfaces.lobby.isCorrectState("hooked", true)) {
+    lobby.createLobby(interfaces.lobby.queueId.normal.draft)
   }
-  return !0
-}
+})
+
+// electron stuff -------
+app.disableHardwareAcceleration()
+
+// when electron is ready create the window's
+app.on("ready", create_window)
 
 // await this.get(data, this.endpoints.LOL_GAMEFLOW_SESSION)
 // .then( async matchData => {

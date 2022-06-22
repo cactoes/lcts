@@ -7,16 +7,27 @@ A feature rich league client written is TypeScript
 $ npm install -g typescript
 ```
 
-## Installing the client
+## Installing the client from source
 ```
 $ git clone https://github.com/cactoes/league_client_ts.git
 $ cd league_client_ts
 $ npm install
 ```
 
-## Running the client
+## Compiling the client from source
 ```
-$ npm start
+$ npm tsc:build
+```
+
+## Running the client from source
+Run & Compile the source
+```
+$ npm test
+```
+
+Compile the src/
+```
+$ npm tsc:build
 ```
 
 ## License

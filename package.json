@@ -4,21 +4,28 @@
   "description": "",
   "main": "dst/index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node .",
+    "tsc:build": "tsc",
+    "start": "electron-forge start",
     "clean": "del /S dst\\*",
-    "test": "tsc && node ."
+    "test": "tsc && electron-forge start"
   },
   "keywords": [],
   "author": "",
   "license": "GNU GPLv3",
   "dependencies": {
+    "electron-overlay-window": "^2.0.1",
     "jsdom": "^20.0.0",
     "lcinterface": "^3.3.1",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "@types/node": "^18.0.0",
-    "@types/node-fetch": "^2.6.2"
+    "@types/node-fetch": "^2.6.2",
+    "electron": "^19.0.5"
   }
 }
