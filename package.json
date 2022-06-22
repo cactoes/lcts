@@ -15,7 +15,7 @@
   "dependencies": {
     "electron-overlay-window": "^2.0.1",
     "jsdom": "^20.0.0",
-    "lcinterface": "^3.3.1",
+    "lcinterface": "^3.3.2",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
