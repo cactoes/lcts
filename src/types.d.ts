@@ -606,6 +606,12 @@ interface IConfig {
     rank: {
       tier: string,
       rank: string
-    }
+    },
+    script: boolean
   }
+}
+
+declare class IScript {
+  async onUserConnect(user: CUser, lobby: CLobby): boolean
+  async onPartyJoin(user: CUser, lobby: CLobby): boolean
 }

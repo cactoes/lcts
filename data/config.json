@@ -79,6 +79,7 @@
     "rank": {
       "tier": "diamond",
       "rank": "III"
-    }
+    },
+    "script": true
   }
 }

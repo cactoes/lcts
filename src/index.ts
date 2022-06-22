@@ -2,6 +2,7 @@ import { create_window, main_window, overlay_window } from "./electron"
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
 import { rune_table, champion_table, get_version } from "./form_data"
 import { get_rune_from_web } from "./web_rune"
+import { script } from "./script_manager"
 import { app, ipcMain } from "electron"
 import * as fs from "fs"
 
@@ -26,10 +27,10 @@ const await_login = async (): Promise<boolean> => {
   while(!logged_in) {
     try {
       await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get") && (logged_in = true)
-  } catch {
+    } catch {
       console.log("not logged in")
-  }
-  await sleep(1 * SECOND)
+    }
+    await sleep(1 * SECOND)
   }
   return false
 }
@@ -79,6 +80,12 @@ const game: CGame = {
       if (this.acceptedMatch)
         this.acceptedMatch = false
       
+      if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.LOBBY) {
+        if (typeof script.onPartyJoin == "function" && config().misc.script) {
+          script.onPartyJoin(user, lobby)
+        }
+      }
+
       if (this.GAMEFLOW_PHASE !== interfaces.game.gameflow.CHAMPSELECT) {
         this.championPickIndex = 0
         this.championBanIndex = 0
@@ -311,7 +318,7 @@ client.on("connect", async (credentials: ICredentials) => {
   interfaces.runes.hook(credentials)
   interfaces.lobby.hook(credentials)
   
-  // setup some destinations
+  // setup dest for checking if we are logged in (tho any endpoint will do)
   interfaces.game.addDest("login", "/lol-login/v1/session")
 
   // wait for client to be logged in
@@ -321,24 +328,27 @@ client.on("connect", async (credentials: ICredentials) => {
 
   // gameflow checker (loop)
   game.updateGameflow()
-  
   main_window.webContents.send('logged_in', true)
 
-  // if we are hooked
-  if (interfaces.user.isCorrectState("hooked", true)) {
-    // set our status
-    await user.setStatus(config().misc.status)
-    // set our display rank
-    await user.setRank(config().misc.rank.tier, config().misc.rank.rank)
+  if (typeof script.onUserConnect == "function" && config().misc.script) {
+    script.onUserConnect(user, lobby)
   }
 
-  if (interfaces.lobby.isCorrectState("hooked", true)) {
+  // if we are hooked
+  //if (interfaces.user.isCorrectState("hooked", true)) {
+    // set our status
+    //await user.setStatus(config().misc.status)
+    // set our display rank
+    //await user.setRank(config().misc.rank.tier, config().misc.rank.rank)
+  //}
+
+  //if (interfaces.lobby.isCorrectState("hooked", true)) {
     //await lobby.createLobby(interfaces.lobby.queueId.normal.draft)
     //await lobby.setLanes(interfaces.game.lane.BOTTOM, interfaces.game.lane.MIDDLE)
     //await lobby.setPartyType(interfaces.lobby.type.open)
 
     //await lobby.startSearch()
-  }
+  //}
 })
 
 client.on("disconnect", () => {
