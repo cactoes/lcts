@@ -279,7 +279,7 @@ const lobby: CLobby = {
   setLanes: async function(firstPreference: string, secondPreference: string) {
     return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.position, { firstPreference, secondPreference }, "put", false)
   },
-  createLobby: async function(queueId: number) {
+  create: async function(queueId: number) {
     return await interfaces.lobby.virtualCall<Promise<ILobby>>(interfaces.lobby.dest.lobby, { queueId }, "post")
   },
   setPartyType: async function(type: string) {
@@ -366,12 +366,6 @@ client.on("disconnect", () => {
 })
 
 client.connect()
-
-ipcMain.on("create_lobby", async () => {
-  if (interfaces.lobby.isCorrectState("hooked", true)) {
-    lobby.createLobby(interfaces.lobby.queueId.normal.draft)
-  }
-})
 
 ipcMain.on("getConfig", () => {
   main_window.webContents.send('config', config()) // send to overlay_page
