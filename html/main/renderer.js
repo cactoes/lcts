@@ -1,48 +1,56 @@
 const { ipcRenderer } = require("electron")
 
 let config = {}
+const call_update_config = () => ipcRenderer.send("getConfig")
+let firstTimeSetup = false
 
-VanillaTilt.init(document.querySelectorAll(".card"), {
-  max: 10,
-  speed: 200,
-  glare: true,
-  "max-glare": 0.3
-})
-
-let setup = false
-
-async function update_config() {
-  ipcRenderer.send("getConfig")
-}
-
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 ipcRenderer.on("config", (e, data) => {
   config = data
-  if (!setup) {
-    setup= true
-    for (var i = 0; i < AllLanesOneImg.length; i++) {
-      const a = AllLanesOneImg[i].src.split("/")
-      if ( a[a.length - 1] == `Position_Challenger-${config.auto.champion.defaultLane}.png`) {
-        AllLanesOneImg[i].className = "active_img"
-      }
-    }
-    
-    for (var i = 0; i < AllLanesTwoImg.length; i++) {
-      const a = AllLanesOneImg[i].src.split("/")
-      if ( a[a.length - 1] == `Position_Challenger-${config.auto.spells.defaultLane}.png`) {
-        AllLanesTwoImg[i].className = "active_img"
-      }
-    }
-
-    document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled"}`
-    document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled"}`
-
-    document.getElementById("autoPick").querySelectorAll("p")[1].className = config.auto.champion.set? "":"disabled"
-    document.getElementById("autoLock").querySelectorAll("p")[1].className = config.auto.champion.lock? "":"disabled"
-    document.getElementById("autoBan").querySelectorAll("p")[1].className =  config.auto.champion.ban? "":"disabled"
-  }
+  if (!firstTimeSetup)
+    setup_ui_on_update()
 })
 
-update_config()
+const setup_ui_on_update = async () => {
+  firstTimeSetup = true
+  for (var i = 0; i < 5; i++) {
+    const imgPrefix = AllLanesOneImg[i].src.split("/")
+    if ( imgPrefix[imgPrefix.length - 1] == `Position_Challenger-${config.auto.champion.defaultLane}.png`) {
+      AllLanesOneImg[i].className = "active_img"
+    }
+  }
+
+  for (var i = 0; i < 5; i++) {
+    const imgPrefix = AllLanesTwoImg[i].src.split("/")
+    if ( imgPrefix[imgPrefix.length - 1] == `Position_Challenger-${config.auto.spells.defaultLane}.png`) {
+      AllLanesTwoImg[i].className = "active_img"
+    }
+  }
+
+  document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled"}`
+  document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled"}`
+
+  document.getElementById("autoPick").querySelectorAll("p")[1].className = config.auto.champion.set? "":"disabled"
+  document.getElementById("autoLock").querySelectorAll("p")[1].className = config.auto.champion.lock? "":"disabled"
+  document.getElementById("autoBan").querySelectorAll("p")[1].className =  config.auto.champion.ban? "":"disabled"
+
+  document.getElementById("autoRunes").className = config.auto.runes.set? "":"disabled2"
+  document.getElementById("runesPrefix").innerHTML = config.auto.runes.prefix
+}
+
+const ipc_send = (dest, data) => {
+  ipcRenderer.send(dest, data)
+}
+
+const allClose = document.getElementsByClassName("client_close")
+for (var i = 0; i < allClose.length; i++) {
+  allClose[i].addEventListener("click", () => {ipc_send("closeWindow")})
+}
+
+const allMini = document.getElementsByClassName("client_mini")
+for (var i = 0; i < allClose.length; i++) {
+  allMini[i].addEventListener("click", () => {ipc_send("miniWindow")})
+}
 
 const allClient_status = document.getElementsByClassName("client_status")
 
@@ -124,15 +132,14 @@ document.getElementById("saveDefaultLanes").addEventListener("click", () => {
     }
   }
 
-  ipcRenderer.send("checkLaneChampion", document.getElementById("checkLaneChampion").parentElement.className == "lanes__one noselect"? true:false)
-  ipcRenderer.send("checkLaneSpells", document.getElementById("checkLaneSpells").parentElement.className == "lanes__two noselect"? true:false)
-
-  ipcRenderer.send("saveLanes", {
+  ipc_send("saveLanes", {
+    checkChampion: document.getElementById("checkLaneChampion").parentElement.className == "lanes__one noselect",
+    checkSpells: document.getElementById("checkLaneSpells").parentElement.className == "lanes__two noselect",
     championId: activeChampion,
     spellsId: activeSpell,
   })
 
-  update_config()
+  call_update_config()
 })
 
 document.getElementById("checkLaneChampion").addEventListener("click", (e) => {
@@ -160,7 +167,6 @@ document.getElementById("autoLock").addEventListener("click", (e) => {
 document.getElementById("autoBan").addEventListener("click", (e) => {
   e.target.parentElement.querySelectorAll("p")[1].className = e.target.parentElement.querySelectorAll("p")[1].className == "disabled"? "":"disabled"
 })
-
 document.getElementById("autoRunes").addEventListener("click", (e) => {
   e.target.className = e.target.className == "disabled2"? "":"disabled2"
 })
@@ -168,11 +174,12 @@ document.getElementById("autoRunes").addEventListener("click", (e) => {
 document.getElementById("saveRunes").addEventListener("click", () => {
   const autoRunes = !(document.getElementById("autoRunes").className == "disabled2")
   const runesPrefix = document.getElementById("runesPrefix").innerHTML
-  ipcRenderer.send("saveRunes", {
+  
+  ipc_send("saveRunes", {
     autoRunes, runesPrefix
   })
 
-  update_config()
+  call_update_config()
 })
 
 document.getElementById("savePicks").addEventListener("click", () => {
@@ -180,9 +187,12 @@ document.getElementById("savePicks").addEventListener("click", () => {
   const autoLock = !(document.getElementById("autoLock").querySelectorAll("p")[1].className == "disabled")
   const autoBan = !(document.getElementById("autoBan").querySelectorAll("p")[1].className == "disabled")
 
-  ipcRenderer.send("savePicks", {
+  ipc_send("savePicks", {
     autoPick, autoLock, autoBan
   })
 
-  update_config()
+  call_update_config()
 })
+
+// after setup is done get config for the first time
+call_update_config()

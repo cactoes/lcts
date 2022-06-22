@@ -367,18 +367,6 @@ ipcMain.on("getConfig", () => {
   main_window.webContents.send('config', config()) // send to overlay_page
 })
 
-ipcMain.on("checkLaneChampion", (e, state) => {
-  let cfg: IConfig = config()
-  cfg.auto.champion.checkLane = state
-  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
-})
-
-ipcMain.on("checkLaneSpells", (e, state) => {
-  let cfg: IConfig = config()
-  cfg.auto.spells.checkLane = state
-  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
-})
-
 ipcMain.on("savePicks", (e, data) => {
   let cfg: IConfig = config()
   cfg.auto.champion.set = data.autoPick
@@ -397,11 +385,19 @@ ipcMain.on("saveRunes", (e, data) => {
 ipcMain.on("saveLanes", (e, data) => {
   let cfg: IConfig = config()
   const lanes: string[] = [interfaces.game.lane.TOP, interfaces.game.lane.JUNGLE, interfaces.game.lane.MIDDLE, interfaces.game.lane.BOTTOM, interfaces.game.lane.SUPPORT]
-
   cfg.auto.champion.defaultLane = lanes[data.championId].toLowerCase()
   cfg.auto.spells.defaultLane = lanes[data.spellsId].toLowerCase()
-
+  cfg.auto.champion.checkLane = data.checkChampion
+  cfg.auto.spells.checkLane = data.checkSpells
   fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
+})
+
+ipcMain.on("closeWindow", () => {
+  main_window.close()
+})
+
+ipcMain.on("miniWindow", () => {
+  main_window.minimize()
 })
 
 // electron stuff -------

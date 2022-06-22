@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>League Client TS</title>
     <link rel="stylesheet" href="index.css" />
-    <script type="text/javascript" src="./tilt.js" defer></script>
     <script src="./renderer.js" defer></script>
   </head>
   <body>
@@ -13,6 +12,8 @@
       <div class="card current">
         <div class="drag"></div>
         <div class="client_status"></div>
+        <div class="client_mini"></div>
+        <div class="client_close"></div>
         <div class="content">
           <h2 class="noselect">CONFIG</h2>
           <h3>DEFAULT / CHECK LANE</h3>
@@ -45,6 +46,8 @@
       <div class="card" style="display: none;">
         <div class="drag"></div>
         <div class="client_status"></div>
+        <div class="client_mini"></div>
+        <div class="client_close"></div>
         <div class="content">
           <h2 class="noselect">CONFIG</h2>
           <h3>CHAMPION SELECT</h3>
@@ -70,6 +73,8 @@
       <div class="card" style="display: none;">
         <div class="drag"></div>
         <div class="client_status"></div>
+        <div class="client_mini"></div>
+        <div class="client_close"></div>
         <div class="content">
           <h2 class="noselect">CONFIG</h2>
           <h3>RUNES</h3>
@@ -83,5 +88,15 @@
       </div>
       
     </div>
+
+    <script type="text/javascript" src="./tilt.js"></script>
+    <script text="text/javascript">
+      VanillaTilt.init(document.querySelectorAll(".card"), {
+        max: 10,
+        speed: 200,
+        glare: true,
+        "max-glare": 0.3
+      })
+    </script>
   </body>
 </html>

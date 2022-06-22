@@ -142,6 +142,30 @@ body {
   border-radius: 5px;
 }
 
+.container .card .client_close {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: 2;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(209, 93, 93, 1);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.container .card .client_mini {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: 2;
+  top: 10px;
+  right: 25px;
+  background-color: rgb(209, 163, 93);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 @keyframes pulse {
   0% {
     opacity: 1;
