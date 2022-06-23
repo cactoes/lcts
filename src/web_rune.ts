@@ -1,8 +1,5 @@
 import fetch from "node-fetch"
-
 import { parse } from 'node-html-parser'
-//const DOMParser = require("jsdom")
-
 const fs = require("fs")
 const runeTable: IRuneTable = JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
 
@@ -18,7 +15,6 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
   })
 
   // parse the text as an html element and select runes part of the DOM
-  //const rune_base: any = new DOMParser.JSDOM(page_data).window.document.querySelectorAll(".recommended-build_runes")[0] 
   const rune_base: any = parse(page_data).querySelectorAll(".recommended-build_runes")[0] 
   
   console.log(rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[0].classList.toString().get_item(2))

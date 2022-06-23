@@ -13,18 +13,6 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {
-        "ignore": [
-          "src",
-          ".gitignore",
-          "README.md",
-          "TODO.md",
-          "tsconfig.json",
-          "data",
-          "out"
-        ],
-        "extraResource": "data"
-      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -53,7 +41,6 @@
     "@types/node": "^18.0.0",
     "@types/node-fetch": "^2.6.2",
     "electron": "^19.0.5",
-    "electron-packager": "^15.5.1",
-    "jsdom": "^20.0.0"
+    "electron-packager": "^15.5.1"
   }
 }
