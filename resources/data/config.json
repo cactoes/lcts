@@ -1,0 +1,85 @@
+{
+  "auto": {
+    "acceptMatch": true,
+    "champion": {
+      "set": true,
+      "lock": true,
+      "ban": true,
+      "checkLane": false,
+      "defaultLane": "bottom",
+      "lanePick": {
+        "top": [
+          "Gwen"
+        ],
+        "jungle": [
+          "Lilia"
+        ],
+        "middle": [
+          "Irelia"
+        ],
+        "bottom": [
+          "Caitlyn"
+        ],
+        "utility": [
+          "Renata"
+        ]
+      },
+      "laneBan": {
+        "top": [
+          "Garen"
+        ],
+        "jungle": [
+          "Belveth"
+        ],
+        "middle": [
+          "Akali"
+        ],
+        "bottom": [
+          "Ezreal"
+        ],
+        "utility": [
+          "Leona"
+        ]
+      }
+    },
+    "runes": {
+      "set": true,
+      "prefix": "[u.gg]"
+    },
+    "spells": {
+      "set": true,
+      "checkLane": false,
+      "defaultLane": "bottom",
+      "lane": {
+        "top": [
+          "Teleport",
+          "Flash"
+        ],
+        "jungle": [
+          "Smite",
+          "Flash"
+        ],
+        "middle": [
+          "Ignite",
+          "Flash"
+        ],
+        "bottom": [
+          "Heal",
+          "Flash"
+        ],
+        "utility": [
+          "Ignite",
+          "Flash"
+        ]
+      }
+    }
+  },
+  "misc": {
+    "status": "default-status",
+    "rank": {
+      "tier": "diamond",
+      "rank": "III"
+    },
+    "script": true
+  }
+}

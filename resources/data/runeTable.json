@@ -1,0 +1,137 @@
+{
+  "version": "12.11.1",
+  "data": {
+    "runes": {
+      "Domination": 8100,
+      "Inspiration": 8300,
+      "Precision": 8000,
+      "Resolve": 8400,
+      "Sorcery": 8200
+    },
+    "styles": {
+      "AdaptiveForce": 5008,
+      "CDRScaling": 5007,
+      "AttackSpeed": 5005,
+      "Armor": 5002,
+      "MagicRes": 5003,
+      "HealthScaling": 5001
+    },
+    "keyStones": {
+      "Domination": {
+        "Electrocute": 8112,
+        "Predator": 8124,
+        "DarkHarvest": 8128,
+        "HailOfBlades": 9923
+      },
+      "Inspiration": {
+        "GlacialAugment": 8351,
+        "UnsealedSpellbook": 8360,
+        "FirstStrike": 8369
+      },
+      "Precision": {
+        "PressTheAttack": 8005,
+        "LethalTempo": 8008,
+        "FleetFootwork": 8021,
+        "Conqueror": 8010
+      },
+      "Resolve": {
+        "GraspOfTheUndying": 8437,
+        "Aftershock": 8439,
+        "Guardian": 8465
+      },
+      "Sorcery": {
+        "SummonAery": 8214,
+        "ArcaneComet": 8229,
+        "PhaseRush": 8230
+      }
+    },
+    "perks": {
+      "Domination": [
+        {
+          "CheapShot": 8126,
+          "TasteOfBlood": 8139,
+          "SuddenImpact": 8143
+        },
+        {
+          "ZombieWard": 8136,
+          "GhostPoro": 8120,
+          "EyeballCollection": 8138
+        },
+        {
+          "TreasureHunter": 8135,
+          "IngeniousHunter": 8134,
+          "RelentlessHunter": 8105,
+          "UltimateHunter": 8106
+        }
+      ],
+      "Inspiration": [
+        {
+          "HextechFlashtraption": 8306,
+          "MagicalFootwear": 8304,
+          "PerfectTiming": 8313
+        },
+        {
+          "FuturesMarket": 8321,
+          "MinionDematerializer": 8316,
+          "BiscuitDelivery": 8345
+        },
+        {
+          "CosmicInsight": 8347,
+          "ApproachVelocity": 8410,
+          "TimeWarpTonic": 8352
+        }
+      ],
+      "Precision": [
+        {
+          "Overheal": 9101,
+          "Triumph": 9111,
+          "PresenceOfMind": 8009
+        },
+        {
+          "LegendAlacrity": 9104,
+          "LegendTenacity": 9105,
+          "LegendBloodline": 9103
+        },
+        {
+          "CoupDeGrace": 8014,
+          "CutDown": 8017,
+          "LastStand": 8299
+        }
+      ],
+      "Resolve": [
+        {
+          "Demolish": 8446,
+          "FontOfLife": 8463,
+          "ShieldBash": 8401
+        },
+        {
+          "Conditioning": 8429,
+          "SecondWind": 8444,
+          "BonePlating": 8473
+        },
+        {
+          "Overgrowth": 8451,
+          "Revitalize": 8453,
+          "Unflinching": 8242
+        }
+      ],
+      "Sorcery": [
+        {
+          "NullifyingOrb": 8224,
+          "ManaflowBand": 8226,
+          "NimbusCloak": 8275
+        },
+        {
+          "Transcendence": 8210,
+          "Celerity": 8234,
+          "AbsoluteFocus": 8233
+        },
+        {
+          "Scorch": 8237,
+          "Waterwalking": 8232,
+          "GatheringStorm": 8236
+        }
+      ]
+    }
+  }
+}
