@@ -20,7 +20,7 @@ Run & Compile the source
 $ npm run test
 ```
 ## Scripting
-The client allows for function scripting, the script is located in data
+The client allows for function scripting, the script is located in (resources/data/script.js)[resources/data/script.js]
 ### Structure
 ```javascript
 class LCScript {
