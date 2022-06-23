@@ -72,8 +72,8 @@ Steps for contributing
 - choose a [task](TODO.md) / or come up with a new task
 - contact me (cactus#9276) so i can link you to the task
 - fork the project
-- make changes
-- upload
+- make changes (and document your code + add any types needed)
+- upload for reviewing
 
 ## License
 [GNU GPLv3](LICENSE)
