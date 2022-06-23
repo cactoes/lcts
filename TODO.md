@@ -4,7 +4,7 @@ idk man
 ### Important
 
 ### Other
-- [ ] make config availible in scripts
+- [ ] make config available in scripts
 - [ ] add "card" / menu for defining champions to pick and ban (in front end)
 - [ ] make public
 
