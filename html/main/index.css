@@ -245,6 +245,11 @@ body {
   text-decoration: line-through;
 }
 
+.disabled2 p {
+  color: #adadad !important;
+  text-decoration: line-through;
+}
+
 .champion_container div .disabled {
   color: #adadad !important;
   text-decoration: line-through;

@@ -14,10 +14,9 @@ export const create_window = (): void => {
     },
     ...overlayWindow.WINDOW_OPTS
   })
+  
   overlay_window.loadFile("html/overlay/index.html")
-
   overlay_window.setIgnoreMouseEvents(true)
-
   overlayWindow.attachTo(overlay_window, 'League of Legends (TM) Client')
 
   main_window = new BrowserWindow({
@@ -32,9 +31,10 @@ export const create_window = (): void => {
       contextIsolation: false
     }
   })
+
   main_window.loadFile("html/main/index.html")
   main_window.setIgnoreMouseEvents(false)
-  //main_window.webContents.openDevTools({ mode: 'detach', activate: false })
+  main_window.webContents.openDevTools({ mode: 'detach', activate: false })
 
   main_window.on("close", () => {
     app.quit()

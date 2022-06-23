@@ -17,8 +17,6 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
   // parse the text as an html element and select runes part of the DOM
   const rune_base: any = parse(page_data).querySelectorAll(".recommended-build_runes")[0] 
   
-  console.log(rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[0].classList.toString().get_item(2))
-
   // form the rune base for later parsing
   const rune_obj: IRuneWebBase = {
     name: rune_base.querySelectorAll("div")[1].querySelectorAll("span")[0].innerHTML,

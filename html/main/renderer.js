@@ -27,12 +27,12 @@ const setup_ui_on_update = async () => {
     }
   }
 
-  document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled"}`
-  document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled"}`
+  document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled2"}`
+  document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled2"}`
 
-  document.getElementById("autoPick").querySelectorAll("p")[1].className = config.auto.champion.set? "":"disabled"
-  document.getElementById("autoLock").querySelectorAll("p")[1].className = config.auto.champion.lock? "":"disabled"
-  document.getElementById("autoBan").querySelectorAll("p")[1].className =  config.auto.champion.ban? "":"disabled"
+  document.getElementById("autoPick").className = config.auto.champion.set? "":"disabled2"
+  document.getElementById("autoLock").className = config.auto.champion.lock? "":"disabled2"
+  document.getElementById("autoBan").className =  config.auto.champion.ban? "":"disabled2"
 
   document.getElementById("autoRunes").className = config.auto.runes.set? "":"disabled2"
   document.getElementById("runesPrefix").innerHTML = config.auto.runes.prefix
@@ -159,13 +159,16 @@ document.getElementById("checkLaneSpells").addEventListener("click", (e) => {
 })
 
 document.getElementById("autoPick").addEventListener("click", (e) => {
-  e.target.parentElement.querySelectorAll("p")[1].className =  e.target.parentElement.querySelectorAll("p")[1].className == "disabled"? "":"disabled"
+  if (e.target.nodeName == "P")
+    e.target.parentElement.className =  e.target.parentElement.className == "disabled2"? "":"disabled2"
 })
 document.getElementById("autoLock").addEventListener("click", (e) => {
-  e.target.parentElement.querySelectorAll("p")[1].className =  e.target.parentElement.querySelectorAll("p")[1].className == "disabled"? "":"disabled"
+  if (e.target.nodeName == "P")
+  e.target.parentElement.className =  e.target.parentElement.className == "disabled2"? "":"disabled2"
 })
 document.getElementById("autoBan").addEventListener("click", (e) => {
-  e.target.parentElement.querySelectorAll("p")[1].className = e.target.parentElement.querySelectorAll("p")[1].className == "disabled"? "":"disabled"
+  if (e.target.nodeName == "P")
+  e.target.parentElement.className =  e.target.parentElement.className == "disabled2"? "":"disabled2"
 })
 document.getElementById("autoRunes").addEventListener("click", (e) => {
   e.target.className = e.target.className == "disabled2"? "":"disabled2"
@@ -183,9 +186,9 @@ document.getElementById("saveRunes").addEventListener("click", () => {
 })
 
 document.getElementById("savePicks").addEventListener("click", () => {
-  const autoPick = !(document.getElementById("autoPick").querySelectorAll("p")[1].className == "disabled")
-  const autoLock = !(document.getElementById("autoLock").querySelectorAll("p")[1].className == "disabled")
-  const autoBan = !(document.getElementById("autoBan").querySelectorAll("p")[1].className == "disabled")
+  const autoPick = !(document.getElementById("autoPick").className == "disabled2")
+  const autoLock = !(document.getElementById("autoLock").className == "disabled2")
+  const autoBan = !(document.getElementById("autoBan").className == "disabled2")
 
   ipc_send("savePicks", {
     autoPick, autoLock, autoBan
