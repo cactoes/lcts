@@ -2,11 +2,12 @@
 idk man
 
 ### Important
+- [ ] preparations make public
+- [ ] make public
 
 ### Other
 - [ ] make config available in scripts
 - [ ] add "card" / menu for defining champions to pick and ban (in front end)
-- [ ] make public
 
 ### Completed tasks ✓
 - [x] clean-up "form_data.ts" [@cactoes](https://github.com/cactoes)
