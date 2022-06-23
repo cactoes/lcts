@@ -4,6 +4,8 @@ idk man
 ### Important
 
 ### Other
+- [ ] make config availible in scripts
+- [ ] add "card" / menu for defining champions to pick and ban (in front end)
 - [ ] make public
 
 ### Completed tasks ✓
