@@ -8,11 +8,11 @@ $ npm install -g typescript
 ```
 
 ## Installing the client
-Just donwload the client from the [releases](https://github.com/cactoes/league_client_ts/releases) tab & run lcts.exe
+Just donwload the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run lcts.exe
 
 ## Installing the client from source
 ```
-$ git clone https://github.com/cactoes/league_client_ts.git
+$ git clone https://github.com/cactoes/lcts.git
 $ cd league_client_ts
 $ npm install
 ```
