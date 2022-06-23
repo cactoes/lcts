@@ -1,4 +1,4 @@
-# league client ts
+# LCTS (League Client TypeScript)
 A feature rich league client written is TypeScript
 
 ## Prerequisites
