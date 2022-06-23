@@ -67,5 +67,13 @@ async function startSearch(): void
 async function stopSearch(): void
 ```
 
+## Contributing 
+Steps for contributing
+- choose a [task](TODO.md) / or come up with a new task
+- contact me (cactus#9276) so i can link you to the task
+- fork the project
+- make changes
+- upload
+
 ## License
 [GNU GPLv3](LICENSE)
