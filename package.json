@@ -1,22 +1,48 @@
 {
   "name": "league_client_ts",
   "version": "1.0.0",
-  "description": "",
+  "description": "a",
   "main": "dst/index.js",
   "scripts": {
     "tsc:build": "tsc",
     "start": "electron-forge start",
     "clean": "del /S dst\\*",
-    "test": "tsc && electron-forge start"
+    "test": "tsc && electron-forge start",
+    "make": "electron-forge make",
+    "package:win": "tsc && electron-packager . lcts --overwrite --asar --platform=win32 --arch=x64 --icon='' --prune=true --out=release --extraResource='./resources/data' --ignore=^/src --ignore=^/.gitignore --ignore=^/README.md --ignore=^/TODO.md --ignore=^/tsconfig.json  --ignore=^/out --version-string.CompanyName=LCTS --version-string.FileDescription=LCTS --version-string.ProductName=\"LCTS\""
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "ignore": [
+          "src",
+          ".gitignore",
+          "README.md",
+          "TODO.md",
+          "tsconfig.json",
+          "data",
+          "out"
+        ],
+        "extraResource": "data"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "lcts"
+          }
+        }
+      ]
+    }
   },
   "keywords": [],
-  "author": "",
+  "author": "cactoes",
   "license": "GNU GPLv3",
   "dependencies": {
     "electron-overlay-window": "^2.0.1",
-    "jsdom": "^20.0.0",
     "lcinterface": "^3.3.2",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "node-html-parser": "^5.3.3"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.63",
@@ -26,6 +52,8 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "@types/node": "^18.0.0",
     "@types/node-fetch": "^2.6.2",
-    "electron": "^19.0.5"
+    "electron": "^19.0.5",
+    "electron-packager": "^15.5.1",
+    "jsdom": "^20.0.0"
   }
 }
