@@ -7,6 +7,9 @@ A feature rich league client written is TypeScript
 $ npm install -g typescript
 ```
 
+## Installing the client
+Just donwload the client from the [releases](/releases) tab & run lcts.exe
+
 ## Installing the client from source
 ```
 $ git clone https://github.com/cactoes/league_client_ts.git
@@ -19,6 +22,13 @@ Run & Compile the source
 ```
 $ npm run test
 ```
+
+## Compiling the client
+Run & Compile the source
+```
+$ npm run package:win
+```
+
 ## Scripting
 The client allows for function scripting, the script is located in [resources/data/script.js](resources/data/script.js)
 ### Structure
@@ -42,13 +52,13 @@ Methods are called like this
 await user.setStatus("example")
 ```
 #### Methods in *user*
-[IUser](src/types.d.ts#L158) class
+- [IUser](src/types.d.ts#L158) Interface/Type
 ```TypeScript
 async function setStatus(status: string): Promise<IUser>
 async function setRank(tier: string, rank: string): Promise<IUser>
 ```
 #### Methods in *lobby*
-[ILobby](src/types.d.ts#L283) class
+- [ILobby](src/types.d.ts#L283) Interface/Type
 ```TypeScript
 async function setLanes(first: string, second: string): void
 async function create(queueId: number): Promise<ILobby>
