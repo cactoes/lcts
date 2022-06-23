@@ -1,7 +1,14 @@
 import fetch from "node-fetch"
-const DOMParser = require("jsdom")
+
+import { parse } from 'node-html-parser'
+//const DOMParser = require("jsdom")
+
 const fs = require("fs")
-const runeTable: IRuneTable = JSON.parse(fs.readFileSync("data/runeTable.json").toString())
+const runeTable: IRuneTable = JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
+
+String.prototype.get_item = function(index: number) {
+  return this.split(" ")[index]
+}
 
 async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
   // get champion rune page from u.gg in text from
@@ -11,7 +18,10 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
   })
 
   // parse the text as an html element and select runes part of the DOM
-  const rune_base: any = new DOMParser.JSDOM(page_data).window.document.querySelectorAll(".recommended-build_runes")[0] 
+  //const rune_base: any = new DOMParser.JSDOM(page_data).window.document.querySelectorAll(".recommended-build_runes")[0] 
+  const rune_base: any = parse(page_data).querySelectorAll(".recommended-build_runes")[0] 
+  
+  console.log(rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[0].classList.toString().get_item(2))
 
   // form the rune base for later parsing
   const rune_obj: IRuneWebBase = {
@@ -24,80 +34,80 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
 
     // get keystone
     keystone: [
-      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[0].classList[2],
-      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[1].classList[2],
-      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[2].classList[2]
+      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[0].classList.toString().get_item(2),
+      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[1].classList.toString().get_item(2),
+      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[2].classList.toString().get_item(2)
     ],
 
     primary_perks: [
       // get primary perks
       [
-        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[2].classList.toString().get_item(1)
       ],
       [
-        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[2].classList.toString().get_item(1)
       ],
       [
-        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[2].classList.toString().get_item(1)
       ]
     ],
 
     secondary_perks: [
       // get primary perks
       [
-        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[2].classList.toString().get_item(1)
       ],
       [
-        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[2].classList.toString().get_item(1)
       ],
       [
-        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[2].classList.toString().get_item(1)
       ]
     ],
 
     styles: [
       // get extra runes (called styles by leagueApi and U.gg)
       [
-        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[2].classList.toString().get_item(1)
       ],
       [
-        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[2].classList.toString().get_item(1)
       ],
       [
-        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[0].classList[1],
-        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[1].classList[1],
-        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[2].classList[1]
+        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[0].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[1].classList.toString().get_item(1),
+        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[2].classList.toString().get_item(1)
       ]
     ]
   }
   
   // if there are 4 keystones
   if (rune_obj.runes.primary == "Precision" || rune_obj.runes.primary == "Domination") 
-    rune_obj.keystone.push( rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[3].classList[2] )
+    rune_obj.keystone.push( rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[3].classList.toString().get_item(2) )
 
   // if there are 4 perks in last row (Primary)
   if (rune_obj.runes.primary == "Domination") 
-    rune_obj.primary_perks[2].push( rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[3].classList[1] )
+    rune_obj.primary_perks[2].push( rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[3].classList.toString().get_item(1) )
   
   // if there are 4 perks in last row (Secondary)
   if (rune_obj.runes.primary == "Domination") 
-    rune_obj.secondary_perks[2].push( rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[3].classList[1] )
+    rune_obj.secondary_perks[2].push( rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[3].classList.toString().get_item(1) )
 
   // return total rune object
   return rune_obj 
@@ -105,7 +115,6 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
 
 // form a rune template for handler
 function form_rune(rune_obj: IRuneWebBase, runePrefix: string): IRune { 
-
   // get active ("perk-active") keystone id based on rune tree. (Ex. domination -> hail of blades) see '../data/runeTable.json'
   const keystone = runeTable.data.keyStones[ rune_obj.runes.primary ][ Object.keys( runeTable.data.keyStones[ rune_obj.runes.primary ] )[ rune_obj.keystone.indexOf("perk-active") ] ]
 
