@@ -615,3 +615,7 @@ declare class IScript {
   async onUserConnect(user: CUser, lobby: CLobby): boolean
   async onPartyJoin(user: CUser, lobby: CLobby): boolean
 }
+
+declare interface String {
+  get_item(index: number): string
+}

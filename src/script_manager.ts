@@ -5,7 +5,7 @@ import * as fs from "fs"
 const sandbox = vm.createContext()
 
 // get the script int string from
-const scriptFile = fs.readFileSync("data/script.js").toString()
+const scriptFile = fs.readFileSync("resources/data/script.js").toString()
 
 // upload the class to the sandbox
 vm.runInContext(scriptFile, sandbox)

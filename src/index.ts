@@ -11,9 +11,9 @@ const SECOND: number = 1000
 
 const getKeyByValue = (object: any, value: number): string => Object.keys(object).find(key => object[key] === value) || ""
 
-const champion = (): IChampionTable => JSON.parse(fs.readFileSync("data/championTable.json").toString())
-const rune = (): IRuneTable => JSON.parse(fs.readFileSync("data/runeTable.json").toString())
-const config = (): IConfig => JSON.parse(fs.readFileSync("data/config.json").toString())
+const champion = (): IChampionTable => JSON.parse(fs.readFileSync("resources/data/championTable.json").toString())
+const rune = (): IRuneTable => JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
+const config = (): IConfig => JSON.parse(fs.readFileSync("resources/data/config.json").toString())
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -300,13 +300,13 @@ client.on("connect", async (credentials: ICredentials) => {
   // check game version
   if (champion().version !== game_version || rune().version !== game_version) {
     // update out championTable
-    fs.writeFileSync("data/championTable.json", JSON.stringify({
+    fs.writeFileSync("resources/data/championTable.json", JSON.stringify({
       version: game_version,
       data: await champion_table()
     }, null, 2))
 
     // update out runeTable
-    fs.writeFileSync("data/runeTable.json", JSON.stringify({
+    fs.writeFileSync("resources/data/runeTable.json", JSON.stringify({
       version: game_version,
       data: await rune_table()
     }, null, 2))
@@ -376,14 +376,14 @@ ipcMain.on("savePicks", (e, data) => {
   cfg.auto.champion.set = data.autoPick
   cfg.auto.champion.lock = data.autoLock
   cfg.auto.champion.ban = data.autoBan
-  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
+  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
 })
 
 ipcMain.on("saveRunes", (e, data) => {
   let cfg: IConfig = config()
   cfg.auto.runes.set = data.autoRunes
   cfg.auto.runes.prefix = data.runesPrefix
-  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
+  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
 })
 
 ipcMain.on("saveLanes", (e, data) => {
@@ -393,7 +393,7 @@ ipcMain.on("saveLanes", (e, data) => {
   cfg.auto.spells.defaultLane = lanes[data.spellsId].toLowerCase()
   cfg.auto.champion.checkLane = data.checkChampion
   cfg.auto.spells.checkLane = data.checkSpells
-  fs.writeFileSync("data/config.json", JSON.stringify(cfg, null, 2))
+  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
 })
 
 ipcMain.on("closeWindow", () => {
