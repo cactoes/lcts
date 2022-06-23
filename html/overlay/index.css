@@ -8,4 +8,22 @@ body {
     Arial, sans-serif;
   background-color: transparent;
   user-select: none;
+  color: white;
+  margin-left: 200px;
+  margin-top: 50px;
+  padding: 10px;
+}
+
+.counter-offset {
+  width: 100px;
+}
+.counter-offset a:first-child {
+  float: left;
+}
+.counter-offset a:last-child {
+  float: right;
+}
+
+a {
+  margin-left: 10px;
 }

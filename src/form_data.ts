@@ -11,6 +11,22 @@ export async function get_version(): Promise<string> {
   return version[0]
 }
 
+// get all items data
+export async function get_items(): Promise<IItems> {
+  // get latest ddragon version
+  const version: string = await get_version()
+
+  // get all the item data
+  const item_data = await fetch(`http://ddragon.leagueoflegends.com/cdn/${version}/data/en_US/item.json`).then<Promise<IItems>>((data: Response | any ) => {
+    // can't change .json() return type :( | any is required
+    return data.json()
+  })
+
+  // return the items data
+  return item_data
+}
+
+
 // format/parse runes from all rune date in riot's data dragon
 export async function rune_table(): Promise<IRuneTable_base> {
   // get latest ddragon version
@@ -93,4 +109,5 @@ module.exports = {
   get_version,
   rune_table,
   champion_table,
+  get_items
 }

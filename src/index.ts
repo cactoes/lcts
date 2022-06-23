@@ -1,9 +1,10 @@
 import { create_window, main_window, overlay_window } from "./electron"
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
-import { rune_table, champion_table, get_version } from "./form_data"
+import { rune_table, champion_table, get_version, get_items } from "./form_data"
 import { get_rune_from_web } from "./web_rune"
 import { script } from "./script_manager"
 import { app, ipcMain } from "electron"
+const fetch = require("node-fetch")
 import * as fs from "fs"
 
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
@@ -14,6 +15,7 @@ const getKeyByValue = (object: any, value: number): string => Object.keys(object
 const champion = (): IChampionTable => JSON.parse(fs.readFileSync("resources/data/championTable.json").toString())
 const rune = (): IRuneTable => JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
 const config = (): IConfig => JSON.parse(fs.readFileSync("resources/data/config.json").toString())
+const items = (): IItems => JSON.parse(fs.readFileSync("resources/data/items.json").toString())
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -58,16 +60,21 @@ const game: CGame = {
   championBanIndex: 0,
   hasSetRunes: false,
   hasSetSummonerSpells: false,
+  gameDataLoop: false,
+
   updateGameflow: async function() {
     // update the gameflow phase
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
     
     // call methods that depend on the gameflow check || depend on checking every second
     if (config().auto.champion.set)
-      this.autoPickChampion()
+      this.autoSetChampion()
 
     if (config().auto.spells.set)
-      this.autoPickSummonerSpells()
+      this.autoSetSummonerSpells()
+    
+    if (config().auto.runes.set)
+      this.autoSetRunes()
 
     if (this.GAMEFLOW_PHASE !== this.GAMEFLOW_PHASE_LAST) {
       overlay_window.webContents.send('game_state', this.GAMEFLOW_PHASE) // send to overlay_page
@@ -80,9 +87,19 @@ const game: CGame = {
       if (this.acceptedMatch)
         this.acceptedMatch = false
       
+      if (this.gameDataLoop == false && this.GAMEFLOW_PHASE == interfaces.game.gameflow.INPROGRESS)
+        this.sendGameData()
+
       if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.LOBBY) {
         if (typeof script.onPartyJoin == "function" && config().misc.script) {
           script.onPartyJoin(user, lobby)
+        }
+      }
+
+      if (this.GAMEFLOW_PHASE !== interfaces.game.gameflow.INPROGRESS) {
+        if (this.gameDataLoop) {
+          clearInterval(this.gameDataLoop)
+          this.gameDataLoop = false
         }
       }
 
@@ -91,7 +108,7 @@ const game: CGame = {
         this.championBanIndex = 0
         this.hasSetRunes = false
         this.hasSetSummonerSpells = false
-      }
+      } 
 
       // update the gameflow last phase
       this.GAMEFLOW_PHASE_LAST = this.GAMEFLOW_PHASE
@@ -110,7 +127,7 @@ const game: CGame = {
       }
     }
   },
-  autoPickChampion: async function() {
+  autoSetChampion: async function() {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
       // get our local players data (for summoner id)
       const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
@@ -165,20 +182,6 @@ const game: CGame = {
           // get the current action data
           const currentAction: IAction = champSelectData.actions[pair][action] // championId, completed, id, isAllyAction, isInProgress, pickTurn, type, actorCellId
 
-          // set runes if we are locked in (rune name has to start with rune.prefix)
-          if (config().auto.runes.set && !game.hasSetRunes && currentAction.completed && currentAction.championId == championPicks[lane][game.championPickIndex]) {
-            game.hasSetRunes = true
-
-            const rune_data = await get_rune_from_web(getKeyByValue(champion().data, championPicks[lane][game.championPickIndex]).toLowerCase(), config().auto.runes.prefix)
-
-            const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
-            const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith(config().auto.runes.prefix))
-
-            // runes
-            if (target_rune)
-              await interfaces.runes.virtualCall<void>(interfaces.runes.dest.runes + `/${target_rune?.id}`, rune_data, "put", false)
-          }
-
           // is it our turn
           if (currentAction.actorCellId !== localUserChampSelect?.cellId)
             continue
@@ -223,7 +226,44 @@ const game: CGame = {
       }
     }
   },
-  autoPickSummonerSpells: async function() {
+  autoSetRunes: async function() {
+    if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
+      // get our local players data (for summoner id)
+      const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
+
+      // get the data of the champion select data
+      const champSelectData = await interfaces.game.virtualCall<IChampSelect>(interfaces.game.dest.champselect, {}, "get")
+
+      // find ourself in the champion select data
+      const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
+      // loop trough all the actions
+      for (const pair in champSelectData.actions) {
+        for (const action in champSelectData.actions[pair]) {
+          // get the current action data
+          const currentAction: IAction = champSelectData.actions[pair][action] // championId, completed, id, isAllyAction, isInProgress, pickTurn, type, actorCellId
+
+          // is it us
+          if (currentAction.actorCellId !== localUserChampSelect?.cellId)
+            continue
+
+          // set runes if we are locked in (rune name has to start with rune.prefix)
+          if (!game.hasSetRunes && currentAction.completed && currentAction.type == "pick") {
+            game.hasSetRunes = true
+
+            const rune_data = await get_rune_from_web(getKeyByValue(champion().data, currentAction.championId).toLowerCase(), config().auto.runes.prefix)
+
+            const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
+            const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith(config().auto.runes.prefix))
+
+            // runes
+            if (target_rune)
+              await interfaces.runes.virtualCall<void>(interfaces.runes.dest.runes + `/${target_rune?.id}`, rune_data, "put", false)
+          }
+        }
+      }
+    }
+  },
+  autoSetSummonerSpells: async function() {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
       // get our local players data (for summoner id)
       const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
@@ -272,7 +312,21 @@ const game: CGame = {
         }
       }
     }
+  },
+  sendGameData: async function() {
+    console.log("loop called")
+    if (game.GAMEFLOW_PHASE == interfaces.game.gameflow.INPROGRESS) {
+      try {
+        const page_data: any = await fetch("https://127.0.0.1:2999/liveclientdata/allgamedata")
+        const p = await page_data.json()
+        overlay_window.webContents.send("liveClientData", p)
+      } catch (e) {
+        console.log("not yet in game")
+      }
+    }
+    this.gameDataLoop = this.gameDataLoop || setInterval(this.sendGameData.bind(this), 10 * SECOND)
   }
+
 }
 
 const lobby: CLobby = {
@@ -298,7 +352,7 @@ client.on("connect", async (credentials: ICredentials) => {
   const game_version = await get_version()
 
   // check game version
-  if (champion().version !== game_version || rune().version !== game_version) {
+  if (champion().version !== game_version || rune().version !== game_version || items().version !== game_version) {
     // update out championTable
     fs.writeFileSync("resources/data/championTable.json", JSON.stringify({
       version: game_version,
@@ -310,6 +364,9 @@ client.on("connect", async (credentials: ICredentials) => {
       version: game_version,
       data: await rune_table()
     }, null, 2))
+
+    // update items
+    fs.writeFileSync("resources/data/items.json", JSON.stringify(await get_items(), null, 2))
   }
 
   // hook all the interfaces

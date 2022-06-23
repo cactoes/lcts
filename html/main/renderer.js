@@ -27,8 +27,8 @@ const setup_ui_on_update = async () => {
     }
   }
 
-  document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled2"}`
-  document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled2"}`
+  document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled"}`
+  document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled"}`
 
   document.getElementById("autoPick").className = config.auto.champion.set? "":"disabled2"
   document.getElementById("autoLock").className = config.auto.champion.lock? "":"disabled2"
