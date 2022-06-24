@@ -11,10 +11,6 @@ All tasks
 - [ ] make config available in scripts
 - [ ] add "card" / menu for defining champions to pick and ban
 - [ ] add "card" / menu for defining champions to pick summoner spells
-- [ ] add "card" / menu for auto accepting match
-- [ ] add "card" / menu config default status
-- [ ] add "card" / menu config default rank
-- [ ] add "card" / menu enable script(s)
 
 ## claimed
 

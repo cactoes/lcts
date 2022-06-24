@@ -29,6 +29,8 @@ const setup_ui_on_update = async () => {
 
   document.getElementById("checkLaneChampion").parentElement.className = `lanes__one noselect ${config.auto.champion.checkLane? "":"disabled"}`
   document.getElementById("checkLaneSpells").parentElement.className = `lanes__two noselect ${config.auto.spells.checkLane? "":"disabled"}`
+  document.getElementById("enableScripts").className = `${config.misc.script? "":"disabled2"}`
+  document.getElementById("autoAccept").className = `${config.auto.acceptMatch? "":"disabled2"}`
 
   document.getElementById("autoPick").className = config.auto.champion.set? "":"disabled2"
   document.getElementById("autoLock").className = config.auto.champion.lock? "":"disabled2"
@@ -36,6 +38,9 @@ const setup_ui_on_update = async () => {
 
   document.getElementById("autoRunes").className = config.auto.runes.set? "":"disabled2"
   document.getElementById("runesPrefix").innerHTML = config.auto.runes.prefix
+  document.getElementById("status").innerHTML = config.misc.status
+  document.getElementById("tier").innerHTML = config.misc.rank.tier
+  document.getElementById("rank").innerHTML = config.misc.rank.rank
 }
 
 const ipc_send = (dest, data) => {
@@ -162,9 +167,19 @@ document.getElementById("autoPick").addEventListener("click", (e) => {
   if (e.target.nodeName == "P")
     e.target.parentElement.className =  e.target.parentElement.className == "disabled2"? "":"disabled2"
 })
+
+document.getElementById("enableScripts").addEventListener("click", (e) => {
+  if (e.target.nodeName == "P")
+    e.target.className = e.target.className == "disabled2"? "":"disabled2"
+})
+document.getElementById("autoAccept").addEventListener("click", (e) => {
+  if (e.target.nodeName == "P")
+    e.target.className = e.target.className == "disabled2"? "":"disabled2"
+})
+
 document.getElementById("autoLock").addEventListener("click", (e) => {
   if (e.target.nodeName == "P")
-  e.target.parentElement.className =  e.target.parentElement.className == "disabled2"? "":"disabled2"
+    e.target.parentElement.className = e.target.parentElement.className == "disabled2"? "":"disabled2"
 })
 document.getElementById("autoBan").addEventListener("click", (e) => {
   if (e.target.nodeName == "P")
@@ -180,6 +195,21 @@ document.getElementById("saveRunes").addEventListener("click", () => {
   
   ipc_send("saveRunes", {
     autoRunes, runesPrefix
+  })
+
+  call_update_config()
+})
+
+document.getElementById("saveMisc").addEventListener("click", () => {
+  const scripts = !(document.getElementById("enableScripts").className == "disabled2")
+  const status = document.getElementById("status").innerHTML
+  const rank = {
+    tier: document.getElementById("tier").innerHTML,
+    rank: document.getElementById("rank").innerHTML
+  }
+  const autoAccept = !(document.getElementById("autoAccept").className == "disabled2")
+  ipc_send("saveMisc", {
+    scripts, status, rank, autoAccept
   })
 
   call_update_config()

@@ -14,6 +14,10 @@ body {
   background-color: transparent;
 }
 
+b {
+  outline: none;
+}
+
 .container {
   position: relative;
   display: flex;
@@ -255,7 +259,7 @@ body {
   text-decoration: line-through;
 }
 
-.champion_container div p {
+.champion_container div p, #enableScripts, #autoAccept {
   padding: 5px 5px;
   cursor: pointer;
 }

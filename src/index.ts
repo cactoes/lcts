@@ -453,6 +453,19 @@ ipcMain.on("saveLanes", (e, data) => {
   fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
 })
 
+ipcMain.on("saveMisc", (e, data) => {
+  let cfg: IConfig = config()
+  console.log(data)
+  cfg.misc.script = data.scripts
+  cfg.misc.status = data.status
+  cfg.misc.rank = {
+    tier: data.rank.tier.toLowerCase(),
+    rank: data.rank.rank.toUpperCase()
+  }
+  cfg.auto.acceptMatch = data.autoAccept
+  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
+})
+
 ipcMain.on("closeWindow", () => {
   main_window.close()
 })
