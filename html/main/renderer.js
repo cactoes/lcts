@@ -4,7 +4,6 @@ let config = {}
 const call_update_config = () => ipcRenderer.send("getConfig")
 let firstTimeSetup = false
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
 ipcRenderer.on("config", (e, data) => {
   config = data
   if (!firstTimeSetup)
