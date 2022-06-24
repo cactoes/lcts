@@ -100,7 +100,7 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
     rune_obj.primary_perks[2].push( rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[3].classList.toString().get_item(1) )
   
   // if there are 4 perks in last row (Secondary)
-  if (rune_obj.runes.primary == "Domination") 
+  if (rune_obj.runes.secondary == "Domination") 
     rune_obj.secondary_perks[2].push( rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[3].classList.toString().get_item(1) )
 
   // return total rune object
