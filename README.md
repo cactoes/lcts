@@ -13,7 +13,7 @@ Just donwload the client from the [releases](https://github.com/cactoes/lcts/rel
 ## Installing the client from source
 ```
 $ git clone https://github.com/cactoes/lcts.git
-$ cd league_client_ts
+$ cd lcts
 $ npm install
 ```
 
