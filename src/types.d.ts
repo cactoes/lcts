@@ -223,12 +223,12 @@ interface CGame {
   hasSetSummonerSpells: boolean
   gameDataLoop: boolean | Timer
 
-  async updateGameflow(): void
-  async autoAcceptMatch(): void
-  async autoSetChampion(): void
-  async autoSetRunes(): void
-  async autoSetSummonerSpells(): void
-  async sendGameData(): void
+  async updateGameflow(): Promise<void>
+  async autoAcceptMatch(): Promise<void>
+  async autoSetChampion(): Promise<void>
+  async autoSetRunes(): Promise<void>
+  async autoSetSummonerSpells(): Promise<void>
+  async sendGameData(): Promise<void>
 }
 
 interface IActor {
@@ -377,11 +377,11 @@ interface ICredentials {
 }
 
 interface CLobby {
-  async setLanes(first: string, second: string): void
+  async setLanes(first: string, second: string): Promise<void>
   async create(queueId: number): Promise<ILobby>
-  async setPartyType(type: string): void
-  async startSearch(): void
-  async stopSearch(): void
+  async setPartyType(type: string): Promise<void>
+  async startSearch(): Promise<void>
+  async stopSearch(): Promise<void>
 }
 
 declare interface String {

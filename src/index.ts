@@ -4,13 +4,12 @@ import { rune_table, champion_table, get_version, get_items } from "./form_data"
 import { get_rune_from_web } from "./web_rune"
 import { script } from "./script_manager"
 import { app, ipcMain } from "electron"
-const fetch = require("node-fetch")
+import fetch from "node-fetch"
 import * as fs from "fs"
 
-const sleep = (ms: number) => new Promise(r => setTimeout(r, ms))
-const SECOND: number = 1000
-
 const getKeyByValue = (object: any, value: number): string => Object.keys(object).find(key => object[key] === value) || ""
+const sleep = (ms: number): Promise<void> => new Promise(r => setTimeout(r, ms))
+const SECOND: number = 1000
 
 const champion = (): IChampionTable => JSON.parse(fs.readFileSync("resources/data/championTable.json").toString())
 const rune = (): IRuneTable => JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
@@ -24,8 +23,8 @@ const interfaces = {
   lobby: new C_Lobby({canCallUnhooked: false})
 }
 
-const await_login = async (): Promise<boolean> => {
-  let logged_in = false
+async function await_login(): Promise<boolean> {
+  let logged_in: boolean = false
   while(!logged_in) {
     try {
       await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get") && (logged_in = true)
@@ -62,7 +61,7 @@ const game: CGame = {
   hasSetSummonerSpells: false,
   gameDataLoop: false,
 
-  updateGameflow: async function() {
+  updateGameflow: async function(): Promise<void> {
     // update the gameflow phase
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
     
@@ -91,9 +90,8 @@ const game: CGame = {
         this.sendGameData()
 
       if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.LOBBY) {
-        if (typeof script.onPartyJoin == "function" && config().misc.script) {
+        if (config().misc.script && typeof script.onPartyJoin == "function")
           script.onPartyJoin(user, lobby)
-        }
       }
 
       if (this.GAMEFLOW_PHASE !== interfaces.game.gameflow.INPROGRESS) {
@@ -119,7 +117,7 @@ const game: CGame = {
     if (this.available)
       this.updateGameflow()
   },
-  autoAcceptMatch: async function() {
+  autoAcceptMatch: async function(): Promise<void> {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.READYCHECK) {
       if (!this.acceptedMatch) {
         this.acceptedMatch = true
@@ -127,7 +125,7 @@ const game: CGame = {
       }
     }
   },
-  autoSetChampion: async function() {
+  autoSetChampion: async function(): Promise<void> {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
       // get our local players data (for summoner id)
       const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
@@ -226,7 +224,7 @@ const game: CGame = {
       }
     }
   },
-  autoSetRunes: async function() {
+  autoSetRunes: async function(): Promise<void> {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
       // get our local players data (for summoner id)
       const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
@@ -263,7 +261,7 @@ const game: CGame = {
       }
     }
   },
-  autoSetSummonerSpells: async function() {
+  autoSetSummonerSpells: async function(): Promise<void> {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
       // get our local players data (for summoner id)
       const user_data = await interfaces.user.virtualCall<IUser>(interfaces.user.dest.me, {}, "get")
@@ -313,7 +311,7 @@ const game: CGame = {
       }
     }
   },
-  sendGameData: async function() {
+  sendGameData: async function(): Promise<void> {
     console.log("loop called")
     if (game.GAMEFLOW_PHASE == interfaces.game.gameflow.INPROGRESS) {
       try {
@@ -326,30 +324,29 @@ const game: CGame = {
     }
     this.gameDataLoop = this.gameDataLoop || setInterval(this.sendGameData.bind(this), 10 * SECOND)
   }
-
 }
 
 const lobby: CLobby = {
-  setLanes: async function(firstPreference: string, secondPreference: string) {
+  setLanes: async function(firstPreference: string, secondPreference: string): Promise<void> {
     return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.position, { firstPreference, secondPreference }, "put", false)
   },
-  create: async function(queueId: number) {
+  create: async function(queueId: number): Promise<ILobby> {
     return await interfaces.lobby.virtualCall<Promise<ILobby>>(interfaces.lobby.dest.lobby, { queueId }, "post")
   },
-  setPartyType: async function(type: string) {
+  setPartyType: async function(type: string): Promise<void> {
     return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.partytype, type, "put", false)
   },
-  startSearch: async function() {
+  startSearch: async function(): Promise<void> {
     return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.search, {}, "post", false)
   },
-  stopSearch: async function() {
+  stopSearch: async function(): Promise<void> {
     return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.search, {}, "delete", false)
   }
 }
 
 client.on("connect", async (credentials: ICredentials) => {
   // get game version
-  const game_version = await get_version()
+  const game_version: string = await get_version()
 
   // check game version
   if (champion().version !== game_version || rune().version !== game_version || items().version !== game_version) {
@@ -387,7 +384,7 @@ client.on("connect", async (credentials: ICredentials) => {
   game.updateGameflow()
   main_window.webContents.send('logged_in', true)
 
-  if (typeof script.onUserConnect == "function" && config().misc.script) {
+  if (config().misc.script && typeof script.onUserConnect == "function") {
     script.onUserConnect(user, lobby)
   }
 
@@ -480,6 +477,7 @@ app.disableHardwareAcceleration()
 // when electron is ready create the window's
 app.on("ready", create_window)
 
+// for later implementation (maybe)
 // await this.get(data, this.endpoints.LOL_GAMEFLOW_SESSION)
 // .then( async matchData => {
 //   const { teamOne, teamTwo, playerChampionSelections } = matchData.gameData
