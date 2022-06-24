@@ -30,7 +30,7 @@ $ npm run package:win
 ```
 
 ## Scripting
-The client allows for function scripting, the script is located in [resources/data/script.js](resources/data/script.js)
+The client allows for function scripting (within LCTS itself), the script is located in [resources/data/script.js](resources/data/script.js)
 ### Structure
 ```javascript
 class LCScript {
