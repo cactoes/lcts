@@ -1,4 +1,4 @@
-# League client ts
+# LCTS (League Client TypeScript)
 All tasks
 
 ## unclaimed
