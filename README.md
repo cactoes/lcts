@@ -1,10 +1,10 @@
 # LCTS (League Client TypeScript)
 A feature rich league client written is TypeScript
 
-## UI
+## A glass style UI
 ![ui](images/ui.gif)
 
-## overlay
+## A x88 style overlay
 ![overlay](images/overlay.png)
 
 ## Prerequisites
