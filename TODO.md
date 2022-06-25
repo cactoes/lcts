@@ -6,7 +6,6 @@ All tasks
 ### Important
 - [ ] preparations make public
 - [ ] make public
-- [ ] overlay makes game lag?
 
 ### Other
 - [ ] make config available in scripts
@@ -16,6 +15,7 @@ All tasks
 ## claimed
 
 ## Completed tasks ✓
+- [x] overlay makes game lag? ([LoL issue](https://www.reddit.com/r/leagueoflegends/comments/mhpnhy/after_alt_tabbing_league_gets_stuck_at_45fps/) not related to lcts) [@cactoes](https://github.com/cactoes)
 - [x] clean-up "form_data.ts" [@cactoes](https://github.com/cactoes)
 - [x] clean-up "web_rune.ts" [@cactoes](https://github.com/cactoes) & [@MeloenCoding](https://github.com/MeloenCoding)
 - [x] choose a license (**GNU GPLv3** / MIT) [https://choosealicense.com/](https://choosealicense.com/)
