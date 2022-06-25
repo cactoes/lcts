@@ -1,6 +1,12 @@
 # LCTS (League Client TypeScript)
 A feature rich league client written is TypeScript
 
+## UI
+![ui](images/ui.gif)
+
+## overlay
+![overlay](images/overlay.png)
+
 ## Prerequisites
 - TypeScript - [Download & Install TypeScript](https://www.typescriptlang.org/download). Used for compiling and the TypeScript enviroment
 ```
