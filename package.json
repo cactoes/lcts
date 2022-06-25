@@ -28,7 +28,7 @@
   "license": "GNU GPLv3",
   "dependencies": {
     "electron-overlay-window": "^2.0.1",
-    "lcinterface": "^3.3.2",
+    "lcinterface": "^4.0.0",
     "node-fetch": "^2.6.1",
     "node-html-parser": "^5.3.3"
   },

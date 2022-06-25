@@ -372,6 +372,7 @@ interface ICredentials {
   address: string
   username: string
   port: number
+  pid: number
   password: string
   protocol: string
 }
