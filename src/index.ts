@@ -312,7 +312,6 @@ const game: CGame = {
     }
   },
   sendGameData: async function(): Promise<void> {
-    console.log("loop called")
     if (game.GAMEFLOW_PHASE == interfaces.game.gameflow.INPROGRESS) {
       try {
         const page_data: any = await fetch("https://127.0.0.1:2999/liveclientdata/allgamedata")

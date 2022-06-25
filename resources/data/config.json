@@ -2,7 +2,7 @@
   "auto": {
     "acceptMatch": true,
     "champion": {
-      "set": false,
+      "set": true,
       "lock": false,
       "ban": false,
       "checkLane": true,
@@ -43,7 +43,7 @@
       }
     },
     "runes": {
-      "set": true,
+      "set": false,
       "prefix": "[u.gg]"
     },
     "spells": {

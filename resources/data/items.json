@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "12.11.1",
+  "version": "12.12.1",
   "basic": {
     "name": "",
     "rune": {
@@ -324,7 +324,6 @@
         "3152",
         "3165",
         "4633",
-        "4636",
         "4637"
       ],
       "image": {
@@ -1107,7 +1106,7 @@
     },
     "1056": {
       "name": "Doran's Ring",
-      "description": "<mainText><stats><attention>15</attention> Ability Power<br><attention>70</attention> Health</stats><br><li><passive>Focus:</passive> Attacks deal an additional <physicalDamage>5 physical damage</physicalDamage> to minions. <li><passive>Drain:</passive> Restore <scaleMana>1 Mana</scaleMana> every second. Damaging an enemy champion increases this amount to <scaleMana>1.5 Mana</scaleMana> every second for 10 seconds. If you can't gain Mana, restore 45% of the value as Health instead. </mainText><br>",
+      "description": "<mainText><stats><attention>15</attention> Ability Power<br><attention>70</attention> Health</stats><br><li><passive>Focus:</passive> Attacks deal an additional <physicalDamage>5 physical damage</physicalDamage> to minions. <li><passive>Drain:</passive> Restore <scaleMana>1 Mana</scaleMana> every second. Damaging an enemy champion increases this amount to <scaleMana>1.5 Mana</scaleMana> every second for 10 seconds. If you can't gain Mana, regenerate 45% of the value as Health instead. </mainText><br>",
       "colloq": ";dring",
       "plaintext": "Good starting item for casters",
       "image": {
@@ -3672,7 +3671,7 @@
     },
     "3053": {
       "name": "Sterak's Gage",
-      "description": "<mainText><stats><attention>400</attention> Health</stats><br><li><passive>The Claws that Catch:</passive> Gain 40% of base AD as bonus Attack Damage.<li><passive>Lifeline:</passive> Upon taking damage that would reduce your Health below 30%, gain a <shield>70% Bonus HP Shield</shield> for 3.75 seconds (60s ).</mainText><br>",
+      "description": "<mainText><stats><attention>400</attention> Health</stats><br><li><passive>The Claws that Catch:</passive> Gain 45% of base AD as bonus Attack Damage.<li><passive>Lifeline:</passive> Upon taking damage that would reduce your Health below 30%, gain a <shield>75% Bonus HP Shield</shield>, decaying over 3.75 seconds (60s ).</mainText><br>",
       "colloq": ";juggernaut;primal",
       "plaintext": "Shields against large bursts of damage",
       "from": [
@@ -4871,7 +4870,8 @@
         "6653",
         "3157",
         "4628",
-        "4629"
+        "4629",
+        "4636"
       ],
       "image": {
         "full": "3108.png",
@@ -5865,7 +5865,7 @@
     },
     "3152": {
       "name": "Hextech Rocketbelt",
-      "description": "<mainText><stats><attention>90</attention> Ability Power<br><attention>10</attention> Magic Penetration<br><attention>250</attention> Health<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal <magicDamage>(125 +15% Ability Power) magic damage</magicDamage>. Then, gain <speed>30% Move Speed</speed> towards enemy champions for 1.5 seconds (40s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration.<br><br><rules>Supersonic's dash cannot pass through terrain.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>90</attention> Ability Power<br><attention>6</attention> Magic Penetration<br><attention>250</attention> Health<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal <magicDamage>(125 +15% Ability Power) magic damage</magicDamage>. Then, gain <speed>30% Move Speed</speed> towards enemy champions for 1.5 seconds (40s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration.<br><br><rules>Supersonic's dash cannot pass through terrain.</rules></mainText><br>",
       "colloq": "rocket belt;",
       "plaintext": "Activate to dash forward and unleash a fiery explosion",
       "from": [
@@ -6004,7 +6004,7 @@
     },
     "3156": {
       "name": "Maw of Malmortius",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>50</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Lifeline:</passive> Upon taking magic damage that would reduce Health below 30%, gain <shield>(200 + 225% bonus Attack Damage [75% Shield Size for Ranged Users]) magic damage Shield</shield> for 5 seconds (75s cooldown). When <passive>Lifeline</passive> triggers, gain <lifeSteal>10% Omnivamp</lifeSteal> until the end of combat.  </mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>50</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Lifeline:</passive> Upon taking magic damage that would reduce Health below 30%, gain <shield>(200 + 225% bonus Attack Damage [75% Shield Size for Ranged Users]) magic damage Shield</shield> for 5 seconds (75s cooldown). When <passive>Lifeline</passive> triggers, gain <lifeSteal>8% Omnivamp</lifeSteal> until the end of combat.  </mainText><br>",
       "colloq": ";",
       "plaintext": "Grants bonus Attack Damage when Health is low",
       "stacks": 0,
@@ -6042,18 +6042,6 @@
       "stats": {
         "FlatPhysicalDamageMod": 55,
         "FlatSpellBlockMod": 50
-      },
-      "effect": {
-        "Effect1Amount": "0",
-        "Effect2Amount": "0",
-        "Effect3Amount": "0",
-        "Effect4Amount": "0",
-        "Effect5Amount": "0",
-        "Effect6Amount": "0",
-        "Effect7Amount": "0",
-        "Effect8Amount": "0",
-        "Effect9Amount": "0",
-        "Effect10Amount": "7"
       },
       "depth": 3
     },
@@ -8341,8 +8329,8 @@
       "colloq": "",
       "plaintext": "",
       "from": [
-        "1026",
         "3145",
+        "3108",
         "1052"
       ],
       "into": [
@@ -8358,7 +8346,7 @@
         "h": 48
       },
       "gold": {
-        "base": 865,
+        "base": 815,
         "purchasable": true,
         "total": 3200,
         "sell": 2240
@@ -8776,7 +8764,7 @@
     },
     "6333": {
       "name": "Death's Dance",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>45</attention> Armor<br><attention>15</attention> Ability Haste</stats><br><li><passive>Ignore Pain:</passive> 30% (10% for Ranged users) of damage taken is dealt to you over 3 seconds instead.<li><passive>Defy:</passive> Champion takedowns cleanse <passive>Ignore Pain's</passive> remaining damage pool and restore <healing>140% bonus AD in Health</healing> over 2 seconds.</mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>45</attention> Armor<br><attention>15</attention> Ability Haste</stats><br><li><passive>Ignore Pain:</passive> 30% (10% for Ranged users) of damage taken is dealt to you over 3 seconds instead.<li><passive>Defy:</passive> Champion takedowns cleanse <passive>Ignore Pain's</passive> remaining damage pool and restore <healing>120% bonus AD in Health</healing> over 2 seconds.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "stacks": 0,
@@ -9197,7 +9185,7 @@
     },
     "6656": {
       "name": "Everfrost",
-      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>250</attention> Health<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal <magicDamage>(100+30% Ability Power) magic damage</magicDamage> in a cone, <status>Slowing</status> enemies by 65% for 1 seconds. Enemies at the center of the cone are <status>Rooted</status> instead (30s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10</attention> Ability Power. <br></mainText><br>",
+      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>250</attention> Health<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal <magicDamage>(100+30% Ability Power) magic damage</magicDamage> in a cone, <status>Slowing</status> enemies by 65% for 1 second. Enemies at the center of the cone are <status>Rooted</status> instead (30s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10</attention> Ability Power. <br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9715,7 +9703,7 @@
     },
     "6691": {
       "name": "Duskblade of Draktharr",
-      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>22</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals an additional <physicalDamage>(75 + 30% bonus Attack Damage for melee / 55 + 25% bonus Attack Damage for ranged) physical damage</physicalDamage> (15s cooldown). If dealt by a Melee champion, this Attack also <status>Slows</status> the target by 99% for 0.25 seconds.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br></mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals an additional <physicalDamage>(75 + 30% bonus Attack Damage for melee / 55 + 25% bonus Attack Damage for ranged) physical damage</physicalDamage> (15s cooldown). If dealt by a Melee champion, this Attack also <status>Slows</status> the target by 99% for 0.25 seconds.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9761,7 +9749,7 @@
     },
     "6692": {
       "name": "Eclipse",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>22</attention> Lethality<br><attention>7%</attention> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals an additional <physicalDamage>{{ Item_Melee_Ranged_Split_C }}% max Health physical damage</physicalDamage>, grants you <speed>15% Move Speed</speed> and a <shield>(160 + 35% bonus Attack Damage) Shield (50% shield for ranged champions)</shield> for 2 seconds (8s cooldown, 16s cooldown for ranged champions).<br><br>{{ Item_Mythic_Passive }} <attention>4%</attention> Armor Penetration</mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>7%</attention> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals an additional <physicalDamage>{{ Item_Melee_Ranged_Split_C }}% max Health physical damage</physicalDamage>, grants you <speed>15% Move Speed</speed> and a <shield>(160 + 35% bonus Attack Damage) Shield (50% shield for ranged champions)</shield> for 2 seconds (8s cooldown, 16s cooldown for ranged champions).<br><br>{{ Item_Mythic_Passive }} <attention>4%</attention> Armor Penetration</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9807,7 +9795,7 @@
     },
     "6693": {
       "name": "Prowler's Claw",
-      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>22</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing <physicalDamage>(75 + 30% bonus Attack Damage) physical damage</physicalDamage>. For the next 3 seconds, you deal 15% increased damage to the target. (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Lethality</mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing <physicalDamage>(75 + 30% bonus Attack Damage) physical damage</physicalDamage>. For the next 3 seconds, you deal 15% increased damage to the target. (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Lethality</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9894,7 +9882,7 @@
     },
     "6695": {
       "name": "Serpent's Fang",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>14</attention> Lethality</stats><br><li><passive>Shield Reaver:</passive> Dealing damage to an enemy champion reduces any shields they gain by (50% | 35% for Ranged Champions) for 3 seconds. When you damage an enemy who is unaffected by Shield Reaver, reduce all shields on them by (50% | 35% for Ranged Champions).<br><br><rules>Additional damage not applied to targets with shields that only block magic damage.<br>Item performance differs for melee and ranged users.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>12</attention> Lethality</stats><br><li><passive>Shield Reaver:</passive> Dealing damage to an enemy champion reduces any shields they gain by (50% | 35% for Ranged Champions) for 3 seconds. When you damage an enemy who is unaffected by Shield Reaver, reduce all shields on them by (50% | 35% for Ranged Champions).<br><br><rules>Additional damage not applied to targets with shields that only block magic damage.<br>Item performance differs for melee and ranged users.</rules></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9933,7 +9921,7 @@
     },
     "6696": {
       "name": "Axiom Arc",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>13</attention> Lethality<br><attention>25</attention> Ability Haste</stats><br><li><passive>Flux:</passive> Whenever a Champion dies within 3 seconds of you having damaged them, refund 20% of your Ultimate Ability's total cooldown.</mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>10</attention> Lethality<br><attention>25</attention> Ability Haste</stats><br><li><passive>Flux:</passive> Whenever a Champion dies within 3 seconds of you having damaged them, refund 20% of your Ultimate Ability's total cooldown.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9973,7 +9961,7 @@
     },
     "7000": {
       "name": "Sandshrike's Claw",
-      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>32</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing <physicalDamage>(75 + 30% bonus Attack Damage) physical damage</physicalDamage>. For the next 3 seconds, you deal 15% increased damage to the target. (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Lethality</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing <physicalDamage>(75 + 30% bonus Attack Damage) physical damage</physicalDamage>. For the next 3 seconds, you deal 15% increased damage to the target. (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Lethality</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10017,7 +10005,7 @@
     },
     "7001": {
       "name": "Syzygy",
-      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>32</ornnBonus> Lethality<br><ornnBonus>8%</ornnBonus> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals an additional <physicalDamage>{{ Item_Melee_Ranged_Split_C }}% max Health physical damage</physicalDamage>, grants you <speed>15% Move Speed</speed> and a <shield>(160 + 35% bonus Attack Damage) Shield (50% shield for ranged champions)</shield> for 2 seconds (8s cooldown, 16s cooldown for ranged champions).<br><br>{{ Item_Mythic_Passive }} <attention>4%</attention> Armor Penetration</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>8%</ornnBonus> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals an additional <physicalDamage>{{ Item_Melee_Ranged_Split_C }}% max Health physical damage</physicalDamage>, grants you <speed>15% Move Speed</speed> and a <shield>(160 + 35% bonus Attack Damage) Shield (50% shield for ranged champions)</shield> for 2 seconds (8s cooldown, 16s cooldown for ranged champions).<br><br>{{ Item_Mythic_Passive }} <attention>4%</attention> Armor Penetration</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10060,7 +10048,7 @@
     },
     "7002": {
       "name": "Draktharr's Shadowcarver",
-      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>32</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals an additional <physicalDamage>(75 + 30% bonus Attack Damage for melee / 55 + 25% bonus Attack Damage for ranged) physical damage</physicalDamage> (15s cooldown). If dealt by a Melee champion, this Attack also <status>Slows</status> the target by 99% for 0.25 seconds.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals an additional <physicalDamage>(75 + 30% bonus Attack Damage for melee / 55 + 25% bonus Attack Damage for ranged) physical damage</physicalDamage> (15s cooldown). If dealt by a Melee champion, this Attack also <status>Slows</status> the target by 99% for 0.25 seconds.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10471,7 +10459,7 @@
     },
     "7011": {
       "name": "Upgraded Aeropack",
-      "description": "<mainText><stats><ornnBonus>120</ornnBonus> Ability Power<br><ornnBonus>15</ornnBonus> Magic Penetration<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>20</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal <magicDamage>(125 +15% Ability Power) magic damage</magicDamage>. Then, gain <speed>30% Move Speed</speed> towards enemy champions for 1.5 seconds (40s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration.<br><br><rules>Supersonic's dash cannot pass through terrain.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>120</ornnBonus> Ability Power<br><ornnBonus>10</ornnBonus> Magic Penetration<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>20</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal <magicDamage>(125 +15% Ability Power) magic damage</magicDamage>. Then, gain <speed>30% Move Speed</speed> towards enemy champions for 1.5 seconds (40s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration.<br><br><rules>Supersonic's dash cannot pass through terrain.</rules></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10605,7 +10593,7 @@
     },
     "7014": {
       "name": "Eternal Winter",
-      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal <magicDamage>(100+30% Ability Power) magic damage</magicDamage> in a cone, <status>Slowing</status> enemies by 65% for 1 seconds. Enemies at the center of the cone are <status>Rooted</status> instead (30s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10</attention> Ability Power. <br></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal <magicDamage>(100+30% Ability Power) magic damage</magicDamage> in a cone, <status>Slowing</status> enemies by 65% for 1 second. Enemies at the center of the cone are <status>Rooted</status> instead (30s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10</attention> Ability Power. <br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
