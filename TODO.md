@@ -6,6 +6,7 @@ All tasks
 ### Important
 - [ ] preparations make public
 - [ ] make public
+- [ ] overlay makes game lag?
 
 ### Other
 - [ ] make config available in scripts
