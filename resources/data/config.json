@@ -3,8 +3,8 @@
     "acceptMatch": true,
     "champion": {
       "set": true,
-      "lock": false,
-      "ban": false,
+      "lock": true,
+      "ban": true,
       "checkLane": true,
       "defaultLane": "utility",
       "lanePick": {
@@ -43,7 +43,7 @@
       }
     },
     "runes": {
-      "set": false,
+      "set": true,
       "prefix": "[u.gg]"
     },
     "spells": {
