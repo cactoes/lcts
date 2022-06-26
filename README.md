@@ -1,5 +1,5 @@
 # LCTS (League Client TypeScript)
-A feature rich league client written is TypeScript
+A feature rich league client written in TypeScript, with scripting & more 
 
 ## A glass style UI
 ![ui](images/ui.gif)
