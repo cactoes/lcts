@@ -11,6 +11,17 @@ Just download the client from the [releases](https://github.com/cactoes/lcts/rel
 ## A x88 style overlay
 ![overlay](images/overlay.png)
 
+## Features
+- automatically
+  - accept the match
+  - pick
+    - a champion to play
+    - a champion to ban
+  - set runes
+  - set summoner spells
+- [scripting](#scripting)
+- ui customizability (check [config](resources/data/config.json))
+
 ## Scripting
 The client allows for function scripting (within LCTS itself), the script is located in [resources/data/script.js](resources/data/script.js)
 ### Structure
