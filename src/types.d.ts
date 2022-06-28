@@ -397,6 +397,7 @@ interface ICredentials {
 interface CLobby {
   async setLanes(first: string, second: string): Promise<void>
   async create(queueId: number): Promise<ILobby>
+  async leave(): Promise<void>
   async setPartyType(type: string): Promise<void>
   async startSearch(): Promise<void>
   async stopSearch(): Promise<void>

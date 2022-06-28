@@ -333,19 +333,22 @@ const game: CGame = {
 
 const lobby: CLobby = {
   setLanes: async function(firstPreference: string, secondPreference: string): Promise<void> {
-    return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.position, { firstPreference, secondPreference }, "put", false)
+    return await interfaces.lobby.virtualCall<Promise<void>>(interfaces.lobby.dest.position, { firstPreference, secondPreference }, "put", false)
   },
   create: async function(queueId: number): Promise<ILobby> {
     return await interfaces.lobby.virtualCall<Promise<ILobby>>(interfaces.lobby.dest.lobby, { queueId }, "post")
   },
+  leave: async function(): Promise<void> {
+    return await interfaces.lobby.virtualCall<Promise<void>>(interfaces.lobby.dest.lobby, { }, "delete", false)
+  },
   setPartyType: async function(type: string): Promise<void> {
-    return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.partytype, type, "put", false)
+    return await interfaces.lobby.virtualCall<Promise<void>>(interfaces.lobby.dest.partytype, type, "put", false)
   },
   startSearch: async function(): Promise<void> {
-    return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.search, {}, "post", false)
+    return await interfaces.lobby.virtualCall<Promise<void>>(interfaces.lobby.dest.search, {}, "post", false)
   },
   stopSearch: async function(): Promise<void> {
-    return await interfaces.lobby.virtualCall<void>(interfaces.lobby.dest.search, {}, "delete", false)
+    return await interfaces.lobby.virtualCall<Promise<void>>(interfaces.lobby.dest.search, {}, "delete", false)
   }
 }
 

@@ -67,11 +67,12 @@ async function setRank(tier: string, rank: string): Promise<IUser>
 #### Methods in *lobby*
 - [ILobby](src/types.d.ts#L283) Interface/Type
 ```TypeScript
-async function setLanes(first: string, second: string): void
+async function setLanes(first: string, second: string): Promise<void>
 async function create(queueId: number): Promise<ILobby>
-async function setPartyType(type: string): void
-async function startSearch(): void
-async function stopSearch(): void
+async function leave(): Promise<void>
+async function setPartyType(type: string): Promise<void>
+async function startSearch(): Promise<void>
+async function stopSearch(): Promise<void>
 ```
 
 ## Contributing 
