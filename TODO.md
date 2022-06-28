@@ -4,15 +4,16 @@ All tasks for LCTS
 ## unclaimed
 
 ### Important
-- [ ] make public
-
-### Other
 - [ ] add "card" / menu for defining champions to pick and ban
 - [ ] add "card" / menu for defining champions to pick summoner spells
+
+### Other
+
 
 ## claimed
 
 ## Completed tasks ✓
+- [x] make public
 - [x] overlay makes game lag? ([LoL issue](https://www.reddit.com/r/leagueoflegends/comments/mhpnhy/after_alt_tabbing_league_gets_stuck_at_45fps/) not related to lcts) [@cactoes](https://github.com/cactoes)
 - [x] clean-up "form_data.ts" [@cactoes](https://github.com/cactoes)
 - [x] clean-up "web_rune.ts" [@cactoes](https://github.com/cactoes) & [@MeloenCoding](https://github.com/MeloenCoding)
