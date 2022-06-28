@@ -94,7 +94,7 @@ const game: CGame = {
           break
         case interfaces.game.gameflow.LOBBY:
           if (file.get<IConfig>("config.json").misc.script && typeof script.onPartyJoin == "function")
-            script.onPartyJoin(user, lobby)
+            script.onPartyJoin(user, lobby, file.get<IConfig>("config.json"))
           break
         case interfaces.game.gameflow.MATCHMAKING:
           break
@@ -104,7 +104,7 @@ const game: CGame = {
           this.championBanIndex = 0
           this.hasSetRunes = false
           this.hasSetSummonerSpells = false
-          
+
           // auto accept match if we want to
           if (file.get<IConfig>("config.json").auto.acceptMatch)
             this.autoAcceptMatch()
@@ -409,7 +409,7 @@ client.on("connect", async (credentials: ICredentials) => {
   main_window.webContents.send('logged_in', true)
 
   if (file.get<IConfig>("config.json").misc.script && typeof script.onUserConnect == "function")
-    script.onUserConnect(user, lobby)
+    script.onUserConnect(user, lobby, file.get<IConfig>("config.json"))
 
   // if we are hooked
   //if (interfaces.user.isCorrectState("hooked", true)) {

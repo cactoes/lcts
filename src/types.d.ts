@@ -617,8 +617,8 @@ interface IConfig {
 }
 
 declare class IScript {
-  async onUserConnect(user: CUser, lobby: CLobby): boolean
-  async onPartyJoin(user: CUser, lobby: CLobby): boolean
+  async onUserConnect(user: CUser, lobby: CLobby, config: IConfig): boolean
+  async onPartyJoin(user: CUser, lobby: CLobby, config: IConfig): boolean
 }
 
 declare interface String {

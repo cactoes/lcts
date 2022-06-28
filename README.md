@@ -41,13 +41,15 @@ The client allows for function scripting (within LCTS itself), the script is loc
 ### Structure
 ```javascript
 class LCScript {
-  // when the game launches onUserConnect is called
-  async onUserConnect(user, lobby) {
+  // when the game launches
+  async onUserConnect(user, lobby, config) {
+    // your code goes here
     return true
   }
 
-  // when user joins a party onPartyJoin is called
-  async onPartyJoin(user, lobby) {
+  // when user joins a party
+  async onPartyJoin(user, lobby, config) {
+    // your code goes here
     return true
   }
 }
@@ -74,6 +76,8 @@ async function setPartyType(type: string): Promise<void>
 async function startSearch(): Promise<void>
 async function stopSearch(): Promise<void>
 ```
+#### Config
+All the saved config data at that moment in [config.json](resources/data/config.json)
 
 ## Contributing 
 Steps for contributing

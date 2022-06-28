@@ -8,7 +8,6 @@ All tasks
 - [ ] make public
 
 ### Other
-- [ ] make config available in scripts
 - [ ] add "card" / menu for defining champions to pick and ban
 - [ ] add "card" / menu for defining champions to pick summoner spells
 
