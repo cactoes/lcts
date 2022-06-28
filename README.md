@@ -1,6 +1,9 @@
 # LCTS (League Client TypeScript)
 A feature rich league client written in TypeScript, with scripting & more 
 
+## Installing the client
+Just donwload the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run lcts.exe
+
 ## A glass style UI
 ![ui](images/ui.gif)
 
@@ -8,13 +11,11 @@ A feature rich league client written in TypeScript, with scripting & more
 ![overlay](images/overlay.png)
 
 ## Prerequisites
+If you want to run the client from source make sure you have:
 - TypeScript - [Download & Install TypeScript](https://www.typescriptlang.org/download). Used for compiling and the TypeScript enviroment
 ```
 $ npm install -g typescript
 ```
-
-## Installing the client
-Just donwload the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run lcts.exe
 
 ## Installing the client from source
 ```
