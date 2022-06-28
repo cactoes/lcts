@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>League Client TS</title>
+    <title>LCTS</title>
     <link rel="stylesheet" href="index.css" />
+    <script type="text/javascript" src="./tilt.js"></script>
     <script src="./renderer.js" defer></script>
   </head>
   <body>
@@ -20,7 +21,7 @@
 
           <div class="lanes__container">
             <div class="lanes__one noselect">
-              <p id="checkLaneChampion">champion</p>
+              <p id="checkLaneChampion">championSelect</p>
               <img src="../img/Position_Challenger-top.png" class="">
               <img src="../img/Position_Challenger-jungle.png" class="">
               <img src="../img/Position_Challenger-middle.png" class="">
@@ -53,18 +54,18 @@
           <h3>CHAMPION SELECT</h3>
           
           <div class="champion_container">
-            <div id="autoPick">
+            <div id="autoPick" class="noselect">
               <p>auto PICK champion</p>
             </div>
-            <div id="autoLock">
+            <div id="autoLock" class="noselect">
               <p>auto LOCK champion</p>
             </div>
-            <div id="autoBan">
+            <div id="autoBan" class="noselect">
               <p>auto BAN champion</p>
             </div>
           </div>
 
-          <a href="#" id="savePicks" class=".noselect">save</a>
+          <a href="#" id="savePicks" class="noselect">save</a>
           <div class="arrow left noselect">&lt;</div>
           <div class="arrow right noselect">></div>
         </div>
@@ -81,7 +82,7 @@
           <p id="autoRunes">lcts will automatically import runes from u.gg</p>
           <br>
           <p style="cursor: default;">automatically change the rune that starts with <b contentEditable="true" id="runesPrefix">[u.gg]</b></p>
-          <a href="#" id="saveRunes" class=".noselect">save</a>
+          <a href="#" id="saveRunes" class="noselect">save</a>
           <div class="arrow left noselect">&lt;</div>
           <div class="arrow right noselect">></div>
         </div>
@@ -99,22 +100,12 @@
           <p id="autoAccept">lcts will automatically accept the match</p>
           <p>status: <b contentEditable="true" id="status"></b></p>
           <p>rank: <b contentEditable="true" id="tier"></b><c> - </c><b contentEditable="true" id="rank"></b></p>
-          <a href="#" id="saveMisc" class=".noselect">save</a>
+          <a href="#" id="saveMisc" class="noselect">save</a>
           <div class="arrow left noselect">&lt;</div>
           <div class="arrow right noselect">></div>
         </div>
       </div>
 
     </div>
-
-    <script type="text/javascript" src="./tilt.js"></script>
-    <script text="text/javascript">
-      VanillaTilt.init(document.querySelectorAll(".card"), {
-        max: 10,
-        speed: 200,
-        glare: true,
-        "max-glare": 0.3
-      })
-    </script>
   </body>
 </html>

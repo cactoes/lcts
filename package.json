@@ -1,7 +1,7 @@
 {
   "name": "lcts",
   "version": "1.0.0",
-  "description": "a",
+  "description": "lcts",
   "main": "dst/index.js",
   "scripts": {
     "tsc:build": "tsc",
@@ -9,7 +9,7 @@
     "clean": "del /S dst\\*",
     "test": "tsc && electron-forge start",
     "make": "electron-forge make",
-    "package:win": "tsc && electron-packager . lcts --overwrite --asar --platform=win32 --arch=x64 --icon='' --prune=true --out=release --extraResource='./resources/data' --ignore=^/src --ignore=^/.gitignore --ignore=^/README.md --ignore=^/TODO.md --ignore=^/tsconfig.json  --ignore=^/out --version-string.CompanyName=LCTS --version-string.FileDescription=LCTS --version-string.ProductName=\"LCTS\""
+    "package:win": "tsc && electron-packager . lcts --overwrite --asar --platform=win32 --arch=x64 --icon='images/icon.ico' --prune=true --out=release --extraResource='./resources/data' --ignore=^/src --ignore=^/.gitignore --ignore=^/README.md --ignore=^/TODO.md --ignore=^/tsconfig.json  --ignore=^/temp.test.js --version-string.CompanyName=LCTS --version-string.FileDescription=LCTS --version-string.ProductName=\"LCTS\""
   },
   "config": {
     "forge": {

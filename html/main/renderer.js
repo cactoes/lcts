@@ -53,6 +53,13 @@ const setup_ui_on_update = async () => {
   document.getElementById("rank").innerHTML = config.misc.rank.rank
   document.getElementById("enableScripts").className = `${config.misc.script? "":"disabled2"}`
   document.getElementById("autoAccept").className = `${config.auto.acceptMatch? "":"disabled2"}`
+
+  VanillaTilt.init(document.querySelectorAll(".card"), {
+    max: config.ui.move? 10:0,
+    speed: config.ui.move? 200:0,
+    glare: config.ui.reflection,
+    "max-glare": 0.3
+  })
 }
 
 // for when we want to send something to ipcmain

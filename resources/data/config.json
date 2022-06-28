@@ -81,5 +81,9 @@
       "rank": "III"
     },
     "script": true
+  },
+  "ui": {
+    "reflection": false,
+    "move": false
   }
 }

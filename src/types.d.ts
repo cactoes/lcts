@@ -614,6 +614,10 @@ interface IConfig {
     },
     script: boolean
   }
+  ui: {
+    reflection: boolean
+    moving: boolean
+  }
 }
 
 declare class IScript {

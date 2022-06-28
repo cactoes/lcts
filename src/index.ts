@@ -11,16 +11,10 @@ const getKeyByValue = (object: any, value: number): string => Object.keys(object
 const sleep = (ms: number): Promise<void> => new Promise(r => setTimeout(r, ms))
 const SECOND: number = 1000
 
-//const champion = (): IChampionTable => JSON.parse(fs.readFileSync("resources/data/championTable.json").toString())
-//const rune = (): IRuneTable => JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
-
 const file = {
   get: <T>(filename: string): T => JSON.parse(fs.readFileSync("resources/data/" + filename).toString()),
   write: <T>(filename: string, filedata: T): void => fs.writeFileSync("resources/data/" + filename, JSON.stringify(filedata, null, 2))
 }
-
-//const config = (): IConfig => JSON.parse(fs.readFileSync("resources/data/config.json").toString())
-//const items = (): IItems => JSON.parse(fs.readFileSync("resources/data/items.json").toString())
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -29,11 +23,37 @@ const interfaces = {
   lobby: new C_Lobby({canCallUnhooked: false})
 }
 
+const resourcedata = {
+  DATA_DRAGON_VERSION: "",
+  update: async function () {
+    // get data dragon version
+    this.DATA_DRAGON_VERSION = await get_version()
+    // check game version
+    if (file.get<IChampionTable>("championTable.json").version !== this.DATA_DRAGON_VERSION || file.get<IRuneTable>("runeTable.json").version !== this.DATA_DRAGON_VERSION || file.get<IItems>("items.json").version !== this.DATA_DRAGON_VERSION) {
+      // update out championTable
+      file.write<IChampionTable>("championTable.json", {
+        version: this.DATA_DRAGON_VERSION,
+        data: await champion_table()
+      })
+  
+      // update out runeTable
+      file.write<IRuneTable>("runeTable.json", {
+        version: this.DATA_DRAGON_VERSION,
+        data: await rune_table()
+      })
+  
+      // update items
+      file.write<IItems>("items.json", await get_items())
+    }
+  }
+}
+
 async function await_login(): Promise<boolean> {
   let logged_in: boolean = false
   while(!logged_in) {
     try {
-      await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get") && (logged_in = true)
+      await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get")
+      return true
     } catch {
       console.log("not logged in")
     }
@@ -364,27 +384,6 @@ const lobby: CLobby = {
 }
 
 client.on("connect", async (credentials: ICredentials) => {
-  // get game version
-  const DATA_DRAGON_VERSION: string = await get_version()
-
-  // check game version
-  if (file.get<IChampionTable>("championTable.json").version !== DATA_DRAGON_VERSION || file.get<IRuneTable>("runeTable.json").version !== DATA_DRAGON_VERSION || file.get<IItems>("items.json").version !== DATA_DRAGON_VERSION) {
-    // update out championTable
-    file.write<IChampionTable>("championTable.json", {
-      version: DATA_DRAGON_VERSION,
-      data: await champion_table()
-    })
-
-    // update out runeTable
-    file.write<IRuneTable>("runeTable.json", {
-      version: DATA_DRAGON_VERSION,
-      data: await rune_table()
-    })
-
-    // update items
-    file.write<IItems>("items.json", await get_items())
-  }
-
   // hook all the interfaces
   interfaces.user.hook(credentials)
   interfaces.game.hook(credentials)
@@ -397,7 +396,7 @@ client.on("connect", async (credentials: ICredentials) => {
   // wait for client to be logged in
   await await_login()
 
-  // make sure gamloop can start/continue
+  // make sure gameloop can start/continue
   game.available = true
 
   console.log("connected")
@@ -410,22 +409,6 @@ client.on("connect", async (credentials: ICredentials) => {
 
   if (file.get<IConfig>("config.json").misc.script && typeof script.onUserConnect == "function")
     script.onUserConnect(user, lobby, file.get<IConfig>("config.json"))
-
-  // if we are hooked
-  //if (interfaces.user.isCorrectState("hooked", true)) {
-    // set our status
-    //await user.setStatus(data.get<IConfig>("config.json").misc.status)
-    // set our display rank
-    //await user.setRank(data.get<IConfig>("config.json").misc.rank.tier, data.get<IConfig>("config.json").misc.rank.rank)
-  //}
-
-  //if (interfaces.lobby.isCorrectState("hooked", true)) {
-    //await lobby.createLobby(interfaces.lobby.queueId.normal.draft)
-    //await lobby.setLanes(interfaces.game.lane.BOTTOM, interfaces.game.lane.MIDDLE)
-    //await lobby.setPartyType(interfaces.lobby.type.open)
-
-    //await lobby.startSearch()
-  //}
 })
 
 client.on("disconnect", () => {
@@ -444,9 +427,13 @@ client.on("disconnect", () => {
   console.log("disconnected")
 })
 
+// update our data
+resourcedata.update()
+
+// start the client back-end wise
 client.connect()
 
-// electron stuff -------
+// electron stuff
 ipcMain.on("savePicks", (e, data) => {
   let cfg = file.get<IConfig>("config.json")
   cfg.auto.champion.set = data.autoPick

@@ -1,10 +1,9 @@
 # LCTS (League Client TypeScript)
-All tasks
+All tasks for LCTS
 
 ## unclaimed
 
 ### Important
-- [ ] preparations make public
 - [ ] make public
 
 ### Other
