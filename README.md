@@ -2,7 +2,7 @@
 A feature rich league client written in TypeScript, with scripting & more 
 
 ## Installing the client
-Just donwload the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run lcts.exe
+Just download the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run 'lcts.exe'
 
 ## A glass style UI
 ![ui](images/ui.gif)
