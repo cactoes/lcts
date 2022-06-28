@@ -71,7 +71,7 @@ const game: CGame = {
     // update the gameflow phase
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
     
-    // call methods that depend on the gameflow check || depend on checking every second
+    // these methods need to run multiple times
     if (file.get<IConfig>("config.json").auto.champion.set)
       this.autoSetChampion()
 
@@ -81,38 +81,53 @@ const game: CGame = {
     if (file.get<IConfig>("config.json").auto.runes.set)
       this.autoSetRunes()
 
+    // main gameflow check
     if (this.GAMEFLOW_PHASE !== this.GAMEFLOW_PHASE_LAST) {
-      overlay_window.webContents.send('game_state', this.GAMEFLOW_PHASE) // send to overlay_page
-      
-      // call methods that depend on the gameflow update
-      if (file.get<IConfig>("config.json").auto.acceptMatch)
-        this.autoAcceptMatch()
   
-      // reset any state changes
+      // default resets on gameflow == any
       if (this.acceptedMatch)
         this.acceptedMatch = false
-      
-      if (this.gameDataLoop == false && this.GAMEFLOW_PHASE == interfaces.game.gameflow.INPROGRESS)
-        this.sendGameData()
 
-      if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.LOBBY) {
-        if (file.get<IConfig>("config.json").misc.script && typeof script.onPartyJoin == "function")
-          script.onPartyJoin(user, lobby)
+      // do something depening on the gameflow state
+      switch (this.GAMEFLOW_PHASE) {
+        case interfaces.game.gameflow.NONE:
+          break
+        case interfaces.game.gameflow.LOBBY:
+          if (file.get<IConfig>("config.json").misc.script && typeof script.onPartyJoin == "function")
+            script.onPartyJoin(user, lobby)
+          break
+        case interfaces.game.gameflow.MATCHMAKING:
+          break
+        case interfaces.game.gameflow.READYCHECK:
+          // reset champion select values
+          this.championPickIndex = 0
+          this.championBanIndex = 0
+          this.hasSetRunes = false
+          this.hasSetSummonerSpells = false
+          
+          // auto accept match if we want to
+          if (file.get<IConfig>("config.json").auto.acceptMatch)
+            this.autoAcceptMatch()
+          break
+        case interfaces.game.gameflow.CHAMPSELECT:
+          break
+        case interfaces.game.gameflow.INPROGRESS:
+          if (this.gameDataLoop == false)
+            this.sendGameData()
+          break
+        case interfaces.game.gameflow.ENDOFGAME:
+          break
+        case interfaces.game.gameflow.WAITINGFORSTATS:
+          break
       }
 
+      // stop loop if we aren't in game
       if (this.GAMEFLOW_PHASE !== interfaces.game.gameflow.INPROGRESS) {
         if (this.gameDataLoop) {
           clearInterval(this.gameDataLoop)
           this.gameDataLoop = false
         }
       }
-
-      if (this.GAMEFLOW_PHASE !== interfaces.game.gameflow.CHAMPSELECT) {
-        this.championPickIndex = 0
-        this.championBanIndex = 0
-        this.hasSetRunes = false
-        this.hasSetSummonerSpells = false
-      } 
 
       // update the gameflow last phase
       this.GAMEFLOW_PHASE_LAST = this.GAMEFLOW_PHASE
@@ -124,12 +139,10 @@ const game: CGame = {
       this.updateGameflow()
   },
   autoAcceptMatch: async function(): Promise<void> {
-    if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.READYCHECK) {
-      if (!this.acceptedMatch) {
-        this.acceptedMatch = true
-        interfaces.game.virtualCall<void>(interfaces.lobby.dest.matchaccept, {}, "post", false)
-      }
-    }
+    if (this.acceptedMatch)
+      return
+    this.acceptedMatch = true
+    interfaces.game.virtualCall<void>(interfaces.lobby.dest.matchaccept, {}, "post", false)
   },
   autoSetChampion: async function(): Promise<void> {
     if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.CHAMPSELECT) {
@@ -318,14 +331,12 @@ const game: CGame = {
     }
   },
   sendGameData: async function(): Promise<void> {
-    if (game.GAMEFLOW_PHASE == interfaces.game.gameflow.INPROGRESS) {
-      try {
-        const page_data: any = await fetch("https://127.0.0.1:2999/liveclientdata/allgamedata")
-        const p = await page_data.json()
-        overlay_window.webContents.send("liveClientData", p)
-      } catch (e) {
-        console.log("not yet in game")
-      }
+    try {
+      const page_data: any = await fetch("https://127.0.0.1:2999/liveclientdata/allgamedata")
+      const p = await page_data.json()
+      overlay_window.webContents.send("liveClientData", p)
+    } catch (e) {
+      console.log("not yet in game")
     }
     this.gameDataLoop = this.gameDataLoop || setInterval(this.sendGameData.bind(this), 10 * SECOND)
   }
