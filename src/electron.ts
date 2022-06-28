@@ -1,8 +1,11 @@
-import { app, BrowserWindow, ipcMain } from "electron"
+import { app, BrowserWindow, Notification } from "electron"
 import { overlayWindow } from "electron-overlay-window"
 
 export let overlay_window: BrowserWindow
 export let main_window: BrowserWindow
+
+// .show() makes it void
+export const notification = (title: string, body: string): void => new Notification({ title , body }).show() 
 
 export const create_window = (): void => {
   overlay_window = new BrowserWindow({

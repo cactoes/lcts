@@ -13,6 +13,23 @@ interface IChampionTable_base {
   [key: string]: number
 }
 
+interface IRuneTable_base {
+  runes: {
+    [key: string]: number
+  }
+  styles: {
+    [key: string]: number
+  }
+  keyStones: {
+    [key: string]: {
+      [key: string]: number
+    }
+  }
+  perks: {
+    [key: string]: {[key: string]: number}[]
+  }
+}
+
 interface IRuneTable {
   version: string
   data: {
@@ -152,7 +169,7 @@ interface IRuneTable {
         }
       ]
     }
-  }
+  } | IRuneTable_base
 }
 
 interface IUser {
@@ -466,23 +483,6 @@ interface IRuneReforged {
   icon: string
   name: string
   slots: { runes: IRuneBase[] }[]
-}
-
-interface IRuneTable_base {
-  runes: {
-    [key: string]: number
-  }
-  styles: {
-    [key: string]: number
-  }
-  keyStones: {
-    [key: string]: {
-      [key: string]: number
-    }
-  }
-  perks: {
-    [key: string]: {[key: string]: number}[]
-  }
 }
 
 interface IRuneBase {

@@ -1,4 +1,4 @@
-import { create_window, main_window, overlay_window } from "./electron"
+import { create_window, main_window, overlay_window, notification } from "./electron"
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
 import { rune_table, champion_table, get_version, get_items } from "./form_data"
 import { get_rune_from_web } from "./web_rune"
@@ -11,10 +11,16 @@ const getKeyByValue = (object: any, value: number): string => Object.keys(object
 const sleep = (ms: number): Promise<void> => new Promise(r => setTimeout(r, ms))
 const SECOND: number = 1000
 
-const champion = (): IChampionTable => JSON.parse(fs.readFileSync("resources/data/championTable.json").toString())
-const rune = (): IRuneTable => JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
-const config = (): IConfig => JSON.parse(fs.readFileSync("resources/data/config.json").toString())
-const items = (): IItems => JSON.parse(fs.readFileSync("resources/data/items.json").toString())
+//const champion = (): IChampionTable => JSON.parse(fs.readFileSync("resources/data/championTable.json").toString())
+//const rune = (): IRuneTable => JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
+
+const file = {
+  get: <T>(filename: string): T => JSON.parse(fs.readFileSync("resources/data/" + filename).toString()),
+  write: <T>(filename: string, filedata: T): void => fs.writeFileSync("resources/data/" + filename, JSON.stringify(filedata, null, 2))
+}
+
+//const config = (): IConfig => JSON.parse(fs.readFileSync("resources/data/config.json").toString())
+//const items = (): IItems => JSON.parse(fs.readFileSync("resources/data/items.json").toString())
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -66,20 +72,20 @@ const game: CGame = {
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
     
     // call methods that depend on the gameflow check || depend on checking every second
-    if (config().auto.champion.set)
+    if (file.get<IConfig>("config.json").auto.champion.set)
       this.autoSetChampion()
 
-    if (config().auto.spells.set)
+    if (file.get<IConfig>("config.json").auto.spells.set)
       this.autoSetSummonerSpells()
     
-    if (config().auto.runes.set)
+    if (file.get<IConfig>("config.json").auto.runes.set)
       this.autoSetRunes()
 
     if (this.GAMEFLOW_PHASE !== this.GAMEFLOW_PHASE_LAST) {
       overlay_window.webContents.send('game_state', this.GAMEFLOW_PHASE) // send to overlay_page
       
       // call methods that depend on the gameflow update
-      if (config().auto.acceptMatch)
+      if (file.get<IConfig>("config.json").auto.acceptMatch)
         this.autoAcceptMatch()
   
       // reset any state changes
@@ -90,7 +96,7 @@ const game: CGame = {
         this.sendGameData()
 
       if (this.GAMEFLOW_PHASE == interfaces.game.gameflow.LOBBY) {
-        if (config().misc.script && typeof script.onPartyJoin == "function")
+        if (file.get<IConfig>("config.json").misc.script && typeof script.onPartyJoin == "function")
           script.onPartyJoin(user, lobby)
       }
 
@@ -139,39 +145,39 @@ const game: CGame = {
       // find ourself in the champion select data
       const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
       
-      // define all the champions we want to try and pick (from config())
+      // define all the champions we want to try and pick (from data.get<IConfig>("config.json"))
       const championPicks: ILane = {
         top: [], jungle: [], middle: [], bottom: [], utility: []
       }
 
-      // fill out championPicks from config()
-      for (const lane in config().auto.champion.lanePick) {
+      // fill out championPicks from data.get<IConfig>("config.json")
+      for (const lane in file.get<IConfig>("config.json").auto.champion.lanePick) {
         // get all champions in current lane
-        config().auto.champion.lanePick[lane].forEach((c_champion: string) => {
+        file.get<IConfig>("config.json").auto.champion.lanePick[lane].forEach((champion: string) => {
           // save their id
-          championPicks[lane].push( champion().data[c_champion] )
+          championPicks[lane].push( file.get<IChampionTable>("championTable.json").data[champion] )
         })
       }
 
-      // define all the champions we want to try and ban (from config())
+      // define all the champions we want to try and ban (from data.get<IConfig>("config.json"))
       const championBans: ILane = {
         top: [], jungle: [], middle: [], bottom: [], utility: []
       }
 
-      // fill out championBans from config()
-      for (const lane in config().auto.champion.laneBan) {
+      // fill out championBans from data.get<IConfig>("config.json")
+      for (const lane in file.get<IConfig>("config.json").auto.champion.laneBan) {
         // get all champions in current lane
-        config().auto.champion.laneBan[lane].forEach((c_champion: string) => {
+        file.get<IConfig>("config.json").auto.champion.laneBan[lane].forEach((champion: string) => {
           // save their id
-          championBans[lane].push( champion().data[c_champion] )
+          championBans[lane].push( file.get<IChampionTable>("championTable.json").data[champion] )
         })
       }
 
       // get our (primary) lane
-      const lane: string = lobby_data.localMember.firstPositionPreference == ""? config().auto.champion.defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
+      const lane: string = lobby_data.localMember.firstPositionPreference == ""? file.get<IConfig>("config.json").auto.champion.defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
       
       // lane checks
-      if (config().auto.champion.checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
+      if (file.get<IConfig>("config.json").auto.champion.checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
         return
 
       // loop trough all the actions
@@ -199,7 +205,7 @@ const game: CGame = {
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championPicks[lane][game.championPickIndex] }, "patch", false)
             
             // check if we want to lock in our selected champion
-            else if (config().auto.champion.lock && currentAction.championId == championPicks[lane][game.championPickIndex])
+            else if (file.get<IConfig>("config.json").auto.champion.lock && currentAction.championId == championPicks[lane][game.championPickIndex])
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][game.championPickIndex] }, "post", false)
   
             // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
@@ -213,7 +219,7 @@ const game: CGame = {
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][game.championBanIndex] }, "patch", false)
             
             // check if we want to ban our champion
-            else if (config().auto.champion.ban && currentAction.championId == championBans[lane][game.championBanIndex])
+            else if (file.get<IConfig>("config.json").auto.champion.ban && currentAction.championId == championBans[lane][game.championBanIndex])
               interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][game.championBanIndex] }, "post", false)
 
             // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
@@ -248,10 +254,10 @@ const game: CGame = {
           if (!game.hasSetRunes && currentAction.completed && currentAction.type == "pick") {
             game.hasSetRunes = true
 
-            const rune_data = await get_rune_from_web(getKeyByValue(champion().data, currentAction.championId).toLowerCase(), config().auto.runes.prefix)
+            const rune_data = await get_rune_from_web(getKeyByValue(file.get<IChampionTable>("championTable.json").data, currentAction.championId).toLowerCase(), file.get<IConfig>("config.json").auto.runes.prefix)
 
             const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
-            const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith(config().auto.runes.prefix))
+            const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith(file.get<IConfig>("config.json").auto.runes.prefix))
 
             // runes
             if (target_rune)
@@ -276,10 +282,10 @@ const game: CGame = {
       const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
 
       // get our (primary) lane
-      const lane: string = lobby_data.localMember.firstPositionPreference == ""? config().auto.spells.defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
+      const lane: string = lobby_data.localMember.firstPositionPreference == ""? file.get<IConfig>("config.json").auto.spells.defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
       
       // lane checks
-      if (config().auto.spells.checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
+      if (file.get<IConfig>("config.json").auto.spells.checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
         return
       
       // define all our summoner spells
@@ -287,11 +293,11 @@ const game: CGame = {
         top: [], jungle: [], middle: [], bottom: [], utility: []
       }
 
-      // fill out summonerSpells from config()
-      for (const lane in config().auto.spells.lane) {
+      // fill out summonerSpells from data.get<IConfig>("config.json")
+      for (const lane in file.get<IConfig>("config.json").auto.spells.lane) {
         // save their id
-        summonerSpells[lane][0] = interfaces.runes.spell[ config().auto.spells.lane[lane][0] ].id
-        summonerSpells[lane][1] = interfaces.runes.spell[ config().auto.spells.lane[lane][1] ].id
+        summonerSpells[lane][0] = interfaces.runes.spell[ file.get<IConfig>("config.json").auto.spells.lane[lane][0] ].id
+        summonerSpells[lane][1] = interfaces.runes.spell[ file.get<IConfig>("config.json").auto.spells.lane[lane][1] ].id
       }
 
       // loop trough all the actions
@@ -345,24 +351,24 @@ const lobby: CLobby = {
 
 client.on("connect", async (credentials: ICredentials) => {
   // get game version
-  const game_version: string = await get_version()
+  const DATA_DRAGON_VERSION: string = await get_version()
 
   // check game version
-  if (champion().version !== game_version || rune().version !== game_version || items().version !== game_version) {
+  if (file.get<IChampionTable>("championTable.json").version !== DATA_DRAGON_VERSION || file.get<IRuneTable>("runeTable.json").version !== DATA_DRAGON_VERSION || file.get<IItems>("items.json").version !== DATA_DRAGON_VERSION) {
     // update out championTable
-    fs.writeFileSync("resources/data/championTable.json", JSON.stringify({
-      version: game_version,
+    file.write<IChampionTable>("championTable.json", {
+      version: DATA_DRAGON_VERSION,
       data: await champion_table()
-    }, null, 2))
+    })
 
     // update out runeTable
-    fs.writeFileSync("resources/data/runeTable.json", JSON.stringify({
-      version: game_version,
+    file.write<IRuneTable>("runeTable.json", {
+      version: DATA_DRAGON_VERSION,
       data: await rune_table()
-    }, null, 2))
+    })
 
     // update items
-    fs.writeFileSync("resources/data/items.json", JSON.stringify(await get_items(), null, 2))
+    file.write<IItems>("items.json", await get_items())
   }
 
   // hook all the interfaces
@@ -376,23 +382,27 @@ client.on("connect", async (credentials: ICredentials) => {
 
   // wait for client to be logged in
   await await_login()
+
+  // make sure gamloop can start/continue
   game.available = true
+
   console.log("connected")
 
   // gameflow checker (loop)
   game.updateGameflow()
+
+  // update ui
   main_window.webContents.send('logged_in', true)
 
-  if (config().misc.script && typeof script.onUserConnect == "function") {
+  if (file.get<IConfig>("config.json").misc.script && typeof script.onUserConnect == "function")
     script.onUserConnect(user, lobby)
-  }
 
   // if we are hooked
   //if (interfaces.user.isCorrectState("hooked", true)) {
     // set our status
-    //await user.setStatus(config().misc.status)
+    //await user.setStatus(data.get<IConfig>("config.json").misc.status)
     // set our display rank
-    //await user.setRank(config().misc.rank.tier, config().misc.rank.rank)
+    //await user.setRank(data.get<IConfig>("config.json").misc.rank.tier, data.get<IConfig>("config.json").misc.rank.rank)
   //}
 
   //if (interfaces.lobby.isCorrectState("hooked", true)) {
@@ -413,6 +423,8 @@ client.on("disconnect", () => {
 
   // make sure gameloop doesnt continue
   game.available = false
+
+  // update ui
   main_window.webContents.send('logged_in', false)
 
   console.log("disconnected")
@@ -420,38 +432,34 @@ client.on("disconnect", () => {
 
 client.connect()
 
-ipcMain.on("getConfig", () => {
-  main_window.webContents.send('config', config()) // send to overlay_page
-})
-
+// electron stuff -------
 ipcMain.on("savePicks", (e, data) => {
-  let cfg: IConfig = config()
+  let cfg = file.get<IConfig>("config.json")
   cfg.auto.champion.set = data.autoPick
   cfg.auto.champion.lock = data.autoLock
   cfg.auto.champion.ban = data.autoBan
-  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
+  file.write<IConfig>("config.json", cfg)
 })
 
 ipcMain.on("saveRunes", (e, data) => {
-  let cfg: IConfig = config()
+  let cfg = file.get<IConfig>("config.json")
   cfg.auto.runes.set = data.autoRunes
   cfg.auto.runes.prefix = data.runesPrefix
-  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
+  file.write<IConfig>("config.json", cfg)
 })
 
 ipcMain.on("saveLanes", (e, data) => {
-  let cfg: IConfig = config()
+  let cfg = file.get<IConfig>("config.json")
   const lanes: string[] = [interfaces.game.lane.TOP, interfaces.game.lane.JUNGLE, interfaces.game.lane.MIDDLE, interfaces.game.lane.BOTTOM, interfaces.game.lane.SUPPORT]
   cfg.auto.champion.defaultLane = lanes[data.championId].toLowerCase()
   cfg.auto.spells.defaultLane = lanes[data.spellsId].toLowerCase()
   cfg.auto.champion.checkLane = data.checkChampion
   cfg.auto.spells.checkLane = data.checkSpells
-  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
+  file.write<IConfig>("config.json", cfg)
 })
 
 ipcMain.on("saveMisc", (e, data) => {
-  let cfg: IConfig = config()
-  console.log(data)
+  let cfg = file.get<IConfig>("config.json")
   cfg.misc.script = data.scripts
   cfg.misc.status = data.status
   cfg.misc.rank = {
@@ -459,21 +467,14 @@ ipcMain.on("saveMisc", (e, data) => {
     rank: data.rank.rank.toUpperCase()
   }
   cfg.auto.acceptMatch = data.autoAccept
-  fs.writeFileSync("resources/data/config.json", JSON.stringify(cfg, null, 2))
+  file.write<IConfig>("config.json", cfg)
 })
 
-ipcMain.on("closeWindow", () => {
-  main_window.close()
-})
+ipcMain.on("getConfig", () => main_window.webContents.send('config', file.get<IConfig>("config.json")))
+ipcMain.on("closeWindow", () => main_window.close())
+ipcMain.on("miniWindow", () => main_window.minimize())
 
-ipcMain.on("miniWindow", () => {
-  main_window.minimize()
-})
-
-// electron stuff -------
 app.disableHardwareAcceleration()
-
-// when electron is ready create the window's
 app.on("ready", create_window)
 
 // for later implementation (maybe)
