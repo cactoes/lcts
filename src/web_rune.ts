@@ -1,8 +1,10 @@
-import fetch from "node-fetch"
 import { parse } from 'node-html-parser'
-const fs = require("fs")
-const runeTable: IRuneTable = JSON.parse(fs.readFileSync("resources/data/runeTable.json").toString())
+import { file } from "./utils"
+import fetch from "node-fetch"
 
+const runeTable = file.get<IRuneTable>("runeTable.json")
+
+// for getting the n'th element in a string (with spaces as delimiter)
 String.prototype.get_item = function(index: number) {
   return this.split(" ")[index]
 }
@@ -15,7 +17,7 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
   })
 
   // parse the text as an html element and select runes part of the DOM
-  const rune_base: any = parse(page_data).querySelectorAll(".recommended-build_runes")[0] 
+  const rune_base = parse(page_data).querySelectorAll(".recommended-build_runes")[0] 
   
   // form the rune base for later parsing
   const rune_obj: IRuneWebBase = {
@@ -33,8 +35,8 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
       rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[2].classList.toString().get_item(2)
     ],
 
+    // get primary perks
     primary_perks: [
-      // get primary perks
       [
         rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[0].classList.toString().get_item(1),
         rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[1].classList.toString().get_item(1),
@@ -52,8 +54,8 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
       ]
     ],
 
+    // get secondary perks
     secondary_perks: [
-      // get primary perks
       [
         rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[0].classList.toString().get_item(1),
         rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[1].classList.toString().get_item(1),
@@ -71,8 +73,8 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
       ]
     ],
 
+    // get extra runes (called styles by leagueApi and U.gg)
     styles: [
-      // get extra runes (called styles by leagueApi and U.gg)
       [
         rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[0].classList.toString().get_item(1),
         rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[1].classList.toString().get_item(1),

@@ -1,11 +1,11 @@
 import * as vm from "vm"
-import * as fs from "fs"
+import { file } from "./utils"
 
 // create our "safe space"
 const sandbox = vm.createContext()
 
-// get the script int string from
-const scriptFile = fs.readFileSync("resources/data/script.js").toString()
+// get the script in string from
+const scriptFile = file.raw("script.js")
 
 // upload the class to the sandbox
 vm.runInContext(scriptFile, sandbox)

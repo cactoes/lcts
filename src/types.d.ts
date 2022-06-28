@@ -744,3 +744,15 @@ interface IItems {
     tags: string[]
   }[]
 }
+
+interface ITime {
+  MILLISECOND: number
+  SECOND: number
+  MINUTE: number
+}
+
+interface IFile {
+  get<T>(filename: string): T
+  write<T>(filename: string, filedata: T): void
+  raw(filename: string): string
+}

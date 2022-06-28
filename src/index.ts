@@ -1,20 +1,11 @@
-import { create_window, main_window, overlay_window, notification } from "./electron"
 import { client, C_Game, C_User, C_Runes, C_Lobby } from "lcinterface"
-import { rune_table, champion_table, get_version, get_items } from "./form_data"
-import { get_rune_from_web } from "./web_rune"
-import { script } from "./script_manager"
 import { app, ipcMain } from "electron"
 import fetch from "node-fetch"
-import * as fs from "fs"
-
-const getKeyByValue = (object: any, value: number): string => Object.keys(object).find(key => object[key] === value) || ""
-const sleep = (ms: number): Promise<void> => new Promise(r => setTimeout(r, ms))
-const SECOND: number = 1000
-
-const file = {
-  get: <T>(filename: string): T => JSON.parse(fs.readFileSync("resources/data/" + filename).toString()),
-  write: <T>(filename: string, filedata: T): void => fs.writeFileSync("resources/data/" + filename, JSON.stringify(filedata, null, 2))
-}
+import { create_window, main_window, overlay_window, notification } from "./electron"
+import { rune_table, champion_table, get_version, get_items } from "./form_data"
+import { sleep, time, getKeyByValue, file } from "./utils"
+import { get_rune_from_web } from "./web_rune"
+import { script } from "./script_manager"
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
@@ -48,18 +39,18 @@ const resourcedata = {
   }
 }
 
-async function await_login(): Promise<boolean> {
-  let logged_in: boolean = false
-  while(!logged_in) {
+async function await_login(): Promise<void> {
+  while (true) {
     try {
-      await interfaces.game.virtualCall<boolean>(interfaces.game.dest.login, {}, "get")
-      return true
+      // try to access lcu (igonre any data we do get) and return
+      return await interfaces.game.virtualCall<void>(interfaces.game.dest.login, {}, "get", false)
     } catch {
+      // if it fails try again
       console.log("not logged in")
     }
-    await sleep(1 * SECOND)
+    // prevent unnecessary spamming of retrys
+    await sleep(1 * time.SECOND)
   }
-  return false
 }
 
 const user: CUser = {
@@ -154,7 +145,7 @@ const game: CGame = {
     }
 
     // recheck the phase after 1 second
-    await sleep(1 * SECOND)
+    await sleep(1 * time.SECOND)
     if (this.available)
       this.updateGameflow()
   },
@@ -355,10 +346,10 @@ const game: CGame = {
       const page_data: any = await fetch("https://127.0.0.1:2999/liveclientdata/allgamedata")
       const p = await page_data.json()
       overlay_window.webContents.send("liveClientData", p)
-    } catch (e) {
+    } catch {
       console.log("not yet in game")
     }
-    this.gameDataLoop = this.gameDataLoop || setInterval(this.sendGameData.bind(this), 10 * SECOND)
+    this.gameDataLoop = this.gameDataLoop || setInterval(this.sendGameData.bind(this), 10 * time.SECOND)
   }
 }
 
@@ -399,13 +390,13 @@ client.on("connect", async (credentials: ICredentials) => {
   // make sure gameloop can start/continue
   game.available = true
 
+  // update ui
+  main_window.webContents.send('logged_in', true)
+
   console.log("connected")
 
   // gameflow checker (loop)
   game.updateGameflow()
-
-  // update ui
-  main_window.webContents.send('logged_in', true)
 
   if (file.get<IConfig>("config.json").misc.script && typeof script.onUserConnect == "function")
     script.onUserConnect(user, lobby, file.get<IConfig>("config.json"))
