@@ -17,7 +17,7 @@ Just download the client from the [releases](https://github.com/cactoes/lcts/rel
   - pick
     - a champion to play
     - a champion to ban
-  - set runes
+  - set runes (runes do change you might not be able to see the changes when editing)
   - set summoner spells
 - [scripting](#scripting)
 - ui customizability (check [config](resources/data/config.json))

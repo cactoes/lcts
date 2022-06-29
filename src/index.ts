@@ -264,6 +264,7 @@ const game: CGame = {
 
       // find ourself in the champion select data
       const localUserChampSelect: IActor | undefined = champSelectData.myTeam.find((p: IActor) => p.summonerId == user_data.summonerId)
+
       // loop trough all the actions
       for (const pair in champSelectData.actions) {
         for (const action in champSelectData.actions[pair]) {
@@ -273,11 +274,10 @@ const game: CGame = {
           // is it us
           if (currentAction.actorCellId !== localUserChampSelect?.cellId)
             continue
-
-          // set runes if we are locked in (rune name has to start with rune.prefix)
-          if (!game.hasSetRunes && currentAction.completed && currentAction.type == "pick") {
-            game.hasSetRunes = true
-
+            // set runes if we are locked in (rune name has to start with rune.prefix)
+            if (!game.hasSetRunes && currentAction.completed && currentAction.type == "pick") {
+              game.hasSetRunes = true
+            
             const rune_data = await get_rune_from_web(getKeyByValue(file.get<IChampionTable>("championTable.json").data, currentAction.championId).toLowerCase(), file.get<IConfig>("config.json").auto.runes.prefix)
 
             const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
