@@ -5,10 +5,13 @@ A feature rich league client written in TypeScript, with scripting & more
 Just download the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run 'lcts.exe'
 
 ## A glass style UI
-- by default the ui doesnt move, edit the config to change that
+By default the ui doesn't move, you have to enable it in the config
+
 ![ui](images/ui.gif)
 
-## A x88 style overlay
+## An x88 style overlay
+Your game has to be in borderless (or windowed) to work
+
 ![overlay](images/overlay.png)
 
 ## Features
@@ -19,11 +22,112 @@ Just download the client from the [releases](https://github.com/cactoes/lcts/rel
     - a champion to ban
   - set runes (runes do change you might not be able to see the changes when editing)
   - set summoner spells
+  - check if you got the lane you want
 - [scripting](#scripting)
 - ui customizability (check [config](resources/data/config.json))
+- [config](#config)
+
+## Config
+The config is located in [resources/data/config.json](resources/data/config.json), here you can customize everything
+### Structure
+```javascript
+{
+  "auto": {
+    "acceptMatch": true, // automatically accepting a match
+    "champion": {
+      "set": true, // "hovering" of your pick/ban
+      "lock": true, // lock-in the selected champion
+      "ban": true, // ban the selected champion
+      "checkLane": true, // check if the lane you got was the lane you chose in the lobby (primary lane only), for picking/banning
+      "defaultLane": "utility", // if you didn't choose a lane this will be the lane it uses instead
+      "lanePick": {
+        "top": [
+          "Gwen" // the list of champion you want to pick on the top lane
+        ],
+        "jungle": [
+          "Lilia" // the list of champion you want to pick in the jungle
+        ],
+        "middle": [
+          "Irelia" // the list of champion you want to pick on mid
+        ],
+        "bottom": [
+          "Caitlyn" // the list of champion you want to pick as the adc
+        ],
+        "utility": [
+          "Renata" // the list of champion you want to pick as the support
+        ]
+      },
+      "laneBan": {
+        "top": [
+          "Garen" // the list of champion you want to ban on the top lane
+        ],
+        "jungle": [
+          "Belveth" // the list of champion you want to ban in the jungle
+        ],
+        "middle": [
+          "Akali" // the list of champion you want to ban on mid
+        ],
+        "bottom": [
+          "Ezreal" // the list of champion you want to ban as the adc
+        ],
+        "utility": [
+          "Leona" // the list of champion you want to ban as the support
+        ]
+      }
+    },
+    "runes": {
+      "set": true, // automatically set the runes of the locked in champion
+      "prefix": "[u.gg]" // change the runes that start with this
+    },
+    "spells": {
+      "set": true, // automatically set you summoner spells
+      "checkLane": true, // check if the lane you got was the lane you chose in the lobby (primary lane only), for setting you spells
+      "defaultLane": "utility", // if you didn't choose a lane this will be the lane it uses instead
+      "lane": {
+        "top": [
+          "Teleport", // *D*
+          "Flash" // *F*
+        ],
+        "jungle": [
+          "Smite", // *D*
+          "Flash" // *F*
+        ],
+        "middle": [
+          "Ignite", // *D*
+          "Flash" // *F*
+        ],
+        "bottom": [
+          "Heal", // *D*
+          "Flash" // *F*
+        ],
+        "utility": [
+          "Ignite", // *D*
+          "Flash" // *F*
+        ]
+      }
+    }
+  },
+  "misc": {
+    "status": "default-status", // for storing you status so you can use it in a script (unused)
+    "rank": {
+      "tier": "diamond", // for storing your tier so you can use it in a script
+      "rank": "III" // for storing your rank so you can use it in a script
+    },
+    "script": true // make use of scripts
+  },
+  "ui": {
+    "reflection": false, // make the ui have a reflection/shine/glare effect
+    "move": false // make the ui move when moving the mouse
+  }
+}
+```
 
 ## Scripting
-The client allows for function scripting (within LCTS itself), the script is located in [resources/data/script.js](resources/data/script.js)
+The client allows for function scripting (within LCTS itself), the script is located in [resources/data/script.js](resources/data/script.js). <br />
+- The script has to be called "**script.js**" so the client can find it. <br />
+
+There are some default scripts available just rename the one you want to "**script.js**", and restart the LCTS to run them.
+
 ### Structure
 ```javascript
 class LCScript {
