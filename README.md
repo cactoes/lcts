@@ -127,6 +127,7 @@ The client allows for function scripting (within LCTS itself), the script is loc
 - The script has to be called "**script.js**" so the client can find it. <br />
 
 There are some default scripts available just rename the one you want to "**script.js**", and restart the LCTS to run them.
+- The default script are located in the "**examples**" folder
 
 ### Structure
 ```javascript
