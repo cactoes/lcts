@@ -4,6 +4,7 @@ All tasks for LCTS
 ## unclaimed
 
 ### Important
+- [ ] redo the ui
 - [ ] add "card" / menu for defining champions to pick and ban
 - [ ] add "card" / menu for defining champions to pick summoner spells
 
