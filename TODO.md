@@ -4,7 +4,7 @@ All tasks for LCTS
 ## unclaimed
 
 ### Important
-- [ ] redo the ui
+
 - [ ] add "card" / menu for defining champions to pick and ban
 - [ ] add "card" / menu for defining champions to pick summoner spells
 
@@ -12,6 +12,7 @@ All tasks for LCTS
 
 
 ## claimed
+- [ ] redo the ui [@MeloenCoding](https://github.com/MeloenCoding)
 
 ## Completed tasks ✓
 - [x] make public
