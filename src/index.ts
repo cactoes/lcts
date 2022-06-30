@@ -4,14 +4,26 @@ import fetch from "node-fetch"
 import { create_window, main_window, overlay_window, notification } from "./electron"
 import { rune_table, champion_table, get_version, get_items } from "./form_data"
 import { sleep, time, getKeyByValue, file } from "./utils"
-import { get_rune_from_web } from "./web_rune"
+import { get_rune_from_web, get_skill_order } from "./web_rune"
 import { script } from "./script_manager"
 
 const interfaces = {
   user: new C_User({canCallUnhooked: false}),
   game: new C_Game({canCallUnhooked: false}),
   runes: new C_Runes({canCallUnhooked: false}),
-  lobby: new C_Lobby({canCallUnhooked: false})
+  lobby: new C_Lobby({canCallUnhooked: false}),
+  hook: (credentials: ICredentials) => {
+    interfaces.user.hook(credentials)
+    interfaces.game.hook(credentials)
+    interfaces.runes.hook(credentials)
+    interfaces.lobby.hook(credentials)
+  },
+  unhook: () => {
+    interfaces.user.unhook()
+    interfaces.game.unhook()
+    interfaces.runes.unhook()
+    interfaces.lobby.unhook()
+  }
 }
 
 const resourcedata = {
@@ -21,19 +33,19 @@ const resourcedata = {
     this.DATA_DRAGON_VERSION = await get_version()
     // check game version
     if (file.get<IChampionTable>("championTable.json").version !== this.DATA_DRAGON_VERSION || file.get<IRuneTable>("runeTable.json").version !== this.DATA_DRAGON_VERSION || file.get<IItems>("items.json").version !== this.DATA_DRAGON_VERSION) {
-      // update out championTable
+      // update our local championTable
       file.write<IChampionTable>("championTable.json", {
         version: this.DATA_DRAGON_VERSION,
         data: await champion_table()
       })
   
-      // update out runeTable
+      // update our local runeTable
       file.write<IRuneTable>("runeTable.json", {
         version: this.DATA_DRAGON_VERSION,
         data: await rune_table()
       })
   
-      // update items
+      // update local items
       file.write<IItems>("items.json", await get_items())
     }
   }
@@ -41,13 +53,10 @@ const resourcedata = {
 
 async function await_login(): Promise<void> {
   while (true) {
-    try {
-      // try to access lcu (igonre any data we do get) and return
-      return await interfaces.game.virtualCall<void>(interfaces.game.dest.login, {}, "get", false)
-    } catch {
-      // if it fails try again
-      console.log("not logged in")
-    }
+    // have we logged in?
+    if (await interfaces.game.virtualCall<void>(interfaces.game.dest.login, {}, "get", false).catch<boolean>(() => false))
+      return
+    
     // prevent unnecessary spamming of retrys
     await sleep(1 * time.SECOND)
   }
@@ -77,6 +86,7 @@ const game: CGame = {
   hasSetRunes: false,
   hasSetSummonerSpells: false,
   gameDataLoop: false,
+  hasSentSkillOrder: false,
 
   updateGameflow: async function(): Promise<void> {
     // update the gameflow phase
@@ -137,6 +147,7 @@ const game: CGame = {
         if (this.gameDataLoop) {
           clearInterval(this.gameDataLoop)
           this.gameDataLoop = false
+          this.hasSentSkillOrder = false
         }
       }
 
@@ -343,13 +354,32 @@ const game: CGame = {
   },
   sendGameData: async function(): Promise<void> {
     try {
-      const page_data: any = await fetch("https://127.0.0.1:2999/liveclientdata/allgamedata")
-      const p = await page_data.json()
-      overlay_window.webContents.send("liveClientData", p)
-    } catch {
-      console.log("not yet in game")
-    }
-    this.gameDataLoop = this.gameDataLoop || setInterval(this.sendGameData.bind(this), 10 * time.SECOND)
+      // get the client data
+      const liveClientData = await fetch("https://127.0.0.1:2999/liveclientdata/allgamedata").then<Promise<ILiveClientData>>((response: Response | any) => {
+        // return the json response
+        return response.json()
+      })
+      
+      // send the data to the client
+      overlay_window.webContents.send("liveClientData", liveClientData)
+
+      // find us in the list
+      const me = liveClientData.allPlayers.find(p => p.summonerName == liveClientData.activePlayer.summonerName)
+
+      // if we haven't send over our skill order
+      if (!this.hasSentSkillOrder) {
+        // only call once per match
+        this.hasSentSkillOrder = true
+
+        // get our skill order
+        const ability_levels: string[] = await get_skill_order(me?.championName.toLowerCase() || "")
+        
+        // send our skill order
+        overlay_window.webContents.send("abilityLevelOrder", ability_levels)
+      }
+    } catch { }
+    // repeat every second
+    this.gameDataLoop = this.gameDataLoop || setInterval(this.sendGameData.bind(this), 1 * time.SECOND)
   }
 }
 
@@ -376,10 +406,7 @@ const lobby: CLobby = {
 
 client.on("connect", async (credentials: ICredentials) => {
   // hook all the interfaces
-  interfaces.user.hook(credentials)
-  interfaces.game.hook(credentials)
-  interfaces.runes.hook(credentials)
-  interfaces.lobby.hook(credentials)
+  interfaces.hook(credentials)
   
   // setup dest for checking if we are logged in (tho any endpoint will do)
   interfaces.game.addDest("login", "/lol-login/v1/session")
@@ -393,8 +420,6 @@ client.on("connect", async (credentials: ICredentials) => {
   // update ui
   main_window.webContents.send('logged_in', true)
 
-  console.log("connected")
-
   // gameflow checker (loop)
   game.updateGameflow()
 
@@ -404,18 +429,13 @@ client.on("connect", async (credentials: ICredentials) => {
 
 client.on("disconnect", () => {
   // unhook all the interfaces
-  interfaces.user.unhook()
-  interfaces.game.unhook()
-  interfaces.runes.unhook()
-  interfaces.lobby.unhook()
+  interfaces.unhook()
 
   // make sure gameloop doesnt continue
   game.available = false
 
   // update ui
   main_window.webContents.send('logged_in', false)
-
-  console.log("disconnected")
 })
 
 // update our data

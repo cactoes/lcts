@@ -190,3 +190,42 @@ export async function get_rune_from_web(champion_name: string, runePrefix: strin
     return form_rune(base, runePrefix)
   })
 }
+
+// returns the skill order of requested champion
+export async function get_skill_order(champion_name: string): Promise<string[]> {
+  // get champion rune page from u.gg in text from
+  const page_data: string = await fetch(`https://u.gg/lol/champions/${champion_name}/build`).then<Promise<string>>((value: Response | any) => {
+    // can't change .text() return type :( | any is required
+    return value.text()
+  })
+  // define the final array
+  let final: string[] = [ ]
+
+  // parse the text as an html element and select runes part of the DOM
+  const document = parse(page_data)
+
+  // get elements of our skills
+  const skills_q = document.querySelectorAll(".skill-order")[0].querySelectorAll("div")
+  const skills_w = document.querySelectorAll(".skill-order")[1].querySelectorAll("div")
+  const skills_e = document.querySelectorAll(".skill-order")[2].querySelectorAll("div")
+  const skills_r = document.querySelectorAll(".skill-order")[3].querySelectorAll("div")
+  
+  // loop through our skills
+  // skills_X.length == 36
+  for (var i = 0; i < 36; i++) {
+    if(skills_q[i].classList.toString().startsWith("skill-up "))
+      final[parseInt(skills_q[i].querySelectorAll("div")[0].innerHTML) - 1] = "q"
+    
+    if(skills_w[i].classList.toString().startsWith("skill-up "))
+      final[parseInt(skills_w[i].querySelectorAll("div")[0].innerHTML) - 1] = "w"
+
+    if(skills_e[i].classList.toString().startsWith("skill-up ")) 
+      final[parseInt(skills_e[i].querySelectorAll("div")[0].innerHTML) - 1] = "e"
+    
+    if(skills_r[i].classList.toString().startsWith("skill-up "))
+      final[parseInt(skills_r[i].querySelectorAll("div")[0].innerHTML) - 1] = "r"
+  }
+
+  // return our skills
+  return final
+}

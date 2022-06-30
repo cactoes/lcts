@@ -210,7 +210,7 @@ interface IUser {
     skinVariant: string
     skinname: string
     timeStamp: string
-  },
+  }
   name: string
   patchline: string
   pid: string
@@ -239,6 +239,7 @@ interface CGame {
   hasSetRunes: boolean
   hasSetSummonerSpells: boolean
   gameDataLoop: boolean | Timer
+  hasSentSkillOrder: boolean
 
   async updateGameflow(): Promise<void>
   async autoAcceptMatch(): Promise<void>
@@ -249,89 +250,89 @@ interface CGame {
 }
 
 interface IActor {
-  assignedPosition: string,
-  cellId: number,
-  championId: number,
-  championPickIntent: number,
-  entitledFeatureType: string,
-  selectedSkinId: number,
-  spell1Id: number,
-  spell2Id: number,
-  summonerId: number,
-  team: number,
+  assignedPosition: string
+  cellId: number
+  championId: number
+  championPickIntent: number
+  entitledFeatureType: string
+  selectedSkinId: number
+  spell1Id: number
+  spell2Id: number
+  summonerId: number
+  team: number
   wardSkinId: number
 }
 
 interface IMember {
-  allowedChangeActivity: boolean,
-  allowedInviteOthers: boolean,
-  allowedKickOthers: boolean,
-  allowedStartActivity: boolean,
-  allowedToggleInvite: boolean,
-  autoFillEligible: boolean,
-  autoFillProtectedForPromos: boolean,
-  autoFillProtectedForSoloing: boolean,
-  autoFillProtectedForStreaking: boolean,
-  botChampionId: number,
-  botDifficulty: string,
-  botId: string,
-  firstPositionPreference: string,
-  isBot: boolean,
-  isLeader: boolean,
-  isSpectator: boolean,
-  puuid: string,
-  ready: boolean,
-  secondPositionPreference: string,
-  showGhostedBanner: boolean,
-  summonerIconId: number,
-  summonerId: number,
-  summonerInternalName: string,
-  summonerLevel: number,
-  summonerName: string,
+  allowedChangeActivity: boolean
+  allowedInviteOthers: boolean
+  allowedKickOthers: boolean
+  allowedStartActivity: boolean
+  allowedToggleInvite: boolean
+  autoFillEligible: boolean
+  autoFillProtectedForPromos: boolean
+  autoFillProtectedForSoloing: boolean
+  autoFillProtectedForStreaking: boolean
+  botChampionId: number
+  botDifficulty: string
+  botId: string
+  firstPositionPreference: string
+  isBot: boolean
+  isLeader: boolean
+  isSpectator: boolean
+  puuid: string
+  ready: boolean
+  secondPositionPreference: string
+  showGhostedBanner: boolean
+  summonerIconId: number
+  summonerId: number
+  summonerInternalName: string
+  summonerLevel: number
+  summonerName: string
   teamId: number
 }
 
 interface IInvite {
-  invitationId: string,
-  invitationType: string,
-  state: string,
-  timestamp: string,
-  toSummonerId: number,
+  invitationId: string
+  invitationType: string
+  state: string
+  timestamp: string
+  toSummonerId: number
   toSummonerName: string
 }
 
 interface ILobby {
-  canStartActivity: boolean,
-  chatRoomId: string,
-  chatRoomKey: string,
+  canStartActivity: boolean
+  chatRoomId: string
+  chatRoomKey: string
   gameConfig: {
-    allowablePremadeSizes: number[],
-    customLobbyName: string,
-    customMutatorName: string,
-    customRewardsDisabledReasons: any[],
-    customSpectatorPolicy: string,
-    customSpectators: any[],
-    customTeam100: any[],
-    customTeam200: any[],
-    gameMode: string,
-    isCustom: boolean,
-    isLobbyFull: boolean,
-    isTeamBuilderManaged: boolean,
-    mapId: number,
-    maxHumanPlayers: number,
-    maxLobbySize: number,
-    maxTeamSize: number,
-    pickType: string,
-    premadeSizeAllowed: boolean,
-    queueId: number,
+    allowablePremadeSizes: number[]
+    customLobbyName: string
+    customMutatorName: string
+    customRewardsDisabledReasons: any[]
+    customSpectatorPolicy: string
+    customSpectators: any[]
+    customTeam100: any[]
+    customTeam200: any[]
+    gameMode: string
+    isCustom: boolean
+    isLobbyFull: boolean
+    isTeamBuilderManaged: boolean
+    mapId: number
+    maxHumanPlayers: number
+    maxLobbySize: number
+    maxTeamSize: number
+    pickType: string
+    premadeSizeAllowed: boolean
+    queueId: number
     showPositionSelector: boolean
-  },
-  invitations: IInvite[],
-  localMember: IMember,
-  members: IMember[],
-  partyId: string,
-  partyType: string,
-  restrictions: any[],
+  }
+  invitations: IInvite[]
+  localMember: IMember
+  members: IMember[]
+  partyId: string
+  partyType: string
+  restrictions: any[]
   warnings: any[]
 }
 
@@ -347,41 +348,41 @@ interface IAction {
 }
 
 interface IChampSelect {
-  actions: IAction[][],
-  allowBattleBoost: boolean,
-  allowDuplicatePicks: boolean,
-  allowLockedEvents: boolean,
-  allowRerolling: boolean,
-  allowSkinSelection: boolean,
-  bans: { myTeamBans: string[], numBans: number, theirTeamBans: string[] },
-  benchChampionIds: number[],
-  benchEnabled: boolean,
-  boostableSkinCount: number,
+  actions: IAction[][]
+  allowBattleBoost: boolean
+  allowDuplicatePicks: boolean
+  allowLockedEvents: boolean
+  allowRerolling: boolean
+  allowSkinSelection: boolean
+  bans: { myTeamBans: string[], numBans: number, theirTeamBans: string[] }
+  benchChampionIds: number[]
+  benchEnabled: boolean
+  boostableSkinCount: number
   chatDetails: {
-    chatRoomName: string,
+    chatRoomName: string
     chatRoomPassword: string
-  },
-  counter: number,
-  entitledFeatureState: { additionalRerolls: number, unlockedSkinIds: number[] },
-  gameId: number,
-  hasSimultaneousBans: boolean,
-  hasSimultaneousPicks: boolean,
-  isCustomGame: boolean,
-  isSpectating: boolean,
-  localPlayerCellId: number,
-  lockedEventIndex: number,
-  myTeam: IActor[],
-  recoveryCounter: number,
-  rerollsRemaining: number,
-  skipChampionSelect: false,
-  theirTeam: IActor[],
+  }
+  counter: number
+  entitledFeatureState: { additionalRerolls: number, unlockedSkinIds: number[] }
+  gameId: number
+  hasSimultaneousBans: boolean
+  hasSimultaneousPicks: boolean
+  isCustomGame: boolean
+  isSpectating: boolean
+  localPlayerCellId: number
+  lockedEventIndex: number
+  myTeam: IActor[]
+  recoveryCounter: number
+  rerollsRemaining: number
+  skipChampionSelect: false
+  theirTeam: IActor[]
   timer: {
-    adjustedTimeLeftInPhase: number,
-    internalNowInEpochMs: number,
-    isInfinite: boolean,
-    phase: string,
+    adjustedTimeLeftInPhase: number
+    internalNowInEpochMs: number
+    isInfinite: boolean
+    phase: string
     totalTimeInPhase: number
-  },
+  }
   trades: any[]
 }
 
@@ -410,70 +411,70 @@ declare interface String {
 interface IRune {
   current: boolean
   name: string
-  primaryStyleId: number,
-  selectedPerkIds: number[],
-  subStyleId: number,
+  primaryStyleId: number
+  selectedPerkIds: number[]
+  subStyleId: number
 }
 
 interface ISavedRune {
-  autoModifiedSelections: any[],
-  current: boolean,
-  id: number,
-  isActive: boolean,
-  isDeletable: boolean,
-  isEditable: boolean,
-  isValid: boolean,
-  lastModified: number,
-  name: string,
-  order: number,
-  primaryStyleId: number,
-  selectedPerkIds: number[],
+  autoModifiedSelections: any[]
+  current: boolean
+  id: number
+  isActive: boolean
+  isDeletable: boolean
+  isEditable: boolean
+  isValid: boolean
+  lastModified: number
+  name: string
+  order: number
+  primaryStyleId: number
+  selectedPerkIds: number[]
   subStyleId: number
 }
 
 interface ISpellTable {
   Barrier: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Cleanse: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Exhaust: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Flash: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Ghost: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Heal: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Smite: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Teleport: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Clarity: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Ignite: {
-    id: number,
+    id: number
     key: string
-  },
+  }
   Mark: {
-    id: number,
+    id: number
     key: string
   }
 }
@@ -589,7 +590,7 @@ interface IConfig {
       }
     }
     runes: {
-      set: boolean,
+      set: boolean
       prefix: string
     }
     spells: {
@@ -607,11 +608,11 @@ interface IConfig {
     }
   }
   misc: {
-    status: string,
+    status: string
     rank: {
-      tier: string,
+      tier: string
       rank: string
-    },
+    }
     script: boolean
   }
   ui: {
@@ -755,4 +756,136 @@ interface IFile {
   get<T>(filename: string): T
   write<T>(filename: string, filedata: T): void
   raw(filename: string): string
+}
+
+interface IAbility {
+  abilityLevel: number
+  displayName: string
+  id: string
+  rawDescription: string
+  rawDisplayName: string
+}
+
+interface IRuneGeneral {
+  displayName: string
+  id: number,
+  rawDescription: string
+  rawDisplayName: string
+}
+
+interface IRawSpells {
+  displayName: string
+  rawDescription: string
+  rawDisplayName: string
+}
+
+interface ILiveClientData {
+  activePlayer: {
+    abilities: {
+      E: IAbility
+      Passive: IAbility
+      Q: IAbility
+      R: IAbility
+      W: IAbility
+    }
+    championStats: {
+      abilityHaste: number
+      abilityPower: number
+      armor: number
+      armorPenetrationFlat: number
+      armorPenetrationPercent: number
+      attackDamage: number
+      attackRange: number
+      attackSpeed: number
+      bonusArmorPenetrationPercent: number
+      bonusMagicPenetrationPercent: number
+      critChance: number
+      critDamage: number
+      currentHealth: number
+      healShieldPower: number
+      healthRegenRate: number
+      lifeSteal: number
+      magicLethality: number
+      magicPenetrationFlat: number
+      magicPenetrationPercent: number
+      magicResist: number
+      maxHealth: number
+      moveSpeed: number
+      omnivamp: number
+      physicalLethality: number
+      physicalVamp: number
+      resourceMax: number
+      resourceRegenRate: number
+      resourceType: string
+      resourceValue: number
+      spellVamp: number
+      tenacity: number
+    }
+    currentGold: number
+    fullRunes: {
+      generalRunes: IRuneGeneral[]
+      keystone: IRuneGeneral
+      primaryRuneTree: IRuneGeneral
+      secondaryRuneTree: IRuneGeneral
+      statRunes: { id: number, rawDescription: string }[]
+    }
+    level: number
+    summonerName: string
+    teamRelativeColors: boolean
+  }
+  allPlayers: {
+    championName: string
+    isBot: boolean
+    isDead: boolean
+    items: {
+      canUse: boolean
+      consumable: boolean
+      count: number
+      displayName: string
+      itemID: number
+      price: number
+      rawDescription: string
+      rawDisplayName: string
+      slot: number
+    }[]
+    level: number
+    position: string
+    rawChampionName: string
+    rawSkinName: string
+    respawnTimer: number
+    runes: {
+      keystone: IRuneGeneral
+      primaryRuneTree: IRuneGeneral
+      secondaryRuneTree: IRuneGeneral
+    }
+    scores: {
+      assists: number
+      creepScore: number
+      deaths: number
+      kills: number
+      wardScore: number
+    }
+    skinID: number
+    skinName: string
+    summonerName: string
+    summonerSpells:  {
+      summonerSpellOne: IRawSpells
+      summonerSpellTwo: IRawSpells
+    }
+    team: string
+  }[]
+  events: {
+    Events: {
+      EventID: number
+      EventName: string
+      EventTime: number
+    }[]
+  }
+  gameData: {
+    gameMode: string
+    gameTime: number
+    mapName: string
+    mapNumber: number
+    mapTerrain: string
+  }
 }
