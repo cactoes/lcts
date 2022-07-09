@@ -12,7 +12,7 @@ By default the ui doesn't move, you have to enable it in the config
 ## An x88 style overlay
 Your game has to be in borderless (or windowed) to work
 
-![overlay](images/overlay.png)
+![overlay](images/overlay_new.png)
 
 ## Features
 - automatically
