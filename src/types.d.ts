@@ -243,11 +243,11 @@ interface CGame {
 
   async updateGameflow(): Promise<void>
   async autoAcceptMatch(): Promise<void>
-  async autoSetChampion(): Promise<void>
-  async autoSetRunes(): Promise<void>
-  async autoSetSummonerSpells(): Promise<void>
+  async autoSetChampion(currentAction: IAction, lane: string): Promise<void>
+  async autoSetRunes(currentAction: IAction, lane: string): Promise<void>
+  async autoSetSummonerSpells(currentAction: IAction, lane: string): Promise<void>
   async sendGameData(): Promise<void>
-  async autoSet(): Promise<void>
+  async loopChampionSelectData(): Promise<void>
 }
 
 interface IActor {

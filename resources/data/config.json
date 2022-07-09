@@ -6,7 +6,7 @@
       "lock": true,
       "ban": true,
       "checkLane": true,
-      "defaultLane": "utility",
+      "defaultLane": "bottom",
       "lanePick": {
         "top": [
           "Gwen"
@@ -49,7 +49,7 @@
     "spells": {
       "set": true,
       "checkLane": true,
-      "defaultLane": "utility",
+      "defaultLane": "bottom",
       "lane": {
         "top": [
           "Teleport",
