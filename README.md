@@ -7,7 +7,7 @@ Just download the client from the [releases](https://github.com/cactoes/lcts/rel
 ## A glass style UI
 By default the ui doesn't move, you have to enable it in the config
 
-![ui](images/ui.gif)
+![ui](images/ui.png)
 
 ## An x88 style overlay
 Your game has to be in borderless (or windowed) to work
