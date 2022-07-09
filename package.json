@@ -30,7 +30,8 @@
     "electron-overlay-window": "^2.0.1",
     "lcinterface": "^4.0.0",
     "node-fetch": "^2.6.1",
-    "node-html-parser": "^5.3.3"
+    "node-html-parser": "^5.3.3",
+    "openurl": "^1.1.1"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.63",

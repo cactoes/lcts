@@ -3,7 +3,7 @@ import { app, ipcMain } from "electron"
 import fetch from "node-fetch"
 import { create_window, main_window, overlay_window, notification } from "./electron"
 import { rune_table, champion_table, get_version, get_items } from "./form_data"
-import { sleep, time, getKeyByValue, file } from "./utils"
+import { sleep, time, getKeyByValue, file, lanes } from "./utils"
 import { get_rune_from_web, get_skill_order } from "./web_rune"
 import { script } from "./script_manager"
 
@@ -92,7 +92,9 @@ const game: CGame = {
     // update the gameflow phase
     try { this.GAMEFLOW_PHASE = await interfaces.game.virtualCall<string>(interfaces.game.dest.gameflow, {}, "get") } catch {  }
     
-    // these methods need to run multiple times
+    // liveGameDataLoop
+    //this.autoSet()
+
     if (file.get<IConfig>("config.json").auto.champion.set)
       this.autoSetChampion()
 
@@ -359,14 +361,14 @@ const game: CGame = {
         // return the json response
         return response.json()
       })
-      
+
       // send the data to the client
       overlay_window.webContents.send("liveClientData", liveClientData)
 
       // find us in the list
       const me = liveClientData.allPlayers.find(p => p.summonerName == liveClientData.activePlayer.summonerName)
 
-      // if we haven't send over our skill order
+      // if we haven't sent over our skill order
       if (!this.hasSentSkillOrder) {
         // only call once per match
         this.hasSentSkillOrder = true
@@ -423,6 +425,14 @@ client.on("connect", async (credentials: ICredentials) => {
   // gameflow checker (loop)
   game.updateGameflow()
 
+  // auto rank
+  if (file.get<IConfig>("config.json").misc.rank.set)
+    await user.setRank(file.get<IConfig>("config.json").misc.rank.tier, file.get<IConfig>("config.json").misc.rank.rank)
+
+  // auto status
+  if (file.get<IConfig>("config.json").misc.status.set)
+    await user.setStatus(file.get<IConfig>("config.json").misc.status.text)
+
   if (file.get<IConfig>("config.json").misc.script && typeof script.onUserConnect == "function")
     script.onUserConnect(user, lobby, file.get<IConfig>("config.json"))
 })
@@ -444,47 +454,105 @@ resourcedata.update()
 // start the client back-end wise
 client.connect()
 
+const DEFAULT_LANE_CHAMPION = 0x00
+const DEFAULT_LANE_SPELLS = 0x01
+const LANE_CHECK = 0x02
+const HOVER_CHAMPION = 0x03
+const LOCK_CHAMPION = 0x04
+const BAN_CHAMPION = 0x05
+const RUNE_IMPORT = 0x06
+const RUNE_PREFIX = 0x07
+const USE_SCRIPTS = 0x08
+const ACCEPT_MATCH = 0x09
+const SET_STATUS = 0x0A
+const SET_RANK = 0x0B
+const OVERLAY = 0x0C
+const STATUS = 0x0D
+const TIER = 0x0E
+const RANK = 0x0F
+const SPELLS = 0x11
+const SET_SPELLS = 0x12
+
+const GET_CONFIG = 0x10
+
 // electron stuff
-ipcMain.on("savePicks", (e, data) => {
-  let cfg = file.get<IConfig>("config.json")
-  cfg.auto.champion.set = data.autoPick
-  cfg.auto.champion.lock = data.autoLock
-  cfg.auto.champion.ban = data.autoBan
-  file.write<IConfig>("config.json", cfg)
-})
-
-ipcMain.on("saveRunes", (e, data) => {
-  let cfg = file.get<IConfig>("config.json")
-  cfg.auto.runes.set = data.autoRunes
-  cfg.auto.runes.prefix = data.runesPrefix
-  file.write<IConfig>("config.json", cfg)
-})
-
-ipcMain.on("saveLanes", (e, data) => {
-  let cfg = file.get<IConfig>("config.json")
-  const lanes: string[] = [interfaces.game.lane.TOP, interfaces.game.lane.JUNGLE, interfaces.game.lane.MIDDLE, interfaces.game.lane.BOTTOM, interfaces.game.lane.SUPPORT]
-  cfg.auto.champion.defaultLane = lanes[data.championId].toLowerCase()
-  cfg.auto.spells.defaultLane = lanes[data.spellsId].toLowerCase()
-  cfg.auto.champion.checkLane = data.checkChampion
-  cfg.auto.spells.checkLane = data.checkSpells
-  file.write<IConfig>("config.json", cfg)
-})
-
-ipcMain.on("saveMisc", (e, data) => {
-  let cfg = file.get<IConfig>("config.json")
-  cfg.misc.script = data.scripts
-  cfg.misc.status = data.status
-  cfg.misc.rank = {
-    tier: data.rank.tier.toLowerCase(),
-    rank: data.rank.rank.toUpperCase()
+ipcMain.on("save", (_, { typeID, data }: IRenderData) => {
+  let config = file.get<IConfig>("config.json")
+  switch (typeID) {
+    case DEFAULT_LANE_CHAMPION:
+      config.auto.champion.defaultLane = data.text.toLowerCase()
+      break
+    case DEFAULT_LANE_SPELLS:
+      config.auto.spells.defaultLane = data.text.toLowerCase()
+      break
+    case LANE_CHECK:
+      config.auto.champion.checkLane = data.state
+      break
+    case HOVER_CHAMPION:
+      config.auto.champion.set = data.state
+      break
+    case LOCK_CHAMPION:
+      config.auto.champion.lock = data.state
+      break
+    case BAN_CHAMPION:
+      config.auto.champion.ban = data.state
+      break
+    case RUNE_IMPORT:
+      config.auto.runes.set = data.state
+      break
+    case RUNE_PREFIX:
+      config.auto.runes.prefix = data.text
+      break
+    case USE_SCRIPTS:
+      config.misc.script = data.state
+      break
+    case ACCEPT_MATCH:
+      config.auto.acceptMatch = data.state
+      break
+    case SET_STATUS:
+      config.misc.status.set = data.state
+      break
+    case SET_RANK:
+      config.misc.rank.set = data.state
+      break
+    case OVERLAY:
+      config.overlay = data.state
+      overlay_window.webContents.send("overlay", data.state)
+      break
+    case STATUS:
+      config.misc.status.text = data.text
+      break
+    case TIER:
+      config.misc.rank.tier = data.text
+      break
+    case RANK:
+      config.misc.rank.rank = data.text
+      break
+    case SPELLS:
+      const [spell, lane, index] = data.text.split("_")
+      config.auto.spells.lane[lane][parseInt(index) - 1] = spell
+      break
+    case SET_SPELLS:
+      config.auto.spells.set = data.state
+      break
+    default:
+      return
   }
-  cfg.auto.acceptMatch = data.autoAccept
-  file.write<IConfig>("config.json", cfg)
+  file.write<IConfig>("config.json", config)
 })
 
-ipcMain.on("getConfig", () => main_window.webContents.send('config', file.get<IConfig>("config.json")))
-ipcMain.on("closeWindow", () => main_window.close())
-ipcMain.on("miniWindow", () => main_window.minimize())
+ipcMain.on("get", (_, { typeID, data }: IRenderData) => {
+  switch (typeID) {
+    case GET_CONFIG:
+      main_window.webContents.send('config', file.get<IConfig>("config.json"))
+      break
+    default:
+      return
+  }
+})
+
+ipcMain.on("close", () => main_window.close())
+ipcMain.on("min", () => main_window.minimize())
 
 app.disableHardwareAcceleration()
 app.on("ready", create_window)

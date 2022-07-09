@@ -247,6 +247,7 @@ interface CGame {
   async autoSetRunes(): Promise<void>
   async autoSetSummonerSpells(): Promise<void>
   async sendGameData(): Promise<void>
+  async autoSet(): Promise<void>
 }
 
 interface IActor {
@@ -608,17 +609,18 @@ interface IConfig {
     }
   }
   misc: {
-    status: string
+    status: {
+      text: string
+      set: boolean
+    }
     rank: {
       tier: string
       rank: string
+      set: boolean
     }
     script: boolean
   }
-  ui: {
-    reflection: boolean
-    moving: boolean
-  }
+  overlay: boolean
 }
 
 declare class IScript {
@@ -887,5 +889,13 @@ interface ILiveClientData {
     mapName: string
     mapNumber: number
     mapTerrain: string
+  }
+}
+
+interface IRenderData {
+  typeID: number
+  data: {
+    state: boolean
+    text: string
   }
 }

@@ -8,28 +8,59 @@
     <script src="./renderer.js" defer></script>
   </head>
   <body>
-    <div class="container">
+    <div id="app">
+      <div id="sidebar" class="noselect">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+    
+        <ul class="menu__box">
+          <div class="header1">
+            <h1>LCTS</h1>
+            <h2>config</h2>
+          </div>
+          <li><a class="menu__item active" href="#" id="HomeButton">Home</a></li>
+          <li><a class="menu__item" href="#" id="BlindButton">Blindpick</a></li>
+          <li><a class="menu__item" href="#" id="GeneralButton">General Select</a></li>
+          <li><a class="menu__item" href="#" id="RunesButton">Rune</a></li>
+          <li><a class="menu__item" href="#" id="SpellsButton">Spells</a></li>
+          <li><a class="menu__item" href="#" id="MiscButton">Misc</a></li>
+          <div class="status" id="status_text">
+            <p>Disconnected</p>
+          </div>
+        </ul>
+        <div id="status"></div>
+      </div>
 
-      <div class="card current">
-        <div class="drag"></div>
-        <div class="client_status"></div>
-        <div class="client_mini"></div>
-        <div class="client_close"></div>
-        <div class="content">
-          <h2 class="noselect">CONFIG</h2>
-          <h3>DEFAULT / CHECK LANE</h3>
+      <div id="buttons" class="noselect">
+        <div id="min"><p>-</p></div>
+        <div id="close"><p>x</p></div>
+      </div>
+      <div style="position: absolute; width: 785px; height: 40px; top: 0; left: 68px; z-index: 1; -webkit-app-region: drag;"></div>
+      <div id="content">
+        <!-- home pick -->
+        <div class="content__container noselect selected" id="Home">
+          <h1>LCTS</h1>
+          <p class="comment">The best open source league client, with many features. <br> But best of all, automated everything </p>
+          <p class="comment">Check the <a href="#">Github</a> for more info. </p>
+        </div>
 
-          <div class="lanes__container">
-            <div class="lanes__one noselect">
-              <p id="checkLaneChampion">picking champion default lane</p>
+        <!-- blind pick -->
+        <div class="content__container noselect" id="BlindPickSettings">
+          <h1>Blindpick Champion Settings</h1>
+          <p class="comment">Here you can change the settings for auto-picking your champion and summoner <br> spells for gamemodes where you can’t set your lane when queueing. </p>
+          <div class="settings">
+            <h3> Default Champion Pick Lane</h3>
+            <div class="lanes_img" id="DefaultLaneChampion">
               <img src="../img/Position_Challenger-top.png" class="">
               <img src="../img/Position_Challenger-jungle.png" class="">
               <img src="../img/Position_Challenger-middle.png" class="">
               <img src="../img/Position_Challenger-bottom.png" class="">
               <img src="../img/Position_Challenger-utility.png" class="">
             </div>
-            <div class="lanes__two noselect">
-              <p id="checkLaneSpells">summoner spells default lane</p>
+            <h3> Default Summoner Spells lane </h3>
+            <div class="lanes_img" id="DefaultLaneSpells">
               <img src="../img/Position_Challenger-top.png" class="">
               <img src="../img/Position_Challenger-jungle.png" class="">
               <img src="../img/Position_Challenger-middle.png" class="">
@@ -37,75 +68,270 @@
               <img src="../img/Position_Challenger-utility.png" class="">
             </div>
           </div>
-
-          <a href="#" id="saveDefaultLanes" class=".noselect">save</a>
-          <div class="arrow left noselect">&lt;</div>
-          <div class="arrow right noselect">></div>
+          <p class="comment">Check the <a href="#">Github</a> for more info. </p>
         </div>
-      </div>
 
-      <div class="card" style="display: none;">
-        <div class="drag"></div>
-        <div class="client_status"></div>
-        <div class="client_mini"></div>
-        <div class="client_close"></div>
-        <div class="content">
-          <h2 class="noselect">CONFIG</h2>
-          <h3>CHAMPION SELECT</h3>
-          
-          <div class="champion_container">
-            <div id="autoPick" class="noselect">
-              <p>auto PICK champion</p>
+        <!-- General Champion Select Settings -->
+        <div class="content__container noselect" id="ChampionSelectSettings">
+          <h1>General Champion Select Settings</h1>
+          <p class="comment">Here you can change the settings for enable/disable-ling picking/banning etc. </p>
+          <div class="settings auto">
+            <div class="button__global">
+              <h3> Lane Check </h3>
+              <div class="toggle" id="LaneCheck"></div>
             </div>
-            <div id="autoLock" class="noselect">
-              <p>auto LOCK champion</p>
+            <div class="button__global">
+              <h3> Auto Hover Champion </h3>
+              <div class="toggle" id="HoverChampion"></div>
             </div>
-            <div id="autoBan" class="noselect">
-              <p>auto BAN champion</p>
+            <div class="button__global">
+              <h3> Auto Lock Champion </h3>
+              <div class="toggle" id="LockChampion"></div>
+            </div>
+            <div class="button__global">
+              <h3> Auto Ban Champion </h3>
+              <div class="toggle" id="BanChampion"></div>
             </div>
           </div>
-
-          <a href="#" id="savePicks" class="noselect">save</a>
-          <div class="arrow left noselect">&lt;</div>
-          <div class="arrow right noselect">></div>
+          <p class="comment">Check the <a href="#" id="github">Github</a> for more info. </p>
         </div>
-      </div>
 
-      <div class="card" style="display: none;">
-        <div class="drag"></div>
-        <div class="client_status"></div>
-        <div class="client_mini"></div>
-        <div class="client_close"></div>
-        <div class="content">
-          <h2 class="noselect">CONFIG</h2>
-          <h3>RUNES</h3>
-          <p id="autoRunes">lcts will automatically import runes from u.gg</p>
-          <br>
-          <p style="cursor: default;">automatically change the rune that starts with <b contentEditable="true" id="runesPrefix">[u.gg]</b></p>
-          <a href="#" id="saveRunes" class="noselect">save</a>
-          <div class="arrow left noselect">&lt;</div>
-          <div class="arrow right noselect">></div>
+        <!-- Rune Settings -->
+        <div class="content__container noselect" id="RuneSettings">
+          <h1>Rune Settings</h1>
+          <p class="comment">Here you can change the settings for rune settings </p>
+          <div class="settings rune">
+            <div class="button__global">
+              <h3> Auto Import Runes </h3>
+              <div class="toggle" id="ImportRunes"></div>
+            </div>
+            <div>
+              <h3> Change The Rune Page That Starts With </h3>
+              <input class="text__input" id="runePrefix" type="text">
+            </div>
+          </div>
+          <p class="comment">Runes are pulled from <a href="#" id="ugg">u.gg</a>.</p>
         </div>
-      </div>
-      
-      <div class="card" style="display: none;">
-        <div class="drag"></div>
-        <div class="client_status"></div>
-        <div class="client_mini"></div>
-        <div class="client_close"></div>
-        <div class="content">
-          <h2 class="noselect">CONFIG</h2>
-          <h3>MISC</h3>
-          <p id="enableScripts">lcts will load scripts(s)</p>
-          <p id="autoAccept">lcts will automatically accept the match</p>
-          <p>status: <b contentEditable="true" id="status"></b></p>
-          <p>rank: <b contentEditable="true" id="tier"></b><c> - </c><b contentEditable="true" id="rank"></b></p>
-          <a href="#" id="saveMisc" class="noselect">save</a>
-          <div class="arrow left noselect">&lt;</div>
-          <div class="arrow right noselect">></div>
-        </div>
-      </div>
 
+        <!-- Spells Settings -->
+        <div class="content__container noselect" id="SpellsSettings">
+          <h1>Spells</h1>
+          <p class="comment">Here you can change setting for auto spells </p>
+          <div class="settings spells">
+
+            <div class="button__global">
+              <h3> Auto Set Summoner Spells </h3>
+              <div class="toggle" id="SetSpells"></div>
+            </div>
+
+            <div class="spell__combo">
+              <h3>Top</h3>
+              <div class="select__list">
+                <select class="spells__container" id="spells_top_1">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+                <select class="spells__container" id="spells_top_2">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+              </div>
+            </div>
+            <div class="spell__combo">
+              <h3>Jungle</h3>
+              <div class="select__list">
+                <select class="spells__container" id="spells_jungle_1">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+                <select class="spells__container" id="spells_jungle_2">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+              </div>
+            </div>
+            <div class="spell__combo">
+              <h3>Middle</h3>
+              <div class="select__list">
+                <select class="spells__container" id="spells_middle_1">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+                <select class="spells__container" id="spells_middle_2">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+              </div>
+            </div>
+            <div class="spell__combo">
+              <h3>Bottom</h3>
+              <div class="select__list">
+                <select class="spells__container" id="spells_bottom_1">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+                <select class="spells__container" id="spells_bottom_2">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+              </div>
+            </div>
+            <div class="spell__combo">
+              <h3>Utility</h3>
+              <div class="select__list">
+                <select class="spells__container" id="spells_utility_1">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+                <select class="spells__container" id="spells_utility_2">
+                  <option value="1">Barrier</option>
+                  <option value="2">Cleanse</option>
+                  <option value="3">Exhaust</option>
+                  <option value="4">Flash</option>
+                  <option value="5">Ghost</option>
+                  <option value="6">Heal</option>
+                  <option value="7">Smite</option>
+                  <option value="8">Teleport</option>
+                  <option value="9">Ignite</option>
+                  <option value="10">Mark</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <p class="comment">Check the <a href="#" id="github">Github</a> for more info. </p>
+        </div>
+
+        <!-- Misc Settings -->
+        <div class="content__container noselect" id="MiscSettings">
+          <h1>Misc</h1>
+          <p class="comment">Here you can change the other config elements / settings </p>
+          <div class="settings misc">
+
+            <div class="block_one">
+              <div class="button__global">
+                <h3> Use Scripts </h3>
+                <div class="toggle" id="UseScripts"></div>
+              </div>
+              <div class="button__global">
+                <h3> Auto Accept Match </h3>
+                <div class="toggle" id="AcceptMatch"></div>
+              </div>
+              <div class="button__global">
+                <h3> Auto Set Status </h3>
+                <div class="toggle" id="SetStatus"></div>
+              </div>
+              <div>
+                <input class="text__input" id="statusText" type="text">
+              </div>
+              <div class="button__global">
+                <h3> Toggle In-Game Overlay </h3>
+                <div class="toggle" id="IGOverlay"></div>
+              </div>
+            </div>
+
+            <div class="block_two">
+              <div class="button__global">
+                <h3> Auto Set Rank </h3>
+                <div class="toggle" id="SetRank"></div>
+              </div>
+              <div class="select__list">
+                <select id="tier">
+                  <option value="1">iron</option>
+                  <option value="2">bronze</option>
+                  <option value="3">silver</option>
+                  <option value="4">gold</option>
+                  <option value="5">platinum</option>
+                  <option value="6">diamond</option>
+                  <option value="7">master</option>
+                  <option value="8">challenger</option>
+                </select>
+                <select id="rank">
+                  <option value="1">I</option>
+                  <option value="2">II</option>
+                  <option value="3">III</option>
+                  <option value="4">IV</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+          <p class="comment">Check the <a href="#" id="github">Github</a> for more info. </p>
+        </div>
+
+      </div>
     </div>
   </body>
 </html>

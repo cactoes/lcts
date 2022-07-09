@@ -75,15 +75,16 @@
     }
   },
   "misc": {
-    "status": "default-status",
+    "status": {
+      "text": "default-status",
+      "set": true
+    },
     "rank": {
       "tier": "diamond",
-      "rank": "III"
+      "rank": "III",
+      "set": false
     },
     "script": true
   },
-  "ui": {
-    "reflection": false,
-    "move": false
-  }
+  "overlay": true
 }

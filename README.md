@@ -108,17 +108,18 @@ The config is located in [resources/data/config.json](resources/data/config.json
     }
   },
   "misc": {
-    "status": "default-status", // for storing you status so you can use it in a script (unused)
+    "status": {
+      "text": "default-status", // what to set the status to
+      "set": false // auto set it
+    },
     "rank": {
       "tier": "diamond", // for storing your tier so you can use it in a script
-      "rank": "III" // for storing your rank so you can use it in a script
+      "rank": "III", // for storing your rank so you can use it in a script
+      "set": false // auto set it
     },
     "script": true // make use of scripts
   },
-  "ui": {
-    "reflection": false, // make the ui have a reflection/shine/glare effect
-    "move": false // make the ui move when moving the mouse
-  }
+  "overlay": true // enable in game overlay
 }
 ```
 

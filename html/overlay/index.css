@@ -12,6 +12,7 @@ body {
   margin-left: 200px;
   margin-top: 50px;
   padding: 10px;
+  transition: .4s;
 }
 
 .counter-offset {

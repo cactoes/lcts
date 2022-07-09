@@ -8,6 +8,7 @@ export const time: ITime = {
   SECOND: 1000,
   MINUTE: 60000,
 }
+export const lanes: string[] = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
 
 export const file: IFile = {
   get: <T>(filename: string): T => JSON.parse(fs.readFileSync("resources/data/" + filename).toString()),

@@ -4,9 +4,11 @@ const fs = require("fs")
 const items = JSON.parse(fs.readFileSync("resources/data/items.json"))
 let levelArray
 
-ipcRenderer.on("abilityLevelOrder", (e, data) => {
-  levelArray = data
-}) 
+ipcRenderer.on("abilityLevelOrder", (e, data) => levelArray = data) 
+
+ipcRenderer.on("overlay", (e, overlay) => {
+  document.getElementById("main").style = overlay? "opacity: 1;": "opacity: 0;"
+})
 
 ipcRenderer.on("liveClientData", (e, data) => {
   const game_time = data.gameData.gameTime
@@ -19,7 +21,7 @@ ipcRenderer.on("liveClientData", (e, data) => {
   }
 
   try {
-    document.getElementById("nextToLevel").innerHTML = `${localPlayer.level}->${levelArray[localPlayer.level - 1]} )`
+    document.getElementById("nextToLevel").innerHTML = `${localPlayer.level + 1}->${levelArray[localPlayer.level]} )`
   } catch {}
 
   let kda = (localPlayer.scores.assists + localPlayer.scores.kills) / localPlayer.scores.deaths || 0

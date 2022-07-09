@@ -4,7 +4,7 @@ class LCScript {
     // your code goes here
 
     // set the users display rank to the saved rank in the config
-    await user.setRank(config.misc.rank.tier, config.misc.rank.rank)
+    await lobby.create(400)
     return true
   }
 

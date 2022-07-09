@@ -24,7 +24,7 @@ export const create_window = (): void => {
   //overlay_window.webContents.openDevTools({ mode: 'detach', activate: false })
 
   main_window = new BrowserWindow({
-    width: 650,
+    width: 950,
     height: 550,
     autoHideMenuBar: true,
     transparent: true,
