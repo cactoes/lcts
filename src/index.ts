@@ -295,11 +295,6 @@ const game: CGame = {
       // get our (primary) lane
       const lane: string = lobby_data.localMember.firstPositionPreference == ""? file.get<IConfig>("config.json").auto.champion.defaultLane : lobby_data.localMember.firstPositionPreference.toLowerCase()
 
-      // lane checks
-      if (file.get<IConfig>("config.json").auto.champion.checkLane && localUserChampSelect?.assignedPosition.toLowerCase() !== lane)
-        if (lobby_data.gameConfig.queueId == 420 || lobby_data.gameConfig.queueId == 440)
-          return
-
       // loop trough all the actions
       for (const pair in champSelectData.actions) {
         for (const action in champSelectData.actions[pair]) {
@@ -315,12 +310,38 @@ const game: CGame = {
             this.autoSetRunes(currentAction, lane)
 
           // do we want to set out spells
-          if (file.get<IConfig>("config.json").auto.spells.set)
-            this.autoSetSummonerSpells(currentAction, lane)
+          if (file.get<IConfig>("config.json").auto.spells.set) {
+            // do we want to check the lane
+            if (file.get<IConfig>("config.json").auto.spells.checkLane) {
+              // does the lane check even matter
+              if (lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.solo_duo || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.flex) {
+                // check the lane
+                if (localUserChampSelect?.assignedPosition.toLowerCase() !== lane) {
+                  this.autoSetSummonerSpells(currentAction, lane)
+                }
+              }
+            }
+            else {
+              this.autoSetSummonerSpells(currentAction, lane)
+            }
+          }
 
           // do we want to set our champion
-          if (file.get<IConfig>("config.json").auto.champion.set)
-            this.autoSetChampion(currentAction, lane)
+          if (file.get<IConfig>("config.json").auto.champion.set) {
+            // do we want to check the lane
+            if (file.get<IConfig>("config.json").auto.champion.checkLane) {
+              // does the lane check even matter
+              if (lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.solo_duo || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.flex) {
+                // check the lane
+                if (localUserChampSelect?.assignedPosition.toLowerCase() !== lane) {
+                  this.autoSetChampion(currentAction, lane)
+                }
+              }
+            }
+            else {
+              this.autoSetChampion(currentAction, lane)
+            }
+          }
 
         }
       }

@@ -82,7 +82,7 @@
     "rank": {
       "tier": "diamond",
       "rank": "III",
-      "set": false
+      "set": true
     },
     "script": true
   },

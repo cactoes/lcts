@@ -123,10 +123,11 @@ ipcRenderer.on("logged_in", (e, state) => {
   document.getElementById("status_text").innerHTML = state? "Connected":"Disconnected"
 })
 
-// when ipcmain send us config data do ...
+// when ipcmain send us config data do we update our local config ( + setup ui )
 ipcRenderer.on("config", (e, data) => {
   // update our local config
   config = data
+
   // setup ui if we havent already
   if (!firstTimeSetup)
     setup_ui_on_update()
