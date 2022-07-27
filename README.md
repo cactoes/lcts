@@ -4,13 +4,13 @@ A feature rich league client written in TypeScript, with scripting & more
 ## Installing the client
 Just download the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run 'lcts.exe'
 
-## A glass style UI
-By default the ui doesn't move, you have to enable it in the config
+## A clean UI
+A stylish clean ui, for ease of use
 
 ![ui](images/ui.png)
 
 ## An x88 style overlay
-Your game has to be in borderless (or windowed) to work
+Your game has to be in borderless (or windowed) to work, (can be turned off)
 
 ![overlay](images/overlay_new.png)
 

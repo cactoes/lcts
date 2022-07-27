@@ -153,18 +153,18 @@ const setup_ui_on_update = async () => {
     }
   }
 
-  // set buttons to active in the ui from the config
+  // set buttons to (in)active in the ui from the config
   document.getElementById("LaneCheck").className = config.auto.champion.checkLane? "toggle toggle_active":"toggle"
   document.getElementById("HoverChampion").className = config.auto.champion.set? "toggle toggle_active":"toggle"
   document.getElementById("LockChampion").className = config.auto.champion.lock? "toggle toggle_active":"toggle"
   document.getElementById("BanChampion").className = config.auto.champion.ban? "toggle toggle_active":"toggle"
   document.getElementById("ImportRunes").className = config.auto.runes.set? "toggle toggle_active":"toggle"
-  document.getElementById("UseScripts").className = config.auto.runes.set? "toggle toggle_active":"toggle"
-  document.getElementById("AcceptMatch").className = config.auto.runes.set? "toggle toggle_active":"toggle"
-  document.getElementById("SetStatus").className = config.auto.runes.set? "toggle toggle_active":"toggle"
-  document.getElementById("SetRank").className = config.auto.runes.set? "toggle toggle_active":"toggle"
-  document.getElementById("IGOverlay").className = config.auto.runes.set? "toggle toggle_active":"toggle"
-  document.getElementById("SetSpells").className = config.auto.runes.set? "toggle toggle_active":"toggle"
+  document.getElementById("UseScripts").className = config.misc.script? "toggle toggle_active":"toggle"
+  document.getElementById("AcceptMatch").className = config.auto.acceptMatch? "toggle toggle_active":"toggle"
+  document.getElementById("SetStatus").className = config.misc.status.set? "toggle toggle_active":"toggle"
+  document.getElementById("SetRank").className = config.misc.rank.set? "toggle toggle_active":"toggle"
+  document.getElementById("IGOverlay").className = config.overlay? "toggle toggle_active":"toggle"
+  document.getElementById("SetSpells").className = config.auto.spells.set? "toggle toggle_active":"toggle"
   document.getElementById("tier").value = convertTier(config.misc.rank.tier)
   document.getElementById("rank").value = convertRank(config.misc.rank.rank)
   document.getElementById("statusText").value = config.misc.status.text
