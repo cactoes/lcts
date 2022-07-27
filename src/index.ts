@@ -319,6 +319,8 @@ const game: CGame = {
                 if (localUserChampSelect?.assignedPosition.toLowerCase() !== lane) {
                   this.autoSetSummonerSpells(currentAction, lane)
                 }
+              } else {
+                this.autoSetSummonerSpells(currentAction, lane)
               }
             }
             else {
@@ -336,6 +338,8 @@ const game: CGame = {
                 if (localUserChampSelect?.assignedPosition.toLowerCase() !== lane) {
                   this.autoSetChampion(currentAction, lane)
                 }
+              } else {
+                this.autoSetChampion(currentAction, lane)
               }
             }
             else {
