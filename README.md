@@ -81,7 +81,6 @@ The config is located in [resources/data/config.json](resources/data/config.json
     },
     "spells": {
       "set": true, // automatically set you summoner spells
-      "checkLane": true, // check if the lane you got was the lane you chose in the lobby (primary lane only), for setting you spells
       "defaultLane": "utility", // if you didn't choose a lane this will be the lane it uses instead
       "lane": {
         "top": [

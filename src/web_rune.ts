@@ -183,7 +183,7 @@ function form_rune(rune_obj: IRuneWebBase, runePrefix: string): IRune {
 
 
 // combine into one function for easy use & export
-export async function get_rune_from_web(champion_name: string, runePrefix: string): Promise<IRune> {
+export async function get_rune(champion_name: string, runePrefix: string): Promise<IRune> {
   // get base rune data
   return get_base_build(champion_name).then<IRune>((base: IRuneWebBase) => {
     // format the runes so league client can use it

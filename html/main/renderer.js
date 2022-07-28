@@ -71,26 +71,31 @@ const spellList = {
 }
 
 // typeIDs
-const DEFAULT_LANE_CHAMPION = 0x00
-const DEFAULT_LANE_SPELLS = 0x01
-const LANE_CHECK = 0x02
-const HOVER_CHAMPION = 0x03
-const LOCK_CHAMPION = 0x04
-const BAN_CHAMPION = 0x05
-const RUNE_IMPORT = 0x06
-const RUNE_PREFIX = 0x07
-const USE_SCRIPTS = 0x08
-const ACCEPT_MATCH = 0x09
-const SET_STATUS = 0x0A
-const SET_RANK = 0x0B
-const OVERLAY = 0x0C
-const STATUS = 0x0D
-const TIER = 0x0E
-const RANK = 0x0F
-const SPELLS = 0x11
-const SET_SPELLS = 0x12
-
-const GET_CONFIG = 0x10
+const uicodes = {
+  save: {
+    dl_champion: 0x00,
+    dl_spells: 0x01,
+    lanecheck: 0x02,
+    c_hover: 0x03,
+    c_lock: 0x04,
+    c_ban: 0x05,
+    r_import: 0x06,
+    r_prefix: 0x07,
+    use_scripts: 0x08,
+    accept_match: 0x09,
+    s_status: 0x0A,
+    s_rank: 0x0B,
+    overlay: 0x0C,
+    status: 0x0D,
+    tier: 0x0E,
+    rank: 0x0F,
+    s_spells: 0x12,
+    spells: 0x11
+  },
+  get: {
+    config: 0x10
+  }
+}
 
 // all dom elements
 const AllImgChapionDefault = document.getElementById("DefaultLaneChampion").querySelectorAll("img")
@@ -101,7 +106,7 @@ const AllMenus = document.getElementById("content").querySelectorAll("div")
 const AllSpellButtons = document.getElementsByClassName("spells__container")
 
 // send request to ipcmain to retrieve to config
-const call_update_config = () => ipc_send("get", GET_CONFIG, {})
+const call_update_config = () => ipc_send("get", uicodes.get.config, {})
 // for when we want to send something to ipcmain
 const ipc_send = (type, typeID, data) => ipcRenderer.send(type, { typeID, data }) && call_update_config()
 
@@ -187,7 +192,7 @@ for (var i = 0; i < AllImgChapionDefault.length; i++) {
     // enable the one that was clicked
     e.target.className = "active"
     // update cfg
-    ipc_send("save", DEFAULT_LANE_CHAMPION, { text: e.target.src.split("-")[1].split(".")[0] })
+    ipc_send("save", uicodes.save.dl_champion, { text: e.target.src.split("-")[1].split(".")[0] })
   })
   AllImgSpellsDefault[i].addEventListener("click", (e) => {
     // reset all the elements
@@ -197,7 +202,7 @@ for (var i = 0; i < AllImgChapionDefault.length; i++) {
     // enable the one that was clicked
     e.target.className = "active"
     // update cfg
-    ipc_send("save", DEFAULT_LANE_SPELLS, { text: e.target.src.split("-")[1].split(".")[0] })
+    ipc_send("save", uicodes.save.dl_spells, { text: e.target.src.split("-")[1].split(".")[0] })
   })
 }
 
@@ -207,37 +212,37 @@ for (var i = 0; i < AllToggles.length; i++) {
     e.target.className = e.target.className == "toggle"? "toggle toggle_active":"toggle"
     switch (e.target.id) {
       case "LaneCheck":
-        ipc_send("save", LANE_CHECK, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.lanecheck, { state: e.target.className == "toggle toggle_active" })
         break
       case "HoverChampion":
-        ipc_send("save", HOVER_CHAMPION, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.c_hover, { state: e.target.className == "toggle toggle_active" })
         break
       case "LockChampion":
-        ipc_send("save", LOCK_CHAMPION, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.c_lock, { state: e.target.className == "toggle toggle_active" })
         break
       case "BanChampion":
-        ipc_send("save", BAN_CHAMPION, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.c_ban, { state: e.target.className == "toggle toggle_active" })
         break
       case "ImportRunes":
-        ipc_send("save", RUNE_IMPORT, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.r_import, { state: e.target.className == "toggle toggle_active" })
         break
       case "UseScripts":
-        ipc_send("save", USE_SCRIPTS, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.use_scripts, { state: e.target.className == "toggle toggle_active" })
         break
       case "AcceptMatch":
-        ipc_send("save", ACCEPT_MATCH, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.accept_match, { state: e.target.className == "toggle toggle_active" })
         break
       case "SetStatus":
-        ipc_send("save", SET_STATUS, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.s_status, { state: e.target.className == "toggle toggle_active" })
         break
       case "SetRank":
-        ipc_send("save", SET_RANK, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.s_rank, { state: e.target.className == "toggle toggle_active" })
         break
       case "IGOverlay":
-        ipc_send("save", OVERLAY, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.overlay, { state: e.target.className == "toggle toggle_active" })
         break
       case "SetSpells":
-        ipc_send("save", SET_SPELLS, { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", uicodes.save.s_spells, { state: e.target.className == "toggle toggle_active" })
         break
     }
   })
@@ -260,7 +265,7 @@ for (var i = 0; i < AllMenuButtons.length; i++) {
 for (var i = 0; i < AllSpellButtons.length; i++) {
   AllSpellButtons[i].addEventListener("change", (e) => {
     const [base, lane, index] = e.target.id.split("_")
-    ipc_send("save",  SPELLS, { text: `${converSpell(e.target.value)}_${lane}_${index}` })
+    ipc_send("save",  uicodes.save.spells, { text: `${converSpell(e.target.value)}_${lane}_${index}` })
   })
 }
 
@@ -290,19 +295,19 @@ document.getElementById("SpellsButton").addEventListener("click", (e) => {
 })
 
 // runes prefix
-document.getElementById("runePrefix").addEventListener("keyup", (e) => ipc_send("save", RUNE_PREFIX, { text: e.target.value }) )
+document.getElementById("runePrefix").addEventListener("keyup", (e) => ipc_send("save", uicodes.save.prefix, { text: e.target.value }) )
 
 // status
-document.getElementById("statusText").addEventListener("keyup", (e) => ipc_send("save", STATUS, { text: e.target.value }) )
+document.getElementById("statusText").addEventListener("keyup", (e) => ipc_send("save", uicodes.save.status, { text: e.target.value }) )
 
 // tier
 document.getElementById("tier").addEventListener("change", (e) => {
-  ipc_send("save", TIER, { text: convertTier(e.target.value) })
+  ipc_send("save", uicodes.save.tier, { text: convertTier(e.target.value) })
 })
 
 // rank
 document.getElementById("rank").addEventListener("change", (e) => {
-  ipc_send("save", RANK, { text: convertRank(e.target.value) })
+  ipc_send("save", uicodes.save.rank, { text: convertRank(e.target.value) })
 })
 
 // github link

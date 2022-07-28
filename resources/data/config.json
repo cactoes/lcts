@@ -12,13 +12,13 @@
           "Gwen"
         ],
         "jungle": [
-          "Lilia"
+          "Lillia"
         ],
         "middle": [
           "Irelia"
         ],
         "bottom": [
-          "Caitlyn"
+          "Zeri"
         ],
         "utility": [
           "Renata"
@@ -48,7 +48,6 @@
     },
     "spells": {
       "set": true,
-      "checkLane": true,
       "defaultLane": "bottom",
       "lane": {
         "top": [

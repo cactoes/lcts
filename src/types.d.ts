@@ -9,10 +9,6 @@ interface IChampionTable {
   }
 }
 
-interface IChampionTable_base {
-  [key: string]: number
-}
-
 interface IRuneTable_base {
   runes: {
     [key: string]: number
@@ -224,44 +220,13 @@ interface IUser {
   time: number
 }
 
-interface CUser {
-  async setStatus(status: string): Promise<IUser>
-  async setRank(tier: string, rank: string): Promise<IUser>
-}
-
-interface CGame {
-  available: boolean
-  acceptedMatch: boolean
-  GAMEFLOW_PHASE: string
-  GAMEFLOW_PHASE_LAST: string
-  championPickIndex: number
-  championBanIndex: number
-  hasSetRunes: boolean
-  hasSetSummonerSpells: boolean
-  gameDataLoop: boolean | Timer
-  hasSentSkillOrder: boolean
-
-  async updateGameflow(): Promise<void>
-  async autoAcceptMatch(): Promise<void>
-  async autoSetChampion(currentAction: IAction, lane: string): Promise<void>
-  async autoSetRunes(currentAction: IAction, lane: string): Promise<void>
-  async autoSetSummonerSpells(currentAction: IAction, lane: string): Promise<void>
-  async sendGameData(): Promise<void>
-  async loopChampionSelectData(): Promise<void>
-}
-
-interface IActor {
-  assignedPosition: string
-  cellId: number
-  championId: number
-  championPickIntent: number
-  entitledFeatureType: string
-  selectedSkinId: number
-  spell1Id: number
-  spell2Id: number
-  summonerId: number
-  team: number
-  wardSkinId: number
+interface IInvite {
+  invitationId: string
+  invitationType: string
+  state: string
+  timestamp: string
+  toSummonerId: number
+  toSummonerName: string
 }
 
 interface IMember {
@@ -291,15 +256,6 @@ interface IMember {
   summonerLevel: number
   summonerName: string
   teamId: number
-}
-
-interface IInvite {
-  invitationId: string
-  invitationType: string
-  state: string
-  timestamp: string
-  toSummonerId: number
-  toSummonerName: string
 }
 
 interface ILobby {
@@ -348,6 +304,20 @@ interface IAction {
   type: string
 }
 
+interface IActor {
+  assignedPosition: string
+  cellId: number
+  championId: number
+  championPickIntent: number
+  entitledFeatureType: string
+  selectedSkinId: number
+  spell1Id: number
+  spell2Id: number
+  summonerId: number
+  team: number
+  wardSkinId: number
+}
+
 interface IChampSelect {
   actions: IAction[][]
   allowBattleBoost: boolean
@@ -394,19 +364,6 @@ interface ICredentials {
   pid: number
   password: string
   protocol: string
-}
-
-interface CLobby {
-  async setLanes(first: string, second: string): Promise<void>
-  async create(queueId: number): Promise<ILobby>
-  async leave(): Promise<void>
-  async setPartyType(type: string): Promise<void>
-  async startSearch(): Promise<void>
-  async stopSearch(): Promise<void>
-}
-
-declare interface String {
-  remove_left_side(): string
 }
 
 interface IRune {
@@ -480,78 +437,6 @@ interface ISpellTable {
   }
 }
 
-interface IRuneReforged {
-  id: number
-  key: string
-  icon: string
-  name: string
-  slots: { runes: IRuneBase[] }[]
-}
-
-interface IRuneBase {
-  id: number
-  key: string
-  icon: string
-  name: string
-  shortDesc: string
-  longDesc: string
-}
-
-interface IChampionRefoged {
-  type: string
-  format: string
-  version: string
-  data: IChampion_base[]
-}
-
-interface IChampion_base {
-  version: string
-  id: string
-  key: string
-  name: string
-  title: string
-  blurb: string
-  info: {
-    attack: number
-    defense: number
-    magic: number
-    difficulty: number
-  }
-  image: {
-    full: string
-    sprite: string
-    group: string
-    x: number
-    y: number
-    w: number
-    h: number
-    tags: [index: string]
-    partype: string
-    stats: {
-      hp: number
-      hpperlevel: number
-      mp: number
-      mpperlevel: number
-      movespeed: number
-      armor: number
-      armorperlevel: number
-      spellblock: number
-      spellblockperlevel: number
-      attackrange: number
-      hpregen: number
-      hpregenperlevel: number
-      mpregen: number
-      mpregenperlevel: number
-      crit: number
-      critperlevel: number
-      attackdamage: number
-      attackdamageperlevel: number
-      attackspeedperlevel: number
-      attackspeed: number
-    }
-  }
-}
-
 interface IRuneWebBase {
   name: string
   runes: {
@@ -596,7 +481,6 @@ interface IConfig {
     }
     spells: {
       set: boolean
-      checkLane: boolean
       defaultLane: string
       lane: {
         [key: string]: Array<string, 2>
@@ -768,15 +652,15 @@ interface IAbility {
   rawDisplayName: string
 }
 
-interface IRuneGeneral {
+interface IRawSpells {
   displayName: string
-  id: number,
   rawDescription: string
   rawDisplayName: string
 }
 
-interface IRawSpells {
+interface IRuneGeneral {
   displayName: string
+  id: number,
   rawDescription: string
   rawDisplayName: string
 }
@@ -899,3 +783,72 @@ interface IRenderData {
     text: string
   }
 }
+
+interface CLobby {
+  async setLanes(first: string, second: string): Promise<void>
+  async create(queueId: number): Promise<ILobby>
+  async leave(): Promise<void>
+  async setPartyType(type: string): Promise<void>
+  async startSearch(): Promise<void>
+  async stopSearch(): Promise<void>
+}
+
+interface CUser {
+  async setStatus(status: string): Promise<IUser>
+  async setRank(tier: string, rank: string): Promise<IUser>
+  async setRunes(currentAction: IAction): Promise<void>
+  async setSpells(currentAction: IAction, lane: string, spell1Id: number, spell2Id: number): Promise<void>
+}
+
+interface CClient {
+  connected: boolean
+  sentSkillOrder: boolean
+  phase: {
+    current: string
+    last: string
+  }
+
+  async acceptMatch(): Promise<void>
+  async sendGameData(pollInterval: number): Promise<void>
+  async gameflowChecker(pollInterval: number): Promise<void>
+  
+  championSelect: {
+    champion: {
+      index: {
+        pick: number
+        ban: number
+      }
+    }
+    runes: {
+      set: boolean
+    }
+
+    async update(pollInterval: number): Promise<void>
+    async reset(): void
+    async hoverBanLock(currentAction: IAction, lane: string): Promise<void>
+  }
+}
+
+interface IClientMethods {
+  lobby: CLobby,
+  user: CUser
+  client: CClient
+}
+
+interface IReadyCheck {
+  declinerIds: number[]
+  dodgeWarning: string
+  playerResponse: string
+  state: string
+  suppressUx: boolean
+  timer: number
+}
+
+interface IRPC_Error {
+  errorCode: string,
+  httpStatus: number,
+  implementationDetails: object,
+  message: string
+}
+
+type TScriptFn = "onUserConnect" | "onPartyJoin"
