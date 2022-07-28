@@ -179,6 +179,15 @@ const game: CGame = {
         top: [], jungle: [], middle: [], bottom: [], utility: []
       }
 
+      // fill out championBans from data.get<IConfig>("config.json")
+      for (const currentLane in file.get<IConfig>("config.json").auto.champion.laneBan) {
+        // get all champions in current lane
+        file.get<IConfig>("config.json").auto.champion.laneBan[currentLane].forEach((champion: string) => {
+          // save their id
+          championBans[currentLane].push( file.get<IChampionTable>("championTable.json").data[champion] )
+        })
+      }
+
       // check if we can do something
       if (!currentAction.isInProgress)
         return
@@ -203,6 +212,7 @@ const game: CGame = {
       
         // check if this is our turn to BAN
       } else if (currentAction.type == "ban") {
+        console.log(currentAction, championBans[lane][game.championBanIndex], game.championBanIndex)
         // check if we have a champion selected
         if (currentAction.championId == 0 || currentAction.championId !== championBans[lane][game.championBanIndex])
           interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][game.championBanIndex] }, "patch", false)
@@ -328,7 +338,7 @@ const game: CGame = {
             }
           }
 
-          // do we want to set our champion
+          // do we want to hover (+ lock/ban) our champion
           if (file.get<IConfig>("config.json").auto.champion.set) {
             // do we want to check the lane
             if (file.get<IConfig>("config.json").auto.champion.checkLane) {

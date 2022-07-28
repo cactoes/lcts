@@ -14,6 +14,7 @@ ipcRenderer.on("overlay", (e, overlay) =>  document.getElementById("main").style
 ipcRenderer.on("liveClientData", (e, data) => {
   // get current time
   const gameTime = data.gameData.gameTime
+  //console.log(gameTime < 1) == loading screen
   
   // get the local player from the list of players
   const localPlayer = data.allPlayers.find(player => player.summonerName == data.activePlayer.summonerName)
