@@ -314,7 +314,7 @@ const game: CGame = {
             // do we want to check the lane
             if (file.get<IConfig>("config.json").auto.spells.checkLane) {
               // does the lane check even matter
-              if (lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.solo_duo || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.flex) {
+              if (lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.solo_duo || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.flex || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.normal.draft) {
                 // check the lane
                 if (localUserChampSelect?.assignedPosition.toLowerCase() !== lane) {
                   this.autoSetSummonerSpells(currentAction, lane)
@@ -333,7 +333,7 @@ const game: CGame = {
             // do we want to check the lane
             if (file.get<IConfig>("config.json").auto.champion.checkLane) {
               // does the lane check even matter
-              if (lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.solo_duo || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.flex) {
+              if (lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.solo_duo || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.ranked.flex || lobby_data.gameConfig.queueId == interfaces.lobby.queueId.normal.draft) {
                 // check the lane
                 if (localUserChampSelect?.assignedPosition.toLowerCase() !== lane) {
                   this.autoSetChampion(currentAction, lane)
