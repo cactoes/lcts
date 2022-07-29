@@ -1,8 +1,8 @@
 import { parse } from 'node-html-parser'
-import { file } from "./utils"
+import * as utils from "./utils"
 import fetch from "node-fetch"
 
-const runeTable = file.get<IRuneTable>("runeTable.json")
+const runeTable = utils.file.get<IRuneTable>("runeTable.json")
 
 // for getting the n'th element in a string (with spaces as delimiter)
 String.prototype.get_item = function(index: number) {

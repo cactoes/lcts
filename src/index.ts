@@ -5,7 +5,6 @@ import fetch            from "node-fetch"
 
 // local
 import * as electron    from "./electron"
-import * as data        from "./form_data"
 import * as utils       from "./utils"
 import * as web         from "./web_rune"
 import * as resource    from "./resource_manager"
@@ -349,6 +348,7 @@ const clientMethods: IClientMethods = {
   }
 }
 
+// when the client connects
 lcinterface.client.on("connect", async (credentials: ICredentials) => {
   // hook all the interfaces
   interfaces.hook_all(credentials)
@@ -391,26 +391,36 @@ lcinterface.client.on("disconnect", () => {
 })
 
 // codes for saving/getting ui stuff
-const uicodes = {
+const ui = {
   save: {
-    dl_champion: 0x00,
-    dl_spells: 0x01,
-    lanecheck: 0x02,
-    c_hover: 0x03,
-    c_lock: 0x04,
-    c_ban: 0x05,
-    r_import: 0x06,
-    r_prefix: 0x07,
-    use_scripts: 0x08,
-    accept_match: 0x09,
-    s_status: 0x0A,
-    s_rank: 0x0B,
-    overlay: 0x0C,
-    status: 0x0D,
-    tier: 0x0E,
-    rank: 0x0F,
-    s_spells: 0x12,
-    spells: 0x11
+    champion: {
+      defaultLane: 0x00,
+      checkLane: 0x01,
+      hover: 0x02,
+      lock: 0x03,
+      ban: 0x04,
+    },
+    runes: {
+      import: 0x05,
+      prefix: 0x06,
+    },
+    spells: {
+      defaultLane: 0x07,
+      set: 0x08,
+      data: 0x09
+    },
+    rank: {
+      set: 0x0A,
+      tier: 0x0B,
+      rank: 0x0C
+    },
+    status: {
+      set: 0x0D,
+      data: 0x0E
+    },
+    use_scripts: 0x0F,
+    accept_match: 0x11,
+    overlay: 0x12,
   },
   get: {
     config: 0x10
@@ -421,60 +431,60 @@ const uicodes = {
 ipcMain.on("save", (_, { typeID, data }: IRenderData) => {
   let config = utils.file.get<IConfig>("config.json")
   switch (typeID) {
-    case uicodes.save.dl_champion:
-      config.auto.champion.defaultLane = data.text.toLowerCase()
+    case ui.save.champion.defaultLane:
+      config.auto.champion.defaultLane = data.text
       break
-    case uicodes.save.dl_spells:
-      config.auto.spells.defaultLane = data.text.toLowerCase()
+    case ui.save.spells.defaultLane:
+      config.auto.spells.defaultLane = data.text
       break
-    case uicodes.save.lanecheck:
+    case ui.save.champion.checkLane:
       config.auto.champion.checkLane = data.state
       break
-    case uicodes.save.c_hover:
+    case ui.save.champion.hover:
       config.auto.champion.set = data.state
       break
-    case uicodes.save.c_lock:
+    case ui.save.champion.lock:
       config.auto.champion.lock = data.state
       break
-    case uicodes.save.c_ban:
+    case ui.save.champion.ban:
       config.auto.champion.ban = data.state
       break
-    case uicodes.save.r_import:
+    case ui.save.runes.import:
       config.auto.runes.set = data.state
       break
-    case uicodes.save.r_prefix:
+    case ui.save.runes.prefix:
       config.auto.runes.prefix = data.text
       break
-    case uicodes.save.use_scripts:
+    case ui.save.use_scripts:
       config.misc.script = data.state
       break
-    case uicodes.save.accept_match:
+    case ui.save.accept_match:
       config.auto.acceptMatch = data.state
       break
-    case uicodes.save.s_status:
+    case ui.save.status.set:
       config.misc.status.set = data.state
       break
-    case uicodes.save.s_rank:
+    case ui.save.rank.set:
       config.misc.rank.set = data.state
       break
-    case uicodes.save.overlay:
+    case ui.save.overlay:
       config.overlay = data.state
       electron.overlay_window.webContents.send("overlay", data.state)
       break
-    case uicodes.save.status:
+    case ui.save.status.data:
       config.misc.status.text = data.text
       break
-    case uicodes.save.tier:
+    case ui.save.rank.tier:
       config.misc.rank.tier = data.text
       break
-    case uicodes.save.rank:
+    case ui.save.rank.rank:
       config.misc.rank.rank = data.text
       break
-    case uicodes.save.spells:
-      const [spell, lane, index] = data.text.split("_")
+    case ui.save.spells.data:
+      const [spell, lane, index] = utils.reinterpret_cast<string[]>(data.text)
       config.auto.spells.lane[lane][parseInt(index) - 1] = spell
       break
-    case uicodes.save.s_spells:
+    case ui.save.spells.set:
       config.auto.spells.set = data.state
       break
     default:
@@ -485,9 +495,10 @@ ipcMain.on("save", (_, { typeID, data }: IRenderData) => {
 
 // when we need to get something reslove it in here
 ipcMain.on("get", (_, { typeID, data }: IRenderData) => {
+  const config = utils.file.get<IConfig>("config.json")
   switch (typeID) {
-    case uicodes.get.config:
-      electron.main_window.webContents.send('config', utils.file.get<IConfig>("config.json"))
+    case ui.get.config:
+      electron.main_window.webContents.send('config', config)
       break
     default:
       return
