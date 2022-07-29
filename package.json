@@ -26,6 +26,9 @@
   "keywords": [],
   "author": "cactoes",
   "license": "GNU GPLv3",
+  "repository": {
+    "url": "https://github.com/cactoes/lcts"
+  },
   "dependencies": {
     "electron-overlay-window": "^2.0.1",
     "lcinterface": "^4.0.0",

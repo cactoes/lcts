@@ -295,7 +295,7 @@ document.getElementById("SpellsButton").addEventListener("click", (e) => {
 })
 
 // runes prefix
-document.getElementById("runePrefix").addEventListener("keyup", (e) => ipc_send("save", uicodes.save.prefix, { text: e.target.value }) )
+document.getElementById("runePrefix").addEventListener("keyup", (e) => ipc_send("save", uicodes.save.r_prefix, { text: e.target.value }) )
 
 // status
 document.getElementById("statusText").addEventListener("keyup", (e) => ipc_send("save", uicodes.save.status, { text: e.target.value }) )

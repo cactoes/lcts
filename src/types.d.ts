@@ -2,11 +2,39 @@ interface ILane {
   [key: string]: number[]
 }
 
+interface IChampionRefoged {
+  type: string
+  format: string
+  version: string
+  data: IChampion_base[]
+}
+
+interface IChampionTable_base {
+  [key: string]: number
+}
+
 interface IChampionTable {
   version: string
   data: {
     [key: string]: number
   }
+}
+
+interface IRuneBase {
+  id: number
+  key: string
+  icon: string
+  name: string
+  shortDesc: string
+  longDesc: string
+}
+
+interface IRuneReforged {
+  id: number
+  key: string
+  icon: string
+  name: string
+  slots: { runes: IRuneBase[] }[]
 }
 
 interface IRuneTable_base {
