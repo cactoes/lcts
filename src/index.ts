@@ -1,14 +1,17 @@
 // node_modules
-import * as lcinterface from "lcinterface"
-import { app, ipcMain } from "electron"
-import fetch            from "node-fetch"
+import * as outputAPI       from "@nut-tree/nut-js"
+import * as lcinterface     from "lcinterface"
+import fetch                from "node-fetch"
+import { app, ipcMain }     from "electron"
+import inputAPI             from "gkm"
 
 // local
-import * as electron    from "./electron"
-import * as utils       from "./utils"
-import * as web         from "./web_rune"
-import * as resource    from "./resource_manager"
-import { script }       from "./script_manager"
+import * as electron        from "./electron"
+import * as utils           from "./utils"
+import * as web             from "./web_rune"
+import * as resource        from "./resource_manager"
+import { script }           from "./script_manager"
+import { getActiveWindow }  from "./activewindow"
 
 // all our interfaces
 const interfaces = {
@@ -40,6 +43,31 @@ const await_login = async (): Promise<boolean> => {
     
     // prevent unnecessary spamming of retrys
     await utils.sleep(utils.time.SECOND)
+  }
+}
+
+// all our actual scripts (not the js file shit)
+const scriptMethods: IScriptMethods = {
+  auto: {
+    kiter: {
+      isRunning: false,
+      timer: setTimeout(()=>{}, 0),
+      attackSpeed: 1000,
+
+      run: function() {
+        if (clientMethods.client.phase.current !== interfaces.game.gameflow.INPROGRESS || !utils.file.get<IConfig>("config.json").script.auto.kiter.enabled)
+          return
+        
+        this.isRunning = true
+
+        outputAPI.keyboard.type(utils.file.get<IConfig>("config.json").script.auto.kiter.keybinds.attackMove.toLowerCase())
+        outputAPI.mouse.rightClick()
+
+        clearTimeout(this.timer)
+
+        this.timer = setTimeout(() => { this.isRunning = false }, this.attackSpeed * utils.time.SECOND)
+      }
+    }
   }
 }
 
@@ -152,6 +180,9 @@ const clientMethods: IClientMethods = {
         // send the data to the client
         electron.overlay_window.webContents.send("liveClientData", liveClientData)
 
+        // set our attack speed every pollInterval
+        scriptMethods.auto.kiter.attackSpeed = 1 / liveClientData.activePlayer.championStats.attackSpeed
+
         // if we havent sent our skill order yet do so
         if (!this.sentSkillOrder) {
           // make sure we only send once
@@ -183,7 +214,7 @@ const clientMethods: IClientMethods = {
           case interfaces.game.gameflow.NONE:
             break
           case interfaces.game.gameflow.LOBBY:
-            if (utils.file.get<IConfig>("config.json").misc.script)
+            if (utils.file.get<IConfig>("config.json").script)
               script.exec("onPartyJoin", clientMethods.user, clientMethods.lobby, utils.file.get<IConfig>("config.json"))
             break
           case interfaces.game.gameflow.MATCHMAKING:
@@ -374,7 +405,7 @@ lcinterface.client.on("connect", async (credentials: ICredentials) => {
     await clientMethods.user.setStatus(utils.file.get<IConfig>("config.json").misc.status.text)
 
   // fire script event onUserConnect
-  if (utils.file.get<IConfig>("config.json").misc.script)
+  if (utils.file.get<IConfig>("config.json").script)
     script.exec("onUserConnect", clientMethods.user, clientMethods.lobby, utils.file.get<IConfig>("config.json"))
 })
 
@@ -418,14 +449,39 @@ const ui = {
       set: 0x0D,
       data: 0x0E
     },
-    use_scripts: 0x0F,
-    accept_match: 0x11,
-    overlay: 0x12,
+    script: {
+      userScripts: 0x0F,
+      auto: {
+        kiter: {
+          enabled: 0x11,
+          keybinds: {
+            activate: 0x12,
+            attackMove: 0x13
+          }
+        }
+      }
+    },
+    accept_match: 0x14,
+    overlay: 0x15,
   },
   get: {
     config: 0x10
   }
 }
+
+// bind our script to keypress
+inputAPI.events.on("key.pressed", async (key: string[]) => {
+  const config = utils.file.get<IConfig>("config.json").script
+  switch (key[0]) {
+    case config.auto.kiter.keybinds.activate.toUpperCase():
+      if (!scriptMethods.auto.kiter.isRunning)
+        if (getActiveWindow()?.title == "League of Legends (TM) Client")
+          scriptMethods.auto.kiter.run()
+      break
+    default:
+      break
+  }
+})
 
 // when we need to save something reslove it in here
 ipcMain.on("save", (_, { typeID, data }: IRenderData) => {
@@ -455,8 +511,17 @@ ipcMain.on("save", (_, { typeID, data }: IRenderData) => {
     case ui.save.runes.prefix:
       config.auto.runes.prefix = data.text
       break
-    case ui.save.use_scripts:
-      config.misc.script = data.state
+    case ui.save.script.userScripts:
+      config.script.userScript = data.state
+      break
+    case ui.save.script.auto.kiter.enabled:
+      config.script.auto.kiter.enabled = data.state
+      break
+    case ui.save.script.auto.kiter.keybinds.activate:
+      config.script.auto.kiter.keybinds.activate = data.text
+      break
+    case ui.save.script.auto.kiter.keybinds.attackMove:
+      config.script.auto.kiter.keybinds.attackMove = data.text
       break
     case ui.save.accept_match:
       config.auto.acceptMatch = data.state

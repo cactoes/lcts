@@ -16,7 +16,7 @@ ipcRenderer.on("liveClientData", (e, data) => {
   const gameTime = data.gameData.gameTime
 
   // only dislpay when no longer loading
-  document.getElementById("main").style = gameTime < 1? "opacity: 1;": "opacity: 0;"
+  document.getElementById("main").style = gameTime > 1? "opacity: 1;": "opacity: 0;"
   
   // get the local player from the list of players
   const localPlayer = data.allPlayers.find(player => player.summonerName == data.activePlayer.summonerName)

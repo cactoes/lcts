@@ -2,7 +2,7 @@
   "auto": {
     "acceptMatch": true,
     "champion": {
-      "set": true,
+      "set": false,
       "lock": true,
       "ban": true,
       "checkLane": true,
@@ -82,8 +82,19 @@
       "tier": "diamond",
       "rank": "III",
       "set": true
-    },
-    "script": true
+    }
+  },
+  "script": {
+    "userScript": false,
+    "auto": {
+      "kiter": {
+        "enabled": false,
+        "keybinds": {
+          "activate": "c",
+          "attackMove": "n"
+        }
+      }
+    }
   },
   "overlay": true
 }

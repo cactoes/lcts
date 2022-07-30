@@ -530,7 +530,18 @@ interface IConfig {
       rank: string
       set: boolean
     }
-    script: boolean
+  }
+  script: {
+    userScript: boolean
+    auto: {
+      kiter: {
+        enabled: boolean
+        keybinds: {
+          activate: string
+          attackMove: string
+        }
+      }
+    }
   }
   overlay: boolean
 }
@@ -879,4 +890,28 @@ interface IRPC_Error {
   message: string
 }
 
+interface IScriptMethods {
+  auto: {
+    kiter: {
+      isRunning: boolean
+      timer: NodeJS.Timer
+      attackSpeed: number
+
+      run(): void
+    }
+  }
+}
+
+interface IWindow {
+  title: string
+  bounds: {
+    x: number
+    y: number
+    width: number
+    height: number
+  }
+}
+
 type TScriptFn = "onUserConnect" | "onPartyJoin"
+
+declare module 'gkm'
