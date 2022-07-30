@@ -52,10 +52,10 @@ export const getActiveWindow = (): undefined | IWindow => {
   return {
     title: wchar.toString(windowTextBufferClean),
     bounds: {
-			x: bounds.left,
-			y: bounds.top,
-			width: bounds.right - bounds.left,
-			height: bounds.bottom - bounds.top
+      x: bounds.left,
+      y: bounds.top,
+      width: bounds.right - bounds.left,
+      height: bounds.bottom - bounds.top
     }
   }
 }

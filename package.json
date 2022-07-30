@@ -8,11 +8,35 @@
     "start": "electron-forge start",
     "clean": "del /S dst\\*",
     "test": "tsc && electron-forge start",
-    "make": "electron-forge make",
-    "package:win": "tsc && electron-packager . lcts --overwrite --asar --platform=win32 --arch=x64 --icon='images/icon.ico' --prune=true --out=release --extraResource='./resources/data' --ignore=^/src --ignore=^/.gitignore --ignore=^/README.md --ignore=^/TODO.md --ignore=^/tsconfig.json  --ignore=^/temp.test.js --version-string.CompanyName=LCTS --version-string.FileDescription=LCTS --version-string.ProductName=\"LCTS\""
+    "package:win": "tsc && electron-builder --dir"
+  },
+  "build": {
+    "appId": "lcts",
+    "extraResources": [
+      {
+        "from": "./resources/data/",
+        "to": "data"
+      }
+    ],
+    "icon": "images/icon.ico",
+    "files": [
+      "!src",
+      "!release*",
+      "!images",
+      "!.gitignore",
+      "!package-lock.json",
+      "!README.md",
+      "!test.temp.js",
+      "!TODO.md",
+      "!tsconfig.json"
+    ],
+    "directories": {
+      "output": "release"
+    }
   },
   "config": {
     "forge": {
+      "packagerConfig": {},
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -51,6 +75,6 @@
     "@types/node": "^18.0.0",
     "@types/node-fetch": "^2.6.2",
     "electron": "^19.0.5",
-    "electron-packager": "^15.5.1"
+    "electron-builder": "^23.1.0"
   }
 }
