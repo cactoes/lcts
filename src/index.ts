@@ -347,7 +347,7 @@ const clientMethods: IClientMethods = {
         // check if this is our turn to PICK
         if (currentAction.type == "pick") {
           // check if we have a champion selected
-          if (currentAction.championId == 0 || currentAction.championId !== championPicks[lane][this.champion.index.pick])
+          if (currentAction.championId == 0) // || currentAction.championId !== championPicks[lane][this.champion.index.pick]
             interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championPicks[lane][this.champion.index.pick] }, "patch", false)
           
           // check if we want to lock in our selected champion
@@ -361,7 +361,7 @@ const clientMethods: IClientMethods = {
           // check if this is our turn to BAN
         } else if (currentAction.type == "ban") {
           // check if we have a champion selected
-          if (currentAction.championId == 0 || currentAction.championId !== championBans[lane][this.champion.index.ban])
+          if (currentAction.championId == 0) // || currentAction.championId !== championBans[lane][this.champion.index.ban]
             interfaces.game.virtualCall<void>(interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][this.champion.index.ban] }, "patch", false)
           
           // check if we want to ban our champion
