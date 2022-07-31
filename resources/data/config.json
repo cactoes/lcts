@@ -2,7 +2,7 @@
   "auto": {
     "acceptMatch": true,
     "champion": {
-      "set": false,
+      "set": true,
       "lock": true,
       "ban": true,
       "checkLane": true,

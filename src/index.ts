@@ -173,14 +173,11 @@ const clientMethods: IClientMethods = {
         // if we arent loaded in game yet retry later
         if (utils.reinterpret_cast<IRPC_Error>(liveClientData).httpStatus == 404)
           throw new Error("RPC_ERROR CAN IGONRE")
-
-        // get our champion name from our Ability name xd
-        const championName: string = liveClientData.activePlayer.abilities.E.id.split("E")[0].toLowerCase()
         
         // send the data to the client
         electron.overlay_window.webContents.send("liveClientData", liveClientData)
 
-        // set our attack speed every pollInterval
+        // set our attack speed every pollInterval (for changes like lethal tempo)
         scriptMethods.auto.kiter.attackSpeed = 1 / liveClientData.activePlayer.championStats.attackSpeed
 
         // if we havent sent our skill order yet do so
@@ -188,15 +185,16 @@ const clientMethods: IClientMethods = {
           // make sure we only send once
           this.sentSkillOrder = true
 
+          // get our champion name from our Ability name xd
+          const championName: string = liveClientData.activePlayer.abilities.E.id.split("E")[0].toLowerCase()
+
           // get our skill order
           const skillOrder: string[] = await web.get_skill_order(championName)
           
           // send our skill order
           electron.overlay_window.webContents.send("abilityLevelOrder", skillOrder)
         }
-      } catch {
-         // we dont care abt any errors
-      }
+      } catch { /* we dont care abt any errors */ }
 
       // await pollInterval before we want to run our loop again
       await utils.sleep(pollInterval)

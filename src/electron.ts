@@ -38,7 +38,7 @@ export const create_window = (): void => {
 
   main_window.loadFile("html/main/index.html")
   main_window.setIgnoreMouseEvents(false)
-  main_window.webContents.openDevTools({ mode: 'detach', activate: false })
+  //main_window.webContents.openDevTools({ mode: 'detach', activate: false })
 
   main_window.on("close", () => {
     app.quit()
