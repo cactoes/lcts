@@ -7,7 +7,7 @@ Just download the client from the [releases](https://github.com/cactoes/lcts/rel
 ## A clean UI
 A stylish clean ui, for ease of use
 
-![ui](images/ui.png)
+![ui](images/ui_new.png)
 
 ## An x88 style overlay
 Your game has to be in borderless (or windowed) to work, (can be turned off)
