@@ -188,8 +188,6 @@ async function setPartyType(type: string): Promise<void>
 async function startSearch(): Promise<void>
 async function stopSearch(): Promise<void>
 ```
-#### Config
-All the saved config data at that moment in [config.json](resources/data/config.json)
 
 ## Prerequisites
 If you want to run the client from source make sure you have:
@@ -199,14 +197,21 @@ $ npm install -g typescript
 ```
 
 ## Dependencies
+- @nut-tree/nut-js@2.1.1
 - electron-overlay-window@2.0.1
+- ffi-napi@4.0.3
+- gkm@0.2.0
 - lcinterface@4.0.0
 - node-fetch@2.6.1
 - node-html-parser@5.3.3
+- openurl@1.1.1
+- ref-napi@3.0.3
+- ref-struct-di@1.1.1
+- ref-wchar-napi@1.0.3
 
 ## DevDependencies
 - electron@19.0.5
-- electron-packager@15.5.1
+- electron-builder@23.1.0
 
 ## Installing the client from source
 ```
