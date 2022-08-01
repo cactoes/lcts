@@ -172,14 +172,16 @@ Methods are called like this
 ```Javascript
 await user.setStatus("example")
 ```
+Some functions return data, they look like this:
+- [IUser](src/types.d.ts#L199) 
+- [ILobby](src/types.d.ts#L289)
+
 #### Methods in *user*
-- [IUser](src/types.d.ts#L158) Interface/Type
 ```TypeScript
 async function setStatus(status: string): Promise<IUser>
 async function setRank(tier: string, rank: string): Promise<IUser>
 ```
 #### Methods in *lobby*
-- [ILobby](src/types.d.ts#L283) Interface/Type
 ```TypeScript
 async function setLanes(first: string, second: string): Promise<void>
 async function create(queueId: number): Promise<ILobby>
@@ -233,12 +235,7 @@ $ npm run package:win
 ```
 
 ## Contributing 
-Steps for contributing
-- choose a [task](TODO.md) / or come up with a new task
-- contact me (cactus#9276) so i can link you to the task
-- fork the project
-- make changes (and document your code + add any types needed)
-- upload for reviewing
+Feel free to contribute.
 
 ## Logo
 The logo isn't mine it was made by [surgingpink](https://www.deviantart.com/surgingpink)
