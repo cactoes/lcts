@@ -24,7 +24,7 @@ Your game has to be in borderless (or windowed) to work, (can be turned off)
   - set summoner spells
   - check if you got the lane you want
 - [scripting](#scripting)
-- ui customizability (check [config](resources/data/config.json))
+- toggleable overlay
 - [config](#config)
 
 ## Config
