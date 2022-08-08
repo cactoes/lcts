@@ -4,6 +4,7 @@ All tasks for LCTS
 ## unclaimed
 
 ### Important
+- [ ] find better way to web scrape / reduce scrape time
 - [ ] add menu for defining champions to pick and ban
 
 ### Other
