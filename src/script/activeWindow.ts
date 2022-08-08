@@ -20,7 +20,17 @@ var user32 = new ffi.Library('user32', {
   GetWindowRect: ['bool', ['pointer', RectPointer]],
 })
 
-export const getActiveWindow = (): undefined | IWindow => {
+export interface IWindow {
+  title: string
+  bounds: {
+    x: number
+    y: number
+    width: number
+    height: number
+  }
+}
+
+export const getActive = (): undefined | IWindow => {
   // Get a "handle" of the active window
   const activeWindowHandle = user32.GetForegroundWindow()
 

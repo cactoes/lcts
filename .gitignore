@@ -1,4 +1,4 @@
 node_modules/
-dst/
 *.temp.js
+src/**/*.js
 release/

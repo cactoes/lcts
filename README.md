@@ -205,8 +205,9 @@ $ npm install -g typescript
 - gkm@0.2.0
 - lcinterface@4.0.0
 - node-fetch@2.6.1
-- node-html-parser@5.3.3
 - openurl@1.1.1
+- puppeteer-core@16.1.0
+- puppeteer-in-electron@3.0.5
 - ref-napi@3.0.3
 - ref-struct-di@1.1.1
 - ref-wchar-napi@1.0.3

@@ -216,7 +216,8 @@ for (var i = 0; i < AllImgChapionDefault.length; i++) {
     // enable the one that was clicked
     e.target.className = "active"
     // update cfg
-    ipc_send("save", ui.save.champion.defaultLane, { text: e.target.src.split("-")[1].split(".")[0].toLowerCase() })
+    const targetSrc = e.target.src.split("-")
+    ipc_send("save", ui.save.champion.defaultLane, { text: targetSrc[targetSrc.length - 1].split(".")[0].toLowerCase() })
   })
   AllImgSpellsDefault[i].addEventListener("click", (e) => {
     // reset all the elements
@@ -226,7 +227,8 @@ for (var i = 0; i < AllImgChapionDefault.length; i++) {
     // enable the one that was clicked
     e.target.className = "active"
     // update cfg
-    ipc_send("save", ui.save.spells.defaultLane, { text: e.target.src.split("-")[1].split(".")[0].toLowerCase() })
+    const targetSrc = e.target.src.split("-")
+    ipc_send("save", ui.save.spells.defaultLane, { text: targetSrc[targetSrc.length - 1].split(".")[0].toLowerCase() })
   })
 }
 
