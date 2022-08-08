@@ -224,22 +224,22 @@ $ npm install
 ```
 
 ## Running the client from source
-Run & Compile the source
+Run the client directly from source
 ```
 $ npm run test
 ```
 
 ## Compiling the client
-Run & Compile the source
+Compile / build the client from source
 ```
 $ npm run package:win
 ```
 
-## Contributing 
-Feel free to contribute.
-
 ## Logo
 The logo isn't mine it was made by [surgingpink](https://www.deviantart.com/surgingpink)
 
+## Contributing 
+[Contributing](CONTRIBUTING.md)
+
 ## License
-[GNU GPLv3](LICENSE)
+[GNU GPLv3](LICENSE.md)
