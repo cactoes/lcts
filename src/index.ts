@@ -4,6 +4,7 @@ import * as lcinterface     from "lcinterface"
 import fetch                from "node-fetch"
 import { app, ipcMain }     from "electron"
 import inputAPI             from "gkm"
+import pie                  from "puppeteer-in-electron"
 
 // local
 import * as electron        from "./electron"
@@ -117,7 +118,7 @@ const clientMethods: IClientMethods = {
       const currentChampionName = utils.getKeyByValue(utils.file.get<IChampionTable>("championTable.json").data, currentAction.championId).toLowerCase()
 
       // get the rune form u.gg
-      const new_rune = await web.get_rune(currentChampionName, utils.file.get<IConfig>("config.json").auto.runes.prefix)
+      const new_rune = await web.get_rune(currentChampionName, utils.file.get<IConfig>("config.json").auto.runes.prefix, app)
       
       // get all our runes
       const user_runes = await interfaces.runes.virtualCall<ISavedRune[]>(interfaces.runes.dest.runes, {}, "get")
@@ -189,7 +190,7 @@ const clientMethods: IClientMethods = {
           const championName: string = liveClientData.activePlayer.abilities.E.id.split("E")[0].toLowerCase()
 
           // get our skill order
-          const skillOrder: string[] = await web.get_skill_order(championName)
+          const skillOrder: string[] = await web.get_skill_order(championName, app)
 
           // send our skill order
           electron.overlay_window.webContents.send("abilityLevelOrder", skillOrder)
@@ -581,4 +582,6 @@ resource.update().then(() => lcinterface.client.connect())
 
 // setup some electron stuff
 app.disableHardwareAcceleration()
-app.on("ready", electron.create_window)
+pie.initialize(app).then(() => {
+  app.on("ready", electron.create_window)
+})

@@ -5,7 +5,7 @@ const fs = require("fs")
 const items = JSON.parse(fs.readFileSync("resources/data/items.json"))
 
 // global array for our abilities
-let skillOrder
+let skillOrder = new Array(18).fill(0)
 
 ipcRenderer.on("abilityLevelOrder", (e, data) => skillOrder = data) 
 
@@ -37,7 +37,7 @@ ipcRenderer.on("liveClientData", (e, data) => {
   }
 
   let nextToLevelId = 0
-  
+
   nextToLevelId += data.activePlayer.abilities.Q.abilityLevel
   nextToLevelId += data.activePlayer.abilities.W.abilityLevel
   nextToLevelId += data.activePlayer.abilities.E.abilityLevel

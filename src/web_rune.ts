@@ -1,34 +1,26 @@
 import * as utils from "./utils"
 import puppeteer from "puppeteer"
 
+import { BrowserWindow } from "electron"
+import pie from "puppeteer-in-electron"
+import puppeteer_core from "puppeteer-core"
+
 const runeTable = utils.file.get<IRuneTable>("runeTable.json")
 
-async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
+async function get_base_build(champion_name: string, app: Electron.App): Promise<IRuneWebBase> {
   // i wanna cry
   
-  // load browser
-  const browser = await puppeteer.launch({})
+  // load the browser
+  const browser = await pie.connect(app, puppeteer_core)
 
-  // load web page
-  const page = await browser.newPage()
-  
-  // so we can only load necessary items
-  await page.setRequestInterception(true)
+  // create a hidden electron window
+  const window = new BrowserWindow({ show: false })
 
-  // skip style and image
-  // script, xhr, fetch and document are needed
-  page.on('request', (request) => {
-    switch (request.resourceType()) {
-      case "stylesheet":
-        return request.abort()
-      case "image":
-        return request.abort()
-    }
-    request.continue()
-  })
+  // load the page on that window
+  await window.loadURL(`https://u.gg/lol/champions/${champion_name}/build`)
 
-  // goto the actual mf page
-  await page.goto(`https://u.gg/lol/champions/${champion_name}/build`)
+  // get the page data
+  const page = await pie.getPage(browser, window)
   
   // page.evaluate create the object for later parsing
   let rune_obj = await page.evaluate<[], () => IRuneWebBase>(() => {
@@ -124,8 +116,8 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
     return rune_obj_internal
   })
 
-  // stop the browser
-  browser.close()
+  // close the electron window
+  window.destroy()
 
   // return total rune object
   return rune_obj 
@@ -205,41 +197,29 @@ function form_rune(rune_obj: IRuneWebBase, runePrefix: string): IRune {
 
 
 // combine into one function for easy use & export
-export async function get_rune(champion_name: string, runePrefix: string): Promise<IRune> {
+export async function get_rune(champion_name: string, runePrefix: string, app: Electron.App): Promise<IRune> {
   // get base rune data
-  return get_base_build(champion_name).then<IRune>((base: IRuneWebBase) => {
+  return get_base_build(champion_name, app).then<IRune>((base: IRuneWebBase) => {
     // format the runes so league client can use it
     return form_rune(base, runePrefix)
   })
 }
 
 // returns the skill order of requested champion
-export async function get_skill_order(champion_name: string): Promise<string[]> {
+export async function get_skill_order(champion_name: string, app: Electron.App): Promise<string[]> {
   // i wanna cry
-  
-  // load browser
-  const browser = await puppeteer.launch({})
 
-  // load web page
-  const page = await browser.newPage()
-  
-  // so we can only load necessary items
-  await page.setRequestInterception(true)
+  // load the browser
+  const browser = await pie.connect(app, puppeteer_core)
 
-  // skip style and image
-  // script, xhr, fetch and document are needed
-  page.on('request', (request) => {
-    switch (request.resourceType()) {
-      case "stylesheet":
-        return request.abort()
-      case "image":
-        return request.abort()
-    }
-    request.continue()
-  })
+  // create a hidden electron window
+  const window = new BrowserWindow({ show: false })
 
-  // goto the actual mf page
-  await page.goto(`https://u.gg/lol/champions/${champion_name}/build`)
+  // load the page on that window
+  await window.loadURL(`https://u.gg/lol/champions/${champion_name}/build`)
+
+  // get the page data
+  const page = await pie.getPage(browser, window)
 
   // page.evalute just returns our original skill order array
   let final = await page.evaluate<[], () => string[]>(() => {
@@ -270,8 +250,8 @@ export async function get_skill_order(champion_name: string): Promise<string[]> 
     return internal_final
   })
 
-  // stop the browser
-  browser.close()
+  // close the electron window
+  window.destroy()
 
   // return our skills
   return final
