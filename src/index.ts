@@ -190,7 +190,7 @@ const clientMethods: IClientMethods = {
 
           // get our skill order
           const skillOrder: string[] = await web.get_skill_order(championName)
-          
+
           // send our skill order
           electron.overlay_window.webContents.send("abilityLevelOrder", skillOrder)
         }

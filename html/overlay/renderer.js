@@ -36,8 +36,19 @@ ipcRenderer.on("liveClientData", (e, data) => {
     kda = localPlayer.scores.assists + localPlayer.scores.kills
   }
 
+  let nextToLevelId = 0
+  
+  nextToLevelId += data.activePlayer.abilities.Q.abilityLevel
+  nextToLevelId += data.activePlayer.abilities.W.abilityLevel
+  nextToLevelId += data.activePlayer.abilities.E.abilityLevel
+  nextToLevelId += data.activePlayer.abilities.R.abilityLevel
+
+  if (nextToLevelId == 18)
+    nextToLevelId = 17
+
   // update ui
-  document.getElementById("championData").innerHTML = `( ${localPlayer.championName} ${localPlayer.level + 1}->${skillOrder[localPlayer.level]} )`
+  document.getElementById("gametype").innerHTML = `${data.gameData.gameMode.toLowerCase()}`
+  document.getElementById("championData").innerHTML = `( ${localPlayer.championName} ${nextToLevelId + 1}->${skillOrder[nextToLevelId]} )`
   document.getElementById("kda").innerHTML = Math.round(kda * 10) / 10
   document.getElementById("goldPerMinute").innerHTML = Math.round((totalGold / gameTime) * 60)
   document.getElementById("csPerMinute").innerHTML = Math.round((localPlayer.scores.creepScore / gameTime) * 60 * 10) / 10
