@@ -1,26 +1,42 @@
-import { parse } from 'node-html-parser'
 import * as utils from "./utils"
-import fetch from "node-fetch"
+import puppeteer from "puppeteer"
 
 const runeTable = utils.file.get<IRuneTable>("runeTable.json")
 
-// for getting the n'th element in a string (with spaces as delimiter)
-String.prototype.get_item = function(index: number) {
-  return this.split(" ")[index]
-}
-
 async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
-  // get champion rune page from u.gg in text from
-  const page_data: string = await fetch(`https://u.gg/lol/champions/${champion_name}/build`).then<Promise<string>>((value: Response | any) => {
-    // can't change .text() return type :( | any is required
-    return value.text()
+  // i wanna cry
+  
+  // load browser
+  const browser = await puppeteer.launch({})
+
+  // load web page
+  const page = await browser.newPage()
+  
+  // so we can only load necessary items
+  await page.setRequestInterception(true)
+
+  // skip style and image
+  // script, xhr, fetch and document are needed
+  page.on('request', (request) => {
+    switch (request.resourceType()) {
+      case "stylesheet":
+        return request.abort()
+      case "image":
+        return request.abort()
+    }
+    request.continue()
   })
 
-  // parse the text as an html element and select runes part of the DOM
-  const rune_base = parse(page_data).querySelectorAll(".recommended-build_runes")[0] 
+  // goto the actual mf page
+  await page.goto(`https://u.gg/lol/champions/${champion_name}/build`)
   
-  // form the rune base for later parsing
-  const rune_obj: IRuneWebBase = {
+  // page.evaluate create the object for later parsing
+  let rune_obj = await page.evaluate<[], () => IRuneWebBase>(() => {
+    // parse the text as an html element and select runes part of the DOM
+    const rune_base = document.querySelectorAll(".recommended-build_runes")[0] 
+
+    // form the rune base for later parsing
+    const rune_obj_internal: IRuneWebBase = {
     name: rune_base.querySelectorAll("div")[1].querySelectorAll("span")[0].innerHTML,
     runes: {
       // get rune tree name so we can create a rune object for the client. check '../data/runeTable.json'
@@ -30,80 +46,86 @@ async function get_base_build(champion_name: string): Promise<IRuneWebBase> {
 
     // get keystone
     keystone: [
-      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[0].classList.toString().get_item(2),
-      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[1].classList.toString().get_item(2),
-      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[2].classList.toString().get_item(2)
+      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[0].classList.toString().split(" ")[2],
+      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[1].classList.toString().split(" ")[2],
+      rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[2].classList.toString().split(" ")[2]
     ],
 
     // get primary perks
     primary_perks: [
       [
-        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[1].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ],
       [
-        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[2].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ],
       [
-        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ]
     ],
 
     // get secondary perks
     secondary_perks: [
       [
-        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[4].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ],
       [
-        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[5].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ],
       [
-        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ]
     ],
 
     // get extra runes (called styles by leagueApi and U.gg)
     styles: [
       [
-        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[7].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ],
       [
-        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[8].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ],
       [
-        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[0].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[1].classList.toString().get_item(1),
-        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[2].classList.toString().get_item(1)
+        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[0].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[1].classList.toString().split(" ")[1],
+        rune_base.querySelectorAll(".perks")[9].querySelectorAll("div")[2].classList.toString().split(" ")[1]
       ]
     ]
-  }
-  
-  // if there are 4 keystones
-  if (rune_obj.runes.primary == "Precision" || rune_obj.runes.primary == "Domination") 
-    rune_obj.keystone.push( rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[3].classList.toString().get_item(2) )
+    }
 
-  // if there are 4 perks in last row (Primary)
-  if (rune_obj.runes.primary == "Domination") 
-    rune_obj.primary_perks[2].push( rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[3].classList.toString().get_item(1) )
-  
-  // if there are 4 perks in last row (Secondary)
-  if (rune_obj.runes.secondary == "Domination") 
-    rune_obj.secondary_perks[2].push( rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[3].classList.toString().get_item(1) )
+    // if there are 4 keystones
+    if (rune_obj_internal.runes.primary == "Precision" || rune_obj_internal.runes.primary == "Domination") 
+    rune_obj_internal.keystone.push( rune_base.querySelectorAll(".perks")[0].querySelectorAll("div")[3].classList.toString().split(" ")[2] )
+
+    // if there are 4 perks in last row (Primary)
+    if (rune_obj_internal.runes.primary == "Domination") 
+    rune_obj_internal.primary_perks[2].push( rune_base.querySelectorAll(".perks")[3].querySelectorAll("div")[3].classList.toString().split(" ")[1] )
+
+    // if there are 4 perks in last row (Secondary)
+    if (rune_obj_internal.runes.secondary == "Domination") 
+    rune_obj_internal.secondary_perks[2].push( rune_base.querySelectorAll(".perks")[6].querySelectorAll("div")[3].classList.toString().split(" ")[1] )
+
+    return rune_obj_internal
+  })
+
+  // stop the browser
+  browser.close()
 
   // return total rune object
   return rune_obj 
@@ -193,38 +215,63 @@ export async function get_rune(champion_name: string, runePrefix: string): Promi
 
 // returns the skill order of requested champion
 export async function get_skill_order(champion_name: string): Promise<string[]> {
-  // get champion rune page from u.gg in text from
-  const page_data: string = await fetch(`https://u.gg/lol/champions/${champion_name}/build`).then<Promise<string>>((value: Response | any) => {
-    // can't change .text() return type :( | any is required
-    return value.text()
-  })
-  // define the final array
-  let final: string[] = [ ]
-
-  // parse the text as an html element and select runes part of the DOM
-  const document = parse(page_data)
-
-  // get elements of our skills
-  const skills_q = document.querySelectorAll(".skill-order")[0].querySelectorAll("div")
-  const skills_w = document.querySelectorAll(".skill-order")[1].querySelectorAll("div")
-  const skills_e = document.querySelectorAll(".skill-order")[2].querySelectorAll("div")
-  const skills_r = document.querySelectorAll(".skill-order")[3].querySelectorAll("div")
+  // i wanna cry
   
-  // loop through our skills
-  // skills_X.length == 36
-  for (var i = 0; i < 36; i++) {
-    if(skills_q[i].classList.toString().startsWith("skill-up "))
-      final[parseInt(skills_q[i].querySelectorAll("div")[0].innerHTML) - 1] = "q"
-    
-    if(skills_w[i].classList.toString().startsWith("skill-up "))
-      final[parseInt(skills_w[i].querySelectorAll("div")[0].innerHTML) - 1] = "w"
+  // load browser
+  const browser = await puppeteer.launch({})
 
-    if(skills_e[i].classList.toString().startsWith("skill-up ")) 
-      final[parseInt(skills_e[i].querySelectorAll("div")[0].innerHTML) - 1] = "e"
+  // load web page
+  const page = await browser.newPage()
+  
+  // so we can only load necessary items
+  await page.setRequestInterception(true)
+
+  // skip style and image
+  // script, xhr, fetch and document are needed
+  page.on('request', (request) => {
+    switch (request.resourceType()) {
+      case "stylesheet":
+        return request.abort()
+      case "image":
+        return request.abort()
+    }
+    request.continue()
+  })
+
+  // goto the actual mf page
+  await page.goto(`https://u.gg/lol/champions/${champion_name}/build`)
+
+  // page.evalute just returns our original skill order array
+  let final = await page.evaluate<[], () => string[]>(() => {
+    let internal_final = []
     
-    if(skills_r[i].classList.toString().startsWith("skill-up "))
-      final[parseInt(skills_r[i].querySelectorAll("div")[0].innerHTML) - 1] = "r"
-  }
+    // get elements of our skills
+    const skills_q = document.querySelectorAll(".skill-order")[0].querySelectorAll("div")
+    const skills_w = document.querySelectorAll(".skill-order")[1].querySelectorAll("div")
+    const skills_e = document.querySelectorAll(".skill-order")[2].querySelectorAll("div")
+    const skills_r = document.querySelectorAll(".skill-order")[3].querySelectorAll("div")
+    
+    // loop through our skills
+    // skills_X.length == 36
+    for (var i = 0; i < 36; i++) {
+      if(skills_q[i].classList.toString().startsWith("skill-up "))
+        internal_final[parseInt(skills_q[i].querySelectorAll("div")[0].innerHTML) - 1] = "q"
+      
+      if(skills_w[i].classList.toString().startsWith("skill-up "))
+        internal_final[parseInt(skills_w[i].querySelectorAll("div")[0].innerHTML) - 1] = "w"
+
+      if(skills_e[i].classList.toString().startsWith("skill-up ")) 
+        internal_final[parseInt(skills_e[i].querySelectorAll("div")[0].innerHTML) - 1] = "e"
+      
+      if(skills_r[i].classList.toString().startsWith("skill-up "))
+        internal_final[parseInt(skills_r[i].querySelectorAll("div")[0].innerHTML) - 1] = "r"
+    }
+
+    return internal_final
+  })
+
+  // stop the browser
+  browser.close()
 
   // return our skills
   return final
