@@ -30,25 +30,26 @@ export namespace Script {
   }
 
   export const methods = {
-    auto: {
-      kiter: {
-        isRunning: false,
-        timer: setTimeout(()=>{}, 0),
-        attackSpeed: 1,
+    autoKiter: {
+      isRunning: false,
+      timer: setTimeout(()=>{}, 0),
+      attackSpeed: 1,
 
-        run: function() {
-          if (Client.GameFlow.getCurrent() !== Interfaces.game.gameflow.INPROGRESS || !Config.get().script.auto.kiter.enabled)
-            return
-          
-          this.isRunning = true
+      run: function() {
+        if (this.isRunning)
+          return
+        
+        if (Client.GameFlow.getCurrent() !== Interfaces.game.gameflow.INPROGRESS || !Config.get().script.auto.kiter.enabled)
+          return
+        
+        this.isRunning = true
 
-          outputAPI.keyboard.type(Config.get().script.auto.kiter.keybinds.attackMove.toLowerCase())
-          outputAPI.mouse.rightClick()
+        outputAPI.keyboard.type(Config.get().script.auto.kiter.keybinds.attackMove.toLowerCase())
+        outputAPI.mouse.rightClick()
 
-          clearTimeout(this.timer)
+        clearTimeout(this.timer)
 
-          this.timer = setTimeout(() => { this.isRunning = false }, this.attackSpeed * Utils.time.SECOND)
-        }
+        this.timer = setTimeout(() => { this.isRunning = false }, this.attackSpeed * Utils.time.SECOND)
       }
     }
   }
@@ -63,9 +64,9 @@ export namespace Script {
 
     onPartyJoin: function(): boolean {
       if (typeof script.onPartyJoin == "function")
-      return script.onPartyJoin(User.methods, Lobby.methods, Config.get())
-    else
-      throw new InvalidClassFunctionError("onPartyJoin")
+        return script.onPartyJoin(User.methods, Lobby.methods, Config.get())
+      else
+        throw new InvalidClassFunctionError("onPartyJoin")
     }
   }
 
@@ -73,9 +74,8 @@ export namespace Script {
     const config = Config.get().script
     switch (key[0]) {
       case config.auto.kiter.keybinds.activate.toUpperCase():
-        if (!methods.auto.kiter.isRunning)
           if (window.getActive()?.title == "League of Legends (TM) Client")
-            methods.auto.kiter.run()
+            methods.autoKiter.run()
         break
     }
   })

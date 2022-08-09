@@ -13,14 +13,11 @@ import { Script } from "../script/script"
 import { Utils } from "../utils/utils"
 import { Resource } from "../resource/resource"
 
-const GameFlow = new Client.GameFlow()
-
 LCIClient.on("connect", async (credentials: Credentials) => {
   Interfaces.hook(credentials)
 
   await Client.awaitLogin()
-  
-  GameFlow.start()
+  Client.GameFlow.start()
 
   Electron.main_window.webContents.send('logged_in', Client.getState())
 
@@ -36,43 +33,11 @@ LCIClient.on("connect", async (credentials: Credentials) => {
 
 LCIClient.on("disconnect", () => {
   Interfaces.unhook()
-  Client.disconnect()
 
-  GameFlow.stop()
+  Client.disconnect()
+  Client.GameFlow.stop()
 
   Electron.main_window.webContents.send('logged_in', Client.getState())
-})
-
-GameFlow.on("new", (gameflow: GameFlows) => {
-  switch (gameflow) {
-    case Interfaces.game.gameflow.NONE:
-      break
-    case Interfaces.game.gameflow.LOBBY:
-      if (Config.get().script.userScript)
-        Script.event.onPartyJoin()
-      break
-    case Interfaces.game.gameflow.MATCHMAKING:
-      break
-    case Interfaces.game.gameflow.READYCHECK:
-      if (Config.get().auto.acceptMatch)
-        Client.methods.acceptMatch()
-      break
-    case Interfaces.game.gameflow.CHAMPSELECT:
-      Client.methods.championSelect.update(Utils.time.SECOND)
-      break
-    case Interfaces.game.gameflow.INPROGRESS:
-      Client.updateGameData(Utils.time.SECOND)
-      break
-    case Interfaces.game.gameflow.ENDOFGAME:
-      break
-    case Interfaces.game.gameflow.WAITINGFORSTATS:
-      break
-  }
-
-  if (gameflow !== Interfaces.game.gameflow.INPROGRESS) {
-    Client.hasSentSkillOrder = false
-    Client.methods.championSelect.reset()
-  }
 })
 
 const ui = {

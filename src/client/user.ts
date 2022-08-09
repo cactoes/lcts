@@ -26,12 +26,12 @@ export namespace User {
       if (Client.methods.championSelect.runes.set || !(currentAction.completed && currentAction.type == "pick"))
         return
 
-      Client.methods.championSelect.runes.set
+      Client.methods.championSelect.runes.set = true
 
       const currentChampionName = Utils.getKeyByValue(IO.file.get<IChampionTable>("resources/data/championTable.json").data, currentAction.championId).toLowerCase()
 
       const new_rune = await Web.getRune(currentChampionName, Config.get().auto.runes.prefix, app)
-      
+
       const user_runes = await Interfaces.runes.virtualCall<ISavedRune[]>(Interfaces.runes.dest.runes, {}, "get")
       
       const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith(Config.get().auto.runes.prefix))

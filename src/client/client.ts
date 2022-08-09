@@ -1,6 +1,5 @@
 // built-in
 import { app } from "electron"
-import { EventEmitter } from "stream"
 import fetch from "node-fetch"
 
 // local
@@ -20,12 +19,10 @@ export namespace Client {
 
   export async function awaitLogin(): Promise<boolean> {
     while (true) {
-      if ( await Interfaces.game.virtualCall<void>(Interfaces.game.dest.gameflow, {}, "get", false)
-        .catch<boolean>(() => false) ) {
+      if ( await Interfaces.game.virtualCall<void>(Interfaces.game.dest.gameflow, {}, "get", false).catch<boolean>(() => false) ) {
           conected = true
           return true
         }
-      
       await Utils.sleep(Utils.time.SECOND)
     }
   }
@@ -39,8 +36,11 @@ export namespace Client {
     return conected
   }
 
-  export declare interface GameFlow {
-    on(event: "new", listner: ( gameflow: GameFlows ) => void): this
+  export interface IGameFlow {
+    current: GameFlows
+    last: string
+    pollInterval: number
+    gameFlowTimeout: boolean | NodeJS.Timer
 
     start(): void
     stop(): void
@@ -48,42 +48,62 @@ export namespace Client {
     setPollInterval(pollInterval: number): void
   }
 
-  export class GameFlow extends EventEmitter {
-    static current: string
-    private last: string
-    private pollInterval: number
-    private gameFlowTimeout: boolean | NodeJS.Timer
+  export const GameFlow: IGameFlow = {
+    current: "OutOfClient",
+    last: "",
+    pollInterval: 1000,
+    gameFlowTimeout: false,
 
-    constructor() {
-      super()
-      GameFlow.current = ""
-      this.last = ""
-      this.pollInterval = 1000
-      this.gameFlowTimeout = false
-    }
+    start: async function() {
+      this.current = await Interfaces.game.virtualCall<GameFlows>(Interfaces.game.dest.gameflow, {}, "get").catch(() => "OutOfClient")
 
-    public async start() {
-      GameFlow.current = await Interfaces.game.virtualCall<string>(Interfaces.game.dest.gameflow, {}, "get").catch(() => "OutOfClient")
+      if (this.current !== this.last) {
+        switch (this.current) {
+          case Interfaces.game.gameflow.NONE:
+            break
+          case Interfaces.game.gameflow.LOBBY:
+            if (Config.get().script.userScript)
+              Script.event.onPartyJoin()
+            break
+          case Interfaces.game.gameflow.MATCHMAKING:
+            break
+          case Interfaces.game.gameflow.READYCHECK:
+            if (Config.get().auto.acceptMatch)
+              Client.methods.acceptMatch()
+            break
+          case Interfaces.game.gameflow.CHAMPSELECT:
+            Client.methods.championSelect.update(Utils.time.SECOND)
+            break
+          case Interfaces.game.gameflow.INPROGRESS:
+            Client.updateGameData(Utils.time.SECOND)
+            break
+          case Interfaces.game.gameflow.ENDOFGAME:
+            break
+          case Interfaces.game.gameflow.WAITINGFORSTATS:
+            break
+        }
+      
+        if (this.current !== Interfaces.game.gameflow.INPROGRESS) {
+          Client.hasSentSkillOrder = false
+          Client.methods.championSelect.reset()
+        }
 
-      if (GameFlow.current !== this.last) {
-        this.emit("new", GameFlow.current)
-
-        this.last = GameFlow.current
+        this.last = this.current
       }
 
       this.gameFlowTimeout = this.gameFlowTimeout || setInterval(this.start.bind(this), this.pollInterval)
-    }
+    },
 
-    public stop() {
+    stop: function() {
       if (this.gameFlowTimeout)
         clearInterval(Utils.reinterpret_cast<NodeJS.Timer>(this.gameFlowTimeout))
-    }
+    },
 
-    public static getCurrent() {
+    getCurrent: function() {
       return this.current
-    }
+    },
 
-    public setPollInterval(pollInterval: number) {
+    setPollInterval: function(pollInterval: number) {
       this.pollInterval = pollInterval
     }
   }
@@ -99,7 +119,7 @@ export namespace Client {
       
       Electron.overlay_window.webContents.send("liveClientData", liveClientData)
       
-      Script.methods.auto.kiter.attackSpeed = 1 / liveClientData.activePlayer.championStats.attackSpeed
+      Script.methods.autoKiter.attackSpeed = 1 / liveClientData.activePlayer.championStats.attackSpeed
       
       if (!hasSentSkillOrder) {
         hasSentSkillOrder = true
@@ -112,7 +132,7 @@ export namespace Client {
 
         Electron.overlay_window.webContents.send("abilityLevelOrder", skillOrder)
       }
-    } catch { /* we dont care abt any errors */ }
+    } catch { /* fetch failed means we are no longer in game */ }
 
     await Utils.sleep(pollInterval)
     if (GameFlow.getCurrent() == Interfaces.game.gameflow.INPROGRESS)
@@ -149,59 +169,47 @@ export namespace Client {
         this.champion.index.ban = 0
         this.runes.set = false
       },
+
       update: async function(pollInterval: number) {
         if (GameFlow.getCurrent() !== Interfaces.game.gameflow.CHAMPSELECT)
           return
           
-        const lobby_data = await Interfaces.lobby.virtualCall<Lobby.ILobby>(Interfaces.lobby.dest.lobby, {}, "get")
+        const lobbyData = await Interfaces.lobby.virtualCall<Lobby.ILobby>(Interfaces.lobby.dest.lobby, {}, "get")
 
-        // get the data of the champion select data
         const champSelectData = await Interfaces.game.virtualCall<IChampSelect>(Interfaces.game.dest.champselect, {}, "get")
 
-        // make sure we are still in champselect (incase someone dodged)
         if (Utils.reinterpret_cast<IRPCError>(champSelectData).httpStatus == 404)
           return
 
-        // find ourself in the champion select data
         const localUserChampSelect = Utils.reinterpret_cast<IActor>(champSelectData.myTeam.find((player: IActor) => player.cellId == champSelectData.localPlayerCellId))
 
-        // get our lane data
         const lane = {
           isCorrect: false,
           using: Config.get().auto.champion.defaultLane
         }
 
-        if (lobby_data.gameConfig == undefined || (lobby_data.gameConfig.queueId !== Interfaces.lobby.queueId.ranked.solo_duo && lobby_data.gameConfig.queueId !== Interfaces.lobby.queueId.ranked.flex && lobby_data.gameConfig.queueId !== Interfaces.lobby.queueId.normal.draft)) {
+        if (lobbyData.gameConfig == undefined || (lobbyData.gameConfig.queueId !== Interfaces.lobby.queueId.ranked.solo_duo && lobbyData.gameConfig.queueId !== Interfaces.lobby.queueId.ranked.flex && lobbyData.gameConfig.queueId !== Interfaces.lobby.queueId.normal.draft)) {
           lane.isCorrect = true
         } 
-        else if (localUserChampSelect.assignedPosition == lobby_data.localMember.firstPositionPreference.toLowerCase() || localUserChampSelect.assignedPosition == lobby_data.localMember.secondPositionPreference.toLowerCase()) {
+        else if (localUserChampSelect.assignedPosition == lobbyData.localMember.firstPositionPreference.toLowerCase() || localUserChampSelect.assignedPosition == lobbyData.localMember.secondPositionPreference.toLowerCase()) {
           lane.isCorrect = true
           lane.using = localUserChampSelect.assignedPosition
         }
 
-
         for (const pair in champSelectData.actions) {
           for (const action in champSelectData.actions[pair]) {
-            // get the current action data
-            const currentAction: IAction = champSelectData.actions[pair][action] // championId, completed, id, isAllyAction, isInProgress, pickTurn, type, actorCellId
+            const currentAction: IAction = champSelectData.actions[pair][action]
   
-            // is it our action
             if (currentAction.actorCellId !== champSelectData.localPlayerCellId)
               continue
   
-            // do we want to set our runes
             if (Config.get().auto.runes.set)
               User.methods.setRunes(currentAction)
 
-            // do we want to set out spells
-            if (Config.get().auto.spells.set) {
-              // no need for lane check (imo)
+            if (Config.get().auto.spells.set)
               User.methods.setSpells(currentAction, lane.using, localUserChampSelect.spell1Id, localUserChampSelect.spell2Id)
-            }
 
-            // do we want to hover (+ lock/ban) our champion
             if (Config.get().auto.champion.set) {
-              // do we want to check the lane and are we one the right lane
               if (Config.get().auto.champion.checkLane) {
                 if (lane.isCorrect)
                   this.hoverBanLock(currentAction, lane.using)
@@ -215,42 +223,32 @@ export namespace Client {
         await Utils.sleep(pollInterval)
         this.update(pollInterval)
       },
+
       hoverBanLock: async function(currentAction: IAction, lane: string) {
-        // define all the champions we want to try and pick (from data.get<IConfig>("config.json"))
         const championPicks: ILane = convertToId(Config.get().auto.champion.lanePick)
 
-        // define all the champions we want to try and ban (from data.get<IConfig>("config.json"))
         const championBans: ILane = convertToId(Config.get().auto.champion.laneBan)
 
-        // check if we can do something
         if (!currentAction.isInProgress || currentAction.completed)
           return
         
-        // check if this is our turn to PICK
         if (currentAction.type == "pick") {
-          // check if we have a champion selected
           if (currentAction.championId == 0) // || currentAction.championId !== championPicks[lane][this.champion.index.pick]
             Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}`, { championId: championPicks[lane][this.champion.index.pick] }, "patch", false)
           
-          // check if we want to lock in our selected champion
           else if (Config.get().auto.champion.lock && currentAction.championId == championPicks[lane][this.champion.index.pick])
-          Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][this.champion.index.pick] }, "post", false)
+            Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][this.champion.index.pick] }, "post", false)
 
-          // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
           else
             this.champion.index.pick = (this.champion.index.pick == championPicks[lane].length) ? 0: this.champion.index.pick + 1
         
-          // check if this is our turn to BAN
         } else if (currentAction.type == "ban") {
-          // check if we have a champion selected
           if (currentAction.championId == 0) // || currentAction.championId !== championBans[lane][this.champion.index.ban]
-          Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][this.champion.index.ban] }, "patch", false)
+            Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][this.champion.index.ban] }, "patch", false)
           
-          // check if we want to ban our champion
           else if (Config.get().auto.champion.ban && currentAction.championId == championBans[lane][this.champion.index.ban])
-          Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][this.champion.index.ban] }, "post", false)
+            Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][this.champion.index.ban] }, "post", false)
 
-          // if we couldnt pick our champion try next champion in the list, if we had all retry the entire list?
           else
             this.champion.index.ban = (this.champion.index.ban == championBans[lane].length) ? 0: this.champion.index.ban + 1
         }
