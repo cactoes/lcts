@@ -1,11 +1,13 @@
 // built-in
-import { app } from "electron"
 import fetch from "node-fetch"
+
+// node_modules
+import { LCIClient } from "lcinterface"
+import { app } from "electron"
 
 // local
 import { Electron } from "../electron/electron"
 import { Config } from "../config/config"
-import { Interfaces } from "../interfaces/interfaces"
 import { IO } from "../io/io"
 import { Utils } from "../utils/utils"
 import { Web } from "../web/web"
@@ -17,10 +19,11 @@ export namespace Client {
   let conected = false
   export let hasSentSkillOrder = false
 
-  export async function awaitLogin(): Promise<boolean> {
+  export async function connect(): Promise<boolean> {
     while (true) {
-      if ( await Interfaces.game.virtualCall<void>(Interfaces.game.dest.gameflow, {}, "get", false).catch<boolean>(() => false) ) {
+      if ( await LCIClient.virtualCall<void>(LCIClient.endpoints.game.gameflow, "get").catch<boolean>(() => false) ) {
           conected = true
+          GameFlow.start()
           return true
         }
       await Utils.sleep(Utils.time.SECOND)
@@ -28,8 +31,10 @@ export namespace Client {
   }
 
   export function disconnect(): void {
-    if (conected) 
+    if (conected) {
       conected = false
+      GameFlow.stop()
+    }
   }
 
   export function getState(): boolean {
@@ -55,35 +60,35 @@ export namespace Client {
     gameFlowTimeout: false,
 
     start: async function() {
-      this.current = await Interfaces.game.virtualCall<GameFlows>(Interfaces.game.dest.gameflow, {}, "get").catch(() => "OutOfClient")
+      this.current = await LCIClient.virtualCall<GameFlows>(LCIClient.endpoints.game.gameflow, "get").catch(() => "OutOfClient")
 
       if (this.current !== this.last) {
         switch (this.current) {
-          case Interfaces.game.gameflow.NONE:
+          case LCIClient.game.gameflows.NONE:
             break
-          case Interfaces.game.gameflow.LOBBY:
+          case LCIClient.game.gameflows.LOBBY:
             if (Config.get().script.userScript)
               Script.event.onPartyJoin()
             break
-          case Interfaces.game.gameflow.MATCHMAKING:
+          case LCIClient.game.gameflows.MATCHMAKING:
             break
-          case Interfaces.game.gameflow.READYCHECK:
+          case LCIClient.game.gameflows.READYCHECK:
             if (Config.get().auto.acceptMatch)
               Client.methods.acceptMatch()
             break
-          case Interfaces.game.gameflow.CHAMPSELECT:
+          case LCIClient.game.gameflows.CHAMPSELECT:
             Client.methods.championSelect.update(Utils.time.SECOND)
             break
-          case Interfaces.game.gameflow.INPROGRESS:
+          case LCIClient.game.gameflows.INPROGRESS:
             Client.updateGameData(Utils.time.SECOND)
             break
-          case Interfaces.game.gameflow.ENDOFGAME:
+          case LCIClient.game.gameflows.ENDOFGAME:
             break
-          case Interfaces.game.gameflow.WAITINGFORSTATS:
+          case LCIClient.game.gameflows.WAITINGFORSTATS:
             break
         }
       
-        if (this.current !== Interfaces.game.gameflow.INPROGRESS) {
+        if (this.current !== LCIClient.game.gameflows.INPROGRESS) {
           Client.hasSentSkillOrder = false
           Client.methods.championSelect.reset()
         }
@@ -118,7 +123,7 @@ export namespace Client {
         throw new RPCError()
       
       Electron.overlay_window.webContents.send("liveClientData", liveClientData)
-      
+
       Script.methods.autoKiter.attackSpeed = 1 / liveClientData.activePlayer.championStats.attackSpeed
       
       if (!hasSentSkillOrder) {
@@ -135,7 +140,7 @@ export namespace Client {
     } catch { /* fetch failed means we are no longer in game */ }
 
     await Utils.sleep(pollInterval)
-    if (GameFlow.getCurrent() == Interfaces.game.gameflow.INPROGRESS)
+    if (GameFlow.getCurrent() == LCIClient.game.gameflows.INPROGRESS)
       updateGameData(pollInterval)
   }
 
@@ -149,9 +154,9 @@ export namespace Client {
 
   export const methods = {
     acceptMatch: async function() {
-      const readyCheckData = await Interfaces.lobby.virtualCall<ReadyCheck>(Interfaces.lobby.dest.readycheck, {}, "get")
+      const readyCheckData = await LCIClient.virtualCall<ReadyCheck>(LCIClient.endpoints.lobby.readycheck, "get")
       if (readyCheckData.playerResponse == "None")
-        Interfaces.lobby.virtualCall<void>(Interfaces.lobby.dest.matchaccept, {}, "post", false)
+        LCIClient.virtualCall<void>(LCIClient.endpoints.lobby.matchaccept, "post")
     },
     championSelect: {
       champion: {
@@ -160,23 +165,23 @@ export namespace Client {
           ban: 0
         }
       },
-      runes: {
-        set: false
-      },
+      setRunes: false,
+      setSpells: false,
 
       reset: function() {
         this.champion.index.pick = 0
         this.champion.index.ban = 0
-        this.runes.set = false
+        this.setRunes = false
+        this.setSpells = false
       },
 
       update: async function(pollInterval: number) {
-        if (GameFlow.getCurrent() !== Interfaces.game.gameflow.CHAMPSELECT)
+        if (GameFlow.getCurrent() !== LCIClient.game.gameflows.CHAMPSELECT)
           return
           
-        const lobbyData = await Interfaces.lobby.virtualCall<Lobby.ILobby>(Interfaces.lobby.dest.lobby, {}, "get")
+        const lobbyData = await LCIClient.virtualCall<Lobby.ILobby>(LCIClient.endpoints.lobby.lobby, "get")
 
-        const champSelectData = await Interfaces.game.virtualCall<IChampSelect>(Interfaces.game.dest.champselect, {}, "get")
+        const champSelectData = await LCIClient.virtualCall<IChampSelect>(LCIClient.endpoints.game.champselect, "get")
 
         if (Utils.reinterpret_cast<IRPCError>(champSelectData).httpStatus == 404)
           return
@@ -188,7 +193,7 @@ export namespace Client {
           using: Config.get().auto.champion.defaultLane
         }
 
-        if (lobbyData.gameConfig == undefined || (lobbyData.gameConfig.queueId !== Interfaces.lobby.queueId.ranked.solo_duo && lobbyData.gameConfig.queueId !== Interfaces.lobby.queueId.ranked.flex && lobbyData.gameConfig.queueId !== Interfaces.lobby.queueId.normal.draft)) {
+        if (lobbyData.gameConfig == undefined || (lobbyData.gameConfig.queueId !== LCIClient.game.queueId.ranked.solo_duo && lobbyData.gameConfig.queueId !== LCIClient.game.queueId.ranked.flex && lobbyData.gameConfig.queueId !== LCIClient.game.queueId.normal.draft)) {
           lane.isCorrect = true
         } 
         else if (localUserChampSelect.assignedPosition == lobbyData.localMember.firstPositionPreference.toLowerCase() || localUserChampSelect.assignedPosition == lobbyData.localMember.secondPositionPreference.toLowerCase()) {
@@ -203,11 +208,17 @@ export namespace Client {
             if (currentAction.actorCellId !== champSelectData.localPlayerCellId)
               continue
   
-            if (Config.get().auto.runes.set)
-              User.methods.setRunes(currentAction)
+            if (Config.get().auto.runes.set && !this.setRunes) {
+              if (currentAction.completed && currentAction.type == "pick") {
+                this.setRunes = true
+                User.methods.setRunes(currentAction)
+              }
+            }
 
-            if (Config.get().auto.spells.set)
+            if (Config.get().auto.spells.set && !this.setSpells) {
+              this.setSpells = true
               User.methods.setSpells(currentAction, lane.using, localUserChampSelect.spell1Id, localUserChampSelect.spell2Id)
+            }
 
             if (Config.get().auto.champion.set) {
               if (Config.get().auto.champion.checkLane) {
@@ -234,20 +245,20 @@ export namespace Client {
         
         if (currentAction.type == "pick") {
           if (currentAction.championId == 0) // || currentAction.championId !== championPicks[lane][this.champion.index.pick]
-            Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}`, { championId: championPicks[lane][this.champion.index.pick] }, "patch", false)
+            LCIClient.virtualCall<void>(LCIClient.endpoints.game.action + `/${currentAction.id}`, "patch", { championId: championPicks[lane][this.champion.index.pick] })
           
           else if (Config.get().auto.champion.lock && currentAction.championId == championPicks[lane][this.champion.index.pick])
-            Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][this.champion.index.pick] }, "post", false)
+            LCIClient.virtualCall<void>(LCIClient.endpoints.game.action + `/${currentAction.id}/complete`, "post", { championId: championPicks[lane][this.champion.index.pick] })
 
           else
             this.champion.index.pick = (this.champion.index.pick == championPicks[lane].length) ? 0: this.champion.index.pick + 1
         
         } else if (currentAction.type == "ban") {
           if (currentAction.championId == 0) // || currentAction.championId !== championBans[lane][this.champion.index.ban]
-            Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}`, { championId: championBans[lane][this.champion.index.ban] }, "patch", false)
+            LCIClient.virtualCall<void>(LCIClient.endpoints.game.action + `/${currentAction.id}`, "patch", { championId: championBans[lane][this.champion.index.ban] })
           
           else if (Config.get().auto.champion.ban && currentAction.championId == championBans[lane][this.champion.index.ban])
-            Interfaces.game.virtualCall<void>(Interfaces.game.dest.action + `/${currentAction.id}/complete`, { championId: championPicks[lane][this.champion.index.ban] }, "post", false)
+            LCIClient.virtualCall<void>(LCIClient.endpoints.game.action + `/${currentAction.id}/complete`, "post", { championId: championPicks[lane][this.champion.index.ban] })
 
           else
             this.champion.index.ban = (this.champion.index.ban == championBans[lane].length) ? 0: this.champion.index.ban + 1

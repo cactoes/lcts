@@ -479,7 +479,8 @@ interface IItems {
 }
 
 interface IRenderData {
-  typeID: number
+  typeID: number,
+  path: string
   data: {
     state: boolean
     text: string

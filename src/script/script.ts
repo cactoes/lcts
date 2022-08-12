@@ -4,6 +4,7 @@ import * as vm from "vm"
 // node_modules
 import * as outputAPI from "@nut-tree/nut-js"
 import inputAPI from "gkm"
+import { LCIClient } from "lcinterface"
 
 // local
 import { IO } from "../io/io"
@@ -12,7 +13,6 @@ import { Lobby } from "../client/lobby"
 import { User } from "../client/user"
 import * as window from "./activeWindow"
 import { Client } from "../client/client"
-import { Interfaces } from "../interfaces/interfaces"
 import { Utils } from "../utils/utils"
 
 const sandbox = vm.createContext()
@@ -39,7 +39,7 @@ export namespace Script {
         if (this.isRunning)
           return
         
-        if (Client.GameFlow.getCurrent() !== Interfaces.game.gameflow.INPROGRESS || !Config.get().script.auto.kiter.enabled)
+        if (Client.GameFlow.getCurrent() !== LCIClient.game.gameflows.INPROGRESS || !Config.get().script.auto.kiter.enabled)
           return
         
         this.isRunning = true

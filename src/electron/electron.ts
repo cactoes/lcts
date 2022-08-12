@@ -3,7 +3,7 @@ import { overlayWindow } from "electron-overlay-window"
 
 export namespace Electron {
   export let overlay_window: BrowserWindow
-  export let main_window: BrowserWindow
+  export let uiWindow: BrowserWindow
 
   export const notification = (title: string, body: string): void => new Notification({ title , body }).show() 
 
@@ -23,7 +23,7 @@ export namespace Electron {
     overlayWindow.attachTo(overlay_window, 'League of Legends (TM) Client')
     //overlay_window.webContents.openDevTools({ mode: 'detach', activate: false })
   
-    main_window = new BrowserWindow({
+    uiWindow = new BrowserWindow({
       width: 950,
       height: 550,
       autoHideMenuBar: true,
@@ -36,11 +36,11 @@ export namespace Electron {
       }
     })
   
-    main_window.loadFile("html/main/index.html")
-    main_window.setIgnoreMouseEvents(false)
-    //main_window.webContents.openDevTools({ mode: 'detach', activate: false })
+    uiWindow.loadFile("html/main/index.html")
+    uiWindow.setIgnoreMouseEvents(false)
+    uiWindow.webContents.openDevTools({ mode: 'detach', activate: false })
   
-    main_window.on("close", () => {
+    uiWindow.on("close", () => {
       app.quit()
     })
   }

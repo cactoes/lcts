@@ -1,43 +1,37 @@
 // node_modules
 import { app } from "electron"
+import { LCIClient } from "lcinterface"
 
 // local
 import { Config } from "../config/config"
-import { Interfaces } from "../interfaces/interfaces"
 import { IO } from "../io/io"
 import { Utils } from "../utils/utils"
 import { Web } from "../web/web"
-import { Client } from "./client"
 
 export namespace User {
   export const methods: Methods ={
     setStatus: async function(status: string) {
-      let user_data = await Interfaces.user.virtualCall<IUser>(Interfaces.user.dest.me, {}, "get")
+      let user_data = await LCIClient.virtualCall<IUser>(LCIClient.endpoints.user.me, "get")
       user_data.statusMessage = status
-      return await Interfaces.user.virtualCall<IUser>(Interfaces.user.dest.me, user_data, "put")
+      return await LCIClient.virtualCall<IUser>(LCIClient.endpoints.user.me, "put", user_data)
     },
     setRank: async function(tier: string, rank: string) {
-      let user_data = await Interfaces.user.virtualCall<IUser>(Interfaces.user.dest.me, {}, "get")
+      let user_data = await LCIClient.virtualCall<IUser>(LCIClient.endpoints.user.me, "get")
       user_data.lol.rankedLeagueTier = tier
       user_data.lol.rankedLeagueDivision = rank
-      return await Interfaces.user.virtualCall<IUser>(Interfaces.user.dest.me, user_data, "put")
+      return await LCIClient.virtualCall<IUser>(LCIClient.endpoints.user.me, "put", user_data)
     },
     setRunes: async function(currentAction: IAction) {
-      if (Client.methods.championSelect.runes.set || !(currentAction.completed && currentAction.type == "pick"))
-        return
-
-      Client.methods.championSelect.runes.set = true
-
       const currentChampionName = Utils.getKeyByValue(IO.file.get<IChampionTable>("resources/data/championTable.json").data, currentAction.championId).toLowerCase()
 
       const new_rune = await Web.getRune(currentChampionName, Config.get().auto.runes.prefix, app)
 
-      const user_runes = await Interfaces.runes.virtualCall<ISavedRune[]>(Interfaces.runes.dest.runes, {}, "get")
-      
-      const target_rune: ISavedRune | undefined = user_runes.find((r: ISavedRune) => r.name.startsWith(Config.get().auto.runes.prefix))
+      const user_runes = await LCIClient.virtualCall<ISavedRune[]>(LCIClient.endpoints.runes.runes, "get")
+
+      const target_rune: ISavedRune | undefined = user_runes.find((rune: ISavedRune) => rune.name.startsWith(Config.get().auto.runes.prefix))
 
       if (target_rune)
-        await Interfaces.runes.virtualCall<void>(Interfaces.runes.dest.runes + `/${target_rune?.id}`, new_rune, "put", false)
+        await LCIClient.virtualCall<void>(LCIClient.endpoints.runes.runes + `/${target_rune?.id}`, "put", new_rune)
     },
     setSpells: async function(currentAction: IAction, lane: string, spell1Id: number, spell2Id: number) {
       const summonerSpells: ILane = {
@@ -45,13 +39,13 @@ export namespace User {
       }
 
       for (const lane in Config.get().auto.spells.lane) {
-        summonerSpells[lane][0] = Interfaces.runes.spell[ Config.get().auto.spells.lane[lane][0] ].id
-        summonerSpells[lane][1] = Interfaces.runes.spell[ Config.get().auto.spells.lane[lane][1] ].id
+        summonerSpells[lane][0] = LCIClient.game.spells[ Config.get().auto.spells.lane[lane][0] ].id
+        summonerSpells[lane][1] = LCIClient.game.spells[ Config.get().auto.spells.lane[lane][1] ].id
       }
 
       if (currentAction.completed && currentAction.type == "pick") {
         if (spell1Id !== summonerSpells[lane][0] || spell2Id !== summonerSpells[lane][1])
-          await Interfaces.runes.virtualCall<void>(Interfaces.runes.dest.spells, { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] }, "patch", false)
+          await LCIClient.virtualCall<void>(LCIClient.endpoints.runes.spells, "patch", { spell1Id: summonerSpells[lane][0], spell2Id: summonerSpells[lane][1] })
       }
     }
   }

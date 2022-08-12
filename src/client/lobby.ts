@@ -1,24 +1,24 @@
-import { Interfaces } from "../interfaces/interfaces"
+import { LCIClient } from "lcinterface"
 
 export namespace Lobby {
   export const methods: Methods = {
     setLanes: async function(firstPreference: string, secondPreference: string) {
-      return await Interfaces.lobby.virtualCall<Promise<void>>(Interfaces.lobby.dest.position, { firstPreference, secondPreference }, "put", false)
+      return await LCIClient.virtualCall<Promise<void>>(LCIClient.endpoints.lobby.position, "put", { firstPreference, secondPreference })
     },
     create: async function(queueId: number) {
-      return await Interfaces.lobby.virtualCall<Promise<ILobby>>(Interfaces.lobby.dest.lobby, { queueId }, "post")
+      return await LCIClient.virtualCall<Promise<ILobby>>(LCIClient.endpoints.lobby.lobby, "post", { queueId })
     },
     leave: async function() {
-      return await Interfaces.lobby.virtualCall<Promise<void>>(Interfaces.lobby.dest.lobby, { }, "delete", false)
+      return await LCIClient.virtualCall<Promise<void>>(LCIClient.endpoints.lobby.lobby, "delete")
     },
     setPartyType: async function(type: string) {
-      return await Interfaces.lobby.virtualCall<Promise<void>>(Interfaces.lobby.dest.partytype, type, "put", false)
+      return await LCIClient.virtualCall<Promise<void>>(LCIClient.endpoints.lobby.partytype, "put", type)
     },
     startSearch: async function() {
-      return await Interfaces.lobby.virtualCall<Promise<void>>(Interfaces.lobby.dest.search, {}, "post", false)
+      return await LCIClient.virtualCall<Promise<void>>(LCIClient.endpoints.lobby.search, "post")
     },
     stopSearch: async function() {
-      return await Interfaces.lobby.virtualCall<Promise<void>>(Interfaces.lobby.dest.search, {}, "delete", false)
+      return await LCIClient.virtualCall<Promise<void>>(LCIClient.endpoints.lobby.search, "delete")
     }
   }
 

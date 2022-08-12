@@ -60,7 +60,7 @@
     "electron-overlay-window": "^2.0.1",
     "ffi-napi": "^4.0.3",
     "gkm": "^0.2.0",
-    "lcinterface": "^4.0.0",
+    "lcinterface": "^4.1.2",
     "node-fetch": "^2.6.1",
     "openurl": "^1.1.1",
     "puppeteer-core": "^16.1.0",

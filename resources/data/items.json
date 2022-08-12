@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "12.14.1",
+  "version": "12.15.1",
   "basic": {
     "name": "",
     "rune": {
@@ -581,7 +581,7 @@
     },
     "1035": {
       "name": "Emberknife",
-      "description": "<mainText><stats></stats>7% Omnivamp vs. Monsters<br><li><passive>Sear:</passive> Damaging Monsters burns them for <magicDamage>(60 + 30% Ability Power + 5% bonus Attack Damage + 2% bonus Health) magic damage</magicDamage> over 5 seconds.<li><passive>Challenging Path:</passive> Smiting 5 times consumes this item upgrade your Smite to <attention>Challenging Smite</attention> and increases its damage to monsters. Challenging Smite marks champions for 4 seconds. During this time, you deal  <truedamage>48 - 125 (based on level)</truedamage> bonus true damage to them over 2.5 seconds on hit and take 10% reduced damage from them.<li><passive>Huntsman:</passive> Killing Large Monsters grants bonus experience.<li><passive>Recoup:</passive> Regen up to 8 - 18 (based on level) mana per second when in the Jungle or River. <br><br><rules><status>Consuming</status> this item grants all item effects permanently and increases Smite damage to monsters. If you have gained more gold from minions than jungle monsters, gold and experience from minions is heavily reduced. Healing is not reduced on AoE attacks. If two levels behind the average champion level of the game, monster kills grant bonus experience. </rules><br><rules>Only attacks and abilities apply Challenging Smite's burn</rules></mainText><br>",
+      "description": "<mainText><stats></stats><li><passive>Sear:</passive> Damaging Monsters burns them over time.<li><passive>Challenging Path:</passive> Smiting 5 times consumes this item upgrade your Smite to <attention>Challenging Smite</attention> and increases its damage to monsters. Challenging Smite marks champions. During this time, you deal bonus true damage to them on hit and take reduced damage from them.<li><passive>Huntsman:</passive> Killing Large Monsters grants bonus experience.<li><passive>Recoup:</passive> Regen mana when in the Jungle or River. <br><br><rules><status>Consuming</status> this item grants all item effects permanently and increases Smite damage to monsters. If you have gained more gold from minions than jungle monsters, gold and experience from minions is heavily reduced. Healing is not reduced on AoE attacks. If two levels behind the average champion level of the game, monster kills grant bonus experience. </rules><br><br><rules>Only attacks and abilities apply Challenging Smite's burn</rules></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "image": {
@@ -761,7 +761,7 @@
     },
     "1039": {
       "name": "Hailblade",
-      "description": "<mainText><stats></stats>7% Omnivamp vs. Monsters<br><li><passive>Sear:</passive> Damaging Monsters burns them for <magicDamage>(60 + 30% Ability Power + 5% bonus Attack Damage + 2% bonus Health) magic damage</magicDamage> over 5 seconds.<li><passive>Chilling Path:</passive> Smiting 5 times consumes this item upgrade your Smite to <attention>Chilling Smite</attention> and increases its damage to monsters. When smiting champions Chilling Smite deals <truedamage>20 - 156 (based on level)</truedamage> true damage and steals 20% of their Move Speed for 2 seconds.<li><passive>Huntsman:</passive> Killing Large Monsters grants bonus experience.<li><passive>Recoup:</passive> Regen up to 8 - 18 (based on level) mana per second when in the Jungle or River. <br><br><rules><status>Consuming</status> this item grants all item effects permanently and increases Smite damage to monsters. If you have gained more gold from minions than jungle monsters, gold and experience from minions is heavily reduced. Healing is not reduced on AoE attacks. If two levels behind the average champion level of the game, monster kills grant bonus experience. </rules><br><br></mainText><br>",
+      "description": "<mainText><stats></stats><li><passive>Sear:</passive> Damaging Monsters burns them over time.<li><passive>Chilling Path:</passive> Smiting 5 times consumes this item upgrade your Smite to <attention>Chilling Smite</attention> and increases its damage to monsters. When smiting champions Chilling Smite deals true damage and steals their Move Speed.<li><passive>Huntsman:</passive> Killing Large Monsters grants bonus experience.<li><passive>Recoup:</passive> Regen mana when in the Jungle or River. <br><br><rules><status>Consuming</status> this item grants all item effects permanently and increases Smite damage to monsters. If you have gained more gold from minions than jungle monsters, gold and experience from minions is heavily reduced. Healing is not reduced on AoE attacks. If two levels behind the average champion level of the game, monster kills grant bonus experience. </rules><br><br></mainText><br>",
       "colloq": ";jungle;Jungle",
       "plaintext": "Provides damage against Monsters and Mana Regen in the Jungle",
       "image": {
@@ -800,7 +800,7 @@
     },
     "1040": {
       "name": "Obsidian Edge",
-      "description": "<mainText><stats></stats>8% Omnivamp vs. Monsters<br><li><passive>Sear:</passive> Damaging Monsters burns them for <magicDamage>(60 + 30% Ability Power + 5% bonus Attack Damage + 2% bonus Health) magic damage</magicDamage> over 5 seconds.<li><passive>Auto Path:</passive> Smiting 5 times consumes this item upgrade your Attack-Smite, increasing its damage to monsters.<li><passive>Huntsman:</passive> Killing Large Monsters grants bonus experience.<li><passive>Recoup:</passive> Regen up to 8 - 18 (based on level) mana per second when in the Jungle or River. <br><br><rules><status>Consuming</status> this item grants all item effects permanently and increases Smite damage to monsters. If you have gained more gold from minions than jungle monsters, gold and experience from minions is heavily reduced. Healing is not reduced on AoE attacks. If two levels behind the average champion level of the game, monster kills grant bonus experience. </rules></mainText><br>",
+      "description": "<mainText><stats></stats><li><passive>Sear:</passive> Damaging Monsters burns them over time.<li><passive>Auto Path:</passive> Smiting 5 times consumes this item upgrade your Attack-Smite, increasing its damage to monsters.<li><passive>Huntsman:</passive> Killing Large Monsters grants bonus experience.<li><passive>Recoup:</passive> Regen mana when in the Jungle or River. <br><br><rules><status>Consuming</status> this item grants all item effects permanently and increases Smite damage to monsters. If you have gained more gold from minions than jungle monsters, gold and experience from minions is heavily reduced. Healing is not reduced on AoE attacks. If two levels behind the average champion level of the game, monster kills grant bonus experience. </rules></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "image": {
@@ -883,7 +883,7 @@
     },
     "1043": {
       "name": "Recurve Bow",
-      "description": "<mainText><stats><attention>25%</attention> Attack Speed</stats><br><li><passive>Steeltipped:</passive> Attacks apply <physicalDamage>15 physical damage</physicalDamage> <OnHit>On-Hit</OnHit>.</mainText><br>",
+      "description": "<mainText><stats><attention>25%</attention> Attack Speed</stats><br><li><passive>Steeltipped:</passive> Attacks apply damage <OnHit>On-Hit</OnHit>.</mainText><br>",
       "colloq": ";",
       "plaintext": "Greatly increases Attack Speed",
       "from": [
@@ -1027,7 +1027,7 @@
     },
     "1054": {
       "name": "Doran's Shield",
-      "description": "<mainText><stats><attention>80</attention> Health</stats><br><li><passive>Focus:</passive> Attacks deal an additional <physicalDamage>5 physical damage</physicalDamage> to minions.<li><passive>Recovery:</passive> Restores <healing>6 Health</healing> every 5 seconds.<li><passive>Endure:</passive> Restores up to <healing>40 Health</healing> over 8 seconds after taking damage from a champion, large jungle monster, or epic jungle monster. Restoration increases when you are low Health.<br><br><rules><passive>Endure</passive> 66% effective when owned by Ranged champions or when taking damage from area of effect or periodic damage sources.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>80</attention> Health</stats><br><li><passive>Focus:</passive> Attacks deal additional damage to minions.<li><passive>Recovery:</passive> Restores Health over time.<li><passive>Endure:</passive> Restores Health after taking damage from a champion, large jungle monster, or epic jungle monster. Restoration increases when you are low Health.<br><br><rules><passive>Endure</passive> 66% effective when owned by Ranged champions or when taking damage from area of effect or periodic damage sources.</rules></mainText><br>",
       "colloq": ";dshield",
       "plaintext": "Good defensive starting item",
       "image": {
@@ -1069,7 +1069,7 @@
     },
     "1055": {
       "name": "Doran's Blade",
-      "description": "<mainText><stats><attention>8</attention> Attack Damage<br><attention>80</attention> Health</stats><br><li><passive>Warmonger:</passive> Gain <lifeSteal>2.5% Omnivamp</lifeSteal>.<br><br><rules>Omnivamp is only 33% effective when dealing area of effect damage or damage through pets.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>8</attention> Attack Damage<br><attention>80</attention> Health</stats><br><li><passive>Warmonger:</passive> Gain Omnivamp.<br><br><rules>Omnivamp is only 33% effective when dealing area of effect damage or damage through pets.</rules></mainText><br>",
       "colloq": ";dblade",
       "plaintext": "Good starting item for attackers",
       "image": {
@@ -1106,7 +1106,7 @@
     },
     "1056": {
       "name": "Doran's Ring",
-      "description": "<mainText><stats><attention>15</attention> Ability Power<br><attention>70</attention> Health</stats><br><li><passive>Focus:</passive> Attacks deal an additional <physicalDamage>5 physical damage</physicalDamage> to minions. <li><passive>Drain:</passive> Restore <scaleMana>1 Mana</scaleMana> every second. Damaging an enemy champion increases this amount to <scaleMana>1.5 Mana</scaleMana> every second for 10 seconds. If you can't gain Mana, regenerate 45% of the value as Health instead. </mainText><br>",
+      "description": "<mainText><stats><attention>15</attention> Ability Power<br><attention>70</attention> Health</stats><br><li><passive>Focus:</passive> Attacks deal additional damage to minions. <li><passive>Drain:</passive> Restore Mana every second. Damaging an enemy champion increases this amount. If you can't gain Mana, regenerate Health instead. </mainText><br>",
       "colloq": ";dring",
       "plaintext": "Good starting item for casters",
       "image": {
@@ -1261,7 +1261,7 @@
     },
     "1083": {
       "name": "Cull",
-      "description": "<mainText><stats><attention>7</attention> Attack Damage</stats><br><li>Attacks restore <healing>3 Health</healing> per hit.<li><passive>Reap:</passive> Killing a lane minion grants <goldGain>1</goldGain> additional gold. Killing 100 lane minions grants an additional <goldGain>350</goldGain> bonus gold immediately and disables <passive>Reap</passive>.<br></mainText><br>",
+      "description": "<mainText><stats><attention>7</attention> Attack Damage</stats><br><li>Attacks restore Health per hit.<li><passive>Reap:</passive> Killing a lane minion grants <goldGain>1</goldGain> additional gold. Killing 100 lane minions grants an additional <goldGain>350</goldGain> bonus gold immediately and disables <passive>Reap</passive>.<br></mainText><br>",
       "colloq": ";dblade",
       "plaintext": "Provides damage and Life Steal on hit - Killing minions grant bonus Gold",
       "image": {
@@ -2038,7 +2038,7 @@
     },
     "2015": {
       "name": "Kircheis Shard",
-      "description": "<mainText><stats><attention>15%</attention> Attack Speed</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Jolt:</passive> Energized Attacks gain an additional <magicDamage>80 magic damage</magicDamage>.</mainText><br>",
+      "description": "<mainText><stats><attention>15%</attention> Attack Speed</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Jolt:</passive> Energized Attacks gain additional damage.</mainText><br>",
       "colloq": ";",
       "plaintext": "Attack speed and a chargable magic hit",
       "from": [
@@ -2156,7 +2156,7 @@
     },
     "2051": {
       "name": "Guardian's Horn",
-      "description": "<mainText><stats><attention>150</attention> Health</stats><br><li><passive>Recovery:</passive> Restores <healing>20 Health</healing> every 5 seconds.<li><passive>Undaunted:</passive> Blocks 15 damage from attacks and spells from champions (25% effectiveness vs. damage over time abilities).<li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
+      "description": "<mainText><stats><attention>150</attention> Health</stats><br><li><passive>Recovery:</passive> Restores Health over time.<li><passive>Undaunted:</passive> Blocks damage from attacks and spells from champions.<li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
       "colloq": "Golden Arm of Kobe;Golden Bicep of Kobe;Horn; Horn of the ManWolf; ManWolf",
       "plaintext": "Good starting item for tanks",
       "image": {
@@ -2269,7 +2269,7 @@
     },
     "2065": {
       "name": "Shurelya's Battlesong",
-      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Inspire:</active> Grants nearby allies <speed>30% Move Speed</speed> for 4 seconds (75s cooldown).<br><li><passive>Motivate:</passive> Empowering or Protecting another ally Champion grants both allies <speed>25% Move Speed</speed> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br><br><rules>An ally can only be affected by <keywordMajor>Motivate</keywordMajor> once every 4 seconds.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Inspire:</active> Grants nearby allies Move Speed.<li><passive>Motivate:</passive> Empowering or Protecting another ally Champion grants both allies Move Speed.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.<br></mainText><br>",
       "colloq": ";shurelya;reverie;",
       "plaintext": "Activate to speed up nearby allies.",
       "from": [
@@ -2729,7 +2729,7 @@
     },
     "3001": {
       "name": "Evenshroud",
-      "description": "<mainText><stats><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>30</attention> Armor<br><attention>30</attention> Magic Resist</stats><br><li><passive>Coruscation:</passive> After <status>Immobilizing</status> champions or being <status>Immobilized</status>, cause that target and all nearby enemy Champions to take 9% increased damage for 4 seconds. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5 Armor and Magic Resist</attention></mainText><br>",
+      "description": "<mainText><stats><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>30</attention> Armor<br><attention>30</attention> Magic Resist</stats><br><li><passive>Coruscation:</passive> After <status>Immobilizing</status> champions or being <status>Immobilized</status>, cause that target and all nearby enemy Champions to take increased damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention> Armor and Magic Resist</attention></mainText><br>",
       "colloq": ";",
       "plaintext": "Nearby enemies take more magic damage",
       "from": [
@@ -2775,7 +2775,7 @@
     },
     "3003": {
       "name": "Archangel's Staff",
-      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>500</attention> Mana<br><attention>200</attention> Health</stats><br><li><passive>Awe:</passive> Gain Ability Haste equal to <scaleMana>0.5% bonus Mana.</scaleMana><li><passive>Mana Charge:</passive> Strike a target with an Ability to consume a charge and gain <scaleMana>3 bonus Mana</scaleMana>, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Seraph's Embrace</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>500</attention> Mana<br><attention>200</attention> Health</stats><br><li><passive>Awe:</passive> Gain Ability Haste equal to  bonus Mana.<li><passive>Mana Charge:</passive> Strike a target with an Ability to consume a charge and gain 3 bonus Mana, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Seraph's Embrace</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
       "colloq": "",
       "plaintext": "Increases Ability Power based on maximum Mana",
       "from": [
@@ -2820,7 +2820,7 @@
     },
     "3004": {
       "name": "Manamune",
-      "description": "<mainText><stats><attention>35</attention> Attack Damage<br><attention>500</attention> Mana<br><attention>15</attention> Ability Haste</stats><br><li><passive>Awe:</passive> Gain bonus <scaleAD>Attack Damage equal to 2.5% max Mana</scaleAD>. <li><passive>Mana Charge:</passive> Strike a target with an Ability or Attack to consume a charge and gain <scaleMana>3 bonus Mana</scaleMana>, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Muramana</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
+      "description": "<mainText><stats><attention>35</attention> Attack Damage<br><attention>500</attention> Mana<br><attention>15</attention> Ability Haste</stats><br><li><passive>Awe:</passive> Gain bonus <scaleAD>Attack Damage equal to your max Mana</scaleAD>. <li><passive>Mana Charge:</passive> Strike a target with an Ability or Attack to consume a charge and gain <scaleMana>3 bonus Mana</scaleMana>, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Muramana</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
       "colloq": "",
       "plaintext": "Increases Attack Damage based on maximum Mana",
       "from": [
@@ -3247,7 +3247,7 @@
     },
     "3036": {
       "name": "Lord Dominik's Regards",
-      "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>30%</attention> Armor Penetration</stats><br><li><passive>Giant Slayer:</passive> Deal up to <physicalDamage>15% bonus physical damage</physicalDamage> against champions with greater max Health than you.<br><br><rules>Max damage increase reached when Health difference is greater than 2000.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>30%</attention> Armor Penetration</stats><br><li><passive>Giant Slayer:</passive> Deal bonus physical damage against champions with greater max Health than you.</mainText><br>",
       "colloq": ";lw",
       "plaintext": "Overcomes enemies with high health and armor",
       "from": [
@@ -3411,7 +3411,7 @@
     },
     "3044": {
       "name": "Phage",
-      "description": "<mainText><stats><attention>15</attention> Attack Damage<br><attention>200</attention> Health</stats><br><li><passive>Sturdy:</passive> After you deal physical damage to a champion, restore <healing>1.6% max Health</healing> over 6 seconds.<br><br><rules>Restoration reduced to 50% for Ranged users.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>15</attention> Attack Damage<br><attention>200</attention> Health</stats><br><li><passive>Sturdy:</passive> After you deal physical damage to a champion, restore Health over time.<br><br><rules>Restoration reduced for Ranged users.</rules></mainText><br>",
       "colloq": ";",
       "plaintext": "Attacks and kills give a small burst of speed",
       "from": [
@@ -3466,7 +3466,7 @@
     },
     "3046": {
       "name": "Phantom Dancer",
-      "description": "<mainText><stats><attention>20</attention> Attack Damage<br><attention>25%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Move Speed</stats><br><li><passive>Spectral Waltz:</passive> Attacks grant <status>Ghosting</status> and <speed>7% Move Speed</speed> for 3 seconds. In addition, Attacking 4 times causes Spectral Waltz to also grant <attackSpeed>30% Attack Speed</attackSpeed> for the same duration.<br><br><rules><status>Ghosted</status> units ignore collision with other units.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>20</attention> Attack Damage<br><attention>25%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Move Speed</stats><br><li><passive>Spectral Waltz:</passive> Attacks grant <status>Ghosting</status> and stacking increased Move Speed. In addition, Attacking 4 times causes Spectral Waltz to also grant Attack Speed.<br><br><rules><status>Ghosted</status> units ignore collision with other units.</rules></mainText><br>",
       "colloq": ";pd",
       "plaintext": "Move faster while attacking enemies and gain a shield when on low health.",
       "from": [
@@ -3574,7 +3574,7 @@
     },
     "3050": {
       "name": "Zeke's Convergence",
-      "description": "<mainText><stats><attention>250</attention> Health<br><attention>35</attention> Armor<br><attention>250</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Conduit:</active> Designate an <attention>Accomplice</attention> (60s cooldown).<br><li><passive>Convergence:</passive> For 8 seconds after you <status>Immobilize</status> an enemy, your <attention>Accomplice's</attention> Attacks and Ability hits apply an additional <magicDamage>(30 - 70 (based on level)(+1.5% max Health)(+7.5% Ability Power) magic damage</magicDamage> to that enemy.<br><br><rules>Champions can only be linked by one Zeke's Convergence at a time.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>250</attention> Health<br><attention>35</attention> Armor<br><attention>250</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Conduit:</active> Designate an <attention>Accomplice</attention>.<br><li><passive>Convergence:</passive> After you <status>Immobilize</status> an enemy, your <attention>Accomplice's</attention> Attacks and Ability hits apply additional damage to that enemy.<br><br><rules>Champions can only be linked by one Zeke's Convergence at a time.</rules></mainText><br>",
       "colloq": ";haroldandkumar",
       "plaintext": "Grants you and your ally bonuses when you cast your ultimate.",
       "from": [
@@ -3620,7 +3620,7 @@
     },
     "3051": {
       "name": "Hearthbound Axe",
-      "description": "<mainText><stats><attention>15</attention> Attack Damage<br><attention>15%</attention> Attack Speed</stats><br><li><passive>Nimble:</passive> Attacking a unit grants <speed>(20 | 10 for Ranged champions) Move Speed</speed> for 2 seconds.</mainText><br>",
+      "description": "<mainText><stats><attention>15</attention> Attack Damage<br><attention>15%</attention> Attack Speed</stats><br><li><passive>Nimble:</passive> Attacking a unit grants Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -3671,7 +3671,7 @@
     },
     "3053": {
       "name": "Sterak's Gage",
-      "description": "<mainText><stats><attention>400</attention> Health</stats><br><li><passive>The Claws that Catch:</passive> Gain 45% of base AD as bonus Attack Damage.<li><passive>Lifeline:</passive> Upon taking damage that would reduce your Health below 30%, gain a <shield>75% Bonus HP Shield</shield>, decaying over 3.75 seconds (60s ).</mainText><br>",
+      "description": "<mainText><stats><attention>400</attention> Health</stats><br><li><passive>The Claws that Catch:</passive> Gain base AD as bonus Attack Damage.<li><passive>Lifeline:</passive> Upon taking damage that would reduce your Health below 30%, gain a Shield, decaying over time.</mainText><br>",
       "colloq": ";juggernaut;primal",
       "plaintext": "Shields against large bursts of damage",
       "from": [
@@ -3711,7 +3711,7 @@
     },
     "3057": {
       "name": "Sheen",
-      "description": "<mainText><stats></stats><br><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with an additional <physicalDamage>(100% base Attack Damage) physical damage</physicalDamage> <OnHit>On-Hit</OnHit> (1.5s cooldown). </mainText><br>",
+      "description": "<mainText><stats></stats><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with additional damage.</mainText><br>",
       "colloq": ";",
       "plaintext": "Grants a bonus to next attack after spell cast",
       "into": [
@@ -3748,7 +3748,7 @@
     },
     "3065": {
       "name": "Spirit Visage",
-      "description": "<mainText><stats><attention>450</attention> Health<br><attention>50</attention> Magic Resist<br><attention>10</attention> Ability Haste<br><attention>100%</attention> Base Health Regen</stats><br><li><passive>Boundless Vitality:</passive> Increases all Healing and Shielding effectiveness on you by 25%.</mainText><br>",
+      "description": "<mainText><stats><attention>450</attention> Health<br><attention>50</attention> Magic Resist<br><attention>10</attention> Ability Haste<br><attention>100%</attention> Base Health Regen</stats><br><li><passive>Boundless Vitality:</passive> Increases all Healing and Shielding effectiveness on you.</mainText><br>",
       "colloq": ";sv",
       "plaintext": "Increases Health and healing effects",
       "from": [
@@ -3897,7 +3897,7 @@
     },
     "3068": {
       "name": "Sunfire Aegis",
-      "description": "<mainText><stats><attention>450</attention> Health<br><attention>35</attention> Armor<br><attention>35</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Immolate:</passive> Taking or dealing damage causes you to begin dealing <magicDamage>(12 - 30 (based on level) + 1% bonus Health) magic damage</magicDamage> per second to nearby enemies (increased by 25% against minions and 150% against monsters) for 3 seconds. Damaging Champions or Epic Monsters with this effect adds a stack, increasing subsequent <passive>Immolate</passive> damage by 10% for 5 seconds (max stacks 6).<li><passive>Flametouch:</passive> At maximum <passive>Immolate</passive> stacks, your Attacks burn nearby enemies for your <passive>Immolate</passive> damage per second for 3 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5%</attention> Tenacity and Slow Resist and <attention>50</attention> Health.</mainText><br>",
+      "description": "<mainText><stats><attention>450</attention> Health<br><attention>35</attention> Armor<br><attention>35</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Immolate:</passive> Taking or dealing damage causes you to begin dealing damage per second to nearby enemies (increased against minions and monsters). Damaging Champions or Epic Monsters with this effect adds a stack, increasing subsequent <passive>Immolate</passive> damage.<li><passive>Flametouch:</passive> At maximum <passive>Immolate</passive> stacks, your Attacks burn nearby enemies for your <passive>Immolate</passive> damage per second.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Tenacity, Slow Resist, and Health.</mainText><br>",
       "colloq": ";",
       "plaintext": "High armor. Constantly deals damage to nearby enemies. Immobilize enemies to release a wave of damaging flame",
       "from": [
@@ -3945,7 +3945,7 @@
     },
     "3070": {
       "name": "Tear of the Goddess",
-      "description": "<mainText><stats><attention>240</attention> Mana</stats><br><li><passive>Focus:</passive> Attacks deal an additional <physicalDamage>5 physical damage</physicalDamage> to Minions.<li><passive>Mana Charge:</passive> Strike a target with an Ability to consume a charge and gain <scaleMana>3 bonus Mana</scaleMana>, doubled if the target is a champion. Grants a maximum of 360 Mana.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
+      "description": "<mainText><stats><attention>240</attention> Mana</stats><br><li><passive>Focus:</passive> Attacks deal additional physical damage to Minions.<li><passive>Mana Charge:</passive> Strike a target with an Ability to consume a charge and gain <scaleMana>3 bonus Mana</scaleMana>, doubled if the target is a champion. Grants a maximum of 360 Mana.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
       "colloq": "",
       "plaintext": "Increases maximum Mana as Mana is spent",
       "into": [
@@ -3984,7 +3984,7 @@
     },
     "3071": {
       "name": "Black Cleaver",
-      "description": "<mainText><stats><attention>45</attention> Attack Damage<br><attention>350</attention> Health<br><attention>30</attention> Ability Haste</stats><br><li><passive>Carve:</passive> Dealing physical damage to a champion applies a stack of <scaleArmor>5% Armor reduction</scaleArmor> for 6 seconds (max <scaleArmor>30% Armor reduction</scaleArmor>).<li><passive>Rage:</passive> Dealing physical damage to a champion grants 3 Move Speed per stack of <unique>Carve</unique> on them for 2 seconds.</mainText><br>",
+      "description": "<mainText><stats><attention>45</attention> Attack Damage<br><attention>350</attention> Health<br><attention>30</attention> Ability Haste</stats><br><li><passive>Carve:</passive> Dealing physical damage to a champion applies a stack of Armor reduction.<li><passive>Rage:</passive> Dealing physical damage to a champion grants Move Speed per stack of <unique>Carve</unique> on them.</mainText><br>",
       "colloq": ";bc",
       "plaintext": "Dealing physical damage to enemy champions reduces their Armor",
       "from": [
@@ -4042,7 +4042,7 @@
     },
     "3072": {
       "name": "Bloodthirster",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>18%</attention> Life Steal</stats><br><li><passive>Ichorshield:</passive> Life Steal from Attacks can now overheal you. Excess Health is stored as a <shield>50 - 320 (based on level) Shield</shield> that decays slowly if you haven't dealt or taken damage in the last 25 seconds.</mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>18%</attention> Life Steal</stats><br><li><passive>Ichorshield:</passive> Life Steal from Attacks can now overheal you. Excess Health is stored as a Shield that decays slowly if you haven't dealt or taken damage.</mainText><br>",
       "colloq": ";bt",
       "plaintext": "Grants Attack Damage, Life Steal and Life Steal now overheals",
       "from": [
@@ -4085,7 +4085,7 @@
     },
     "3074": {
       "name": "Ravenous Hydra",
-      "description": "<mainText><stats><attention>70</attention> Attack Damage<br><attention>20</attention> Ability Haste<br><attention>10%</attention> Omnivamp</stats><br><li><passive>Cleave:</passive> Attacks and Abilities deal up to <physicalDamage>(60% Attack Damage) physical damage</physicalDamage> to other enemies near target hit.<br><br><rules>Deals a minimum of (12% Attack Damage) damage to units at the end of its range, can only hit each target once per Attack or Ability, and doesn't trigger off of periodic damage.<br>Cleave does not trigger on structures. </rules><br></mainText><br>",
+      "description": "<mainText><stats><attention>70</attention> Attack Damage<br><attention>20</attention> Ability Haste<br><attention>10%</attention> Omnivamp</stats><br><li><passive>Cleave:</passive> Attacks and Abilities deal damage to other enemies near target hit.<br></mainText><br>",
       "colloq": ";",
       "plaintext": "Melee attacks hit nearby enemies, dealing damage and restoring Health",
       "from": [
@@ -4128,7 +4128,7 @@
     },
     "3075": {
       "name": "Thornmail",
-      "description": "<mainText><stats><attention>350</attention> Health<br><attention>60</attention> Armor</stats><br><li><passive>Thorns:</passive> When struck by an Attack, deal <magicDamage>(10 + 20% bonus Armor) magic damage</magicDamage> to the attacker and apply 25% <status>Grievous Wounds</status> for 3 seconds if they are a champion. Immobilizing enemy champions also applies 40% <status>Grievous Wounds</status> for 3 seconds.<br><br><rules><status>Grievous Wounds</status> reduces the effectiveness of Healing and Regeneration effects.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>350</attention> Health<br><attention>60</attention> Armor</stats><br><li><passive>Thorns:</passive> When struck by an Attack, deal damage to the attacker and apply 25% <status>Grievous Wounds</status> if they are a champion. Immobilizing enemy champions also applies 40% <status>Grievous Wounds</status>.<br><br><rules><status>Grievous Wounds</status> reduces the effectiveness of Healing and Regeneration effects.</rules></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -4168,7 +4168,7 @@
     },
     "3076": {
       "name": "Bramble Vest",
-      "description": "<mainText><stats><attention>30</attention> Armor</stats><br><li><passive>Thorns:</passive> When struck by an Attack, deal <magicDamage>4 magic damage</magicDamage> to the attacker and apply <status>25% Grievous Wounds</status> for 3 seconds if they are a champion.<br><br><rules><status>Grievous Wounds</status> reduces the effectiveness of Healing and Regeneration effects.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>30</attention> Armor</stats><br><li><passive>Thorns:</passive> When struck by an Attack, deal damage to the attacker and apply 25% Grievous Wounds if they are a champion.<br><br><rules><status>Grievous Wounds</status> reduces the effectiveness of Healing and Regeneration effects.</rules></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -4209,7 +4209,7 @@
     },
     "3077": {
       "name": "Tiamat",
-      "description": "<mainText><stats><attention>25</attention> Attack Damage</stats><br><li><passive>Cleave:</passive> Attacks deal up to <physicalDamage>(60% Attack Damage) physical damage</physicalDamage> to other nearby enemies. <br><br><rules>Minimum of (12% Attack Damage) damage to enemies furthest away.<br>Cleave does not trigger on structures. </rules></mainText><br>",
+      "description": "<mainText><stats><attention>25</attention> Attack Damage</stats><br><li><passive>Cleave:</passive> Attacks deal physical damage to other nearby enemies. <br><br><br>Cleave does not trigger on structures.</mainText><br>",
       "colloq": ";",
       "plaintext": "Melee attacks hit nearby enemies",
       "from": [
@@ -4254,7 +4254,7 @@
     },
     "3078": {
       "name": "Trinity Force",
-      "description": "<mainText><stats><attention>35</attention> Attack Damage<br><attention>30%</attention> Attack Speed<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste</stats><br><li><passive>Threefold Strike:</passive> Attacks grant <speed>20 Move Speed</speed> for 3 seconds. If the target is a champion, increase your <scaleAD>base Attack Damage by 4%</scaleAD> for 3 seconds, stacking up to 5 times (Max increase <scaleAD>20% AD</scaleAD>).<li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with an additional <physicalDamage>(200% base Attack Damage) physical damage</physicalDamage> <OnHit>On-Hit</OnHit> (1.5s cooldown). <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>3</attention> Attack Damage,  <attention>3</attention> Ability Haste, and <attention> 3</attention> Move Speed</mainText><br>",
+      "description": "<mainText><stats><attention>35</attention> Attack Damage<br><attention>30%</attention> Attack Speed<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste</stats><br><li><passive>Threefold Strike:</passive> Attacks grant Move Speed. If the target is a champion, increase your base Attack Damage, stacking.<li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with additional damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Attack Damage, Ability Haste, and Move Speed.</mainText><br>",
       "colloq": ";triforce;tons of damage",
       "plaintext": "Tons of Damage",
       "from": [
@@ -4311,7 +4311,7 @@
     },
     "3082": {
       "name": "Warden's Mail",
-      "description": "<mainText><stats><attention>40</attention> Armor</stats><br><li><passive>Rock Solid:</passive> Reduce incoming damage from Attacks by up to 5 + (0.35% max Health), capped at 40% of the attack's damage.</mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Armor</stats><br><li><passive>Rock Solid:</passive> Reduce incoming damage from Attacks.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -4353,7 +4353,7 @@
     },
     "3083": {
       "name": "Warmog's Armor",
-      "description": "<mainText><stats><attention>800</attention> Health<br><attention>10</attention> Ability Haste<br><attention>200%</attention> Base Health Regen</stats><br><li><passive>Warmog's Heart:</passive> If you have at least 1100 bonus Health, restore <healing>5% max Health</healing> per second if damage hasn't been taken within 6 seconds (3 seconds for non-Champions).</mainText><br>",
+      "description": "<mainText><stats><attention>800</attention> Health<br><attention>10</attention> Ability Haste<br><attention>200%</attention> Base Health Regen</stats><br><li><passive>Warmog's Heart:</passive> If you have at least 1100 bonus Health, restore max Health per second if damage hasn't been taken within 6 seconds.</mainText><br>",
       "colloq": ";",
       "plaintext": "Grants massive Health and Health Regen",
       "from": [
@@ -4395,7 +4395,7 @@
     },
     "3085": {
       "name": "Runaan's Hurricane",
-      "description": "<mainText><stats><attention>45%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Move Speed</stats><br><li><passive>Wind's Fury:</passive> When Attacking, bolts are fired at up to 2 enemies near the target, each dealing <physicalDamage>(40% Attack Damage) physical damage</physicalDamage>. Bolts apply On-Hit effects and can Critically Strike.<br><br><rules>Item is for Ranged champions only.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>45%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Move Speed</stats><br><li><passive>Wind's Fury:</passive> When Attacking, bolts are fired at up to 2 enemies near the target. Bolts apply On-Hit effects and can Critically Strike.<br><br><rules>Item is for Ranged champions only.</rules></mainText><br>",
       "colloq": ";",
       "plaintext": "Ranged attacks fire two bolts at nearby enemies",
       "from": [
@@ -4536,7 +4536,7 @@
     },
     "3091": {
       "name": "Wit's End",
-      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>40%</attention> Attack Speed<br><attention>40</attention> Magic Resist</stats><br><li><passive>Fray:</passive> Attacks apply <magicDamage>15 - 80 (based on level) magic damage</magicDamage> <OnHit>On-Hit</OnHit> and grant <speed>20 Move Speed</speed> for 2 seconds.</mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>40%</attention> Attack Speed<br><attention>40</attention> Magic Resist</stats><br><li><passive>Fray:</passive> Attacks apply damage <OnHit>On-Hit</OnHit> and grant Move Speed.</mainText><br>",
       "colloq": ";",
       "plaintext": "Resist magic damage and claw your way back to life.",
       "from": [
@@ -4581,7 +4581,7 @@
     },
     "3094": {
       "name": "Rapid Firecannon",
-      "description": "<mainText><stats><attention>35%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Move Speed</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Sharpshooter:</passive> Your Energized Attack applies <magicDamage>120 bonus magic damage</magicDamage>. In addition, Energized attacks gain up to 35% bonus Attack Range.<br><br><rules>Attack Range cannot increase more than 150 units.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>35%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Move Speed</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Sharpshooter:</passive> Your Energized Attack applies bonus damage. In addition, Energized attacks gain Attack Range.<br><br><rules>Attack Range cannot increase more than 150 units.</rules></mainText><br>",
       "colloq": ";canon;rapidfire;rfc",
       "plaintext": "Movement builds charges that release a sieging fire attack on release",
       "from": [
@@ -4623,7 +4623,7 @@
     },
     "3095": {
       "name": "Stormrazor",
-      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>15%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Paralyze:</passive> Your Energized Attack gains <magicDamage>120 bonus magic damage</magicDamage>. In addition, Energized Attacks slow enemies by 75% for 0.5 seconds.<br></mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>15%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Paralyze:</passive> Your Energized Attack gains bonus magic damage. In addition, Energized Attacks slow enemies.<br></mainText><br>",
       "colloq": ";Windblade",
       "plaintext": "Tremendously empower other Energized effects.",
       "from": [
@@ -4675,7 +4675,7 @@
     },
     "3100": {
       "name": "Lich Bane",
-      "description": "<mainText><stats><attention>75</attention> Ability Power<br><attention>15</attention> Ability Haste<br><attention>8%</attention> Move Speed</stats><br><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with an additional <magicDamage>(75% base Attack Damage + 50% Ability Power) magic damage</magicDamage> <OnHit>On-Hit</OnHit> (1.5s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>75</attention> Ability Power<br><attention>15</attention> Ability Haste<br><attention>8%</attention> Move Speed</stats><br><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with additional magic damage.</mainText><br>",
       "colloq": ";",
       "plaintext": "Grants a bonus to next attack after spell cast",
       "from": [
@@ -4718,7 +4718,7 @@
     },
     "3102": {
       "name": "Banshee's Veil",
-      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>45</attention> Magic Resist<br><attention>10</attention> Ability Haste</stats><br><li><passive>Annul:</passive> Grants a Spell Shield that blocks the next enemy Ability (40s cooldown).<br><br><rules>Item cooldown is restarted if you take damage from champions before it is completed.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>45</attention> Magic Resist<br><attention>10</attention> Ability Haste</stats><br><li><passive>Annul:</passive> Grants a Spell Shield that blocks the next enemy Ability.<br><br><rules>Item cooldown is restarted if you take damage from champions before it is completed.</rules></mainText><br>",
       "colloq": ";bv",
       "plaintext": "Periodically blocks enemy abilities",
       "from": [
@@ -4817,7 +4817,7 @@
     },
     "3107": {
       "name": "Redemption",
-      "description": "<mainText><stats><attention>16%</attention> Heal and Shield Power<br><attention>200</attention> Health<br><attention>15</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Intervention:</active> Target an area within 5500 range. After 2.5 seconds, call down a beam of light to Restore <healing>180 - 340 (scales with ally level) Health</healing> to allies and burn enemy champions for <trueDamage>10% max Health true damage</trueDamage> (90s cooldown).<br><br><rules>Item can be activated whilst dead. Damage and healing reduced by 50% if the target has recently been affected by another <active>Intervention</active>. Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>16%</attention> Heal and Shield Power<br><attention>200</attention> Health<br><attention>15</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Intervention:</active> Target an area within. After 2.5 seconds, call down a beam of light to Restore Health to allies and damage enemy champions.<br><br><rules>Item can be activated whilst dead. Damage and healing reduced by 50% if the target has recently been affected by another <active>Intervention</active>. Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
       "colloq": ";",
       "plaintext": "Activate to heal allies and damage enemies in an area",
       "from": [
@@ -4909,7 +4909,7 @@
     },
     "3109": {
       "name": "Knight's Vow",
-      "description": "<mainText><stats><attention>400</attention> Health<br><attention>20</attention> Ability Haste<br><attention>200%</attention> Base Health Regen</stats><br><br><active>Active -</active> <active>Pledge:</active> Designate an ally who is <attention>Worthy</attention> (60s cooldown).<br><li><passive>Sacrifice:</passive> While your <attention>Worthy</attention> ally is nearby, redirect 10% of damage they take to you and heal for 7% of the damage dealt by your <attention>Worthy</attention> ally to Champions. If they have less than 30% Health the damage reduction is increased to <attention>20%</attention>.<br><br><rules>Champions can only be linked by one Knight's Vow at a time. Damage redirection stops if you have less than 30% Health</rules></mainText><br>",
+      "description": "<mainText><stats><attention>400</attention> Health<br><attention>20</attention> Ability Haste<br><attention>200%</attention> Base Health Regen</stats><br><br><active>Active -</active> <active>Pledge:</active> Designate an ally who is <attention>Worthy</attention>..<br><li><passive>Sacrifice:</passive> While your <attention>Worthy</attention> ally is nearby, redirect damage they take to you and heal based on the damage dealt by your <attention>Worthy</attention> ally to Champions.<br></mainText><br>",
       "colloq": ";",
       "plaintext": "Partner with an ally to protect each other",
       "from": [
@@ -4954,7 +4954,7 @@
     },
     "3110": {
       "name": "Frozen Heart",
-      "description": "<mainText><stats><attention>80</attention> Armor<br><attention>400</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Winter's Caress:</passive> Reduces the <attackSpeed>Attack Speed</attackSpeed> of nearby enemies by 20%.<li><passive>Rock Solid:</passive> Reduce incoming damage from Attacks by up to 7 + (3.5 per 1000 max Health), capped at 40% of the Attack's damage.</mainText><br>",
+      "description": "<mainText><stats><attention>80</attention> Armor<br><attention>400</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Winter's Caress:</passive> Reduces the <attackSpeed>Attack Speed</attackSpeed> of nearby enemies.<li><passive>Rock Solid:</passive> Reduce incoming damage from Attacks.</mainText><br>",
       "colloq": ";fh",
       "plaintext": "Massively increases Armor and slows enemy basic attacks",
       "from": [
@@ -5038,7 +5038,7 @@
     },
     "3112": {
       "name": "Guardian's Orb",
-      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>150</attention> Health</stats><br><li><passive>Recovery:</passive> Restores <scaleMana>10 Mana</scaleMana> every 5 seconds. If you can't gain mana, restores <healing>15 Health</healing> instead.<li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>150</attention> Health</stats><br><li><passive>Recovery:</passive> Restores Mana over time. If you can't gain mana, restores Health instead.<li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
       "colloq": ";",
       "plaintext": "Good starting item for mages",
       "image": {
@@ -5161,7 +5161,7 @@
     },
     "3115": {
       "name": "Nashor's Tooth",
-      "description": "<mainText><stats><attention>100</attention> Ability Power<br><attention>50%</attention> Attack Speed</stats><br><li><passive>Icathian Bite:</passive> Attacks apply <magicDamage>(15 + 20% Ability Power) magic damage</magicDamage> <OnHit>On-Hit</OnHit>.</mainText><br>",
+      "description": "<mainText><stats><attention>100</attention> Ability Power<br><attention>50%</attention> Attack Speed</stats><br><li><passive>Icathian Bite:</passive> Attacks apply magic damage <OnHit>On-Hit</OnHit>.</mainText><br>",
       "colloq": ";",
       "plaintext": "Increases Attack Speed, Ability Power, and Cooldown Reduction",
       "from": [
@@ -5203,7 +5203,7 @@
     },
     "3116": {
       "name": "Rylai's Crystal Scepter",
-      "description": "<mainText><stats><attention>75</attention> Ability Power<br><attention>400</attention> Health</stats><br><li><passive>Rimefrost:</passive> Damaging Abilities <status>Slow</status> enemies by 30% for 1 second.</mainText><br>",
+      "description": "<mainText><stats><attention>75</attention> Ability Power<br><attention>400</attention> Health</stats><br><li><passive>Rimefrost:</passive> Damaging Abilities <status>Slow</status> enemies.</mainText><br>",
       "colloq": ";",
       "plaintext": "Abilities slow enemies",
       "from": [
@@ -5300,7 +5300,7 @@
     },
     "3119": {
       "name": "Winter's Approach",
-      "description": "<mainText><stats><attention>350</attention> Health<br><attention>500</attention> Mana<br><attention>15</attention> Ability Haste</stats><br><li><passive>Awe:</passive> Gain bonus <scaleHealth>Health equal to 8% Total Mana</scaleHealth>.<li><passive>Mana Charge:</passive> Strike a target with an Ability or Attack to consume a charge and gain <scaleMana>3 bonus Mana</scaleMana>, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Fimbulwinter</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
+      "description": "<mainText><stats><attention>350</attention> Health<br><attention>500</attention> Mana<br><attention>15</attention> Ability Haste</stats><br><li><passive>Awe:</passive> Gain bonus <scaleHealth>Health equal to Total Mana</scaleHealth>.<li><passive>Mana Charge:</passive> Strike a target with an Ability or Attack to consume a charge and gain <scaleMana>3 bonus Mana</scaleMana>, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Fimbulwinter</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -5632,7 +5632,7 @@
     },
     "3139": {
       "name": "Mercurial Scimitar",
-      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>30</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Quicksilver:</active> Remove all crowd control debuffs (excluding <status>Airborne</status>) and also gain <speed>50% Move Speed</speed> for 1 second (90s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>40</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Quicksilver:</active> Remove all crowd control debuffs and gain Move Speed.</mainText><br>",
       "colloq": ";",
       "plaintext": "Activate to remove all crowd control debuffs and grant massive Move Speed",
       "from": [
@@ -5672,18 +5672,18 @@
       "stats": {
         "FlatPhysicalDamageMod": 40,
         "FlatCritChanceMod": 0.2,
-        "FlatSpellBlockMod": 30
+        "FlatSpellBlockMod": 40
       },
       "effect": {
         "Effect1Amount": "0.5",
-        "Effect2Amount": "1",
+        "Effect2Amount": "1.5",
         "Effect3Amount": "90"
       },
       "depth": 3
     },
     "3140": {
       "name": "Quicksilver Sash",
-      "description": "<mainText><stats><attention>30</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Quicksilver:</active> Removes all crowd control debuffs (excluding <status>Airborne</status>) (90s cooldown).<br></mainText><br>",
+      "description": "<mainText><stats><attention>30</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Quicksilver:</active> Removes all crowd control debuffs (excluding <status>Airborne</status>).<br></mainText><br>",
       "colloq": ";qss",
       "plaintext": "Activate to remove all crowd control debuffs",
       "from": [
@@ -5725,7 +5725,7 @@
     },
     "3142": {
       "name": "Youmuu's Ghostblade",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Wraith Step:</active> Gain <speed>20% Move Speed</speed> and <status>Ghosting</status> for 6 seconds (45s cooldown).<br><li><passive>Haunt:</passive> Gain <speed>40 Move Speed</speed> out of combat.<br><br><rules><status>Ghosted</status> units ignore collision with other units.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Wraith Step:</active> Gain Move Speed and Ghosting.<br><li><passive>Haunt:</passive> Gain Move Speed out of combat.<br><br><rules><status>Ghosted</status> units ignore collision with other units.</rules></mainText><br>",
       "colloq": ";lethality",
       "plaintext": "Activate to greatly increase Move Speed",
       "from": [
@@ -5774,7 +5774,7 @@
     },
     "3143": {
       "name": "Randuin's Omen",
-      "description": "<mainText><stats><attention>250</attention> Health<br><attention>90</attention> Armor<br><attention>10</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Humility:</active> Briefly <status>Slow</status> nearby enemies and reduce their <scaleAD>Attack Damage</scaleAD> by 10% and Critical Strike Damage by 20% for 4 seconds (60s cooldown).<br><li><passive>Rock Solid:</passive> Reduce incoming damage from Attacks by up to 5 + (0.35% max Health), capped at 40% of the attack's damage.</mainText><br>",
+      "description": "<mainText><stats><attention>250</attention> Health<br><attention>90</attention> Armor<br><attention>10</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Humility:</active> Briefly <status>Slow</status> nearby enemies and reduce their Attack Damage and Critical Strike Damage.<br><li><passive>Rock Solid:</passive> Reduce incoming damage from Attacks.</mainText><br>",
       "colloq": ";",
       "plaintext": "Greatly increases defenses, activate to slow nearby enemies",
       "from": [
@@ -5819,7 +5819,7 @@
     },
     "3145": {
       "name": "Hextech Alternator",
-      "description": "<mainText><stats><attention>25</attention> Ability Power<br><attention>150</attention> Health</stats><br><li><passive>Revved:</passive> Damaging a champion deals an additional <magicDamage>50 - 125 (based on level) magic damage</magicDamage> (40s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>25</attention> Ability Power<br><attention>150</attention> Health</stats><br><li><passive>Revved:</passive> Damaging a champion deals additional damage.</mainText><br>",
       "colloq": ";",
       "plaintext": "Increases Ability Power. Deal bonus magic damage on attack periodically.",
       "from": [
@@ -5865,7 +5865,7 @@
     },
     "3152": {
       "name": "Hextech Rocketbelt",
-      "description": "<mainText><stats><attention>90</attention> Ability Power<br><attention>6</attention> Magic Penetration<br><attention>250</attention> Health<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal <magicDamage>(125 +15% Ability Power) magic damage</magicDamage>. Then, gain <speed>30% Move Speed</speed> towards enemy champions for 1.5 seconds (40s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration.<br><br><rules>Supersonic's dash cannot pass through terrain.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>90</attention> Ability Power<br><attention>6</attention> Magic Penetration<br><attention>250</attention> Health<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal damage. Then, gain Move Speed towards enemy champions.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Magic Penetration.</mainText><br>",
       "colloq": "rocket belt;",
       "plaintext": "Activate to dash forward and unleash a fiery explosion",
       "from": [
@@ -5914,7 +5914,7 @@
     },
     "3153": {
       "name": "Blade of The Ruined King",
-      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>25%</attention> Attack Speed<br><attention>8%</attention> Life Steal</stats><br><li><passive>Mist's Edge:</passive> Attacks apply <physicalDamage>physical damage</physicalDamage> <OnHit>On-Hit</OnHit> equal to (12% for Melee users | 8% for Ranged users) of the target's current Health. <li><passive>Siphon:</passive> Attacking a champion 3 times deals <magicDamage>40 - 150 (based on level) magic damage</magicDamage> and steals 25% Move Speed for 2 seconds (20s cooldown).<br><br><rules>Maximum <passive>Mist's Edge</passive> damage dealt to monsters and minions is 60.<br>Item performance differs for melee and ranged users.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>25%</attention> Attack Speed<br><attention>8%</attention> Life Steal</stats><br><li><passive>Mist's Edge:</passive> Attacks apply physical damage based off of the target's current Health. <li><passive>Siphon:</passive> Attacking a champion 3 times deals magic damage and steals Move Speed.<br><br>Item performance differs for melee and ranged users.</mainText><br>",
       "colloq": ";brk;bork;bork;bork;botrk",
       "plaintext": "Deals damage based on target's Health, can steal Move Speed",
       "from": [
@@ -5960,7 +5960,7 @@
     },
     "3155": {
       "name": "Hexdrinker",
-      "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>35</attention> Magic Resist</stats><br><li><passive>Lifeline:</passive> Upon taking magic damage that would reduce Health below 30%, gain <shield>110 - 280 (based on level) magic damage Shield</shield> for 3 seconds (90s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>35</attention> Magic Resist</stats><br><li><passive>Lifeline:</passive> Upon taking magic damage that would reduce Health below 30%, gain a magic damage Shield.</mainText><br>",
       "colloq": ";",
       "plaintext": "Increases Attack Damage and Magic Resist",
       "stacks": 0,
@@ -6004,7 +6004,7 @@
     },
     "3156": {
       "name": "Maw of Malmortius",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>50</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Lifeline:</passive> Upon taking magic damage that would reduce Health below 30%, gain <shield>(200 + 225% bonus Attack Damage [75% Shield Size for Ranged Users]) magic damage Shield</shield> for 5 seconds (75s cooldown). When <passive>Lifeline</passive> triggers, gain <lifeSteal>8% Omnivamp</lifeSteal> until the end of combat.  </mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>50</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Lifeline:</passive> Upon taking magic damage that would reduce Health below 30%, gain a magic damage Shield. When <passive>Lifeline</passive> triggers, gain Omnivamp until the end of combat.  </mainText><br>",
       "colloq": ";",
       "plaintext": "Grants bonus Attack Damage when Health is low",
       "stacks": 0,
@@ -6047,7 +6047,7 @@
     },
     "3157": {
       "name": "Zhonya's Hourglass",
-      "description": "<mainText><stats><attention>65</attention> Ability Power<br><attention>45</attention> Armor<br><attention>10</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Stasis:</active> You become <status>Invulnerable</status> and <status>Untargetable</status> for 2.5 seconds, but are prevented from taking any other actions during this time (120s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>65</attention> Ability Power<br><attention>45</attention> Armor<br><attention>10</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Stasis:</active> You become <status>Invulnerable</status> and <status>Untargetable</status> for 2.5 seconds, but are prevented from taking any other actions during this time.</mainText><br>",
       "colloq": ";zhg;zonyas",
       "plaintext": "Activate to become invincible but unable to take actions",
       "from": [
@@ -6215,7 +6215,7 @@
     },
     "3179": {
       "name": "Umbral Glaive",
-      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>10</attention> Lethality<br><attention>15</attention> Ability Haste</stats><br><li><passive>Blackout:</passive> When spotted by an enemy Ward, reveal traps and disable Wards around you for 8 seconds (40s cooldown). Your Attacks instantly kill revealed traps and do triple damage to Wards.</mainText><br>",
+      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>10</attention> Lethality<br><attention>15</attention> Ability Haste</stats><br><li><passive>Blackout:</passive> When spotted by an enemy Ward, reveal traps and disable Wards around you. Your Attacks instantly kill revealed traps and do triple damage to Wards.</mainText><br>",
       "colloq": ";lethality",
       "plaintext": "Provides trap and ward detection periodically",
       "from": [
@@ -6263,7 +6263,7 @@
     },
     "3181": {
       "name": "Hullbreaker",
-      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>400</attention> Health<br><attention>150%</attention> Base Health Regen</stats><br><br><li><passive>Boarding Party:</passive> While no allied champions are nearby you gain (10 - 75 / 5 - 37.5) <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and Attacks deal 20% increased damage to towers. Nearby large minions gain (30 - 225 / 15 - 112.5)  <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and 200% increased damage to towers. <br><br><rules>Boarding Party's resistances decay over 3 seconds when an ally gets too close.</rules><br></mainText><br>",
+      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>400</attention> Health<br><attention>150%</attention> Base Health Regen</stats><br><br><li><passive>Boarding Party:</passive> While no allied champions are nearby you gain <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and Attacks deal increased damage to towers. Nearby large minions gain <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and increased damage to towers. <br><br><rules>Boarding Party's resistances decay over 3 seconds when an ally gets too close.</rules><br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -6343,7 +6343,7 @@
     },
     "3190": {
       "name": "Locket of the Iron Solari",
-      "description": "<mainText><stats><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>30</attention> Armor<br><attention>30</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Devotion:</active> Grant nearby allies a <shield>180 - 330 (based on ally level) Shield</shield>, decaying over 2.5 seconds (90s cooldown). <br><li><passive>Consecrate:</passive> Grant nearby allied champions <scaleArmor>3 Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2</attention> Armor/Magic Resist increase to <passive>Consecrate</passive>.<br><br><rules>Strength of level-scaling effects are based on the ally's level.<br>Subsequent <active>Devotion</active> shields within 20 seconds only have 25% effect.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>30</attention> Armor<br><attention>30</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Devotion:</active> Grant nearby allies a <shield>Shield</shield>, decaying over time.<br><li><passive>Consecrate:</passive> Grant nearby allied champions Armor and <scaleMR>Magic Resist</scaleMR>. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Armor and Magic Resist increase to <passive>Consecrate</passive>.<br><br></mainText><br>",
       "colloq": ";",
       "plaintext": "Activate to shield nearby allies from damage",
       "from": [
@@ -6439,7 +6439,7 @@
     },
     "3193": {
       "name": "Gargoyle Stoneplate",
-      "description": "<mainText><stats><attention>60</attention> Armor<br><attention>60</attention> Magic Resist<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Unbreakable:</active> Gain a <shield>(100 + 90% bonus Health) Shield</shield>  that decays and grow 25% in size for 2.5 seconds. (90s cooldown).<br><li><passive>Fortify:</passive> Taking damage from a champion grants a stack of <scaleArmor>5% bonus Armor</scaleArmor> and <scaleMR>5% bonus Magic Resist</scaleMR> for 6 seconds.<br><br><rules>Max 5 stacks; 1 per champion.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Armor<br><attention>60</attention> Magic Resist<br><attention>15</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Unbreakable:</active> Gain a Shield that decays and grow in size.<br><li><passive>Fortify:</passive> Taking damage from a champion grants a stack of <scaleArmor>bonus Armor</scaleArmor> and <scaleMR>bonus Magic Resist</scaleMR>.<br><br><rules>Max 5 stacks; 1 per champion.</rules></mainText><br>",
       "colloq": ";",
       "plaintext": "Greatly increases defense near multiple enemies.",
       "from": [
@@ -6483,7 +6483,7 @@
     },
     "3211": {
       "name": "Spectre's Cowl",
-      "description": "<mainText><stats><attention>250</attention> Health<br><attention>25</attention> Magic Resist</stats><br><li><passive>Incorporeal:</passive> After taking damage from a champion, gain <scaleHealth>150% base Health Regen</scaleHealth> for up to 10 seconds (duration increases with damage taken).</mainText><br>",
+      "description": "<mainText><stats><attention>250</attention> Health<br><attention>25</attention> Magic Resist</stats><br><li><passive>Incorporeal:</passive> After taking damage from a champion, Regenerate Health.</mainText><br>",
       "colloq": ";hat",
       "plaintext": "Improves defense and grants regeneration upon being damaged",
       "from": [
@@ -6528,7 +6528,7 @@
     },
     "3222": {
       "name": "Mikael's Blessing",
-      "description": "<mainText><stats><attention>16%</attention> Heal and Shield Power<br><attention>50</attention> Magic Resist<br><attention>15</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Purify:</active> Remove all crowd control debuffs (except <status>Knockups</status> and <status>Suppression</status>) from an ally champion and restore <healing>100 - 180 (based on ally level) Health</healing> (120s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>16%</attention> Heal and Shield Power<br><attention>50</attention> Magic Resist<br><attention>15</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Purify:</active> Restore Health and Remove all crowd control debuffs (except <status>Knockups</status> and <status>Suppression</status>) from an ally champion.</mainText><br>",
       "colloq": ";",
       "plaintext": "Activate to remove all disabling effects from an allied champion",
       "from": [
@@ -6571,7 +6571,7 @@
     },
     "3330": {
       "name": "Scarecrow Effigy",
-      "description": "<mainText><stats></stats>Cannot be sold<br><br><active>Active - Trinket:</active> Places an effigy that lasts for 130 - 300 (based on level) seconds and appears exactly as Fiddlesticks does to enemies. Stores one charge every 115 - 30 (based on level) seconds, up to maximum 2 charges.<br><br>Enemy champions approaching an effigy will activate it, causing the effigy to fake a random action, after which the effigy will fall apart.</mainText><br>",
+      "description": "<mainText><stats></stats><br><active>Active - Trinket:</active> Places an effigy that appears exactly as Fiddlesticks does to enemies. Stores up to a maximum of 2 charges.<br><br>Enemy champions approaching an effigy will activate it, causing the effigy to fake a random action, after which the effigy will fall apart.</mainText><br>",
       "colloq": "yellow; totem; trinket",
       "plaintext": "Periodically place a Stealth Ward",
       "requiredChampion": "FiddleSticks",
@@ -6662,7 +6662,7 @@
     },
     "3363": {
       "name": "Farsight Alteration",
-      "description": "<mainText><stats></stats><active>Active - Trinket:</active> Reveals an area and places a visible, fragile Ward up to 4000 units away. Allies cannot target this Ward with Summoner Spells or Abilities <scaleLevel>(198 - 99s cooldown)</scaleLevel>.</mainText><br>",
+      "description": "<mainText><stats></stats><active>Active - Trinket:</active> Reveals an area and places a visible, fragile Ward up to 4000 units away.</mainText><br>",
       "colloq": "blue; totem; trinket",
       "plaintext": "Grants increased range and reveals the targetted area",
       "image": {
@@ -6712,7 +6712,7 @@
     },
     "3364": {
       "name": "Oracle Lens",
-      "description": "<mainText><stats></stats><active>Active - Trinket:</active> Scans around you, warning against hidden enemy units, revealing invisible traps and revealing (and temporarily disabling) enemy Stealth Wards for 10 seconds <scaleLevel>(90 - 60s cooldown)</scaleLevel>.</mainText><br>",
+      "description": "<mainText><stats></stats><active>Active - Trinket:</active> Scans around you, warning against hidden enemy units, revealing invisible traps and revealing (and temporarily disabling) enemy Stealth Wards.</mainText><br>",
       "colloq": "red; lens; trinket",
       "plaintext": "Disables nearby invisible wards and traps for a duration",
       "image": {
@@ -6791,7 +6791,7 @@
     },
     "3504": {
       "name": "Ardent Censer",
-      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>8%</attention> Heal and Shield Power<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Sanctify:</passive> Healing or Shielding another ally enhances you both for 6 seconds, granting your Attacks <attackSpeed>10% - 30% (based on ally level)</attackSpeed> Attack Speed and <magicDamage>5 - 20 (based on ally level) magic damage</magicDamage> <OnHit>On-Hit</OnHit>. <br><br><rules>Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>8%</attention> Heal and Shield Power<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Sanctify:</passive> Healing or Shielding another ally enhances you both, granting Attack Speed and magic damage <OnHit>On-Hit</OnHit>. <br></mainText><br>",
       "colloq": "",
       "plaintext": "Shield and heal effects on other units grant both of you Attack Speed and their attacks deal additional on-hit magic damage.",
       "from": [
@@ -6833,7 +6833,7 @@
     },
     "3508": {
       "name": "Essence Reaver",
-      "description": "<mainText><stats><attention>45</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>20</attention> Ability Haste</stats><br><li><passive>Spellblade:</passive> After using an Ability, your next Attack deals an additional <physicalDamage>100% Base Attack Damage + 40% Bonus Attack Damage physical damage</physicalDamage> <OnHit>On-Hit</OnHit> and restores 40% of that damage as Mana (1.5s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>45</attention> Attack Damage<br><attention>20%</attention> Critical Strike Chance<br><attention>20</attention> Ability Haste</stats><br><li><passive>Spellblade:</passive> After using an Ability, your next Attack deals additional damage and restores Mana.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -6982,7 +6982,7 @@
     },
     "3742": {
       "name": "Dead Man's Plate",
-      "description": "<mainText><stats><attention>300</attention> Health<br><attention>45</attention> Armor<br><attention>5%</attention> Move Speed</stats><li><passive>Shipwrecker:</passive> While moving, build up to <speed>40 bonus Move Speed</speed>. Your next Attack discharges built up Move Speed to deal up to <physicalDamage>40 (+100% base Attack Damage) physical damage</physicalDamage>. If dealt by a Melee champion at top speed, the Attack also <status>Slows</status> the target by 50% for 1 second.<br><br><flavorText>''There's only one way you'll get this armor from me...'' - forgotten namesake</flavorText></mainText><br>",
+      "description": "<mainText><stats><attention>300</attention> Health<br><attention>45</attention> Armor<br><attention>5%</attention> Move Speed</stats><li><passive>Shipwrecker:</passive> While moving, build up  Move Speed. Your next Attack discharges built up Move Speed to deal damage. If dealt by a Melee champion at top speed, the Attack also <status>Slows</status> the target.<br><br><flavorText>''There's only one way you'll get this armor from me...'' - forgotten namesake</flavorText></mainText><br>",
       "colloq": ";juggernaut;dreadnought",
       "plaintext": "Build momentum as you move around then smash into enemies.",
       "from": [
@@ -7026,7 +7026,7 @@
     },
     "3748": {
       "name": "Titanic Hydra",
-      "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>500</attention> Health</stats><br><li><passive>Colossus:</passive> Gain bonus <scaleAD>Attack Damage equal to 2% bonus Health</scaleAD>.<li><passive>Cleave:</passive> Attacks apply an additional <physicalDamage>(5 + 1.5% max Health) physical damage</physicalDamage> <OnHit>On-Hit</OnHit>, creating a shockwave that deals <physicalDamage>(40 + 3% max Health)  physical damage</physicalDamage> to enemies behind the target.<br><br><rules>Deals 75% for Ranged users. <OnHit>On-Hit</OnHit> damage is also applied to Structures.<br>Cleave's shockwave does not trigger on structures.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>500</attention> Health</stats><br><li><passive>Colossus:</passive> Gain bonus <scaleAD>Attack Damage based off of bonus Health</scaleAD>.<li><passive>Cleave:</passive> Attacks apply additional damage <OnHit>On-Hit</OnHit>, creating a shockwave that deals damage to enemies behind the target.</mainText><br>",
       "colloq": ";juggernaut",
       "plaintext": "Deals area of effect damage based on owner's health",
       "from": [
@@ -7174,7 +7174,7 @@
     },
     "3814": {
       "name": "Edge of Night",
-      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>10</attention> Lethality<br><attention>325</attention> Health</stats><br><li><passive>Annul:</passive> Gain a Spell Shield that blocks the next enemy Ability (40s cooldown).<br><br><rules>Item's cooldown is restarted if you take damage before it is completed.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>10</attention> Lethality<br><attention>325</attention> Health</stats><br><li><passive>Annul:</passive> Gain a Spell Shield that blocks the next enemy Ability.<br><br><rules>Item's cooldown is restarted if you take damage before it is completed.</rules></mainText><br>",
       "colloq": ";lethality",
       "plaintext": "Periodically blocks enemy abilities",
       "stacks": 0,
@@ -7912,7 +7912,7 @@
     },
     "4005": {
       "name": "Imperial Mandate",
-      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Coordinated Fire:</passive> Abilities that <status>Slow</status> or <status>Immobilize</status> a champion deal <magicDamage>45 - 75 (based on level) bonus magic damage</magicDamage> and marks them for 4 seconds (6s cooldown per champion). Ally champion damage detonates the mark, dealing an additional <magicDamage>90 - 150 (based on ally level) magic damage</magicDamage> and granting you both <speed>20% Move Speed</speed> for 2 seconds. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>15</attention> Ability Power. <br><br><rules>Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Coordinated Fire:</passive> Abilities that <status>Slow</status> or <status>Immobilize</status> a champion deal bonus damage and mark them. Ally champion damage detonates the mark, dealing additional damage and granting you both Move Speed. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Power. <br></mainText><br>",
       "colloq": ";",
       "plaintext": "Defer damage until later.",
       "from": [
@@ -7958,7 +7958,7 @@
     },
     "4401": {
       "name": "Force of Nature",
-      "description": "<mainText><stats><attention>350</attention> Health<br><attention>70</attention> Magic Resist<br><attention>5%</attention> Move Speed</stats><br><li><passive>Absorb:</passive> Taking <magicDamage>magic damage</magicDamage> from enemy Champions grants a stack of <attention>Steadfast</attention> (max 6) for 7 seconds. Enemy <status>Immobilizing</status> effects grant an additional 2 stacks.<li><passive>Dissipate:</passive> While at 6 stacks of <attention>Steadfast</attention>, take <magicDamage>25% reduced magic damage</magicDamage> and gain 10% increased Move Speed.<br><br><rules>One spell can add a new stack of <attention>Steadfast</attention> every 1 second.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>350</attention> Health<br><attention>70</attention> Magic Resist<br><attention>5%</attention> Move Speed</stats><br><li><passive>Absorb:</passive> Taking <magicDamage>magic damage</magicDamage> from enemy Champions grants a stack of <attention>Steadfast</attention>. Enemy <status>Immobilizing</status> effects grant additional stacks.<li><passive>Dissipate:</passive> While at max stacks of <attention>Steadfast</attention>, take reduced magic damage and gain increased Move Speed.</mainText><br>",
       "colloq": ";fon",
       "plaintext": "Move Speed, Magic Resist, and max Health Regeneration",
       "from": [
@@ -8064,7 +8064,7 @@
     },
     "4628": {
       "name": "Horizon Focus",
-      "description": "<mainText><stats><attention>85</attention> Ability Power<br><attention>150</attention> Health<br><attention>15</attention> Ability Haste</stats><br><li><passive>Hypershot:</passive> Damaging a champion with a non-targeted Ability at over 700 range or <status>Slowing or Immobilizing</status> them <keywordStealth>Reveals</keywordStealth> them and increases their damage taken from you by 10% for 6 seconds. <br><br><rules>The Ability that triggers <passive>Hypershot</passive> also benefits from the damage increase. Pets and non-immobilizing traps do not trigger this effect. Only the initial placement of zone Abilities will trigger this effect. Distance is measured from the Ability cast position. </rules></mainText><br>",
+      "description": "<mainText><stats><attention>85</attention> Ability Power<br><attention>150</attention> Health<br><attention>15</attention> Ability Haste</stats><br><li><passive>Hypershot:</passive> Damaging a champion with a non-targeted Ability at over 700 range or <status>Slowing or Immobilizing</status> them <keywordStealth>Reveals</keywordStealth> them and increases their damage taken from you.<br><br><rules>The Ability that triggers <passive>Hypershot</passive> also benefits from the damage increase. Pets and non-immobilizing traps do not trigger this effect. Only the initial placement of zone Abilities will trigger this effect. Distance is measured from the Ability cast position. </rules></mainText><br>",
       "colloq": "",
       "plaintext": "Immobilizing a champion causes lightning to strike them",
       "from": [
@@ -8105,7 +8105,7 @@
     },
     "4629": {
       "name": "Cosmic Drive",
-      "description": "<mainText><stats><attention>65</attention> Ability Power<br><attention>200</attention> Health<br><attention>30</attention> Ability Haste<br><attention>5%</attention> Move Speed</stats><br><li><passive>Spelldance:</passive> Damaging a champion with 3 separate Attacks or Spells grants <speed>15% Move Speed</speed> (decaying to <speed>5%</speed>) and <scaleAP>40 Ability Power</scaleAP> until exiting champion combat.<br></mainText><br>",
+      "description": "<mainText><stats><attention>65</attention> Ability Power<br><attention>200</attention> Health<br><attention>30</attention> Ability Haste<br><attention>5%</attention> Move Speed</stats><br><li><passive>Spelldance:</passive> Damaging a champion with 3 separate Attacks or Spells grants Move Speed and Ability Power until exiting champion combat.<br></mainText><br>",
       "colloq": "",
       "plaintext": "Massive amounts of Cooldown Reduction",
       "from": [
@@ -8234,7 +8234,7 @@
     },
     "4633": {
       "name": "Riftmaker",
-      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>300</attention> Health<br><attention>15</attention> Ability Haste<br><attention>7%</attention> Omnivamp</stats><br><li><passive>Void Corruption:</passive> For each second damaging enemy champions, deal 3% bonus damage (max 9%). At maximum strength, the bonus damage is dealt as <trueDamage>true damage</trueDamage> instead. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2%</attention> Omnivamp and 8 Ability Power.</mainText><br>",
+      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>300</attention> Health<br><attention>15</attention> Ability Haste<br><attention>7%</attention> Omnivamp</stats><br><li><passive>Void Corruption:</passive> For each second damaging enemy champions, deal bonus damage. At maximum strength, the bonus damage is dealt as <trueDamage>true damage</trueDamage> instead. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Omnivamp and Ability Power.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8325,7 +8325,7 @@
     },
     "4636": {
       "name": "Night Harvester",
-      "description": "<mainText><stats><attention>90</attention> Ability Power<br><attention>300</attention> Health<br><attention>25</attention> Ability Haste</stats><br><li><passive>Soulrend:</passive> Damaging a champion deals an additional <magicDamage>(125 +15% Ability Power) magic damage</magicDamage> and grants you <speed>25% Move Speed</speed> for 1.5 seconds (30s cooldown per champion).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br><br><rules>Damaging a new champion will extend the duration of the Move Speed bonus.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>90</attention> Ability Power<br><attention>300</attention> Health<br><attention>25</attention> Ability Haste</stats><br><li><passive>Soulrend:</passive> Damaging a champion deals additional magic damage and grants you Move Speed.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8372,7 +8372,7 @@
     },
     "4637": {
       "name": "Demonic Embrace",
-      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>450</attention> Health</stats><br><li><passive>Azakana Gaze:</passive> Dealing Ability damage burns enemies for 1.8/1% (Melee/Ranged) <magicDamage>max Health magic damage</magicDamage> every second for 4 seconds. <li><passive>Dark Pact:</passive> Gain 2% of your <scaleHealth>bonus Health</scaleHealth> as <scaleAP>Ability Power</scaleAP>. </mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>450</attention> Health</stats><br><li><passive>Azakana Gaze:</passive> Dealing Ability damage burns enemies for max Health magic damage every second.<li><passive>Dark Pact:</passive> Gain <scaleHealth>bonus Health</scaleHealth> as <scaleAP>Ability Power</scaleAP>. </mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8583,7 +8583,7 @@
     },
     "4644": {
       "name": "Crown of the Shattered Queen",
-      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>250</attention> Health<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Divine Safeguard:</passive> You are <keywordMajor>Safeguarded</keywordMajor>, reducing incoming champion damage by 75%. <keywordMajor>Safeguard</keywordMajor> persists for 1.5 seconds after taking champion damage. (40 second cooldown). <li><passive>Holy Gift:</passive> While <keywordMajor>Safeguarded</keywordMajor> and for 3 seconds after it is broken, gain <scaleAP>10-40 Ability Power</scaleAP>. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>1%</attention> Move Speed and 8 Ability Power.</mainText><br>",
+      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>250</attention> Health<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Divine Safeguard:</passive> You are <keywordMajor>Safeguarded</keywordMajor>, reducing incoming champion damage. <keywordMajor>Safeguard</keywordMajor> persists for 1.5 seconds after taking champion damage. <li><passive>Holy Gift:</passive> While <keywordMajor>Safeguarded</keywordMajor> and for 3 seconds after it is broken, gain  Ability Power. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Move Speed and Ability Power.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8631,7 +8631,7 @@
     },
     "4645": {
       "name": "Shadowflame",
-      "description": "<mainText><stats><attention>100</attention> Ability Power<br><attention>200</attention> Health</stats><br><li><passive>Cinderbloom:</passive> Damage to champions benefits from 10 to 20 additional <keywordStealth>Magic Penetration</keywordStealth> based on their current <scaleHealth>Health</scaleHealth> (max benefit when the target has 1000 or less Health). If the target was recently affected by Shields, gain the maximum benefit against that target (20 bonus <keywordStealth>Magic Penetration</keywordStealth>). </mainText><br>",
+      "description": "<mainText><stats><attention>100</attention> Ability Power<br><attention>200</attention> Health</stats><br><li><passive>Cinderbloom:</passive> Damage to champions benefits from additional <keywordStealth>Magic Penetration</keywordStealth> based on their current <scaleHealth>Health</scaleHealth>. If the target was recently affected by Shields, gain the maximum benefit against that target. </mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8672,7 +8672,7 @@
     },
     "6029": {
       "name": "Ironspike Whip",
-      "description": "<mainText><stats><attention>30</attention> Attack Damage</stats><br><br><active>Active -</active> <active>Crescent:</active> Deal <physicalDamage>(100% Base Attack Damage) physical damage</physicalDamage> to nearby enemies. (20s cooldown, reduced by Ability Haste).</mainText><br>",
+      "description": "<mainText><stats><attention>30</attention> Attack Damage</stats><br><br><active>Active -</active> <active>Crescent:</active> Deal damage to nearby enemies.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8714,7 +8714,7 @@
     },
     "6035": {
       "name": "Silvermere Dawn",
-      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>300</attention> Health<br><attention>35</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Quicksilver:</active> Remove all crowd control debuffs (excluding <status>Airborne</status>) and gain 40% Tenacity and 40% Slow Resistance for 3 seconds (90s cooldown).</mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>300</attention> Health<br><attention>40</attention> Magic Resist</stats><br><br><active>Active -</active> <active>Quicksilver:</active> Remove all crowd control debuffs and gain Tenacity and Slow Resistance.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8753,7 +8753,7 @@
       "stats": {
         "FlatPhysicalDamageMod": 40,
         "FlatHPPoolMod": 300,
-        "FlatSpellBlockMod": 35
+        "FlatSpellBlockMod": 40
       },
       "effect": {
         "Effect1Amount": "0.5",
@@ -8764,7 +8764,7 @@
     },
     "6333": {
       "name": "Death's Dance",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>45</attention> Armor<br><attention>15</attention> Ability Haste</stats><br><li><passive>Ignore Pain:</passive> 30% (10% for Ranged users) of damage taken is dealt to you over 3 seconds instead.<li><passive>Defy:</passive> Champion takedowns cleanse <passive>Ignore Pain's</passive> remaining damage pool and restore <healing>120% bonus AD in Health</healing> over 2 seconds.</mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>45</attention> Armor<br><attention>15</attention> Ability Haste</stats><br><li><passive>Ignore Pain:</passive> Damage taken is dealt to you over time instead.<li><passive>Defy:</passive> Champion takedowns cleanse <passive>Ignore Pain's</passive> remaining damage pool and restore Health over time.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "stacks": 0,
@@ -8851,7 +8851,7 @@
     },
     "6616": {
       "name": "Staff of Flowing Water",
-      "description": "<mainText><stats><attention>50</attention> Ability Power<br><attention>8%</attention> Heal and Shield Power<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Rapids:</passive> Healing or Shielding another ally grants you both <magicDamage>25 - 45 Ability Power</magicDamage>  and <magicDamage>20 Ability Haste</magicDamage> for 4 seconds.<br><br><rules>Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>50</attention> Ability Power<br><attention>8%</attention> Heal and Shield Power<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Rapids:</passive> Healing or Shielding another ally grants you both Ability Power and Ability Haste.<br></mainText><br>",
       "colloq": "",
       "plaintext": "Your heals and shields reduce crowd control and grant Move Speed",
       "from": [
@@ -8892,7 +8892,7 @@
     },
     "6617": {
       "name": "Moonstone Renewer",
-      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Starlit Grace:</passive> When affecting champions with Attacks or Abilities in combat, restore <healing>60 Health</healing> to the most wounded nearby ally (2s cooldown). Each second spent in combat with champions increases your Heal and Shield Power by 5% (stacking up to 4 times).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>8</attention> increase to <passive>Starlit Grace's</passive> Heal.<br><br></mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>200</attention> Health<br><attention>20</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><li><passive>Starlit Grace:</passive> When affecting champions with Attacks or Abilities in combat, restore Health to the most wounded nearby ally. Each second spent in combat with champions increases your Heal and Shield Power.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items an increase to <passive>Starlit Grace's</passive> Heal.<br><br></mainText><br>",
       "colloq": "",
       "plaintext": "Your heals and shields cool down faster and have greater effect on low health allies",
       "from": [
@@ -8936,7 +8936,7 @@
     },
     "6630": {
       "name": "Goredrinker",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste<br><attention>8%</attention> Omnivamp</stats><br><br><active>Active -</active> <active>Thirsting Slash:</active> Deal <physicalDamage>(175% Base Attack Damage) physical damage</physicalDamage> to nearby enemies. Restore <healing>(20% Base Attack Damage + 8% missing Health)</healing> for each champion hit (15s cooldown, reduced by Ability Haste).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>7</attention> Ability Haste.</mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste<br><attention>8%</attention> Omnivamp</stats><br><br><active>Active -</active> <active>Thirsting Slash:</active> Deal damage to nearby enemies. Restore Health for each champion hit.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -8985,7 +8985,7 @@
     },
     "6631": {
       "name": "Stridebreaker",
-      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>20%</attention> Attack Speed<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Halting Slash:</active> Deal <physicalDamage>(175% Attack Damage) physical damage</physicalDamage> to nearby enemies, <status>Slowing</status> them by 40% for 3 seconds (15s cooldown, reduced by Ability Haste). Can be cast while moving.<br><li><passive>Heroic Gait:</passive> Dealing physical damage grants <speed>20 Move Speed</speed> for 3 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2%</attention> Move Speed.</mainText><br>",
+      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>20%</attention> Attack Speed<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Halting Slash:</active> Deal damage to nearby enemies, <status>Slowing</status> them. Can be cast while moving.<br><li><passive>Heroic Gait:</passive> Dealing physical damage grants Move Speed.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9043,7 +9043,7 @@
     },
     "6632": {
       "name": "Divine Sunderer",
-      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste</stats><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with an additional <physicalDamage>125% base Attack Damage + 6% (3% for Ranged owners) target max Health physical damage</physicalDamage> <OnHit>On-Hit</OnHit> (1.5s cooldown). If the target is a champion, also heal for <healing>65% of the premitigation damage</healing>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>3%</attention> Armor Penetration and <attention>3%</attention> Magic Penetration.<br><br><rules><passive>Spellblade</passive> will deal a minimum of (150% base Attack Damage) damage to units, but no more than (250% base Attack Damage) damage to Monsters.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>300</attention> Health<br><attention>20</attention> Ability Haste</stats><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with additional damage <OnHit>On-Hit</OnHit>. If the target is a champion, also heal.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Armor Penetration and Magic Penetration.<br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9093,7 +9093,7 @@
     },
     "6653": {
       "name": "Liandry's Anguish",
-      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Agony:</passive> Deal up to <magicDamage>12% bonus magic damage</magicDamage> to Champions based on the target's bonus Health (maxed at 1250 bonus Health).<li><passive>Torment:</passive> Dealing damage with Abilities causes enemies to burn for <magicDamage>(12.5 + 1.5% Ability Power) + 1% max Health magic damage</magicDamage> per second for 4 seconds. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.</mainText><br>",
+      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Agony:</passive> Deal bonus magic damage to Champions based on the target's bonus Health.<li><passive>Torment:</passive> Dealing damage with Abilities causes enemies to burn over time.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.</mainText><br>",
       "colloq": "",
       "plaintext": "Charge up in combat to deal high damage over time, especially against durable enemies",
       "from": [
@@ -9138,7 +9138,7 @@
     },
     "6655": {
       "name": "Luden's Tempest",
-      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>6</attention> Magic Penetration<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Echo:</passive> Damaging Abilities deal an additional <magicDamage>(100 + 10% Ability Power) magic damage</magicDamage> to the target and 3 nearby enemies and grants you <speed>15% Move Speed</speed> for 2 seconds (10s cooldown). Dealing ability damage to Champions reduces this item's cooldown by 0.5 second, up to 3 seconds per spell cast.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration. </mainText><br>",
+      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>6</attention> Magic Penetration<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><li><passive>Echo:</passive> Damaging Abilities deal magic damage to the target and 3 nearby enemies and grants you Move Speed. Dealing ability damage to Champions reduces this item's cooldown.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Magic Penetration. </mainText><br>",
       "colloq": "",
       "plaintext": "High burst damage, good against fragile foes",
       "from": [
@@ -9185,7 +9185,7 @@
     },
     "6656": {
       "name": "Everfrost",
-      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>250</attention> Health<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal <magicDamage>(100+30% Ability Power) magic damage</magicDamage> in a cone, <status>Slowing</status> enemies by 65% for 1 second. Enemies at the center of the cone are <status>Rooted</status> instead (30s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10</attention> Ability Power. <br></mainText><br>",
+      "description": "<mainText><stats><attention>70</attention> Ability Power<br><attention>250</attention> Health<br><attention>600</attention> Mana<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal damage in a cone, <status>Slowing</status> enemies hit. Enemies at the center of the cone are <status>Rooted</status> instead.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Power. <br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9235,7 +9235,7 @@
     },
     "6660": {
       "name": "Bami's Cinder",
-      "description": "<mainText><stats><attention>300</attention> Health</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing <magicDamage>(15 + 1% bonus Health) magic damage</magicDamage> per second to nearby enemies (increased by 25% against minions and 25% against monsters) for 3 seconds.</mainText><br>",
+      "description": "<mainText><stats><attention>300</attention> Health</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing damage per second to nearby enemies (increased  against minions and monsters).</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9278,7 +9278,7 @@
     },
     "6662": {
       "name": "Frostfire Gauntlet",
-      "description": "<mainText><stats><attention>450</attention> Health<br><attention>25</attention> Armor<br><attention>25</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing <magicDamage>(12 + 1% bonus Health) magic damage</magicDamage> per second to nearby enemies (increased by 25% against minions and 150% against monsters) for 3 seconds.<li><passive>Snowbind:</passive> Attacks create a frost field for 1.5 seconds and deal (12 - 85  / 6 - 42.5) bonus magic damage to all enemies in the area (4s cooldown, 6s cooldown for ranged champions). Enemies that move across the field are <status>Slowed</status> by 25% for melee champions and 12.5% for ranged champions (increased by your <scaleHealth>max Health</scaleHealth>).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>100</attention> Health and <attention>6%</attention> Size.</mainText><br>",
+      "description": "<mainText><stats><attention>450</attention> Health<br><attention>25</attention> Armor<br><attention>25</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing damage per second to nearby enemies. Enemies that move across the field are <status>Slowed</status>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Health and Size.</mainText><br>",
       "colloq": "",
       "plaintext": "High Magic Resist.Passively slow nearby enemies. When spells are cast near you, release a wave of energy that damages and slows.",
       "from": [
@@ -9328,7 +9328,7 @@
     },
     "6664": {
       "name": "Turbo Chemtank",
-      "description": "<mainText><stats><attention>450</attention> Health<br><attention>25</attention> Armor<br><attention>25</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Supercharged:</active> Grants <speed>40% Move Speed</speed> towards enemies or enemy turrets for 4 seconds. Once near an enemy (or after 4 seconds) a shockwave is emitted that <status>Slows</status> nearby champions by 50% for 1.5 seconds (90s cooldown).<br><passive>Refuel:</passive> Moving and taking damage from Champions and large monsters fills up the <keywordMajor>Chemtank</keywordMajor>. At 100 stacks, your next basic attack deals <magicDamage>40-120 (+1% max Health, + 3% Move Speed) magic damage</magicDamage> to all nearby enemies (increased by 30% against minions and 200% against jungle monsters).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste and <attention>50</attention> Health.</mainText><br>",
+      "description": "<mainText><stats><attention>450</attention> Health<br><attention>25</attention> Armor<br><attention>25</attention> Magic Resist<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Supercharged:</active> Grants Move Speed towards enemies or enemy turrets. Once near an enemy (or after 4 seconds) a shockwave is emitted that <status>Slows</status> nearby champions.<br><passive>Refuel:</passive> Moving and taking damage from Champions and large monsters fills up the <keywordMajor>Chemtank</keywordMajor>. At 100 stacks, your next basic attack deals damage to all nearby enemies (increased  against minions and monsters).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste and Health.</mainText><br>",
       "colloq": "",
       "plaintext": "Immobilize enemies to gain a shield. Activate to run faster at opponents.",
       "from": [
@@ -9381,7 +9381,7 @@
     },
     "6670": {
       "name": "Noonquiver",
-      "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>15%</attention> Attack Speed</stats><br><li><passive>Precision:</passive> Attacks deal an additional <physicalDamage>20 physical damage</physicalDamage> to Minions and Monsters.</mainText><br>",
+      "description": "<mainText><stats><attention>30</attention> Attack Damage<br><attention>15%</attention> Attack Speed</stats><br><li><passive>Precision:</passive> Attacks deal additional damage to Minions and Monsters.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9427,7 +9427,7 @@
     },
     "6671": {
       "name": "Galeforce",
-      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>20%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><br><active>Active -</active> <active>Cloudburst:</active> Dash in target direction, firing three missiles at the lowest Health enemy near your destination (prioritizing champions). Deals a total of <magicDamage>(180 - 220 (based on level) + 45% bonus Attack Damage) magic damage</magicDamage>, increased against low Health targets by up to 50% (110s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2%</attention> Move Speed.<br><br><rules>Maximum missile damage dealt when enemy Health is below 30%.<br>Cloudburst's dash cannot pass through terrain.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>20%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><br><active>Active -</active> <active>Cloudburst:</active> Dash in target direction, firing three missiles at the lowest Health enemy near your destination. Deals damage, increased against low Health targets.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9475,7 +9475,7 @@
     },
     "6672": {
       "name": "Kraken Slayer",
-      "description": "<mainText><stats><attention>65</attention> Attack Damage<br><attention>25%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><li><passive>Bring It Down:</passive> Every third Attack deals an additional <trueDamage>(50 + 40% bonus Attack Damage) true damage</trueDamage>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10%</attention> Attack Speed.</mainText><br>",
+      "description": "<mainText><stats><attention>65</attention> Attack Damage<br><attention>25%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><li><passive>Bring It Down:</passive> Every third Attack deals additional true damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Attack Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9522,7 +9522,7 @@
     },
     "6673": {
       "name": "Immortal Shieldbow",
-      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>20%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Life Steal</stats><br><li><passive>Lifeline:</passive> When taking damage that would reduce you below 30% Health, gain a <shield>250 - 630 Shield</shield> for 3s. In addition, gain <attackDamage>15-35 Attack Damage</attackDamage> for 8s (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Attack Damage and <attention>70</attention> Health.</mainText><br>",
+      "description": "<mainText><stats><attention>50</attention> Attack Damage<br><attention>20%</attention> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><attention>7%</attention> Life Steal</stats><br><li><passive>Lifeline:</passive> When taking damage that would reduce you below 30% Health, gain a Shield. In addition, gain Attack Damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Attack Damage and Health.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9703,7 +9703,7 @@
     },
     "6691": {
       "name": "Duskblade of Draktharr",
-      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals an additional <physicalDamage>(75 + 30% bonus Attack Damage for melee / 55 + 25% bonus Attack Damage for ranged) physical damage</physicalDamage> (15s cooldown). If dealt by a Melee champion, this Attack also <status>Slows</status> the target by 99% for 0.25 seconds.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste and <attention>5</attention>  Move Speed.<br></mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals additional damage. If dealt by a Melee champion, this Attack also <status>Slows</status> the target.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste and Move Speed.<br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9750,7 +9750,7 @@
     },
     "6692": {
       "name": "Eclipse",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>7%</attention> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals an additional <physicalDamage>6% (3% for Ranged users) max Health physical damage</physicalDamage>, grants you <speed>15% Move Speed</speed> and a <shield>(160 + 35% bonus Attack Damage) Shield (50% shield for Ranged users)</shield> for 2 seconds (8s cooldown, 16s cooldown for Ranged users).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>4%</attention> Armor Penetration and <attention>5</attention>  Move Speed.</mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>7%</attention> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals additional damage, grants you Move Speed and a Shield.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Armor Penetration and Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9796,7 +9796,7 @@
     },
     "6693": {
       "name": "Prowler's Claw",
-      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing <physicalDamage>(75 + 30% bonus Attack Damage) physical damage</physicalDamage>. For the next 3 seconds, you deal 15% increased damage to the target. (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Lethality and <attention>5</attention>  Move Speed.</mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Attack Damage<br><attention>18</attention> Lethality<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing damage. You deal increased damage to the target.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Lethality and Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9842,7 +9842,7 @@
     },
     "6694": {
       "name": "Serylda's Grudge",
-      "description": "<mainText><stats><attention>45</attention> Attack Damage<br><attention>30%</attention> Armor Penetration<br><attention>20</attention> Ability Haste</stats><br><li><passive>Bitter Cold:</passive> Damaging Abilities <status>Slow</status> enemies by 30% for 1 second.</mainText><br>",
+      "description": "<mainText><stats><attention>45</attention> Attack Damage<br><attention>30%</attention> Armor Penetration<br><attention>20</attention> Ability Haste</stats><br><li><passive>Bitter Cold:</passive> Damaging Abilities <status>Slow</status> enemies.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9883,7 +9883,7 @@
     },
     "6695": {
       "name": "Serpent's Fang",
-      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>12</attention> Lethality</stats><br><li><passive>Shield Reaver:</passive> Dealing damage to an enemy champion reduces any shields they gain by (50% | 35% for Ranged Champions) for 3 seconds. When you damage an enemy who is unaffected by Shield Reaver, reduce all shields on them by (50% | 35% for Ranged Champions).<br><br><rules>Additional damage not applied to targets with shields that only block magic damage.<br>Item performance differs for melee and ranged users.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>55</attention> Attack Damage<br><attention>12</attention> Lethality</stats><br><li><passive>Shield Reaver:</passive> Dealing damage to an enemy champion reduces any shields they gain. When you damage an enemy who is unaffected by Shield Reaver, reduce all shields on them.<br><br>Item performance differs for melee and ranged users.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -9962,7 +9962,7 @@
     },
     "7000": {
       "name": "Sandshrike's Claw",
-      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing <physicalDamage>(75 + 30% bonus Attack Damage) physical damage</physicalDamage>. For the next 3 seconds, you deal 15% increased damage to the target. (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Lethality and <attention>5</attention>  Move Speed.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Sandswipe:</active> Dash through target enemy champion, dealing damage. You deal increased damage to the target.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Lethality and Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10006,7 +10006,7 @@
     },
     "7001": {
       "name": "Syzygy",
-      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>8%</ornnBonus> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals an additional <physicalDamage>6% (3% for Ranged users) max Health physical damage</physicalDamage>, grants you <speed>15% Move Speed</speed> and a <shield>(160 + 35% bonus Attack Damage) Shield (50% shield for Ranged users)</shield> for 2 seconds (8s cooldown, 16s cooldown for Ranged users).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>4%</attention> Armor Penetration and <attention>5</attention>  Move Speed.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>8%</ornnBonus> Omnivamp</stats><br><br><li><passive>Ever Rising Moon:</passive> Hitting a champion with 2 separate Attacks or Abilities within 1.5 seconds deals additional damage, grants you Move Speed and a Shield.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Armor Penetration and Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10049,7 +10049,7 @@
     },
     "7002": {
       "name": "Draktharr's Shadowcarver",
-      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals an additional <physicalDamage>(75 + 30% bonus Attack Damage for melee / 55 + 25% bonus Attack Damage for ranged) physical damage</physicalDamage> (15s cooldown). If dealt by a Melee champion, this Attack also <status>Slows</status> the target by 99% for 0.25 seconds.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste and <attention>5</attention>  Move Speed.<br></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>75</ornnBonus> Attack Damage<br><ornnBonus>26</ornnBonus> Lethality<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Nightstalker:</passive> Attacking a champion deals additional damage. If dealt by a Melee champion, this Attack also <status>Slows</status> the target.  When a champion that you have damaged within the last 3 seconds dies, this cooldown is refreshed and you become <keywordStealth>Invisible</keywordStealth>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste and Move Speed.<br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10094,7 +10094,7 @@
     },
     "7003": {
       "name": "Turbocharged Hexperiment",
-      "description": "<mainText><stats><ornnBonus>600</ornnBonus> Health<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Supercharged:</active> Grants <speed>40% Move Speed</speed> towards enemies or enemy turrets for 4 seconds. Once near an enemy (or after 4 seconds) a shockwave is emitted that <status>Slows</status> nearby champions by 50% for 1.5 seconds (90s cooldown).<br><passive>Refuel:</passive> Moving and taking damage from Champions and large monsters fills up the <keywordMajor>Chemtank</keywordMajor>. At 100 stacks, your next basic attack deals <magicDamage>40-120 (+1% max Health, + 3% Move Speed) magic damage</magicDamage> to all nearby enemies (increased by 30% against minions and 200% against jungle monsters).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste and <attention>50</attention> Health.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>600</ornnBonus> Health<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Supercharged:</active> Grants Move Speed towards enemies or enemy turrets. Once near an enemy (or after 4 seconds) a shockwave is emitted that <status>Slows</status> nearby champions.<br><passive>Refuel:</passive> Moving and taking damage from Champions and large monsters fills up the <keywordMajor>Chemtank</keywordMajor>. At 100 stacks, your next basic attack deals damage to all nearby enemies (increased  against minions and monsters).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste and Health.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10144,7 +10144,7 @@
     },
     "7004": {
       "name": "Forgefire Crest",
-      "description": "<mainText><stats><ornnBonus>600</ornnBonus> Health<br><ornnBonus>50</ornnBonus> Armor<br><ornnBonus>50</ornnBonus> Magic Resist<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Immolate:</passive> Taking or dealing damage causes you to begin dealing <magicDamage>(12 - 30 (based on level) + 1% bonus Health) magic damage</magicDamage> per second to nearby enemies (increased by 25% against minions and 150% against monsters) for 3 seconds. Damaging Champions or Epic Monsters with this effect adds a stack, increasing subsequent <passive>Immolate</passive> damage by 10% for 5 seconds (max stacks 6).<li><passive>Flametouch:</passive> At maximum <passive>Immolate</passive> stacks, your Attacks burn nearby enemies for your <passive>Immolate</passive> damage per second for 3 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5%</attention> Tenacity and Slow Resist and <attention>50</attention> Health.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>600</ornnBonus> Health<br><ornnBonus>50</ornnBonus> Armor<br><ornnBonus>50</ornnBonus> Magic Resist<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Immolate:</passive> Taking or dealing damage causes you to begin dealing damage per second to nearby enemies (increased against minions and monsters). Damaging Champions or Epic Monsters with this effect adds a stack, increasing subsequent <passive>Immolate</passive> damage.<li><passive>Flametouch:</passive> At maximum <passive>Immolate</passive> stacks, your Attacks burn nearby enemies for your <passive>Immolate</passive> damage per second.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Tenacity, Slow Resist, and Health.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10190,7 +10190,7 @@
     },
     "7005": {
       "name": "Rimeforged Grasp",
-      "description": "<mainText><stats><ornnBonus>600</ornnBonus> Health<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing <magicDamage>(12 + 1% bonus Health) magic damage</magicDamage> per second to nearby enemies (increased by 25% against minions and 150% against monsters) for 3 seconds.<li><passive>Snowbind:</passive> Attacks create a frost field for 1.5 seconds and deal (12 - 85  / 6 - 42.5) bonus magic damage to all enemies in the area (4s cooldown, 6s cooldown for ranged champions). Enemies that move across the field are <status>Slowed</status> by 25% for melee champions and 12.5% for ranged champions (increased by your <scaleHealth>max Health</scaleHealth>).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>100</attention> Health and <attention>6%</attention> Size.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>600</ornnBonus> Health<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing damage per second to nearby enemies. Enemies that move across the field are <status>Slowed</status>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Health and Size.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10237,7 +10237,7 @@
     },
     "7006": {
       "name": "Typhoon",
-      "description": "<mainText><stats><ornnBonus>80</ornnBonus> Attack Damage<br><ornnBonus>35%</ornnBonus> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><br><active>Active -</active> <active>Cloudburst:</active> Dash in target direction, firing three missiles at the lowest Health enemy near your destination (prioritizing champions). Deals a total of <magicDamage>(180 - 220 (based on level) + 45% bonus Attack Damage) magic damage</magicDamage>, increased against low Health targets by up to 50% (110s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2%</attention> Move Speed.<br><br><rules>Maximum missile damage dealt when enemy Health is below 30%.<br>Cloudburst's dash cannot pass through terrain.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>80</ornnBonus> Attack Damage<br><ornnBonus>35%</ornnBonus> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><br><active>Active -</active> <active>Cloudburst:</active> Dash in target direction, firing three missiles at the lowest Health enemy near your destination. Deals damage, increased against low Health targets.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10282,7 +10282,7 @@
     },
     "7007": {
       "name": "Wyrmfallen Sacrifice",
-      "description": "<mainText><stats><ornnBonus>85</ornnBonus> Attack Damage<br><ornnBonus>40%</ornnBonus> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><li><passive>Bring It Down:</passive> Every third Attack deals an additional <trueDamage>(50 + 40% bonus Attack Damage) true damage</trueDamage>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10%</attention> Attack Speed.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>85</ornnBonus> Attack Damage<br><ornnBonus>40%</ornnBonus> Attack Speed<br><attention>20%</attention> Critical Strike Chance</stats><br><li><passive>Bring It Down:</passive> Every third Attack deals additional true damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Attack Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10326,7 +10326,7 @@
     },
     "7008": {
       "name": "Bloodward",
-      "description": "<mainText><stats><ornnBonus>65</ornnBonus> Attack Damage<br><ornnBonus>30%</ornnBonus> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><ornnBonus>8%</ornnBonus> Life Steal</stats><br><li><passive>Lifeline:</passive> When taking damage that would reduce you below 30% Health, gain a <shield>250 - 630 Shield</shield> for 3s. In addition, gain <attackDamage>15-35 Attack Damage</attackDamage> for 8s (90s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Attack Damage and <attention>70</attention> Health.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>65</ornnBonus> Attack Damage<br><ornnBonus>30%</ornnBonus> Attack Speed<br><attention>20%</attention> Critical Strike Chance<br><ornnBonus>8%</ornnBonus> Life Steal</stats><br><li><passive>Lifeline:</passive> When taking damage that would reduce you below 30% Health, gain a Shield. In addition, gain Attack Damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Attack Damage and Health.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10372,7 +10372,7 @@
     },
     "7009": {
       "name": "Icathia's Curse",
-      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>450</ornnBonus> Health<br><ornnBonus>20</ornnBonus> Ability Haste<br><ornnBonus>8%</ornnBonus> Omnivamp</stats><br><li><passive>Void Corruption:</passive> For each second damaging enemy champions, deal 3% bonus damage (max 9%). At maximum strength, the bonus damage is dealt as <trueDamage>true damage</trueDamage> instead. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2%</attention> Omnivamp and 8 Ability Power.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>450</ornnBonus> Health<br><ornnBonus>20</ornnBonus> Ability Haste<br><ornnBonus>8%</ornnBonus> Omnivamp</stats><br><li><passive>Void Corruption:</passive> For each second damaging enemy champions, deal bonus damage. At maximum strength, the bonus damage is dealt as <trueDamage>true damage</trueDamage> instead. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Omnivamp and Ability Power.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10417,7 +10417,7 @@
     },
     "7010": {
       "name": "Vespertide",
-      "description": "<mainText><stats><ornnBonus>120</ornnBonus> Ability Power<br><ornnBonus>400</ornnBonus> Health<br><ornnBonus>30</ornnBonus> Ability Haste</stats><br><li><passive>Soulrend:</passive> Damaging a champion deals an additional <magicDamage>(125 +15% Ability Power) magic damage</magicDamage> and grants you <speed>25% Move Speed</speed> for 1.5 seconds (30s cooldown per champion).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br><br><rules>Damaging a new champion will extend the duration of the Move Speed bonus.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>120</ornnBonus> Ability Power<br><ornnBonus>400</ornnBonus> Health<br><ornnBonus>30</ornnBonus> Ability Haste</stats><br><li><passive>Soulrend:</passive> Damaging a champion deals additional magic damage and grants you Move Speed.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10461,7 +10461,7 @@
     },
     "7011": {
       "name": "Upgraded Aeropack",
-      "description": "<mainText><stats><ornnBonus>120</ornnBonus> Ability Power<br><ornnBonus>10</ornnBonus> Magic Penetration<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>20</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal <magicDamage>(125 +15% Ability Power) magic damage</magicDamage>. Then, gain <speed>30% Move Speed</speed> towards enemy champions for 1.5 seconds (40s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration.<br><br><rules>Supersonic's dash cannot pass through terrain.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>120</ornnBonus> Ability Power<br><ornnBonus>10</ornnBonus> Magic Penetration<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>20</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Supersonic:</active> Dash in target direction, unleashing an arc of magic missiles that deal damage. Then, gain Move Speed towards enemy champions.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Magic Penetration.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10507,7 +10507,7 @@
     },
     "7012": {
       "name": "Liandry's Lament",
-      "description": "<mainText><stats><ornnBonus>110</ornnBonus> Ability Power<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Agony:</passive> Deal up to <magicDamage>12% bonus magic damage</magicDamage> to Champions based on the target's bonus Health (maxed at 1250 bonus Health).<li><passive>Torment:</passive> Dealing damage with Abilities causes enemies to burn for <magicDamage>(12.5 + 1.5% Ability Power) + 1% max Health magic damage</magicDamage> per second for 4 seconds. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>110</ornnBonus> Ability Power<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Agony:</passive> Deal bonus magic damage to Champions based on the target's bonus Health.<li><passive>Torment:</passive> Dealing damage with Abilities causes enemies to burn over time.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10550,7 +10550,7 @@
     },
     "7013": {
       "name": "Eye of Luden",
-      "description": "<mainText><stats><ornnBonus>100</ornnBonus> Ability Power<br><ornnBonus>10</ornnBonus> Magic Penetration<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Echo:</passive> Damaging Abilities deal an additional <magicDamage>(100 + 10% Ability Power) magic damage</magicDamage> to the target and 3 nearby enemies and grants you <speed>15% Move Speed</speed> for 2 seconds (10s cooldown). Dealing ability damage to Champions reduces this item's cooldown by 0.5 second, up to 3 seconds per spell cast.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Magic Penetration. </mainText><br>",
+      "description": "<mainText><stats><ornnBonus>100</ornnBonus> Ability Power<br><ornnBonus>10</ornnBonus> Magic Penetration<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Echo:</passive> Damaging Abilities deal magic damage to the target and 3 nearby enemies and grants you Move Speed. Dealing ability damage to Champions reduces this item's cooldown.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Magic Penetration. </mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10595,7 +10595,7 @@
     },
     "7014": {
       "name": "Eternal Winter",
-      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal <magicDamage>(100+30% Ability Power) magic damage</magicDamage> in a cone, <status>Slowing</status> enemies by 65% for 1 second. Enemies at the center of the cone are <status>Rooted</status> instead (30s cooldown).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>10</attention> Ability Power. <br></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Glaciate:</active> Deal damage in a cone, <status>Slowing</status> enemies hit. Enemies at the center of the cone are <status>Rooted</status> instead.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Power. <br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10642,7 +10642,7 @@
     },
     "7015": {
       "name": "Ceaseless Hunger",
-      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Attack Damage<br><ornnBonus>450</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>12%</ornnBonus> Omnivamp</stats><br><br><active>Active -</active> <active>Thirsting Slash:</active> Deal <physicalDamage>(175% Base Attack Damage) physical damage</physicalDamage> to nearby enemies. Restore <healing>(20% Base Attack Damage + 8% missing Health)</healing> for each champion hit (15s cooldown, reduced by Ability Haste).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>7</attention> Ability Haste.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Attack Damage<br><ornnBonus>450</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>12%</ornnBonus> Omnivamp</stats><br><br><active>Active -</active> <active>Thirsting Slash:</active> Deal damage to nearby enemies. Restore Health for each champion hit.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10688,7 +10688,7 @@
     },
     "7016": {
       "name": "Dreamshatter",
-      "description": "<mainText><stats><ornnBonus>60</ornnBonus> Attack Damage<br><ornnBonus>30%</ornnBonus> Attack Speed<br><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Halting Slash:</active> Deal <physicalDamage>(175% Attack Damage) physical damage</physicalDamage> to nearby enemies, <status>Slowing</status> them by 40% for 3 seconds (15s cooldown, reduced by Ability Haste). Can be cast while moving.<br><li><passive>Heroic Gait:</passive> Dealing physical damage grants <speed>20 Move Speed</speed> for 3 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2%</attention> Move Speed.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>60</ornnBonus> Attack Damage<br><ornnBonus>30%</ornnBonus> Attack Speed<br><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><br><active>Active -</active> <active>Halting Slash:</active> Deal damage to nearby enemies, <status>Slowing</status> them. Can be cast while moving.<br><li><passive>Heroic Gait:</passive> Dealing physical damage grants Move Speed.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10743,7 +10743,7 @@
     },
     "7017": {
       "name": "Deicide",
-      "description": "<mainText><stats><ornnBonus>60</ornnBonus> Attack Damage<br><ornnBonus>450</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste</stats><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with an additional <physicalDamage>125% base Attack Damage + 6% (3% for Ranged owners) target max Health physical damage</physicalDamage> <OnHit>On-Hit</OnHit> (1.5s cooldown). If the target is a champion, also heal for <healing>65% of the premitigation damage</healing>.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>3%</attention> Armor Penetration and <attention>3%</attention> Magic Penetration.<br><br><rules><passive>Spellblade</passive> will deal a minimum of (150% base Attack Damage) damage to units, but no more than (250% base Attack Damage) damage to Monsters.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>60</ornnBonus> Attack Damage<br><ornnBonus>450</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste</stats><li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with additional damage <OnHit>On-Hit</OnHit>. If the target is a champion, also heal.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Armor Penetration and Magic Penetration.<br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10790,7 +10790,7 @@
     },
     "7018": {
       "name": "Infinity Force",
-      "description": "<mainText><stats><ornnBonus>45</ornnBonus> Attack Damage<br><ornnBonus>40%</ornnBonus> Attack Speed<br><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Threefold Strike:</passive> Attacks grant <speed>20 Move Speed</speed> for 3 seconds. If the target is a champion, increase your <scaleAD>base Attack Damage by 4%</scaleAD> for 3 seconds, stacking up to 5 times (Max increase <scaleAD>20% AD</scaleAD>).<li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with an additional <physicalDamage>(200% base Attack Damage) physical damage</physicalDamage> <OnHit>On-Hit</OnHit> (1.5s cooldown). <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>3</attention> Attack Damage,  <attention>3</attention> Ability Haste, and <attention> 3</attention> Move Speed</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>45</ornnBonus> Attack Damage<br><ornnBonus>40%</ornnBonus> Attack Speed<br><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Threefold Strike:</passive> Attacks grant Move Speed. If the target is a champion, increase your base Attack Damage, stacking.<li><passive>Spellblade:</passive> After using an Ability, your next Attack is enhanced with additional damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Attack Damage, Ability Haste, and Move Speed.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10844,7 +10844,7 @@
     },
     "7019": {
       "name": "Reliquary of the Golden Dawn",
-      "description": "<mainText><stats><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist</stats><br><br><active>Active -</active> <active>Devotion:</active> Grant nearby allies a <shield>180 - 330 (based on ally level) Shield</shield>, decaying over 2.5 seconds (90s cooldown). <br><li><passive>Consecrate:</passive> Grant nearby allied champions <scaleArmor>3 Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>2</attention> Armor/Magic Resist increase to <passive>Consecrate</passive>.<br><br><rules>Strength of level-scaling effects are based on the ally's level.<br>Subsequent <active>Devotion</active> shields within 20 seconds only have 25% effect.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist</stats><br><br><active>Active -</active> <active>Devotion:</active> Grant nearby allies a <shield>Shield</shield>, decaying over time.<br><li><passive>Consecrate:</passive> Grant nearby allied champions Armor and <scaleMR>Magic Resist</scaleMR>. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Armor and Magic Resist increase to <passive>Consecrate</passive>.<br><br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10891,7 +10891,7 @@
     },
     "7020": {
       "name": "Shurelya's Requiem",
-      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Ability Power<br><ornnBonus>300</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>200%</ornnBonus> Base Mana Regen</stats><br><br><active>Active -</active> <active>Inspire:</active> Grants nearby allies <speed>30% Move Speed</speed> for 4 seconds (75s cooldown).<br><li><passive>Motivate:</passive> Empowering or Protecting another ally Champion grants both allies <speed>25% Move Speed</speed> for 1.5 seconds.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5</attention> Ability Haste.<br><br><rules>An ally can only be affected by <keywordMajor>Motivate</keywordMajor> once every 4 seconds.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Ability Power<br><ornnBonus>300</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>200%</ornnBonus> Base Mana Regen</stats><br><br><active>Active -</active> <active>Inspire:</active> Grants nearby allies Move Speed.<li><passive>Motivate:</passive> Empowering or Protecting another ally Champion grants both allies Move Speed.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Haste.<br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10937,7 +10937,7 @@
     },
     "7021": {
       "name": "Starcaster",
-      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Ability Power<br><ornnBonus>300</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>200%</ornnBonus> Base Mana Regen</stats><br><li><passive>Starlit Grace:</passive> When affecting champions with Attacks or Abilities in combat, restore <healing>60 Health</healing> to the most wounded nearby ally (2s cooldown). Each second spent in combat with champions increases your Heal and Shield Power by 5% (stacking up to 4 times).<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>8</attention> increase to <passive>Starlit Grace's</passive> Heal.<br><br></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Ability Power<br><ornnBonus>300</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>200%</ornnBonus> Base Mana Regen</stats><br><li><passive>Starlit Grace:</passive> When affecting champions with Attacks or Abilities in combat, restore Health to the most wounded nearby ally. Each second spent in combat with champions increases your Heal and Shield Power.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items an increase to <passive>Starlit Grace's</passive> Heal.<br><br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -10979,7 +10979,7 @@
     },
     "7022": {
       "name": "Seat of Command",
-      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Ability Power<br><ornnBonus>300</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>200%</ornnBonus> Base Mana Regen</stats><br><li><passive>Coordinated Fire:</passive> Abilities that <status>Slow</status> or <status>Immobilize</status> a champion deal <magicDamage>45 - 75 (based on level) bonus magic damage</magicDamage> and marks them for 4 seconds (6s cooldown per champion). Ally champion damage detonates the mark, dealing an additional <magicDamage>90 - 150 (based on ally level) magic damage</magicDamage> and granting you both <speed>20% Move Speed</speed> for 2 seconds. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>15</attention> Ability Power. <br><br><rules>Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>70</ornnBonus> Ability Power<br><ornnBonus>300</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>200%</ornnBonus> Base Mana Regen</stats><br><li><passive>Coordinated Fire:</passive> Abilities that <status>Slow</status> or <status>Immobilize</status> a champion deal bonus damage and mark them. Ally champion damage detonates the mark, dealing additional damage and granting you both Move Speed. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Ability Power. <br></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -11023,7 +11023,7 @@
     },
     "7023": {
       "name": "Equinox",
-      "description": "<mainText><stats><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist</stats><br><li><passive>Coruscation:</passive> After <status>Immobilizing</status> champions or being <status>Immobilized</status>, cause that target and all nearby enemy Champions to take 9% increased damage for 4 seconds. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>5 Armor and Magic Resist</attention></mainText><br>",
+      "description": "<mainText><stats><ornnBonus>400</ornnBonus> Health<br><ornnBonus>25</ornnBonus> Ability Haste<br><ornnBonus>40</ornnBonus> Armor<br><ornnBonus>40</ornnBonus> Magic Resist</stats><br><li><passive>Coruscation:</passive> After <status>Immobilizing</status> champions or being <status>Immobilized</status>, cause that target and all nearby enemy Champions to take increased damage.<br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention> Armor and Magic Resist</attention></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -11066,7 +11066,7 @@
     },
     "7024": {
       "name": "Caesura",
-      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Divine Safeguard:</passive> You are <keywordMajor>Safeguarded</keywordMajor>, reducing incoming champion damage by 75%. <keywordMajor>Safeguard</keywordMajor> persists for 1.5 seconds after taking champion damage. (40 second cooldown). <li><passive>Holy Gift:</passive> While <keywordMajor>Safeguarded</keywordMajor> and for 3 seconds after it is broken, gain <scaleAP>10-40 Ability Power</scaleAP>. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items <attention>1%</attention> Move Speed and 8 Ability Power.</mainText><br>",
+      "description": "<mainText><stats><ornnBonus>90</ornnBonus> Ability Power<br><ornnBonus>350</ornnBonus> Health<br><ornnBonus>800</ornnBonus> Mana<br><ornnBonus>25</ornnBonus> Ability Haste</stats><br><li><passive>Divine Safeguard:</passive> You are <keywordMajor>Safeguarded</keywordMajor>, reducing incoming champion damage. <keywordMajor>Safeguard</keywordMajor> persists for 1.5 seconds after taking champion damage. <li><passive>Holy Gift:</passive> While <keywordMajor>Safeguarded</keywordMajor> and for 3 seconds after it is broken, gain  Ability Power. <br><br><rarityMythic>Mythic Passive:</rarityMythic> Grants all other <rarityLegendary>Legendary</rarityLegendary> items Move Speed and Ability Power.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -11146,7 +11146,7 @@
     },
     "8001": {
       "name": "Anathema's Chains",
-      "description": "<mainText><stats><attention>650</attention> Health<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Vow:</active> Choose a Nemesis to start building a Vendetta (90s).<br><li><passive>Vendetta:</passive> Take up to 30% reduced damage from your Nemesis, 1% per Vendetta stack. You gain stacks over time, and reach the maximum number of stacks after 60 seconds.<li><passive>Vengeance:</passive> At maximum stacks, your Nemesis has 20% reduced Tenacity while near you.<br><br><rules>Active can be cast while dead and at global range. Stacks reset upon choosing a new target. Cannot be cast for 15 seconds while in-combat with champions.</rules><br><br><flavorText>\"She swore to dedicate her life to his destruction. The gauntlets heard.\"</flavorText></mainText><br>",
+      "description": "<mainText><stats><attention>650</attention> Health<br><attention>20</attention> Ability Haste</stats><br><br><active>Active -</active> <active>Vow:</active> Choose a Nemesis to start building a Vendetta (90s).<br><li><passive>Vendetta:</passive> Take reduced damage from your Nemesis, increasing per Vendetta stack. You gain stacks over time, and reach the maximum number of stacks after 60 seconds.<li><passive>Vengeance:</passive> At maximum stacks, your Nemesis has reduced Tenacity while near you.<br><br><rules>Active can be cast while dead and at global range. Stacks reset upon choosing a new target. Cannot be cast for 15 seconds while in-combat with champions.</rules><br><br><flavorText>\"She swore to dedicate her life to his destruction. The gauntlets heard.\"</flavorText></mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
@@ -11187,7 +11187,7 @@
     },
     "8020": {
       "name": "Abyssal Mask",
-      "description": "<mainText><stats><attention>450</attention> Health<br><attention>35</attention> Magic Resist<br><attention>10</attention> Ability Haste</stats><br><li><passive>Unmake:</passive> <status>Curse</status> nearby enemy champions, reducing their <scaleMR>Magic Resist by 5 + 1.2% bonus Health</scaleMR> (max 25). For each <status>Cursed</status> enemy, gain <scaleMR>9 Magic Resist</scaleMR>.</mainText><br>",
+      "description": "<mainText><stats><attention>450</attention> Health<br><attention>35</attention> Magic Resist<br><attention>10</attention> Ability Haste</stats><br><li><passive>Unmake:</passive> <status>Curse</status> nearby enemy champions, reducing their Magic Resist. For each <status>Cursed</status> enemy, gain Magic Resist.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [
