@@ -62,19 +62,8 @@ export namespace Config {
         tier: string
         rank: string
         set: boolean
-      }
-    }
-    script: {
-      userScript: boolean
-      auto: {
-        kiter: {
-          enabled: boolean
-          keybinds: {
-            activate: string
-            attackMove: string
-          }
-        }
-      }
+      },
+      userScript: boolean,
     }
     overlay: boolean
   }

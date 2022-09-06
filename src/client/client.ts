@@ -67,7 +67,7 @@ export namespace Client {
           case LCIClient.game.gameflows.NONE:
             break
           case LCIClient.game.gameflows.LOBBY:
-            if (Config.get().script.userScript)
+            if (Config.get().misc.userScript)
               Script.event.onPartyJoin()
             break
           case LCIClient.game.gameflows.MATCHMAKING:
@@ -124,8 +124,6 @@ export namespace Client {
       
       Electron.overlay_window.webContents.send("liveClientData", liveClientData)
 
-      Script.methods.autoKiter.attackSpeed = 1 / liveClientData.activePlayer.championStats.attackSpeed
-      
       if (!hasSentSkillOrder) {
         hasSentSkillOrder = true
 

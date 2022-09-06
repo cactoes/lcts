@@ -1,5 +1,5 @@
 # LCTS (League Client TypeScript)
-A feature rich league client written in TypeScript, with scripting & more 
+A feature rich league client written in TypeScript, with basic scripting & more 
 
 ## Installing the client
 Just download the client from the [releases](https://github.com/cactoes/lcts/releases) tab & run 'lcts.exe'
@@ -115,33 +115,15 @@ The config is located in [resources/data/config.json](resources/data/config.json
       "tier": "diamond", // for storing your tier so you can use it in a script
       "rank": "III", // for storing your rank so you can use it in a script
       "set": false // auto set it
-    }
-  },
-  "script": {
-    "userScript": true, // make use of the user made script (script.js)
-    "auto": {
-      "kiter": { // auto kiter
-        "enabled": true, // do we want to use it
-        "keybinds": {
-          "activate": "c", // keybind for activating the kite bot
-          "attackMove": "n" // keybind for attack move
-        }
-      }
-    }
+    },
+    "userScript": true // make use of the user made script (script.js)
   },
   "overlay": true // enable in game overlay
 }
 ```
 
 ## Scripting
-LCTS has **2** types of scripts
-
-### Actual scripts
-Actual scripts that may get you banned LCTS is not responisible for your account, customizabel in the config or ui
-- auto kiter
-  - enable / disable
-  - keybind (default is "c")
-  - attack move keybind (default is "n")
+LCTS doesn't have any scripts, it only support "scripts" for automating the client
 
 ### User made scripts
 The client allows for function scripting (within LCTS itself), the script is located in [resources/data/script.js](resources/data/script.js). <br />
@@ -199,18 +181,12 @@ $ npm install -g typescript
 ```
 
 ## Dependencies
-- @nut-tree/nut-js@2.1.1
 - electron-overlay-window@2.0.1
-- ffi-napi@4.0.3
-- gkm@0.2.0
 - lcinterface@4.1.2
 - node-fetch@2.6.1
 - openurl@1.1.1
 - puppeteer-core@16.1.0
 - puppeteer-in-electron@3.0.5
-- ref-napi@3.0.3
-- ref-struct-di@1.1.1
-- ref-wchar-napi@1.0.3
 
 ## DevDependencies
 - electron@19.0.5

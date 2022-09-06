@@ -2,11 +2,11 @@
   "name": "lcts",
   "version": "1.0.0",
   "description": "lcts",
-  "main": "src/main/main.js",
+  "main": "dist/main/main.js",
   "scripts": {
     "tsc:build": "tsc",
     "start": "electron-forge start",
-    "clean": "del /S src\\*.js",
+    "clean": "del /S dist\\*.js",
     "test": "tsc && electron-forge start",
     "package:win": "tsc && electron-builder --dir"
   },
@@ -20,8 +20,7 @@
     ],
     "icon": "images/icon.ico",
     "files": [
-      "!src/**/*.ts",
-      "!src/types.d.ts",
+      "!src",
       "!release",
       "!resources",
       "!images",
@@ -56,18 +55,12 @@
     "url": "https://github.com/cactoes/lcts"
   },
   "dependencies": {
-    "@nut-tree/nut-js": "^2.1.1",
     "electron-overlay-window": "^2.0.1",
-    "ffi-napi": "^4.0.3",
-    "gkm": "^0.2.0",
     "lcinterface": "^4.1.2",
     "node-fetch": "^2.6.1",
     "openurl": "^1.1.1",
     "puppeteer-core": "^16.1.0",
-    "puppeteer-in-electron": "^3.0.5",
-    "ref-napi": "^3.0.3",
-    "ref-struct-di": "^1.1.1",
-    "ref-wchar-napi": "^1.0.3"
+    "puppeteer-in-electron": "^3.0.5"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.63",

@@ -1,6 +1,6 @@
 {
   "type": "item",
-  "version": "12.15.1",
+  "version": "12.16.1",
   "basic": {
     "name": "",
     "rune": {
@@ -883,7 +883,7 @@
     },
     "1043": {
       "name": "Recurve Bow",
-      "description": "<mainText><stats><attention>25%</attention> Attack Speed</stats><br><li><passive>Steeltipped:</passive> Attacks apply damage <OnHit>On-Hit</OnHit>.</mainText><br>",
+      "description": "<mainText><stats><attention>25%</attention> Attack Speed</stats><br><li><passive>Steeltipped:</passive> Attacks apply physical damage On-Hit.</mainText><br>",
       "colloq": ";",
       "plaintext": "Greatly increases Attack Speed",
       "from": [
@@ -2038,7 +2038,7 @@
     },
     "2015": {
       "name": "Kircheis Shard",
-      "description": "<mainText><stats><attention>15%</attention> Attack Speed</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Jolt:</passive> Energized Attacks gain additional damage.</mainText><br>",
+      "description": "<mainText><stats><attention>15%</attention> Attack Speed</stats><br><li><passive>Energized:</passive> Moving and Attacking will generate an Energized Attack.<li><passive>Jolt:</passive> Energized Attacks gain additional magic damage.</mainText><br>",
       "colloq": ";",
       "plaintext": "Attack speed and a chargable magic hit",
       "from": [
@@ -2775,7 +2775,7 @@
     },
     "3003": {
       "name": "Archangel's Staff",
-      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>500</attention> Mana<br><attention>200</attention> Health</stats><br><li><passive>Awe:</passive> Gain Ability Haste equal to  bonus Mana.<li><passive>Mana Charge:</passive> Strike a target with an Ability to consume a charge and gain 3 bonus Mana, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Seraph's Embrace</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
+      "description": "<mainText><stats><attention>60</attention> Ability Power<br><attention>500</attention> Mana<br><attention>200</attention> Health</stats><br><li><passive>Awe:</passive> Gain Ability Haste equal to bonus Mana.<li><passive>Mana Charge:</passive> Strike a target with an Ability to consume a charge and gain 3 bonus Mana, doubled if the target is a champion. Grants a maximum of 360 Mana at which point this item transforms into <rarityLegendary>Seraph's Embrace</rarityLegendary>.<br><br><rules>Gain a new <passive>Mana Charge</passive> every 8 seconds (max 4).</rules></mainText><br>",
       "colloq": "",
       "plaintext": "Increases Ability Power based on maximum Mana",
       "from": [
@@ -3291,7 +3291,7 @@
     },
     "3040": {
       "name": "Seraph's Embrace",
-      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>860</attention> Mana<br><attention>250</attention> Health</stats><br><li><passive>Awe:</passive> Gain Ability Haste equal to <scaleMana>1.3% bonus Mana</scaleMana>.<li><passive>Empyrean:</passive> Restore <scaleHealth>Health</scaleHealth> equal to 25% of <scaleMana>Mana</scaleMana> spent, up to 25-50 (+10% AP) per cast. Toggle abilities can heal up to the same value per second. </mainText><br>",
+      "description": "<mainText><stats><attention>80</attention> Ability Power<br><attention>860</attention> Mana<br><attention>250</attention> Health</stats><br><li><passive>Awe:</passive> Gain Ability Haste based on Mana.<li><passive>Empyrean:</passive> Restore Health based on Mana spent. Toggle abilities can heal up to the same value per second. </mainText><br>",
       "colloq": "",
       "plaintext": "",
       "specialRecipe": 3003,
@@ -3371,7 +3371,7 @@
     },
     "3042": {
       "name": "Muramana",
-      "description": "<mainText><stats><attention>35</attention> Attack Damage<br><attention>860</attention> Mana<br><attention>15</attention> Ability Haste</stats><br><li><passive>Awe:</passive> Gain bonus <scaleAD>Attack Damage equal to 2.5% max Mana</scaleAD>. <li><passive>Shock:</passive> Attacks against champions deal an additional <physicalDamage>1.5% Max Mana physical damage</physicalDamage> <OnHit>On-Hit</OnHit>. Damaging Abilities against champions deal an additional <physicalDamage>(3.5% for Melee users | 2.7% for Ranged users) Max Mana + 6% Total AD physical damage</physicalDamage>.</mainText><br>",
+      "description": "<mainText><stats><attention>35</attention> Attack Damage<br><attention>860</attention> Mana<br><attention>15</attention> Ability Haste</stats><br><li><passive>Awe:</passive> Gain bonus Attack Damage based on Mana. <li><passive>Shock:</passive> Attacks against champions deal additional physical damage.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "specialRecipe": 3004,
@@ -4536,7 +4536,7 @@
     },
     "3091": {
       "name": "Wit's End",
-      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>40%</attention> Attack Speed<br><attention>40</attention> Magic Resist</stats><br><li><passive>Fray:</passive> Attacks apply damage <OnHit>On-Hit</OnHit> and grant Move Speed.</mainText><br>",
+      "description": "<mainText><stats><attention>40</attention> Attack Damage<br><attention>40%</attention> Attack Speed<br><attention>40</attention> Magic Resist</stats><br><li><passive>Fray:</passive> Attacks apply magic damage On-Hit and grant Move Speed.</mainText><br>",
       "colloq": ";",
       "plaintext": "Resist magic damage and claw your way back to life.",
       "from": [
@@ -4817,7 +4817,7 @@
     },
     "3107": {
       "name": "Redemption",
-      "description": "<mainText><stats><attention>16%</attention> Heal and Shield Power<br><attention>200</attention> Health<br><attention>15</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Intervention:</active> Target an area within. After 2.5 seconds, call down a beam of light to Restore Health to allies and damage enemy champions.<br><br><rules>Item can be activated whilst dead. Damage and healing reduced by 50% if the target has recently been affected by another <active>Intervention</active>. Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>16%</attention> Heal and Shield Power<br><attention>200</attention> Health<br><attention>15</attention> Ability Haste<br><attention>100%</attention> Base Mana Regen</stats><br><br><active>Active -</active> <active>Intervention:</active> Target an area within. After 2.5 seconds, call down a beam of light to restore Health to allies and damage enemy champions.<br><br><rules>Item can be activated whilst dead. Damage and healing reduced by 50% if the target has recently been affected by another <active>Intervention</active>. Strength of level-scaling effects are based on the ally's level.</rules></mainText><br>",
       "colloq": ";",
       "plaintext": "Activate to heal allies and damage enemies in an area",
       "from": [
@@ -5038,7 +5038,7 @@
     },
     "3112": {
       "name": "Guardian's Orb",
-      "description": "<mainText><stats><attention>40</attention> Ability Power<br><attention>150</attention> Health</stats><br><li><passive>Recovery:</passive> Restores Mana over time. If you can't gain mana, restores Health instead.<li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
+      "description": "<mainText><stats><attention>50</attention> Ability Power<br><attention>150</attention> Health</stats><br><li><passive>Recovery:</passive> Restores Mana over time. If you can't gain mana, restores Health instead.<li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
       "colloq": ";",
       "plaintext": "Good starting item for mages",
       "image": {
@@ -5070,7 +5070,7 @@
       },
       "stats": {
         "FlatHPPoolMod": 150,
-        "FlatMagicDamageMod": 40
+        "FlatMagicDamageMod": 50
       },
       "effect": {
         "Effect1Amount": "3"
@@ -5342,7 +5342,7 @@
     },
     "3121": {
       "name": "Fimbulwinter",
-      "description": "<mainText><stats><attention>350</attention> Health<br><attention>860</attention> Mana<br><attention>15</attention> Ability Haste</stats><li><passive>Awe:</passive> Gain bonus <scaleHealth>Health equal to 8% Total Mana</scaleHealth>.<li><passive>Everlasting:</passive> <status>Immobilizing</status> or <status>Slowing</status> (Melee only) an enemy champion consumes <scaleMana>3% current Mana</scaleMana> and grants a Shield for 3 seconds, absorbing <scaleMana>100-180 + 4.5% current Mana</scaleMana> damage (8s). The Shield is increased by <attention>80%</attention> if more than one enemy is nearby.<br><br><rules>This effect only activates while you have greater than 20% Mana.</rules></mainText><br>",
+      "description": "<mainText><stats><attention>350</attention> Health<br><attention>860</attention> Mana<br><attention>15</attention> Ability Haste</stats><li><passive>Awe:</passive> Gain bonus Health based on Mana.<li><passive>Everlasting:</passive> <status>Immobilizing</status> or <status>Slowing</status> an enemy champion consumes current Mana and grants a Shield. The Shield is increased if more than one enemy is nearby.</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "specialRecipe": 3119,
@@ -6305,7 +6305,7 @@
     },
     "3184": {
       "name": "Guardian's Hammer",
-      "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>150</attention> Health<br><attention>10%</attention> Life Steal</stats><br><li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
+      "description": "<mainText><stats><attention>25</attention> Attack Damage<br><attention>150</attention> Health<br><attention>7%</attention> Life Steal</stats><br><li><passive>Legendary:</passive> This item counts as a <rarityLegendary>Legendary</rarityLegendary> item.</mainText><br>",
       "colloq": ";dblade",
       "plaintext": "Good starting item for attackers",
       "image": {
@@ -6338,7 +6338,7 @@
       "stats": {
         "FlatPhysicalDamageMod": 25,
         "FlatHPPoolMod": 150,
-        "PercentLifeStealMod": 0.1
+        "PercentLifeStealMod": 0.07
       }
     },
     "3190": {
@@ -6617,7 +6617,7 @@
     },
     "3340": {
       "name": "Stealth Ward",
-      "description": "<mainText><stats></stats><active>Active - Trinket:</active> Place a Stealth Ward on the ground that lasts between <scaleLevel>90 - 120</scaleLevel> seconds, is <keywordStealth>Invisible</keywordStealth> to enemies but grants your team vision of the surrounding area. Stores up to 2 Stealth Wards, generating a new Ward every <scaleLevel>240 - 120</scaleLevel> seconds. </mainText><br>",
+      "description": "<mainText><stats></stats><active>Active - Trinket:</active> Place a Stealth Ward on the ground that is <keywordStealth>Invisible</keywordStealth> to enemies but grants your team vision of the surrounding area. Stores up to 2 Stealth Wards.</mainText><br>",
       "colloq": "yellow; totem; trinket",
       "plaintext": "Periodically place a Stealth Ward",
       "image": {
@@ -9235,7 +9235,7 @@
     },
     "6660": {
       "name": "Bami's Cinder",
-      "description": "<mainText><stats><attention>300</attention> Health</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing damage per second to nearby enemies (increased  against minions and monsters).</mainText><br>",
+      "description": "<mainText><stats><attention>300</attention> Health</stats><br><li><passive>Immolate :</passive> Taking or dealing damage causes you to begin dealing magic damage per second to nearby enemies (increased against minions and monsters).</mainText><br>",
       "colloq": "",
       "plaintext": "",
       "from": [

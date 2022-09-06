@@ -144,8 +144,7 @@ const setup_ui_on_update = async () => {
   document.getElementById("LockChampion").className = config.auto.champion.lock? "toggle toggle_active":"toggle"
   document.getElementById("BanChampion").className = config.auto.champion.ban? "toggle toggle_active":"toggle"
   document.getElementById("ImportRunes").className = config.auto.runes.set? "toggle toggle_active":"toggle"
-  document.getElementById("UserScripts").className = config.script.userScript? "toggle toggle_active":"toggle"
-  document.getElementById("AutoKiter").className = config.script.auto.kiter.enabled? "toggle toggle_active":"toggle"
+  document.getElementById("UserScripts").className = config.misc.userScript? "toggle toggle_active":"toggle"
   document.getElementById("AcceptMatch").className = config.auto.acceptMatch? "toggle toggle_active":"toggle"
   document.getElementById("SetStatus").className = config.misc.status.set? "toggle toggle_active":"toggle"
   document.getElementById("SetRank").className = config.misc.rank.set? "toggle toggle_active":"toggle"
@@ -153,8 +152,6 @@ const setup_ui_on_update = async () => {
   document.getElementById("SetSpells").className = config.auto.spells.set? "toggle toggle_active":"toggle"
   document.getElementById("tier").value = convertTier(config.misc.rank.tier)
   document.getElementById("rank").value = convertRank(config.misc.rank.rank)
-  document.getElementById("AutoKiterKey").value = config.script.auto.kiter.keybinds.activate
-  document.getElementById("AttackMoveKey").value = config.script.auto.kiter.keybinds.attackMove
   document.getElementById("statusText").value = config.misc.status.text
   document.getElementById("runePrefix").value = config.auto.runes.prefix
 
@@ -211,7 +208,7 @@ for (var i = 0; i < AllToggles.length; i++) {
         ipc_send("save", ui.save, "auto.runes.set", { state: e.target.className == "toggle toggle_active" })
         break
       case "UserScripts":
-        ipc_send("save", ui.save, "script.userScript", { state: e.target.className == "toggle toggle_active" })
+        ipc_send("save", ui.save, "misc.userScript", { state: e.target.className == "toggle toggle_active" })
         break
       case "AcceptMatch":
         ipc_send("save", ui.save, "auto.acceptMatch", { state: e.target.className == "toggle toggle_active" })
@@ -227,9 +224,6 @@ for (var i = 0; i < AllToggles.length; i++) {
         break
       case "SetSpells":
         ipc_send("save", ui.save, "auto.spells.set", { state: e.target.className == "toggle toggle_active" })
-        break
-      case "AutoKiter":
-        ipc_send("save", ui.save, "script.auto.kiter.enabled", { state: e.target.className == "toggle toggle_active" })
         break
     }
   })
@@ -277,12 +271,6 @@ document.getElementById("runePrefix").addEventListener("keyup", (e) => ipc_send(
 
 // status
 document.getElementById("statusText").addEventListener("keyup", (e) => ipc_send("save", ui.save, "misc.status.text", { text: e.target.value }) )
-
-// auto kiter key
-document.getElementById("AutoKiterKey").addEventListener("keyup", (e) => ipc_send("save", ui.save, "script.auto.kiter.keybinds.activate", { text: e.target.value }) )
-
-// auto kiter key
-document.getElementById("AttackMoveKey").addEventListener("keyup", (e) => ipc_send("save", ui.save, "script.auto.kiter.keybinds.attackMove", { text: e.target.value }) )
 
 // tier
 document.getElementById("tier").addEventListener("change", (e) => ipc_send("save", ui.save, "misc.rank.tier", { text: convertTier(e.target.value) }) )

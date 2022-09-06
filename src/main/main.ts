@@ -27,7 +27,7 @@ connector.on("connect", async (credentials: Credentials) => {
   if (Config.get().misc.status.set)
     User.methods.setStatus(Config.get().misc.status.text)
   
-  if (Config.get().script.userScript)
+  if (Config.get().misc.userScript)
     Script.event.onUserConnect()
 })
 

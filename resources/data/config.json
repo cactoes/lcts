@@ -82,19 +82,8 @@
       "tier": "diamond",
       "rank": "III",
       "set": true
-    }
-  },
-  "script": {
-    "userScript": false,
-    "auto": {
-      "kiter": {
-        "enabled": false,
-        "keybinds": {
-          "activate": "c",
-          "attackMove": "n"
-        }
-      }
-    }
+    },
+    "userScript": false
   },
   "overlay": true
 }
